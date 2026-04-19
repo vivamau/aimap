@@ -9,6 +9,7 @@ const API = '/api';
 const state = {
   meta: {},
   models: [],
+  editions: [],
   filteredIds: null,
   activeId: null,
 };
@@ -43,6 +44,8 @@ async function api(path, opts = {}) {
   bindBar();
   bindForm();
   bindSearch();
+  bindEditionsToggle();
+  bindEditionModal();
   try {
     await refresh();
     newEntry();
@@ -52,12 +55,14 @@ async function api(path, opts = {}) {
 })();
 
 async function refresh() {
-  const [meta, list] = await Promise.all([
+  const [meta, list, edList] = await Promise.all([
     api('/meta'),
     api('/models'),
+    api('/editions'),
   ]);
-  state.meta = meta;
-  state.models = list.models;
+  state.meta    = meta;
+  state.models  = list.models;
+  state.editions = edList.editions;
   renderAll();
 }
 
@@ -66,6 +71,7 @@ async function refresh() {
 function renderAll() {
   renderStatline();
   renderList();
+  renderEditions();
   renderPreview();
 }
 
@@ -303,6 +309,98 @@ async function editMeta() {
     await api('/meta', { method: 'PUT', body: JSON.stringify({ edition, compiler }) });
     await refresh();
     toast('Meta updated.');
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+// ──────────────  editions panel
+
+function renderEditions() {
+  const count = state.editions.length;
+  $('#editions-count').textContent = count ? `${count} saved` : '0 saved';
+
+  const list = $('#editions-list');
+  if (count === 0) {
+    list.innerHTML = `<div class="empty-state" style="padding:32px 18px">
+      No editions saved yet.<br>Use <em>Save Edition ✦</em> to archive the current catalogue.
+    </div>`;
+    return;
+  }
+  list.innerHTML = state.editions.map(ed => `
+    <div class="edition-item">
+      <span class="ed-label">${escapeHtml(ed.label)}</span>
+      <div class="ed-meta">
+        <span>${ed.date}</span>
+        <span>${ed.features} model${ed.features !== 1 ? 's' : ''}</span>
+        <a href="/data/${escapeHtml(ed.file)}" download
+           style="color:var(--gold);border-bottom:1px solid rgba(201,165,68,.3);margin-left:auto">
+          Download ↓
+        </a>
+      </div>
+      ${ed.note ? `<div class="ed-note">${escapeHtml(ed.note)}</div>` : ''}
+    </div>`).join('');
+}
+
+function bindEditionsToggle() {
+  $('#editions-toggle').addEventListener('click', () => {
+    const panel = $('#editions-panel');
+    const open  = panel.style.display !== 'none';
+    panel.style.display = open ? 'none' : 'block';
+    $('#editions-toggle').style.borderBottom =
+      open ? '1px solid var(--line)' : 'none';
+  });
+}
+
+// ──────────────  save edition modal
+
+function bindEditionModal() {
+  $('#btn-save-edition').addEventListener('click', openEditionModal);
+  $('#modal-close').addEventListener('click',  closeEditionModal);
+  $('#modal-cancel').addEventListener('click', closeEditionModal);
+  $('#modal-confirm').addEventListener('click', confirmSaveEdition);
+  $('#edition-modal').addEventListener('click', e => {
+    if (e.target === $('#edition-modal')) closeEditionModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('#edition-modal').style.display !== 'none') {
+      closeEditionModal();
+    }
+  });
+}
+
+function openEditionModal() {
+  const count = state.models.length;
+  $('#modal-count').textContent = `${count} model${count !== 1 ? 's' : ''}`;
+  // pre-fill label from current meta edition as a starting point
+  $('#ed-label').value = state.meta.edition ? `${state.meta.edition} — snapshot` : '';
+  $('#ed-note').value  = '';
+  $('#edition-modal').style.display = 'grid';
+  setTimeout(() => $('#ed-label').focus(), 50);
+}
+
+function closeEditionModal() {
+  $('#edition-modal').style.display = 'none';
+}
+
+async function confirmSaveEdition() {
+  const label = $('#ed-label').value.trim();
+  const note  = $('#ed-note').value.trim();
+  if (!label) {
+    $('#ed-label').focus();
+    toast('An edition label is required.', 'danger');
+    return;
+  }
+  try {
+    const ed = await api('/editions', {
+      method: 'POST',
+      body: JSON.stringify({ label, note }),
+    });
+    closeEditionModal();
+    await refresh();
+    // Ensure the editions panel is open so the user sees their new entry
+    $('#editions-panel').style.display = 'block';
+    toast(`Edition "${ed.label}" saved — ${ed.features} models archived.`);
   } catch (err) {
     toast(err.message, 'danger');
   }

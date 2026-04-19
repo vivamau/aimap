@@ -17,6 +17,7 @@
   <div class="actions">
     <button class="btn" id="btn-refresh">Refresh</button>
     <button class="btn" id="btn-meta">Meta</button>
+    <button class="btn edition-btn" id="btn-save-edition">Save Edition ✦</button>
     <button class="btn" id="btn-download">Download GeoJSON</button>
     <button class="btn primary" id="btn-export">Regenerate file</button>
     <a class="btn" href="/api/docs" target="_blank">API docs ↗</a>
@@ -36,7 +37,7 @@
 
 <main class="desk-grid">
 
-  <!-- LEFT: list -->
+  <!-- LEFT: list + editions archive -->
   <section class="panel">
     <div class="panel__head">
       <span>The Catalogue</span>
@@ -45,6 +46,15 @@
     <div class="panel__body">
       <input class="entry-search" id="search" type="text" placeholder="Search models, orgs, places…">
       <div class="entry-list" id="entry-list"></div>
+    </div>
+
+    <!-- Editions archive drawer -->
+    <div class="panel__head editions-toggle" id="editions-toggle" style="cursor:pointer">
+      <span>Editions archive</span>
+      <span class="num" id="editions-count">—</span>
+    </div>
+    <div class="panel__body" id="editions-panel" style="display:none">
+      <div class="editions-list" id="editions-list"></div>
     </div>
   </section>
 
@@ -134,21 +144,48 @@
     </div>
   </section>
 
-  <!-- RIGHT: live JSON preview -->
+  <!-- RIGHT: live GeoJSON preview -->
   <section class="panel">
     <div class="panel__head">
-      <span>JSON preview</span>
+      <span>GeoJSON preview</span>
       <span class="num">live</span>
     </div>
     <div class="panel__body">
       <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;line-height:1.6">
-        The exported file is identical to what is rendered below. Commit it as <span style="color:var(--gold)">data/ai-models.json</span> to publish.
+        This is the exact GeoJSON written to <span style="color:var(--gold)">data/ai-models.geojson</span>. Save an edition to snapshot this state permanently.
       </p>
       <pre class="json-preview" id="json-preview"></pre>
     </div>
   </section>
 
 </main>
+
+<!-- Save Edition modal -->
+<div class="modal-backdrop" id="edition-modal" style="display:none">
+  <div class="modal">
+    <div class="modal__head">
+      <span>Save Edition</span>
+      <button class="close" id="modal-close">×</button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__lede">
+        A named snapshot of the current <strong id="modal-count"></strong> will be saved as a GeoJSON file and added to the editions archive. The live catalogue is unaffected.
+      </p>
+      <div class="field" style="margin-top:24px">
+        <label>Edition label <span style="color:var(--rust)">*</span></label>
+        <input id="ed-label" type="text" placeholder="Vol. II — Summer 2026">
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label>Editorial note</label>
+        <textarea id="ed-note" placeholder="A sentence describing what changed in this edition…"></textarea>
+      </div>
+      <div class="form-actions" style="margin-top:24px">
+        <button type="button" class="btn" id="modal-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="modal-confirm">Save Edition ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 

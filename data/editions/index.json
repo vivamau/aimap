@@ -1,0 +1,12 @@
+{
+  "editions": [
+    {
+      "id": "2026-04-19_vol-i-spring-2026-mo69c0yw",
+      "label": "Vol. I — Spring 2026",
+      "note": "Initial release with 22 models across 14 countries.",
+      "date": "2026-04-19",
+      "features": 21,
+      "file": "editions/2026-04-19_vol-i-spring-2026-mo69c0yw.geojson"
+    }
+  ]
+}

@@ -24,6 +24,13 @@
   </nav>
 </header>
 
+<!-- ARCHIVE BANNER (shown when a past edition is active) -->
+<div class="archive-banner" id="archive-banner">
+  <span>Viewing archived edition</span>
+  <span class="ed-label" id="banner-label"></span>
+  <button class="return-live" id="btn-return-live">← Return to live</button>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <h1 class="reveal reveal-1">
@@ -64,7 +71,14 @@
       <div class="filter-row" id="filter-modality"></div>
     </div>
 
-    <div style="margin-top:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);line-height:1.6">
+    <div class="editions-block">
+      <div class="section-label">Editions</div>
+      <div class="edition-switcher" id="edition-switcher">
+        <!-- populated by atlas.js -->
+      </div>
+    </div>
+
+    <div style="margin-top:24px;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);line-height:1.6">
       Markers indicate the principal headquarters or research centre associated with each model. Hover for details, click to open the dossier.
     </div>
   </aside>

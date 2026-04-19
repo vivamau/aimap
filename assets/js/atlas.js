@@ -3,8 +3,9 @@
    Reads /data/ai-models.json, renders D3 world map + catalogue.
    ============================================================ */
 
-const DATA_URL = './data/ai-models.geojson';
-const TOPO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+const DATA_URL      = './data/ai-models.geojson';
+const EDITIONS_URL  = './data/editions/index.json';
+const TOPO_URL      = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
 // Convert GeoJSON FeatureCollection → flat model objects used by the rest of the code.
 function fromGeoJson(geo) {
@@ -25,6 +26,8 @@ const state = {
   filterModality: 'all', // all | text | image | audio | video
   sort: { key: 'year', asc: false },
   selected: null,
+  activeEditionId: 'live',   // 'live' or an edition id string
+  editions: [],              // list loaded from editions/index.json
 };
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -34,19 +37,23 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 (async function init() {
   try {
-    const [geo, topo] = await Promise.all([
+    const [geo, topo, editionsIndex] = await Promise.all([
       fetch(DATA_URL).then(r => r.json()),
       fetch(TOPO_URL).then(r => r.json()),
+      fetch(EDITIONS_URL).then(r => r.json()).catch(() => ({ editions: [] })),
     ]);
     const { meta, models } = fromGeoJson(geo);
-    state.models = models;
+    state.models  = models;
+    state.editions = editionsIndex.editions || [];
     renderMeta(meta);
     renderStats();
     renderFilters();
+    renderEditionSwitcher();
     renderMap(topo);
     applyFilters();
     bindCatalogueSort();
     bindDetailPanel();
+    bindArchiveBanner();
   } catch (err) {
     console.error('Atlas failed to load:', err);
     document.body.insertAdjacentHTML('beforeend',
@@ -336,7 +343,103 @@ function closeDetail() {
   state.selected = null;
 }
 
+// ──────────────  edition switcher
+
+function renderEditionSwitcher() {
+  const container = $('#edition-switcher');
+  if (!container) return;
+
+  const liveActive = state.activeEditionId === 'live';
+
+  const liveBtn = `
+    <button class="edition-opt live ${liveActive ? 'is-active' : ''}" data-edition="live">
+      <span class="ed-dot"></span>
+      <span class="ed-name">Live edition</span>
+      <span class="ed-count">${state.models.length} models</span>
+    </button>`;
+
+  const archiveBtns = state.editions.map(ed => `
+    <button class="edition-opt ${state.activeEditionId === ed.id ? 'is-active' : ''}"
+            data-edition="${escapeAttr(ed.id)}"
+            title="${escapeAttr(ed.note || ed.label)}">
+      <span class="ed-dot"></span>
+      <span class="ed-name">${escapeHtml(ed.label)}</span>
+      <span class="ed-count">${ed.features}</span>
+    </button>`).join('');
+
+  container.innerHTML = liveBtn + (state.editions.length
+    ? archiveBtns
+    : `<div style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--muted);padding:8px 2px;line-height:1.5">
+         No archived editions yet.
+       </div>`);
+
+  container.querySelectorAll('.edition-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.edition;
+      if (id === 'live') loadLiveEdition();
+      else loadEdition(id);
+    });
+  });
+}
+
+async function loadEdition(id) {
+  const ed = state.editions.find(e => e.id === id);
+  if (!ed) return;
+  try {
+    const geo = await fetch(`./data/${ed.file}`).then(r => r.json());
+    const { meta, models } = fromGeoJson(geo);
+    state.models = models;
+    state.activeEditionId = id;
+    closeDetail();
+    renderMeta({ ...meta, edition: ed.label, updated: ed.date });
+    renderStats();
+    renderEditionSwitcher();
+    applyFilters();
+    updateArchiveBanner(ed);
+  } catch (err) {
+    console.error('Failed to load edition', id, err);
+  }
+}
+
+async function loadLiveEdition() {
+  try {
+    const geo = await fetch(DATA_URL).then(r => r.json());
+    const { meta, models } = fromGeoJson(geo);
+    state.models = models;
+    state.activeEditionId = 'live';
+    closeDetail();
+    renderMeta(meta);
+    renderStats();
+    renderEditionSwitcher();
+    applyFilters();
+    updateArchiveBanner(null);
+  } catch (err) {
+    console.error('Failed to reload live edition', err);
+  }
+}
+
+function updateArchiveBanner(ed) {
+  const banner = $('#archive-banner');
+  if (!banner) return;
+  if (!ed) {
+    banner.classList.remove('is-visible');
+  } else {
+    $('#banner-label').textContent = `${ed.label} · ${ed.date} · ${ed.features} models`;
+    banner.classList.add('is-visible');
+  }
+}
+
+function bindArchiveBanner() {
+  const btn = $('#btn-return-live');
+  if (btn) btn.addEventListener('click', loadLiveEdition);
+}
+
 // ──────────────  utilities
 
 function zeroPad(n, w) { return String(n).padStart(w, '0'); }
 function stripUrl(u) { return u.replace(/^https?:\/\//, '').replace(/\/$/, ''); }
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function escapeAttr(s) { return escapeHtml(s); }
