@@ -1,0 +1,38 @@
+{
+  "name": "atlas-of-ai-backend",
+  "version": "0.1.0",
+  "description": "Editorial Desk backend for the Atlas of Artificial Intelligence — JSON file store + GeoJSON exporter.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --runInBand",
+    "export": "node scripts/export-geojson.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"],
+    "collectCoverageFrom": [
+      "services/**/*.js",
+      "routes/**/*.js",
+      "utilities/**/*.js",
+      "middleware/**/*.js"
+    ],
+    "coverageThreshold": {
+      "global": { "lines": 85, "functions": 85, "branches": 70, "statements": 85 }
+    }
+  }
+}

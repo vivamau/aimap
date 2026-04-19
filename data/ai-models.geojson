@@ -1,0 +1,567 @@
+{
+  "type": "FeatureCollection",
+  "meta": {
+    "edition": "Vol. II — MMXXVI",
+    "updated": "2026-04-19",
+    "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "gpt-4o",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "gpt-4o",
+        "name": "GPT-4o",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "modality": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://openai.com",
+        "notes": "Native multimodal foundation model with vision and voice capabilities."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-opus-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4094,
+          37.7849
+        ]
+      },
+      "properties": {
+        "id": "claude-opus-4",
+        "name": "Claude Opus 4",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://anthropic.com",
+        "notes": "Frontier reasoning model from the Constitutional AI lineage."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "gemini-2",
+        "name": "Gemini 2.5 Pro",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "modality": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google",
+        "notes": "Multimodal model trained jointly across text, image, audio and video."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "llama-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "llama-3",
+        "name": "Llama 3.3",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "70B",
+        "url": "https://ai.meta.com",
+        "notes": "Open-weight family widely fine-tuned by the research community."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "qwen-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1551,
+          30.2741
+        ]
+      },
+      "properties": {
+        "id": "qwen-3",
+        "name": "Qwen 3",
+        "organization": "Alibaba DAMO",
+        "country": "China",
+        "city": "Hangzhou",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "72B",
+        "url": "https://qwenlm.github.io",
+        "notes": "Leading Chinese open-weight family across multiple sizes."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "deepseek-r1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1651,
+          30.2841
+        ]
+      },
+      "properties": {
+        "id": "deepseek-r1",
+        "name": "DeepSeek R1",
+        "organization": "DeepSeek",
+        "country": "China",
+        "city": "Hangzhou",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "671B (MoE)",
+        "url": "https://deepseek.com",
+        "notes": "Reasoning-focused mixture-of-experts model released with open weights."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ernie-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4074,
+          39.9042
+        ]
+      },
+      "properties": {
+        "id": "ernie-4",
+        "name": "ERNIE 4.0",
+        "organization": "Baidu",
+        "country": "China",
+        "city": "Beijing",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://yiyan.baidu.com",
+        "notes": "Baidu's flagship knowledge-enhanced foundation model."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "yi-large",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4174,
+          39.9142
+        ]
+      },
+      "properties": {
+        "id": "yi-large",
+        "name": "Yi-Large",
+        "organization": "01.AI",
+        "country": "China",
+        "city": "Beijing",
+        "modality": [
+          "text"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://01.ai",
+        "notes": "Founded by Kai-Fu Lee; bilingual English/Chinese capabilities."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "falcon-180b",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          54.3773,
+          24.4539
+        ]
+      },
+      "properties": {
+        "id": "falcon-180b",
+        "name": "Falcon 2",
+        "organization": "Technology Innovation Institute",
+        "country": "United Arab Emirates",
+        "city": "Abu Dhabi",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "11B",
+        "url": "https://falconllm.tii.ae",
+        "notes": "Open-weight family from the Gulf region's flagship AI institute."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "command-r",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3832,
+          43.6532
+        ]
+      },
+      "properties": {
+        "id": "command-r",
+        "name": "Command R+",
+        "organization": "Cohere",
+        "country": "Canada",
+        "city": "Toronto",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "104B",
+        "url": "https://cohere.com",
+        "notes": "Enterprise-focused model with strong retrieval-augmented generation."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "jamba",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          34.7818,
+          32.0853
+        ]
+      },
+      "properties": {
+        "id": "jamba",
+        "name": "Jamba 1.5",
+        "organization": "AI21 Labs",
+        "country": "Israel",
+        "city": "Tel Aviv",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "398B (MoE)",
+        "url": "https://ai21.com",
+        "notes": "Hybrid Transformer–Mamba architecture with very long context."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "stable-diffusion-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1378,
+          51.5174
+        ]
+      },
+      "properties": {
+        "id": "stable-diffusion-3",
+        "name": "Stable Diffusion 3",
+        "organization": "Stability AI",
+        "country": "United Kingdom",
+        "city": "London",
+        "modality": [
+          "image"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "8B",
+        "url": "https://stability.ai",
+        "notes": "Open-weight diffusion model for high-fidelity image synthesis."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "grok-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.143,
+          37.4419
+        ]
+      },
+      "properties": {
+        "id": "grok-3",
+        "name": "Grok 3",
+        "organization": "xAI",
+        "country": "United States",
+        "city": "Palo Alto",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://x.ai",
+        "notes": "Trained on the Colossus supercluster; integrated with X."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "phi-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1215,
+          47.674
+        ]
+      },
+      "properties": {
+        "id": "phi-4",
+        "name": "Phi-4",
+        "organization": "Microsoft Research",
+        "country": "United States",
+        "city": "Redmond",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "14B",
+        "url": "https://microsoft.com/research",
+        "notes": "Small-but-strong model trained on heavily curated synthetic data."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "luminous",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6724,
+          49.3988
+        ]
+      },
+      "properties": {
+        "id": "luminous",
+        "name": "Pharia-1",
+        "organization": "Aleph Alpha",
+        "country": "Germany",
+        "city": "Heidelberg",
+        "modality": [
+          "text"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "7B",
+        "url": "https://aleph-alpha.com",
+        "notes": "Sovereign European foundation model with multilingual training."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sarvam-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.5946,
+          12.9716
+        ]
+      },
+      "properties": {
+        "id": "sarvam-1",
+        "name": "Sarvam-1",
+        "organization": "Sarvam AI",
+        "country": "India",
+        "city": "Bengaluru",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "2B",
+        "url": "https://sarvam.ai",
+        "notes": "Indic-language model trained on 10 Indian languages plus English."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "krutrim",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.6046,
+          12.9816
+        ]
+      },
+      "properties": {
+        "id": "krutrim",
+        "name": "Krutrim",
+        "organization": "Krutrim SI Designs",
+        "country": "India",
+        "city": "Bengaluru",
+        "modality": [
+          "text"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://olakrutrim.com",
+        "notes": "First Indian unicorn-built foundation model; Indic multilingual."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hyperclova-x",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.1389,
+          37.4449
+        ]
+      },
+      "properties": {
+        "id": "hyperclova-x",
+        "name": "HyperCLOVA X",
+        "organization": "Naver",
+        "country": "South Korea",
+        "city": "Seongnam",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://clova.ai",
+        "notes": "Korean-language flagship model from Naver's AI division."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sakana-evo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6503,
+          35.6762
+        ]
+      },
+      "properties": {
+        "id": "sakana-evo",
+        "name": "Evo-LLM-JP",
+        "organization": "Sakana AI",
+        "country": "Japan",
+        "city": "Tokyo",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "10B",
+        "url": "https://sakana.ai",
+        "notes": "Evolutionary model-merging research; Japanese-language capable."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "maritaca",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -47.0626,
+          -22.9099
+        ]
+      },
+      "properties": {
+        "id": "maritaca",
+        "name": "Sabiá-3",
+        "organization": "Maritaca AI",
+        "country": "Brazil",
+        "city": "Campinas",
+        "modality": [
+          "text"
+        ],
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://maritaca.ai",
+        "notes": "Brazilian-Portuguese specialised foundation model."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lelapa",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          28.0473,
+          -26.2041
+        ]
+      },
+      "properties": {
+        "id": "lelapa",
+        "name": "InkubaLM",
+        "organization": "Lelapa AI",
+        "country": "South Africa",
+        "city": "Johannesburg",
+        "modality": [
+          "text"
+        ],
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "0.4B",
+        "url": "https://lelapa.ai",
+        "notes": "Small language model for five African languages."
+      }
+    }
+  ]
+}

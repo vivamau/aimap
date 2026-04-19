@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editorial Desk — Atlas of AI</title>
+<link rel="stylesheet" href="./assets/css/desk.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='3' width='18' height='18' fill='%230d0b08' stroke='%23b14a2c' stroke-width='2'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='serif' font-style='italic' font-size='14' fill='%23b14a2c'%3EE%3C/text%3E%3C/svg%3E">
+</head>
+<body class="desk">
+
+<header class="desk-bar">
+  <div class="brand">
+    <span class="glyph"><em>E</em></span>
+    <span>Editorial Desk &nbsp;·&nbsp; <em>Atlas of AI</em></span>
+  </div>
+  <div class="actions">
+    <button class="btn" id="btn-refresh">Refresh</button>
+    <button class="btn" id="btn-meta">Meta</button>
+    <button class="btn" id="btn-download">Download GeoJSON</button>
+    <button class="btn primary" id="btn-export">Regenerate file</button>
+    <a class="btn" href="/api/docs" target="_blank">API docs ↗</a>
+    <a class="btn" href="./index.html" target="_blank">View Atlas ↗</a>
+  </div>
+</header>
+
+<section class="desk-head">
+  <h1><em>Editorial</em> <span class="accent">Desk</span></h1>
+  <div class="meta">
+    Backed by Express · saves persist immediately<br>
+    Every change regenerates <span style="color:var(--gold)">data/ai-models.geojson</span>.
+  </div>
+</section>
+
+<div class="statline" id="statline"></div>
+
+<main class="desk-grid">
+
+  <!-- LEFT: list -->
+  <section class="panel">
+    <div class="panel__head">
+      <span>The Catalogue</span>
+      <span class="num" id="entry-count"></span>
+    </div>
+    <div class="panel__body">
+      <input class="entry-search" id="search" type="text" placeholder="Search models, orgs, places…">
+      <div class="entry-list" id="entry-list"></div>
+    </div>
+  </section>
+
+  <!-- CENTER: form -->
+  <section class="panel">
+    <div class="panel__head">
+      <span id="form-mode">New entry</span>
+      <span class="num">Composer</span>
+    </div>
+    <div class="panel__body">
+      <form class="form" id="form">
+        <div class="field">
+          <label>Model name</label>
+          <input id="f-name" type="text" required placeholder="e.g. Mistral Large 3">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Organisation</label>
+            <input id="f-org" type="text" required placeholder="e.g. Mistral AI">
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <select id="f-type" class="mono"></select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>City</label>
+            <input id="f-city" type="text" placeholder="Paris">
+          </div>
+          <div class="field">
+            <label>Country</label>
+            <input id="f-country" type="text" placeholder="France">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Latitude</label>
+            <input id="f-lat" class="mono" type="number" step="any" required placeholder="48.8566">
+          </div>
+          <div class="field">
+            <label>Longitude</label>
+            <input id="f-lng" class="mono" type="number" step="any" required placeholder="2.3522">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Year</label>
+            <input id="f-year" class="mono" type="number" min="1950" max="2100" required>
+          </div>
+          <div class="field">
+            <label>Parameters</label>
+            <input id="f-params" class="mono" type="text" placeholder="70B / undisclosed">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Modality</label>
+          <div class="modality-grid" id="mod-grid"></div>
+        </div>
+
+        <div class="field">
+          <label>Reference URL</label>
+          <input id="f-url" class="mono" type="url" placeholder="https://…">
+        </div>
+
+        <div class="field">
+          <label>Notes</label>
+          <textarea id="f-notes" placeholder="One or two sentences. Italicised in the dossier."></textarea>
+        </div>
+
+        <div class="field" style="display:none">
+          <label>ID (auto)</label>
+          <input id="f-id" class="mono" type="text">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn danger" id="btn-delete" style="display:none">Delete</button>
+          <button type="button" class="btn" id="btn-new">New entry</button>
+          <button type="submit" class="btn primary">Save entry</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- RIGHT: live JSON preview -->
+  <section class="panel">
+    <div class="panel__head">
+      <span>JSON preview</span>
+      <span class="num">live</span>
+    </div>
+    <div class="panel__body">
+      <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;line-height:1.6">
+        The exported file is identical to what is rendered below. Commit it as <span style="color:var(--gold)">data/ai-models.json</span> to publish.
+      </p>
+      <pre class="json-preview" id="json-preview"></pre>
+    </div>
+  </section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="./assets/js/desk.js"></script>
+</body>
+</html>

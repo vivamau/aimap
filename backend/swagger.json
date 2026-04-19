@@ -1,0 +1,152 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Atlas of AI — Editorial Desk API",
+    "version": "0.1.0",
+    "description": "CRUD over the AI-models JSON store. Every mutation also regenerates the public GeoJSON file consumed by the static viewer."
+  },
+  "servers": [{ "url": "/api" }],
+  "components": {
+    "schemas": {
+      "Model": {
+        "type": "object",
+        "required": ["name", "organization", "lat", "lng"],
+        "properties": {
+          "id":           { "type": "string", "description": "Auto-derived from name if omitted" },
+          "name":         { "type": "string" },
+          "organization": { "type": "string" },
+          "country":      { "type": "string" },
+          "city":         { "type": "string" },
+          "lat":          { "type": "number", "minimum": -90,  "maximum": 90 },
+          "lng":          { "type": "number", "minimum": -180, "maximum": 180 },
+          "type":         { "type": "string", "enum": ["proprietary", "open-weight"] },
+          "year":         { "type": "integer" },
+          "parameters":   { "type": "string" },
+          "url":          { "type": "string" },
+          "notes":        { "type": "string" },
+          "modality":     { "type": "array", "items": { "type": "string", "enum": ["text", "image", "audio", "video", "code", "3d"] } }
+        }
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "edition":  { "type": "string" },
+          "updated":  { "type": "string", "format": "date" },
+          "compiler": { "type": "string" }
+        }
+      },
+      "Edition": {
+        "type": "object",
+        "properties": {
+          "id":       { "type": "string", "description": "Unique edition id, e.g. 2026-04-19_vol-i-mmxxvi-abc123" },
+          "label":    { "type": "string", "description": "Human-readable edition title" },
+          "note":     { "type": "string", "description": "Editorial note" },
+          "date":     { "type": "string", "format": "date" },
+          "features": { "type": "integer", "description": "Number of models snapshotted" },
+          "file":     { "type": "string", "description": "Path relative to the data root, e.g. editions/2026-04-19_….geojson" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error":   { "type": "string" },
+          "details": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Liveness probe",
+        "responses": { "200": { "description": "OK" } }
+      }
+    },
+    "/meta": {
+      "get": { "summary": "Get atlas meta", "responses": { "200": { "description": "Meta", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Meta" } } } } } },
+      "put": {
+        "summary": "Update atlas meta",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Meta" } } } },
+        "responses": { "200": { "description": "Updated meta" } }
+      }
+    },
+    "/models": {
+      "get": {
+        "summary": "List all models",
+        "responses": {
+          "200": {
+            "description": "Array of models",
+            "content": { "application/json": { "schema": { "type": "object", "properties": { "models": { "type": "array", "items": { "$ref": "#/components/schemas/Model" } } } } } }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a model",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Model" } } } },
+        "responses": {
+          "201": { "description": "Created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Model" } } } },
+          "400": { "description": "Validation failed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "409": { "description": "ID conflict" }
+        }
+      }
+    },
+    "/models/{id}": {
+      "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+      "get":    { "summary": "Get one model", "responses": { "200": { "description": "Model" }, "404": { "description": "Not found" } } },
+      "put":    {
+        "summary": "Update a model",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Model" } } } },
+        "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } }
+      },
+      "delete": { "summary": "Delete a model", "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
+    },
+    "/export": {
+      "post": {
+        "summary": "Force regeneration of the public GeoJSON file",
+        "responses": { "200": { "description": "Wrote file" } }
+      }
+    },
+    "/editions": {
+      "get": {
+        "summary": "List all saved editions",
+        "responses": {
+          "200": {
+            "description": "Array of edition metadata",
+            "content": { "application/json": { "schema": {
+              "type": "object",
+              "properties": { "editions": { "type": "array", "items": { "$ref": "#/components/schemas/Edition" } } }
+            }}}
+          }
+        }
+      },
+      "post": {
+        "summary": "Save current catalogue as a named edition",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": {
+            "type": "object",
+            "required": ["label"],
+            "properties": {
+              "label": { "type": "string", "description": "Edition title, e.g. Vol. II — Autumn 2026" },
+              "note":  { "type": "string", "description": "Optional editorial note" }
+            }
+          }}}
+        },
+        "responses": {
+          "201": { "description": "Created edition metadata", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Edition" } } } },
+          "400": { "description": "Label missing" }
+        }
+      }
+    },
+    "/editions/{id}": {
+      "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+      "get": {
+        "summary": "Get GeoJSON FeatureCollection for a specific edition",
+        "responses": {
+          "200": { "description": "GeoJSON FeatureCollection" },
+          "404": { "description": "Edition not found" }
+        }
+      }
+    }
+  }
+}

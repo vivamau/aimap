@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas of Artificial Intelligence — Vol. I</title>
+<meta name="description" content="A cartographic survey of the global distribution of artificial intelligence systems.">
+<link rel="stylesheet" href="./assets/css/atlas.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%230d0b08' stroke='%23c9a544' stroke-width='2'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='serif' font-style='italic' font-size='14' fill='%23c9a544'%3EA%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="crest">
+    <span class="glyph"><em>A</em></span>
+    <span>Atlas of Artificial Intelligence</span>
+  </div>
+  <nav>
+    <a href="#atlas">The Map</a>
+    <a href="#catalogue">Catalogue</a>
+    <a href="#colophon">Colophon</a>
+    <a href="./admin.html">Editorial Desk</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1 class="reveal reveal-1">
+    Atlas
+    <span class="em">of Artificial</span>
+    <span class="second">Intelligence</span>
+  </h1>
+  <aside class="meta reveal reveal-2">
+    <dl>
+      <dt>Edition</dt>      <dd id="edition">Vol. I — MMXXVI</dd>
+      <dt>Updated</dt>      <dd id="updated">—</dd>
+      <dt>Projection</dt>   <dd>Natural Earth</dd>
+      <dt>Coverage</dt>     <dd>Worldwide</dd>
+    </dl>
+    <p class="lede" id="compiler">A cartographic survey of the global distribution of artificial intelligence systems.</p>
+  </aside>
+</section>
+
+<!-- ATLAS -->
+<section class="atlas" id="atlas">
+  <aside class="atlas__aside reveal reveal-3">
+    <div>
+      <div class="section-label">Survey at a glance</div>
+      <div class="stats">
+        <div class="stat"><div class="num"><em id="stat-models">00</em></div><div class="label">Catalogued models</div></div>
+        <div class="stat"><div class="num" id="stat-orgs">00</div><div class="label">Organisations</div></div>
+        <div class="stat"><div class="num" id="stat-countries">00</div><div class="label">Countries</div></div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="section-label">Filter — Type</div>
+      <div class="filter-row" id="filter-type"></div>
+    </div>
+
+    <div class="filter-group">
+      <div class="section-label">Filter — Modality</div>
+      <div class="filter-row" id="filter-modality"></div>
+    </div>
+
+    <div style="margin-top:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);line-height:1.6">
+      Markers indicate the principal headquarters or research centre associated with each model. Hover for details, click to open the dossier.
+    </div>
+  </aside>
+
+  <div class="atlas__map reveal reveal-4" id="map"></div>
+</section>
+
+<!-- CATALOGUE -->
+<section class="catalogue" id="catalogue">
+  <header>
+    <h2>The Catalogue</h2>
+    <span class="count" id="catalogue-count"></span>
+  </header>
+  <table class="catalogue__table" id="catalogue">
+    <thead>
+      <tr>
+        <th data-sort="name">Model</th>
+        <th data-sort="organization">Organisation</th>
+        <th data-sort="country" class="hide-sm">Origin</th>
+        <th data-sort="type">Type</th>
+        <th data-sort="modality" class="hide-sm">Modality</th>
+        <th data-sort="year" class="sorted">Year</th>
+        <th data-sort="parameters" class="hide-sm">Parameters</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<!-- COLOPHON -->
+<section class="colophon" id="colophon">
+  <div>
+    <h4>Colophon</h4>
+    <p>Set in <span class="ornament">Instrument Serif</span> for display and Geist for body text and data. Geographic projection by Natural Earth.</p>
+  </div>
+  <div>
+    <h4>Method</h4>
+    <p>Entries reflect the principal headquarters of the publishing organisation. Coordinates are approximate and indicative; this is a survey, not a directory of physical infrastructure.</p>
+  </div>
+  <div>
+    <h4>Contribute</h4>
+    <p>The atlas is editable. Use the <a href="./admin.html">Editorial Desk</a> to propose additions, then commit the regenerated <code style="font-family:var(--mono);color:var(--gold)">ai-models.json</code> back to the repository.</p>
+  </div>
+</section>
+
+<!-- DETAIL PANEL -->
+<aside class="detail-panel" id="detail">
+  <button class="close" aria-label="Close">×</button>
+  <div class="eyebrow"></div>
+  <h3></h3>
+  <div class="org-line"></div>
+  <dl class="specs"></dl>
+  <p class="notes"></p>
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script src="./assets/js/atlas.js"></script>
+</body>
+</html>
