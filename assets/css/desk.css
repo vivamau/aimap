@@ -321,6 +321,85 @@ body.desk {
 }
 .statline .dirty { color: var(--rust); }
 
+/* ─── submodels inline editor ─── */
+.submodels-editor { display: flex; flex-direction: column; gap: 0; }
+
+.submodels-header {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr 1fr 0.9fr 28px;
+  gap: 0 8px;
+  padding: 7px 8px;
+  background: var(--bg-3);
+  border: 1px solid var(--line-2);
+  border-bottom: none;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.submodel-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr 1fr 0.9fr 28px;
+  gap: 0 8px;
+  align-items: center;
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  background: transparent;
+  transition: background 0.12s;
+}
+.submodel-row:last-of-type { border-bottom: 1px solid var(--line); }
+.submodel-row:hover { background: rgba(237, 228, 204, 0.02); }
+
+.submodel-row input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 4px 2px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--paper);
+  width: 100%;
+  transition: border-color 0.15s;
+}
+.submodel-row input:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+}
+.submodel-row input::placeholder { color: var(--muted); font-size: 10px; }
+
+.submodel-row .del-row {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 4px;
+  transition: color 0.15s;
+  text-align: center;
+}
+.submodel-row .del-row:hover { color: var(--rust); }
+
+.submodels-empty {
+  padding: 16px 10px;
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+.btn-add-submodel {
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
 /* ─── edition button accent ─── */
 .edition-btn {
   color: var(--gold) !important;

@@ -130,6 +130,27 @@
           <textarea id="f-notes" placeholder="One or two sentences. Italicised in the dossier."></textarea>
         </div>
 
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Variants / Submodels</span>
+            <span id="submodels-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 variants</span>
+          </label>
+          <div class="submodels-editor" id="submodels-editor" style="margin-top:10px">
+            <div class="submodels-header">
+              <span>Name</span>
+              <span>Version</span>
+              <span>Params</span>
+              <span>Ollama</span>
+              <span>HuggingFace</span>
+              <span>Added</span>
+              <span></span>
+            </div>
+            <div id="submodel-rows"></div>
+            <div class="submodels-empty" id="submodels-empty">No variants yet</div>
+          </div>
+          <button type="button" class="btn btn-add-submodel" id="btn-add-submodel">+ Add variant</button>
+        </div>
+
         <div class="field" style="display:none">
           <label>ID (auto)</label>
           <input id="f-id" class="mono" type="text">

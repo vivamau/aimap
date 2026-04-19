@@ -141,6 +141,12 @@ function sanitiseModel(input) {
 
   if (errors.length) throw new HttpError(400, 'Validation failed', errors);
 
+  const submodels = Array.isArray(input.submodels)
+    ? input.submodels
+        .filter(s => s.name || s.parameters)
+        .map(sanitiseSubmodel)
+    : [];
+
   return {
     id: input.id ? slugify(input.id) : slugify(input.name),
     name: String(input.name).trim(),
@@ -154,6 +160,18 @@ function sanitiseModel(input) {
     url: String(input.url || '').trim(),
     notes: String(input.notes || '').trim(),
     modality,
+    submodels,
+  };
+}
+
+function sanitiseSubmodel(s) {
+  return {
+    name:           String(s.name           ?? '').trim(),
+    version:        String(s.version        ?? '').trim(),
+    parameters:     String(s.parameters     ?? '').trim(),
+    ollamaUrl:      String(s.ollamaUrl      ?? '').trim(),
+    huggingfaceUrl: String(s.huggingfaceUrl ?? '').trim(),
+    addedAt:        String(s.addedAt        ?? today()).trim(),
   };
 }
 

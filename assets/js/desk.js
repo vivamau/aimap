@@ -160,6 +160,58 @@ function bindForm() {
   });
 
   $('#f-type').innerHTML = TYPES.map(t => `<option value="${t}">${t}</option>`).join('');
+
+  $('#btn-add-submodel').addEventListener('click', addSubmodelRow);
+}
+
+// ──────────────  submodels editor
+
+function addSubmodelRow(data = {}) {
+  const today = new Date().toISOString().slice(0, 10);
+  const row = document.createElement('div');
+  row.className = 'submodel-row';
+  row.innerHTML = `
+    <input type="text"  class="sm-name"   placeholder="model:7b"         value="${escapeHtml(data.name           || '')}">
+    <input type="text"  class="sm-ver"    placeholder="2.5"               value="${escapeHtml(data.version        || '')}">
+    <input type="text"  class="sm-params" placeholder="7B"                value="${escapeHtml(data.parameters     || '')}">
+    <input type="url"   class="sm-ollama" placeholder="https://ollama.com/…" value="${escapeHtml(data.ollamaUrl   || '')}">
+    <input type="url"   class="sm-hf"     placeholder="https://huggingface.co/…" value="${escapeHtml(data.huggingfaceUrl || '')}">
+    <input type="date"  class="sm-date"   value="${escapeHtml(data.addedAt || today)}">
+    <button type="button" class="del-row" title="Remove">×</button>`;
+
+  row.querySelector('.del-row').addEventListener('click', () => {
+    row.remove();
+    refreshSubmodelsUI();
+  });
+
+  $('#submodel-rows').appendChild(row);
+  refreshSubmodelsUI();
+  row.querySelector('.sm-name').focus();
+}
+
+function refreshSubmodelsUI() {
+  const rows = $$('#submodel-rows .submodel-row');
+  const empty = $('#submodels-empty');
+  const count = $('#submodels-count');
+  if (empty) empty.style.display = rows.length ? 'none' : 'block';
+  if (count) count.textContent = `${rows.length} variant${rows.length !== 1 ? 's' : ''}`;
+}
+
+function populateSubmodels(submodels = []) {
+  $('#submodel-rows').innerHTML = '';
+  submodels.forEach(s => addSubmodelRow(s));
+  if (submodels.length === 0) refreshSubmodelsUI();
+}
+
+function readSubmodels() {
+  return $$('#submodel-rows .submodel-row').map(row => ({
+    name:           row.querySelector('.sm-name').value.trim(),
+    version:        row.querySelector('.sm-ver').value.trim(),
+    parameters:     row.querySelector('.sm-params').value.trim(),
+    ollamaUrl:      row.querySelector('.sm-ollama').value.trim(),
+    huggingfaceUrl: row.querySelector('.sm-hf').value.trim(),
+    addedAt:        row.querySelector('.sm-date').value.trim(),
+  })).filter(s => s.name || s.parameters);
 }
 
 function newEntry() {
@@ -169,6 +221,7 @@ function newEntry() {
   $('#btn-delete').style.display = 'none';
   $$('#mod-grid .mod-toggle').forEach(t => t.classList.remove('is-on'));
   $('#f-type').value = 'proprietary';
+  populateSubmodels([]);
   renderList();
 }
 
@@ -192,6 +245,7 @@ function loadIntoForm(id) {
   $('#f-notes').value = m.notes || '';
   $$('#mod-grid .mod-toggle').forEach(t =>
     t.classList.toggle('is-on', m.modality.includes(t.dataset.mod)));
+  populateSubmodels(m.submodels || []);
   renderList();
 }
 
@@ -211,6 +265,7 @@ function readForm() {
     url: $('#f-url').value.trim(),
     notes: $('#f-notes').value.trim(),
     modality: modality.length ? modality : ['text'],
+    submodels: readSubmodels(),
   };
 }
 

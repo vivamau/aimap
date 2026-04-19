@@ -333,6 +333,38 @@ function openDetail(m) {
     <dt>Reference</dt><dd><a href="${m.url}" target="_blank" rel="noopener">${stripUrl(m.url)} ↗</a></dd>`;
   $('#detail .notes').textContent = m.notes || '';
 
+  // ── submodels ──
+  const subEl = $('#detail .submodels-section');
+  if (subEl) {
+    const subs = Array.isArray(m.submodels) ? m.submodels.filter(s => s.name || s.parameters) : [];
+    if (subs.length) {
+      const rows = subs.map(s => {
+        const links = [
+          s.ollamaUrl      ? `<a class="sub-link" href="${escapeAttr(s.ollamaUrl)}" target="_blank" rel="noopener">Ollama ↗</a>` : '',
+          s.huggingfaceUrl ? `<a class="sub-link" href="${escapeAttr(s.huggingfaceUrl)}" target="_blank" rel="noopener">HF ↗</a>` : '',
+        ].filter(Boolean).join('');
+        return `<tr>
+          <td>${escapeHtml(s.name)}</td>
+          <td>${escapeHtml(s.version)}</td>
+          <td>${escapeHtml(s.parameters)}</td>
+          <td class="sub-links">${links}</td>
+          <td>${escapeHtml(s.addedAt)}</td>
+        </tr>`;
+      }).join('');
+      subEl.innerHTML = `
+        <div class="submodels-title">Variants &amp; submodels<span>(${subs.length})</span></div>
+        <table class="submodels-table">
+          <thead><tr>
+            <th>Name</th><th>Version</th><th>Params</th><th>Links</th><th>Added</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>`;
+      subEl.style.display = '';
+    } else {
+      subEl.style.display = 'none';
+    }
+  }
+
   panel.classList.add('is-open');
   d3.selectAll('g.marker').classed('open', d => d.id === m.id);
 }

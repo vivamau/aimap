@@ -518,6 +518,66 @@ table.catalogue__table {
   color: var(--paper-2);
 }
 
+/* ─────────  Submodels ───────── */
+
+.detail-panel .submodels-section {
+  margin-top: 28px;
+  border-top: 1px solid var(--line-2);
+  padding-top: 22px;
+}
+.detail-panel .submodels-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.detail-panel .submodels-title::before {
+  content: '';
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.submodels-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.submodels-table th {
+  text-align: left;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line-2);
+  padding: 0 8px 7px 0;
+  white-space: nowrap;
+}
+.submodels-table td {
+  padding: 7px 8px 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--paper-2);
+  vertical-align: middle;
+  line-height: 1.4;
+}
+.submodels-table tr:last-child td { border-bottom: none; }
+.submodels-table td:first-child { color: var(--paper); font-weight: 500; }
+.submodels-table .sub-link {
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+.submodels-table .sub-link:hover { text-decoration: underline; }
+.submodels-table .sub-links { display: flex; gap: 8px; flex-wrap: wrap; }
+
 /* ─────────  Colophon ───────── */
 
 .colophon {
