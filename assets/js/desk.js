@@ -12,10 +12,16 @@ const state = {
   editions: [],
   filteredIds: null,
   activeId: null,
+  // tools
+  tools: [],
+  filteredToolIds: null,
+  activeToolId: null,
+  activeTab: 'models',
 };
 
-const MODALITIES = ['text', 'image', 'audio', 'video', 'code', '3d'];
-const TYPES = ['proprietary', 'open-weight'];
+const MODALITIES   = ['text', 'image', 'audio', 'video', 'code', '3d'];
+const TYPES        = ['proprietary', 'open-weight'];
+const CATEGORIES   = ['assistant', 'search', 'ide', 'codegen', 'devtool'];
 
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
@@ -46,6 +52,9 @@ async function api(path, opts = {}) {
   bindSearch();
   bindEditionsToggle();
   bindEditionModal();
+  bindTabSwitcher();
+  bindToolForm();
+  bindToolSearch();
   try {
     await refresh();
     newEntry();
@@ -55,14 +64,16 @@ async function api(path, opts = {}) {
 })();
 
 async function refresh() {
-  const [meta, list, edList] = await Promise.all([
+  const [meta, list, edList, toolList] = await Promise.all([
     api('/meta'),
     api('/models'),
     api('/editions'),
+    api('/tools'),
   ]);
-  state.meta    = meta;
-  state.models  = list.models;
+  state.meta     = meta;
+  state.models   = list.models;
   state.editions = edList.editions;
+  state.tools    = toolList.tools;
   renderAll();
 }
 
@@ -73,6 +84,8 @@ function renderAll() {
   renderList();
   renderEditions();
   renderPreview();
+  renderToolsList();
+  renderToolsPreview();
 }
 
 function renderStatline() {
@@ -456,6 +469,183 @@ async function confirmSaveEdition() {
     // Ensure the editions panel is open so the user sees their new entry
     $('#editions-panel').style.display = 'block';
     toast(`Edition "${ed.label}" saved — ${ed.features} models archived.`);
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+// ──────────────  tab switcher
+
+function bindTabSwitcher() {
+  const tabs = $$('.desk-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      state.activeTab = target;
+      tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === target));
+      const mg = $('#models-grid');
+      const tg = $('#tools-grid');
+      if (mg) mg.style.display = target === 'models' ? '' : 'none';
+      if (tg) tg.style.display = target === 'tools'  ? '' : 'none';
+    });
+  });
+}
+
+// ──────────────  tools list
+
+function renderToolsList() {
+  const list  = $('#tools-list');
+  const count = $('#tools-count');
+  if (!list) return;
+  const ids   = state.filteredToolIds || state.tools.map(t => t.id);
+  const items = state.tools.filter(t => ids.includes(t.id));
+
+  if (count) count.textContent = `${items.length} / ${state.tools.length}`;
+
+  if (items.length === 0) {
+    list.innerHTML = `<div class="empty-state">No tools match.</div>`;
+    return;
+  }
+  list.innerHTML = items.map(t => `
+    <button class="entry ${state.activeToolId === t.id ? 'is-active' : ''}" data-id="${t.id}">
+      <span class="ent-name">${escapeHtml(t.name)}</span>
+      <span class="ent-org">${escapeHtml(t.organization)} · ${escapeHtml(t.country)}</span>
+      <span class="ent-type">${escapeHtml(t.category)}</span>
+    </button>`).join('');
+
+  list.querySelectorAll('.entry').forEach(btn => {
+    btn.addEventListener('click', () => loadToolIntoForm(btn.dataset.id));
+  });
+}
+
+function renderToolsPreview() {
+  const el = $('#tools-json-preview');
+  if (!el) return;
+  const fc = {
+    type: 'FeatureCollection',
+    features: state.tools.map(t => {
+      const { lat, lng, ...properties } = t;
+      return { type: 'Feature', id: t.id,
+               geometry: { type: 'Point', coordinates: [lng, lat] }, properties };
+    }),
+  };
+  el.innerHTML = highlightJson(JSON.stringify(fc, null, 2));
+}
+
+// ──────────────  tools form
+
+function bindToolForm() {
+  const form = $('#tool-form');
+  if (!form) return;
+  form.addEventListener('submit', e => { e.preventDefault(); saveToolEntry(); });
+  $('#btn-tool-new').addEventListener('click', newToolEntry);
+  $('#btn-tool-delete').addEventListener('click', deleteToolEntry);
+  const sel = $('#ft-category');
+  if (sel) sel.innerHTML = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+}
+
+function bindToolSearch() {
+  const el = $('#tool-search');
+  if (!el) return;
+  el.addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) { state.filteredToolIds = null; return renderToolsList(); }
+    state.filteredToolIds = state.tools.filter(t =>
+      t.name.toLowerCase().includes(q) ||
+      t.organization.toLowerCase().includes(q) ||
+      (t.country || '').toLowerCase().includes(q) ||
+      (t.category || '').toLowerCase().includes(q)
+    ).map(t => t.id);
+    renderToolsList();
+  });
+}
+
+function newToolEntry() {
+  state.activeToolId = null;
+  const form = $('#tool-form');
+  if (form) form.reset();
+  $('#tool-form-mode').textContent = 'New tool';
+  $('#btn-tool-delete').style.display = 'none';
+  renderToolsList();
+}
+
+function loadToolIntoForm(id) {
+  const t = state.tools.find(x => x.id === id);
+  if (!t) return;
+  state.activeToolId = id;
+  $('#tool-form-mode').textContent = `Editing № ${state.tools.indexOf(t) + 1}`;
+  $('#btn-tool-delete').style.display = '';
+  $('#ft-id').value           = t.id;
+  $('#ft-name').value         = t.name;
+  $('#ft-org').value          = t.organization;
+  $('#ft-country').value      = t.country;
+  $('#ft-city').value         = t.city;
+  $('#ft-lat').value          = t.lat;
+  $('#ft-lng').value          = t.lng;
+  $('#ft-category').value     = t.category;
+  $('#ft-year').value         = t.year;
+  $('#ft-url').value          = t.url;
+  $('#ft-notes').value        = t.notes || '';
+  $('#ft-builton').value      = Array.isArray(t.builtOn) ? t.builtOn.join(', ') : '';
+  renderToolsList();
+}
+
+function readToolForm() {
+  const builtOnRaw = ($('#ft-builton').value || '').trim();
+  const builtOn = builtOnRaw
+    ? builtOnRaw.split(',').map(s => s.trim()).filter(Boolean)
+    : [];
+  return {
+    id: $('#ft-id').value || undefined,
+    name:         $('#ft-name').value.trim(),
+    organization: $('#ft-org').value.trim(),
+    country:      $('#ft-country').value.trim(),
+    city:         $('#ft-city').value.trim(),
+    lat:          parseFloat($('#ft-lat').value),
+    lng:          parseFloat($('#ft-lng').value),
+    category:     $('#ft-category').value,
+    year:         parseInt($('#ft-year').value, 10),
+    url:          $('#ft-url').value.trim(),
+    notes:        $('#ft-notes').value.trim(),
+    builtOn,
+  };
+}
+
+async function saveToolEntry() {
+  const t = readToolForm();
+  if (!t.name || !t.organization) {
+    return toast('Name and organisation are required.', 'danger');
+  }
+  try {
+    let saved;
+    if (state.activeToolId) {
+      saved = await api('/tools/' + encodeURIComponent(state.activeToolId), {
+        method: 'PUT', body: JSON.stringify(t),
+      });
+      toast(`Updated "${saved.name}".`);
+    } else {
+      saved = await api('/tools', {
+        method: 'POST', body: JSON.stringify(t),
+      });
+      toast(`Added "${saved.name}". GeoJSON regenerated.`);
+    }
+    state.activeToolId = saved.id;
+    await refresh();
+    loadToolIntoForm(saved.id);
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+async function deleteToolEntry() {
+  if (!state.activeToolId) return;
+  const t = state.tools.find(x => x.id === state.activeToolId);
+  if (!confirm(`Remove "${t.name}" from the atlas?`)) return;
+  try {
+    await api('/tools/' + encodeURIComponent(state.activeToolId), { method: 'DELETE' });
+    toast(`Removed "${t.name}". GeoJSON regenerated.`, 'danger');
+    await refresh();
+    newToolEntry();
   } catch (err) {
     toast(err.message, 'danger');
   }

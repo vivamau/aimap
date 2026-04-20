@@ -62,6 +62,22 @@
     </div>
 
     <div class="filter-group">
+      <div class="section-label">Layers</div>
+      <div class="layer-toggles" id="layer-toggles">
+        <button class="layer-btn is-active" data-layer="models">
+          <span class="layer-swatch models"></span>
+          Models
+          <span class="layer-num" id="layer-models-count">—</span>
+        </button>
+        <button class="layer-btn is-active" data-layer="tools">
+          <span class="layer-swatch tools"></span>
+          Tools
+          <span class="layer-num" id="layer-tools-count">—</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-group">
       <div class="section-label">Filter — Type</div>
       <div class="filter-row" id="filter-type"></div>
     </div>
@@ -90,9 +106,14 @@
 <section class="catalogue" id="catalogue">
   <header>
     <h2>The Catalogue</h2>
+    <div class="cat-tabs">
+      <button class="cat-tab is-active" data-cat="models">Models</button>
+      <button class="cat-tab" data-cat="tools">Tools</button>
+    </div>
     <span class="count" id="catalogue-count"></span>
   </header>
-  <table class="catalogue__table" id="catalogue">
+
+  <table class="catalogue__table" id="cat-models" data-cat="models">
     <thead>
       <tr>
         <th data-sort="name">Model</th>
@@ -102,6 +123,20 @@
         <th data-sort="modality" class="hide-sm">Modality</th>
         <th data-sort="year" class="sorted">Year</th>
         <th data-sort="parameters" class="hide-sm">Parameters</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <table class="catalogue__table" id="cat-tools" data-cat="tools" style="display:none">
+    <thead>
+      <tr>
+        <th data-sort="name">Tool</th>
+        <th data-sort="organization">Organisation</th>
+        <th data-sort="country" class="hide-sm">Origin</th>
+        <th data-sort="category">Category</th>
+        <th data-sort="year" class="sorted">Year</th>
+        <th data-sort="builtOn" class="hide-sm">Built on</th>
       </tr>
     </thead>
     <tbody></tbody>

@@ -1,0 +1,452 @@
+{
+  "type": "FeatureCollection",
+  "meta": {
+    "layer": "tools"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "claude",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "claude",
+        "name": "Claude",
+        "organization": "Anthropic",
+        "category": "assistant",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2023,
+        "url": "https://claude.ai",
+        "notes": "Constitutional AI assistant developed by Anthropic, known for safety and helpfulness.",
+        "builtOn": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "chatgpt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "chatgpt",
+        "name": "ChatGPT",
+        "organization": "OpenAI",
+        "category": "assistant",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2022,
+        "url": "https://chat.openai.com",
+        "notes": "Conversational AI assistant powered by GPT models, launched the modern AI chat era.",
+        "builtOn": [
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0839,
+          37.3861
+        ]
+      },
+      "properties": {
+        "id": "gemini",
+        "name": "Gemini",
+        "organization": "Google DeepMind",
+        "category": "assistant",
+        "city": "Mountain View",
+        "country": "United States",
+        "year": 2023,
+        "url": "https://gemini.google.com",
+        "notes": "Google's multimodal AI assistant, deeply integrated with Google Workspace.",
+        "builtOn": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "microsoft-copilot",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1215,
+          47.674
+        ]
+      },
+      "properties": {
+        "id": "microsoft-copilot",
+        "name": "Microsoft Copilot",
+        "organization": "Microsoft",
+        "category": "assistant",
+        "city": "Redmond",
+        "country": "United States",
+        "year": 2023,
+        "url": "https://copilot.microsoft.com",
+        "notes": "AI assistant integrated into Microsoft 365 products and Windows.",
+        "builtOn": [
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "perplexity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "perplexity",
+        "name": "Perplexity",
+        "organization": "Perplexity AI",
+        "category": "search",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2022,
+        "url": "https://perplexity.ai",
+        "notes": "AI-powered search engine that provides cited answers to queries in real time.",
+        "builtOn": [
+          "claude-3-5-sonnet",
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cursor",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "cursor",
+        "name": "Cursor",
+        "organization": "Anysphere",
+        "category": "ide",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2023,
+        "url": "https://cursor.sh",
+        "notes": "AI-first code editor built on VS Code with deep chat and autocomplete integration.",
+        "builtOn": [
+          "claude-3-5-sonnet",
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kiro",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3321,
+          47.6062
+        ]
+      },
+      "properties": {
+        "id": "kiro",
+        "name": "Kiro",
+        "organization": "Amazon",
+        "category": "ide",
+        "city": "Seattle",
+        "country": "United States",
+        "year": 2025,
+        "url": "https://kiro.dev",
+        "notes": "Amazon's AI IDE with spec-driven development and agentic coding workflows.",
+        "builtOn": [
+          "claude-3-5-sonnet"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "windsurf",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0839,
+          37.3861
+        ]
+      },
+      "properties": {
+        "id": "windsurf",
+        "name": "Windsurf",
+        "organization": "Codeium",
+        "category": "ide",
+        "city": "Mountain View",
+        "country": "United States",
+        "year": 2024,
+        "url": "https://codeium.com/windsurf",
+        "notes": "Agentic IDE by Codeium with Cascade flow engine for multi-step coding tasks.",
+        "builtOn": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "github-copilot",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "github-copilot",
+        "name": "GitHub Copilot",
+        "organization": "GitHub",
+        "category": "ide",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2021,
+        "url": "https://github.com/features/copilot",
+        "notes": "AI pair programmer integrated into VS Code, JetBrains, and GitHub.com.",
+        "builtOn": [
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lovable",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.0686,
+          59.3293
+        ]
+      },
+      "properties": {
+        "id": "lovable",
+        "name": "Lovable",
+        "organization": "Lovable",
+        "category": "codegen",
+        "city": "Stockholm",
+        "country": "Sweden",
+        "year": 2023,
+        "url": "https://lovable.dev",
+        "notes": "AI full-stack engineer that builds React apps from natural language prompts.",
+        "builtOn": [
+          "claude-3-5-sonnet"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bolt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "bolt",
+        "name": "Bolt",
+        "organization": "StackBlitz",
+        "category": "codegen",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2024,
+        "url": "https://bolt.new",
+        "notes": "Browser-based AI coding agent that creates and deploys full-stack apps instantly.",
+        "builtOn": [
+          "claude-3-5-sonnet"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "v0",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "v0",
+        "name": "v0",
+        "organization": "Vercel",
+        "category": "codegen",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2023,
+        "url": "https://v0.dev",
+        "notes": "Vercel's generative UI tool that produces React/shadcn components from prompts.",
+        "builtOn": [
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "replit",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "replit",
+        "name": "Replit",
+        "organization": "Replit",
+        "category": "codegen",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2023,
+        "url": "https://replit.com",
+        "notes": "Cloud IDE with AI agent (Replit Agent) that can build and deploy apps end-to-end.",
+        "builtOn": [
+          "claude-3-5-sonnet"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "devin",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "devin",
+        "name": "Devin",
+        "organization": "Cognition AI",
+        "category": "devtool",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2024,
+        "url": "https://cognition.ai",
+        "notes": "First autonomous AI software engineer capable of completing end-to-end engineering tasks.",
+        "builtOn": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "roo-code",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "roo-code",
+        "name": "Roo Code",
+        "organization": "Roo AI",
+        "category": "devtool",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2024,
+        "url": "https://roocode.com",
+        "notes": "Open-source VS Code extension for agentic coding with multi-model support.",
+        "builtOn": [
+          "claude-3-5-sonnet",
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kilo-code",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "kilo-code",
+        "name": "Kilo Code",
+        "organization": "Kilo",
+        "category": "devtool",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2024,
+        "url": "https://kilocode.ai",
+        "notes": "VS Code extension for AI-assisted coding with context-aware completions.",
+        "builtOn": [
+          "claude-3-5-sonnet"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "opencode",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "opencode",
+        "name": "OpenCode",
+        "organization": "OpenCode",
+        "category": "devtool",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2025,
+        "url": "https://opencode.ai",
+        "notes": "Terminal-based AI coding agent with a clean TUI and multi-model support.",
+        "builtOn": [
+          "claude-3-5-sonnet",
+          "gpt-4o"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "antigravity",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "antigravity",
+        "name": "Antigravity",
+        "organization": "Antigravity",
+        "category": "devtool",
+        "city": "San Francisco",
+        "country": "United States",
+        "year": 2025,
+        "url": "https://antigravity.dev",
+        "notes": "AI-powered developer productivity tool for code review and refactoring.",
+        "builtOn": []
+      }
+    }
+  ]
+}

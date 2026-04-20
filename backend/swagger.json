@@ -46,6 +46,24 @@
           "file":     { "type": "string", "description": "Path relative to the data root, e.g. editions/2026-04-19_….geojson" }
         }
       },
+      "Tool": {
+        "type": "object",
+        "required": ["name", "organization", "lat", "lng"],
+        "properties": {
+          "id":           { "type": "string", "description": "Auto-derived from name if omitted" },
+          "name":         { "type": "string" },
+          "organization": { "type": "string" },
+          "country":      { "type": "string" },
+          "city":         { "type": "string" },
+          "lat":          { "type": "number", "minimum": -90,  "maximum": 90 },
+          "lng":          { "type": "number", "minimum": -180, "maximum": 180 },
+          "category":     { "type": "string", "enum": ["assistant", "search", "ide", "codegen", "devtool"], "default": "devtool" },
+          "year":         { "type": "integer" },
+          "url":          { "type": "string" },
+          "notes":        { "type": "string" },
+          "builtOn":      { "type": "array", "items": { "type": "string" }, "description": "Model ids this tool is built on" }
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
@@ -147,6 +165,36 @@
           "404": { "description": "Edition not found" }
         }
       }
+    },
+    "/tools": {
+      "get": {
+        "summary": "List all tools",
+        "responses": {
+          "200": {
+            "description": "Array of tools",
+            "content": { "application/json": { "schema": { "type": "object", "properties": { "tools": { "type": "array", "items": { "$ref": "#/components/schemas/Tool" } } } } } }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a tool",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Tool" } } } },
+        "responses": {
+          "201": { "description": "Created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Tool" } } } },
+          "400": { "description": "Validation failed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } },
+          "409": { "description": "ID conflict" }
+        }
+      }
+    },
+    "/tools/{id}": {
+      "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+      "get":    { "summary": "Get one tool", "responses": { "200": { "description": "Tool" }, "404": { "description": "Not found" } } },
+      "put":    {
+        "summary": "Update a tool",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Tool" } } } },
+        "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } }
+      },
+      "delete": { "summary": "Delete a tool", "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
     }
   }
 }

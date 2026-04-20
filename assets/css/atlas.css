@@ -17,6 +17,7 @@
   --gold-soft: #e2c062;
   --rust:      #b14a2c;
   --verdigris: #4a8474;
+  --violet:    #8060a8;
   --muted:     #5c5447;
   --line:      rgba(237, 228, 204, 0.10);
   --line-2:    rgba(237, 228, 204, 0.20);
@@ -319,6 +320,90 @@ a:hover { color: var(--paper); border-color: var(--paper); }
 .marker.type-open-weight .ring { stroke: var(--verdigris); }
 .marker.type-open-weight .pulse { fill: var(--verdigris); }
 
+/* ─────────  Tool markers (diamond) ───────── */
+
+.tool-marker { cursor: pointer; }
+.tool-marker .tdiamond {
+  fill: var(--violet);
+  stroke: var(--bg);
+  stroke-width: 1.5;
+}
+.tool-marker .tdiamond-ring {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.tool-marker.open .tdiamond-ring,
+.tool-marker:hover .tdiamond-ring { opacity: 0.7; }
+.tool-marker.open .tdiamond,
+.tool-marker:hover .tdiamond { fill: var(--paper); }
+
+/* ─────────  Layer toggles ───────── */
+
+.layer-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+.layer-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--line);
+  border-left: 2px solid transparent;
+  padding: 7px 10px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: left;
+  width: 100%;
+}
+.layer-btn:hover { color: var(--paper-2); border-color: var(--line-2); }
+.layer-btn.is-active { color: var(--paper-2); }
+.layer-btn.is-active[data-layer="models"] { border-left-color: var(--gold); }
+.layer-btn.is-active[data-layer="tools"]  { border-left-color: var(--violet); }
+.layer-swatch {
+  width: 9px; height: 9px; flex-shrink: 0;
+}
+.layer-swatch.models {
+  background: var(--gold);
+  border-radius: 50%;
+}
+.layer-swatch.tools {
+  background: var(--violet);
+  transform: rotate(45deg);
+}
+.layer-num {
+  margin-left: auto;
+  font-size: 9px;
+  color: var(--muted);
+  transition: color 0.18s;
+}
+.layer-btn.is-active .layer-num { color: var(--paper-3); }
+
+/* ─────────  Built-on tags (tool detail panel) ───────── */
+
+.built-on-tag {
+  display: inline-block;
+  background: rgba(128, 96, 168, 0.12);
+  border: 1px solid rgba(128, 96, 168, 0.28);
+  color: #a888d8;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  margin: 0 3px 3px 0;
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); fill-opacity: 0.16; }
   50%      { transform: scale(2.4); fill-opacity: 0; }
@@ -361,9 +446,55 @@ a:hover { color: var(--paper); border-color: var(--paper); }
   border-bottom: 1px solid var(--line);
 }
 .catalogue header {
-  display: flex; align-items: baseline; justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   margin-bottom: 32px;
 }
+
+/* Catalogue tab switcher */
+.cat-tabs {
+  display: flex;
+  gap: 0;
+  margin-left: auto;
+  border-bottom: 1px solid var(--line-2);
+  align-self: flex-end;
+  padding-bottom: 0;
+}
+.cat-tab {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 10px 18px 8px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+  white-space: nowrap;
+}
+.cat-tab:hover { color: var(--paper-2); }
+.cat-tab.is-active { color: var(--gold); border-bottom-color: var(--gold); }
+.cat-tab[data-cat="tools"].is-active { color: var(--violet); border-bottom-color: var(--violet); }
+
+/* Tool category pill */
+.catalogue__table .cat-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid rgba(128, 96, 168, 0.35);
+  border-radius: 999px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--violet);
+}
+
+/* Sorted column colour for tools table */
+#cat-tools th.sorted { color: var(--violet); }
 .catalogue h2 {
   font-family: var(--serif);
   font-style: italic;

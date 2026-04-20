@@ -302,6 +302,38 @@ body.desk {
 .toast.is-visible { transform: translateX(-50%) translateY(0); }
 .toast.danger { box-shadow: 6px 6px 0 var(--rust); }
 
+/* ─── tabs ─── */
+.desk-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--line-2);
+  padding: 0 32px;
+  background: rgba(13, 11, 8, 0.6);
+}
+.desk-tab {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 16px 20px 14px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.desk-tab:hover { color: var(--paper-2); }
+.desk-tab.is-active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+.desk-tab[data-tab="tools"].is-active {
+  color: var(--violet);
+  border-bottom-color: var(--violet);
+}
+
 /* ─── stats line ─── */
 .statline {
   padding: 18px 32px;

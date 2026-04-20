@@ -35,7 +35,12 @@
 
 <div class="statline" id="statline"></div>
 
-<main class="desk-grid">
+<div class="desk-tabs">
+  <button class="desk-tab is-active" data-tab="models">Models</button>
+  <button class="desk-tab" data-tab="tools">Tools &amp; Applications</button>
+</div>
+
+<main class="desk-grid" id="models-grid">
 
   <!-- LEFT: list + editions archive -->
   <section class="panel">
@@ -176,6 +181,118 @@
         This is the exact GeoJSON written to <span style="color:var(--gold)">data/ai-models.geojson</span>. Save an edition to snapshot this state permanently.
       </p>
       <pre class="json-preview" id="json-preview"></pre>
+    </div>
+  </section>
+
+</main>
+
+<!-- TOOLS GRID -->
+<main class="desk-grid" id="tools-grid" style="display:none">
+
+  <!-- LEFT: tools list -->
+  <section class="panel">
+    <div class="panel__head">
+      <span>The Tools</span>
+      <span class="num" id="tools-count"></span>
+    </div>
+    <div class="panel__body">
+      <input class="entry-search" id="tool-search" type="text" placeholder="Search tools, orgs, categories…">
+      <div class="entry-list" id="tools-list"></div>
+    </div>
+  </section>
+
+  <!-- CENTER: tools form -->
+  <section class="panel">
+    <div class="panel__head">
+      <span id="tool-form-mode">New tool</span>
+      <span class="num">Composer</span>
+    </div>
+    <div class="panel__body">
+      <form class="form" id="tool-form">
+        <div class="field">
+          <label>Tool name</label>
+          <input id="ft-name" type="text" required placeholder="e.g. Cursor">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Organisation</label>
+            <input id="ft-org" type="text" required placeholder="e.g. Anysphere">
+          </div>
+          <div class="field">
+            <label>Category</label>
+            <select id="ft-category" class="mono"></select>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>City</label>
+            <input id="ft-city" type="text" placeholder="San Francisco">
+          </div>
+          <div class="field">
+            <label>Country</label>
+            <input id="ft-country" type="text" placeholder="United States">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Latitude</label>
+            <input id="ft-lat" class="mono" type="number" step="any" required placeholder="37.7749">
+          </div>
+          <div class="field">
+            <label>Longitude</label>
+            <input id="ft-lng" class="mono" type="number" step="any" required placeholder="-122.4194">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Year</label>
+            <input id="ft-year" class="mono" type="number" min="1950" max="2100" required>
+          </div>
+          <div class="field">
+            <label>Reference URL</label>
+            <input id="ft-url" class="mono" type="url" placeholder="https://…">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Built on <span style="font-size:9px;letter-spacing:0.12em;color:var(--muted)">(comma-separated model IDs)</span></label>
+          <input id="ft-builton" class="mono" type="text" placeholder="claude-3-5-sonnet, gpt-4o">
+        </div>
+
+        <div class="field">
+          <label>Notes</label>
+          <textarea id="ft-notes" placeholder="One or two sentences."></textarea>
+        </div>
+
+        <div class="field" style="display:none">
+          <label>ID (auto)</label>
+          <input id="ft-id" class="mono" type="text">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn danger" id="btn-tool-delete" style="display:none">Delete</button>
+          <button type="button" class="btn" id="btn-tool-new">New tool</button>
+          <button type="submit" class="btn primary">Save tool</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- RIGHT: tools GeoJSON preview -->
+  <section class="panel">
+    <div class="panel__head">
+      <span>GeoJSON preview</span>
+      <span class="num">tools · live</span>
+    </div>
+    <div class="panel__body">
+      <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;line-height:1.6">
+        This is the exact GeoJSON written to <span style="color:var(--gold)">data/ai-tools.geojson</span>.
+      </p>
+      <pre class="json-preview" id="tools-json-preview"></pre>
     </div>
   </section>
 

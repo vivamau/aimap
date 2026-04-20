@@ -4,8 +4,19 @@
    ============================================================ */
 
 const DATA_URL      = './data/ai-models.geojson';
+const TOOLS_URL     = './data/ai-tools.geojson';
 const EDITIONS_URL  = './data/editions/index.json';
 const TOPO_URL      = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+
+// Convert tools GeoJSON FeatureCollection → flat tool objects.
+function fromToolsGeoJson(geo) {
+  return (geo.features || []).map(f => ({
+    ...f.properties,
+    id: f.id || f.properties.id,
+    lng: f.geometry.coordinates[0],
+    lat: f.geometry.coordinates[1],
+  }));
+}
 
 // Convert GeoJSON FeatureCollection → flat model objects used by the rest of the code.
 function fromGeoJson(geo) {
@@ -24,10 +35,15 @@ const state = {
   filtered: [],
   filterType: 'all',     // all | proprietary | open-weight
   filterModality: 'all', // all | text | image | audio | video
-  sort: { key: 'year', asc: false },
+  sort:     { key: 'year', asc: false },
+  toolSort: { key: 'year', asc: false },
   selected: null,
+  selectedTool: null,
   activeEditionId: 'live',   // 'live' or an edition id string
   editions: [],              // list loaded from editions/index.json
+  tools: [],                 // AI tools layer
+  layers: { models: true, tools: true },
+  catTab: 'models',          // active catalogue tab
 };
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -37,23 +53,29 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
 (async function init() {
   try {
-    const [geo, topo, editionsIndex] = await Promise.all([
+    const [geo, topo, editionsIndex, toolsGeo] = await Promise.all([
       fetch(DATA_URL).then(r => r.json()),
       fetch(TOPO_URL).then(r => r.json()),
       fetch(EDITIONS_URL).then(r => r.json()).catch(() => ({ editions: [] })),
+      fetch(TOOLS_URL).then(r => r.json()).catch(() => ({ features: [] })),
     ]);
     const { meta, models } = fromGeoJson(geo);
-    state.models  = models;
+    state.models   = models;
     state.editions = editionsIndex.editions || [];
+    state.tools    = fromToolsGeoJson(toolsGeo);
     renderMeta(meta);
     renderStats();
     renderFilters();
+    renderLayerToggles();
     renderEditionSwitcher();
     renderMap(topo);
     applyFilters();
+    renderToolsCatalogue();
     bindCatalogueSort();
+    bindCatalogueTabs();
     bindDetailPanel();
     bindArchiveBanner();
+    bindLayerToggles();
   } catch (err) {
     console.error('Atlas failed to load:', err);
     document.body.insertAdjacentHTML('beforeend',
@@ -164,10 +186,12 @@ function renderMap(topo) {
     .attr('class', d => 'country' + (countryHasModels(d, state.models) ? ' has-models' : ''))
     .attr('d', path);
 
-  // markers layer drawn after countries
+  // markers layers drawn after countries (models below, tools above)
   svg.append('g').attr('class', 'markers');
+  svg.append('g').attr('class', 'tool-markers');
 
   renderMarkers();
+  renderToolMarkers();
   buildLegend();
 }
 
@@ -222,12 +246,16 @@ function buildLegend() {
 
   legend.html(`
     <div style="display:flex;align-items:center;gap:8px">
-      <span style="width:8px;height:8px;border-radius:50%;background:#c9a544;display:inline-block"></span>
-      Proprietary
+      <span style="width:8px;height:8px;border-radius:50%;background:#c9a544;display:inline-block;flex-shrink:0"></span>
+      Proprietary model
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <span style="width:8px;height:8px;border-radius:50%;background:#4a8474;display:inline-block"></span>
-      Open-weight
+      <span style="width:8px;height:8px;border-radius:50%;background:#4a8474;display:inline-block;flex-shrink:0"></span>
+      Open-weight model
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="width:9px;height:9px;background:#8060a8;display:inline-block;transform:rotate(45deg);flex-shrink:0"></span>
+      Tool / Application
     </div>
   `);
 
@@ -245,11 +273,15 @@ const tooltip = (() => {
   return el;
 })();
 
-function showTooltip(e, d) {
+function showTooltip(e, d, entryType = 'model') {
+  const badge = entryType === 'tool'
+    ? `<span style="margin-top:4px;display:inline-block;background:rgba(128,96,168,0.2);color:#c0a0e0;font-size:9px;letter-spacing:0.12em;padding:1px 5px;border-radius:2px;text-transform:uppercase">${escapeHtml(d.category)}</span>`
+    : '';
   tooltip.innerHTML = `
-    <span class="name">${d.name}</span>
-    <span class="org">${d.organization}</span>
-    <span class="place">${d.city}, ${d.country}</span>`;
+    <span class="name">${escapeHtml(d.name)}</span>
+    <span class="org">${escapeHtml(d.organization)}</span>
+    <span class="place">${escapeHtml(d.city)}, ${escapeHtml(d.country)}</span>
+    ${badge}`;
   tooltip.classList.add('is-visible');
   positionTooltip(e);
 }
@@ -262,7 +294,7 @@ function hideTooltip() { tooltip.classList.remove('is-visible'); }
 // ──────────────  catalogue
 
 function renderCatalogue() {
-  const tbody = $('#catalogue tbody');
+  const tbody = $('#cat-models tbody');
   const sorted = [...state.filtered].sort((a, b) => {
     const k = state.sort.key;
     let av = a[k], bv = b[k];
@@ -284,8 +316,7 @@ function renderCatalogue() {
       <td class="hide-sm">${m.parameters}</td>
     </tr>`).join('');
 
-  $('#catalogue-count').textContent =
-    `${state.filtered.length} of ${state.models.length} entries`;
+  updateCatalogueCount();
 
   tbody.querySelectorAll('tr').forEach(tr => {
     tr.addEventListener('click', () => {
@@ -295,16 +326,93 @@ function renderCatalogue() {
   });
 }
 
+function renderToolsCatalogue() {
+  const tbody = $('#cat-tools tbody');
+  if (!tbody) return;
+  const sorted = [...state.tools].sort((a, b) => {
+    const k = state.toolSort.key;
+    let av = a[k], bv = b[k];
+    if (Array.isArray(av)) av = av.join(',');
+    if (Array.isArray(bv)) bv = bv.join(',');
+    if (av < bv) return state.toolSort.asc ? -1 : 1;
+    if (av > bv) return state.toolSort.asc ?  1 : -1;
+    return 0;
+  });
+
+  tbody.innerHTML = sorted.map(t => {
+    const bo = Array.isArray(t.builtOn) && t.builtOn.length
+      ? t.builtOn.slice(0, 2).join(', ') +
+        (t.builtOn.length > 2 ? ` <span style="color:var(--muted)">+${t.builtOn.length - 2}</span>` : '')
+      : '<span style="color:var(--muted)">—</span>';
+    return `
+      <tr data-id="${escapeAttr(t.id)}">
+        <td class="name-cell">${escapeHtml(t.name)}</td>
+        <td>${escapeHtml(t.organization)}</td>
+        <td class="hide-sm">${escapeHtml(t.city)}, ${escapeHtml(t.country)}</td>
+        <td><span class="cat-pill">${escapeHtml(t.category)}</span></td>
+        <td>${t.year}</td>
+        <td class="hide-sm" style="font-family:var(--mono);font-size:11px">${bo}</td>
+      </tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('tr').forEach(tr => {
+    tr.addEventListener('click', () => {
+      const t = state.tools.find(x => x.id === tr.dataset.id);
+      if (t) openToolDetail(t);
+    });
+  });
+}
+
+function updateCatalogueCount() {
+  const el = $('#catalogue-count');
+  if (!el) return;
+  if (state.catTab === 'tools') {
+    el.textContent = `${state.tools.length} tool${state.tools.length !== 1 ? 's' : ''}`;
+  } else {
+    el.textContent = `${state.filtered.length} of ${state.models.length} entries`;
+  }
+}
+
 function bindCatalogueSort() {
-  $$('#catalogue th[data-sort]').forEach(th => {
+  // models table sort
+  $$('#cat-models th[data-sort]').forEach(th => {
     th.addEventListener('click', () => {
       const k = th.dataset.sort;
       if (state.sort.key === k) state.sort.asc = !state.sort.asc;
       else { state.sort.key = k; state.sort.asc = true; }
-      $$('#catalogue th').forEach(t => t.classList.remove('sorted', 'asc'));
+      $$('#cat-models th').forEach(t => t.classList.remove('sorted', 'asc'));
       th.classList.add('sorted');
       if (state.sort.asc) th.classList.add('asc');
       renderCatalogue();
+    });
+  });
+
+  // tools table sort
+  $$('#cat-tools th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const k = th.dataset.sort;
+      if (state.toolSort.key === k) state.toolSort.asc = !state.toolSort.asc;
+      else { state.toolSort.key = k; state.toolSort.asc = true; }
+      $$('#cat-tools th').forEach(t => t.classList.remove('sorted', 'asc'));
+      th.classList.add('sorted');
+      if (state.toolSort.asc) th.classList.add('asc');
+      renderToolsCatalogue();
+    });
+  });
+}
+
+function bindCatalogueTabs() {
+  const tabs = $$('.cat-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.cat;
+      state.catTab = target;
+      tabs.forEach(t => t.classList.toggle('is-active', t.dataset.cat === target));
+      const mt = $('#cat-models');
+      const tt = $('#cat-tools');
+      if (mt) mt.style.display = target === 'models' ? '' : 'none';
+      if (tt) tt.style.display = target === 'tools'  ? '' : 'none';
+      updateCatalogueCount();
     });
   });
 }
@@ -372,7 +480,117 @@ function openDetail(m) {
 function closeDetail() {
   $('#detail').classList.remove('is-open');
   d3.selectAll('g.marker').classed('open', false);
+  d3.selectAll('g.tool-marker').classed('open', false);
   state.selected = null;
+  state.selectedTool = null;
+}
+
+// ──────────────  tools layer
+
+function renderToolMarkers() {
+  if (!svg) return;
+  const layer = svg.select('g.tool-markers');
+  if (layer.empty()) return;
+
+  const visible = state.layers.tools ? state.tools : [];
+  const sel = layer.selectAll('g.tool-marker').data(visible, d => d.id);
+
+  sel.exit().remove();
+
+  const enter = sel.enter().append('g')
+    .attr('class', d => `tool-marker cat-${d.category}`)
+    .attr('transform', d => {
+      const [x, y] = projection([d.lng, d.lat]);
+      return `translate(${x}, ${y})`;
+    })
+    .style('opacity', 0);
+
+  // outer ring (hover feedback)
+  enter.append('rect')
+    .attr('class', 'tdiamond-ring')
+    .attr('x', -7).attr('y', -7)
+    .attr('width', 14).attr('height', 14)
+    .attr('transform', 'rotate(45)');
+
+  // solid diamond fill
+  enter.append('rect')
+    .attr('class', 'tdiamond')
+    .attr('x', -4.5).attr('y', -4.5)
+    .attr('width', 9).attr('height', 9)
+    .attr('transform', 'rotate(45)');
+
+  enter.transition()
+    .delay((_, i) => 400 + i * 28)
+    .duration(500)
+    .style('opacity', 1);
+
+  layer.selectAll('g.tool-marker')
+    .on('mouseenter', (e, d) => showTooltip(e, d, 'tool'))
+    .on('mousemove',  (e)    => positionTooltip(e))
+    .on('mouseleave', hideTooltip)
+    .on('click',      (e, d) => openToolDetail(d));
+}
+
+function openToolDetail(t) {
+  state.selectedTool = t;
+  state.selected = null;
+  const panel = $('#detail');
+
+  const idx = state.tools.indexOf(t) + 1;
+  $('#detail .eyebrow').textContent = `Tool № ${zeroPad(idx, 3)} · ${t.year} · ${t.category}`;
+  $('#detail h3').textContent = t.name;
+  $('#detail .org-line').innerHTML =
+    `${escapeHtml(t.organization)}<span class="place">${escapeHtml(t.city)} · ${escapeHtml(t.country)}</span>`;
+
+  const builtOnHtml = Array.isArray(t.builtOn) && t.builtOn.length
+    ? t.builtOn.map(b => `<span class="built-on-tag">${escapeHtml(b)}</span>`).join('')
+    : `<span style="color:var(--muted)">—</span>`;
+
+  const refHtml = t.url
+    ? `<a href="${escapeAttr(t.url)}" target="_blank" rel="noopener">${escapeHtml(stripUrl(t.url))} ↗</a>`
+    : '—';
+
+  $('#detail .specs').innerHTML = `
+    <dt>Category</dt><dd>${escapeHtml(t.category)}</dd>
+    <dt>Year</dt><dd>${t.year}</dd>
+    <dt>Built on</dt><dd style="display:flex;flex-wrap:wrap;gap:2px">${builtOnHtml}</dd>
+    <dt>Coordinates</dt><dd>${t.lat.toFixed(2)}°, ${t.lng.toFixed(2)}°</dd>
+    <dt>Reference</dt><dd>${refHtml}</dd>`;
+
+  $('#detail .notes').textContent = t.notes || '';
+
+  // tools have no submodels
+  const subEl = $('#detail .submodels-section');
+  if (subEl) subEl.style.display = 'none';
+
+  d3.selectAll('g.marker').classed('open', false);
+  d3.selectAll('g.tool-marker').classed('open', d => d.id === t.id);
+  panel.classList.add('is-open');
+}
+
+// ──────────────  layer toggles
+
+function renderLayerToggles() {
+  const modelsNum = $('#layer-models-count');
+  const toolsNum  = $('#layer-tools-count');
+  if (modelsNum) modelsNum.textContent = state.models.length;
+  if (toolsNum)  toolsNum.textContent  = state.tools.length;
+}
+
+function bindLayerToggles() {
+  const container = $('#layer-toggles');
+  if (!container) return;
+  container.addEventListener('click', e => {
+    const btn = e.target.closest('.layer-btn');
+    if (!btn) return;
+    const layer = btn.dataset.layer;
+    state.layers[layer] = !state.layers[layer];
+    btn.classList.toggle('is-active', state.layers[layer]);
+    if (svg) {
+      if (layer === 'models') svg.select('g.markers').style('display', state.layers.models ? '' : 'none');
+      if (layer === 'tools')  svg.select('g.tool-markers').style('display', state.layers.tools ? '' : 'none');
+    }
+  });
 }
 
 // ──────────────  edition switcher
