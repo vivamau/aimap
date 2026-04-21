@@ -45,6 +45,8 @@ const state = {
   layers: { models: true, tools: true },
   catTab: 'models',          // active catalogue tab
   glanceTab: 'models',       // active "at a glance" tab
+  view: 'map',               // 'map' | 'timeline'
+  timelineRendered: false,
 };
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -78,6 +80,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     bindDetailPanel();
     bindArchiveBanner();
     bindLayerToggles();
+    bindViewSwitch();
   } catch (err) {
     console.error('Atlas failed to load:', err);
     document.body.insertAdjacentHTML('beforeend',
@@ -159,6 +162,8 @@ function applyFilters() {
   });
   renderMarkers();
   renderCatalogue();
+  if (state.view === 'timeline') renderTimeline();
+  else state.timelineRendered = false;
 }
 
 // ──────────────  map
@@ -295,6 +300,20 @@ const tooltip = (() => {
 })();
 
 function showTooltip(e, d, entryType = 'model') {
+  if (entryType === 'submodel') {
+    const parts = [
+      d.version      ? `v${escapeHtml(d.version)}`      : '',
+      d.parameters   ? escapeHtml(d.parameters)         : '',
+    ].filter(Boolean).join(' · ');
+    tooltip.innerHTML = `
+      <span class="name">${escapeHtml(d.name)}</span>
+      <span class="org">${escapeHtml(d.parentName)} · submodel</span>
+      ${parts ? `<span class="place">${parts}</span>` : ''}
+      ${d.addedAt ? `<span style="margin-top:4px;display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;color:var(--paper-3)">${escapeHtml(d.addedAt)}</span>` : ''}`;
+    tooltip.classList.add('is-visible');
+    positionTooltip(e);
+    return;
+  }
   const badge = entryType === 'tool'
     ? `<span style="margin-top:4px;display:inline-block;background:rgba(128,96,168,0.2);color:#c0a0e0;font-size:9px;letter-spacing:0.12em;padding:1px 5px;border-radius:2px;text-transform:uppercase">${escapeHtml(d.category)}</span>`
     : '';
@@ -611,6 +630,7 @@ function bindLayerToggles() {
       if (layer === 'models') svg.select('g.markers').style('display', state.layers.models ? '' : 'none');
       if (layer === 'tools')  svg.select('g.tool-markers').style('display', state.layers.tools ? '' : 'none');
     }
+    if (state.view === 'timeline') renderTimeline();
   });
 }
 
@@ -703,6 +723,259 @@ function updateArchiveBanner(ed) {
 function bindArchiveBanner() {
   const btn = $('#btn-return-live');
   if (btn) btn.addEventListener('click', loadLiveEdition);
+}
+
+// ──────────────  view switcher (Map / Timeline)
+
+function bindViewSwitch() {
+  const box = $('#view-switch');
+  if (!box) return;
+  box.addEventListener('click', e => {
+    const btn = e.target.closest('.view-btn');
+    if (!btn) return;
+    setView(btn.dataset.view);
+  });
+}
+
+function setView(view) {
+  if (state.view === view) return;
+  state.view = view;
+  $$('#view-switch .view-btn').forEach(b =>
+    b.classList.toggle('is-active', b.dataset.view === view));
+  const mapEl = $('#map');
+  const tlEl  = $('#timeline');
+  if (view === 'timeline') {
+    if (mapEl) mapEl.hidden = true;
+    if (tlEl)  tlEl.hidden  = false;
+    renderTimeline();
+  } else {
+    if (tlEl)  tlEl.hidden  = true;
+    if (mapEl) mapEl.hidden = false;
+  }
+}
+
+// ──────────────  timeline
+
+const TL_W = 1100;
+const TL_H = 620;
+const TL_PAD = { top: 60, right: 56, bottom: 80, left: 56 };
+const TL_LANES = {
+  models: { top: TL_PAD.top + 10,  bottom: 290, label: 'Models' },
+  tools:  { top: 320,              bottom: TL_H - TL_PAD.bottom - 10, label: 'Tools & applications' },
+};
+
+function parseItemDate(d) {
+  if (d && typeof d === 'object' && d.addedAt) {
+    const t = Date.parse(d.addedAt);
+    if (!isNaN(t)) return new Date(t);
+  }
+  if (d && d.year != null) return new Date(d.year, 6, 1); // mid-year anchor
+  return null;
+}
+
+function renderTimeline() {
+  const container = $('#timeline');
+  if (!container) return;
+  container.innerHTML = '';
+
+  // ── collect items (respect filters for models; layers toggle respected too)
+  const modelItems = (state.layers.models ? state.filtered : []).map(m => ({
+    kind: 'model',
+    datum: m,
+    date: parseItemDate(m),
+  }));
+  const toolItems = (state.layers.tools ? state.tools : []).map(t => ({
+    kind: 'tool',
+    datum: t,
+    date: parseItemDate(t),
+  }));
+  const submodelItems = (state.layers.models ? state.filtered : []).flatMap(m =>
+    (Array.isArray(m.submodels) ? m.submodels : [])
+      .filter(s => s && (s.name || s.parameters))
+      .map(s => ({
+        kind: 'submodel',
+        datum: { ...s, parentId: m.id, parentName: m.name },
+        parent: m,
+        date: parseItemDate(s) || parseItemDate(m),
+      }))
+  );
+
+  const all = [...modelItems, ...toolItems, ...submodelItems].filter(i => i.date);
+  if (!all.length) {
+    container.innerHTML = `<div style="padding:48px;font-family:var(--mono);font-size:11px;letter-spacing:0.18em;color:var(--muted);text-transform:uppercase">No datable entries to plot.</div>`;
+    return;
+  }
+
+  // ── X scale (reversed: newer on left)
+  const minDate = d3.min(all, d => d.date);
+  const maxDate = d3.max(all, d => d.date);
+  const pad = Math.max(
+    (maxDate - minDate) * 0.05,
+    1000 * 60 * 60 * 24 * 120 // min 4 months padding
+  );
+  const domain = [new Date(maxDate.getTime() + pad), new Date(minDate.getTime() - pad)];
+  const x = d3.scaleTime()
+    .domain(domain)
+    .range([TL_PAD.left, TL_W - TL_PAD.right]);
+
+  const svgSel = d3.select(container).append('svg')
+    .attr('class', 'timeline')
+    .attr('viewBox', `0 0 ${TL_W} ${TL_H}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet');
+
+  // ── lane backgrounds & labels
+  Object.entries(TL_LANES).forEach(([key, lane]) => {
+    svgSel.append('rect')
+      .attr('class', `tl-lane tl-lane-${key}`)
+      .attr('x', TL_PAD.left - 20)
+      .attr('y', lane.top)
+      .attr('width', TL_W - TL_PAD.left - TL_PAD.right + 40)
+      .attr('height', lane.bottom - lane.top);
+    svgSel.append('text')
+      .attr('class', 'tl-lane-label')
+      .attr('x', TL_PAD.left - 16)
+      .attr('y', lane.top + 16)
+      .text(lane.label.toUpperCase());
+  });
+
+  // ── year grid + axis
+  const years = d3.timeYear.range(
+    d3.timeYear.floor(domain[1]),
+    d3.timeYear.offset(d3.timeYear.ceil(domain[0]), 1)
+  );
+  const grid = svgSel.append('g').attr('class', 'tl-grid');
+  years.forEach(yr => {
+    const xp = x(yr);
+    grid.append('line')
+      .attr('class', 'tl-gridline')
+      .attr('x1', xp).attr('x2', xp)
+      .attr('y1', TL_PAD.top - 20)
+      .attr('y2', TL_H - TL_PAD.bottom);
+    grid.append('text')
+      .attr('class', 'tl-year')
+      .attr('x', xp)
+      .attr('y', TL_H - TL_PAD.bottom + 26)
+      .attr('text-anchor', 'middle')
+      .text(yr.getFullYear());
+  });
+
+  // arrow hint "newer → older"
+  svgSel.append('text')
+    .attr('class', 'tl-hint')
+    .attr('x', TL_PAD.left)
+    .attr('y', 28)
+    .text('◄ Newer');
+  svgSel.append('text')
+    .attr('class', 'tl-hint')
+    .attr('x', TL_W - TL_PAD.right)
+    .attr('y', 28)
+    .attr('text-anchor', 'end')
+    .text('Older ►');
+
+  // ── helpers for stacking within lane
+  function placeInLane(items, lane, radius) {
+    const cy = (lane.top + lane.bottom) / 2;
+    const step = radius * 2 + 4;
+    const placed = [];
+    items
+      .slice()
+      .sort((a, b) => d3.descending(a.date, b.date))
+      .forEach(it => {
+        const xp = x(it.date);
+        let level = 0;
+        // zig-zag: 0, -1, +1, -2, +2, ...
+        const tries = [];
+        for (let k = 0; k < 40; k++) {
+          tries.push(k === 0 ? 0 : (k % 2 === 1 ? -Math.ceil(k/2) : Math.ceil(k/2)));
+        }
+        for (const lv of tries) {
+          const y = cy + lv * step;
+          if (y < lane.top + radius + 6 || y > lane.bottom - radius - 6) continue;
+          const hit = placed.some(p => Math.hypot(p.x - xp, p.y - y) < radius * 2 + 2);
+          if (!hit) { level = lv; placed.push({ x: xp, y, ref: it }); it._x = xp; it._y = y; return; }
+        }
+        // fallback: clamp
+        it._x = xp; it._y = cy;
+        placed.push({ x: xp, y: it._y, ref: it });
+      });
+  }
+
+  placeInLane(modelItems, TL_LANES.models, 6);
+  placeInLane(toolItems,  TL_LANES.tools,  6);
+  // Submodels: place along the models lane, smaller radius; they may overlap parents slightly
+  placeInLane(submodelItems, TL_LANES.models, 4);
+
+  // ── submodel → parent connectors (drawn first, under markers)
+  const connectors = svgSel.append('g').attr('class', 'tl-connectors');
+  submodelItems.forEach(s => {
+    const parent = modelItems.find(m => m.datum.id === s.datum.parentId);
+    if (!parent || parent._x == null) return;
+    connectors.append('path')
+      .attr('class', 'tl-connector')
+      .attr('d', `M${parent._x},${parent._y} C${parent._x},${(parent._y + s._y) / 2} ${s._x},${(parent._y + s._y) / 2} ${s._x},${s._y}`);
+  });
+
+  // ── model markers
+  const modelsG = svgSel.append('g').attr('class', 'tl-models');
+  modelsG.selectAll('g.tl-model')
+    .data(modelItems)
+    .join('g')
+    .attr('class', d => `tl-model type-${d.datum.type}`)
+    .attr('transform', d => `translate(${d._x}, ${d._y})`)
+    .each(function (d) {
+      const g = d3.select(this);
+      g.append('circle').attr('class', 'tl-ring').attr('r', 8);
+      g.append('circle').attr('class', 'tl-dot').attr('r', 4);
+    })
+    .on('mouseenter', (e, d) => showTooltip(e, d.datum, 'model'))
+    .on('mousemove',  (e)    => positionTooltip(e))
+    .on('mouseleave', hideTooltip)
+    .on('click',      (e, d) => openDetail(d.datum));
+
+  // ── submodel markers
+  const subG = svgSel.append('g').attr('class', 'tl-submodels');
+  subG.selectAll('g.tl-submodel')
+    .data(submodelItems)
+    .join('g')
+    .attr('class', 'tl-submodel')
+    .attr('transform', d => `translate(${d._x}, ${d._y})`)
+    .each(function () {
+      const g = d3.select(this);
+      g.append('circle').attr('class', 'tl-sub-dot').attr('r', 2.5);
+    })
+    .on('mouseenter', (e, d) => showTooltip(e, d.datum, 'submodel'))
+    .on('mousemove',  (e)    => positionTooltip(e))
+    .on('mouseleave', hideTooltip)
+    .on('click',      (e, d) => {
+      if (d.parent) openDetail(d.parent);
+    });
+
+  // ── tool markers (diamonds)
+  const toolsG = svgSel.append('g').attr('class', 'tl-tools');
+  toolsG.selectAll('g.tl-tool')
+    .data(toolItems)
+    .join('g')
+    .attr('class', 'tl-tool')
+    .attr('transform', d => `translate(${d._x}, ${d._y})`)
+    .each(function () {
+      const g = d3.select(this);
+      g.append('rect')
+        .attr('class', 'tl-tdiamond-ring')
+        .attr('x', -7).attr('y', -7)
+        .attr('width', 14).attr('height', 14)
+        .attr('transform', 'rotate(45)');
+      g.append('rect')
+        .attr('class', 'tl-tdiamond')
+        .attr('x', -4.5).attr('y', -4.5)
+        .attr('width', 9).attr('height', 9)
+        .attr('transform', 'rotate(45)');
+    })
+    .on('mouseenter', (e, d) => showTooltip(e, d.datum, 'tool'))
+    .on('mousemove',  (e)    => positionTooltip(e))
+    .on('mouseleave', hideTooltip)
+    .on('click',      (e, d) => openToolDetail(d.datum));
+
+  state.timelineRendered = true;
 }
 
 // ──────────────  utilities
