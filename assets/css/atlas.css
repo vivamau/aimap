@@ -197,6 +197,41 @@ a:hover { color: var(--paper); border-color: var(--paper); }
   content: ''; width: 18px; height: 1px; background: var(--gold);
 }
 
+.glance-block { display: flex; flex-direction: column; gap: 18px; }
+.glance-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.glance-head .section-label { margin-bottom: 0; }
+
+.glance-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--line-2);
+}
+.glance-tab {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 6px 10px 5px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.glance-tab:hover { color: var(--paper-2); }
+.glance-tab.is-active { color: var(--gold); border-bottom-color: var(--gold); }
+.glance-tab[data-glance="tools"].is-active {
+  color: #8060A8;
+  border-bottom-color: #8060A8;
+}
+
 .stats {
   display: flex; flex-direction: column; gap: 18px;
 }
@@ -208,6 +243,7 @@ a:hover { color: var(--paper); border-color: var(--paper); }
   letter-spacing: -0.02em;
 }
 .stat .num em { font-style: italic; color: var(--gold); }
+.glance-block[data-glance="tools"] .stat .num em { color: #8060A8; }
 .stat .label {
   font-family: var(--mono);
   font-size: 10px;

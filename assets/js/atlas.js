@@ -44,6 +44,7 @@ const state = {
   tools: [],                 // AI tools layer
   layers: { models: true, tools: true },
   catTab: 'models',          // active catalogue tab
+  glanceTab: 'models',       // active "at a glance" tab
 };
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -73,6 +74,7 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     renderToolsCatalogue();
     bindCatalogueSort();
     bindCatalogueTabs();
+    bindGlanceTabs();
     bindDetailPanel();
     bindArchiveBanner();
     bindLayerToggles();
@@ -94,11 +96,30 @@ function renderMeta(meta) {
 // ──────────────  stats
 
 function renderStats() {
-  const countries = new Set(state.models.map(m => m.country));
-  const orgs      = new Set(state.models.map(m => m.organization));
-  $('#stat-models').innerHTML    = state.models.length.toString().padStart(2, '0');
-  $('#stat-countries').innerHTML = countries.size.toString().padStart(2, '0');
-  $('#stat-orgs').innerHTML      = orgs.size.toString().padStart(2, '0');
+  const src = state.glanceTab === 'tools' ? state.tools : state.models;
+  const countries = new Set(src.map(x => x.country).filter(Boolean));
+  const orgs      = new Set(src.map(x => x.organization).filter(Boolean));
+  const pad2 = n => n.toString().padStart(2, '0');
+  $('#stat-primary').textContent   = pad2(src.length);
+  $('#stat-countries').textContent = pad2(countries.size);
+  $('#stat-orgs').textContent      = pad2(orgs.size);
+  $('#stat-primary-label').textContent =
+    state.glanceTab === 'tools' ? 'Catalogued tools' : 'Catalogued models';
+  const block = document.querySelector('.glance-block');
+  if (block) block.setAttribute('data-glance', state.glanceTab);
+}
+
+function bindGlanceTabs() {
+  const tabs = $$('#glance-tabs .glance-tab');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.glance;
+      if (state.glanceTab === target) return;
+      state.glanceTab = target;
+      tabs.forEach(t => t.classList.toggle('is-active', t.dataset.glance === target));
+      renderStats();
+    });
+  });
 }
 
 // ──────────────  filters

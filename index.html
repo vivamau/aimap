@@ -52,10 +52,16 @@
 <!-- ATLAS -->
 <section class="atlas" id="atlas">
   <aside class="atlas__aside reveal reveal-3">
-    <div>
-      <div class="section-label">Survey at a glance</div>
+    <div class="glance-block" data-glance="models">
+      <div class="glance-head">
+        <div class="section-label">At a glance</div>
+        <div class="glance-tabs" id="glance-tabs">
+          <button class="glance-tab is-active" data-glance="models">Models</button>
+          <button class="glance-tab" data-glance="tools">Tools</button>
+        </div>
+      </div>
       <div class="stats">
-        <div class="stat"><div class="num"><em id="stat-models">00</em></div><div class="label">Catalogued models</div></div>
+        <div class="stat"><div class="num"><em id="stat-primary">00</em></div><div class="label" id="stat-primary-label">Catalogued models</div></div>
         <div class="stat"><div class="num" id="stat-orgs">00</div><div class="label">Organisations</div></div>
         <div class="stat"><div class="num" id="stat-countries">00</div><div class="label">Countries</div></div>
       </div>
