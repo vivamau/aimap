@@ -727,6 +727,25 @@ a:hover { color: var(--paper); border-color: var(--paper); }
   color: var(--muted);
 }
 
+.cat-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 0 20px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0;
+}
+.cat-filterbar .atlas-search-wrap {
+  flex: 0 0 auto;
+  width: 220px;
+}
+.cat-filterbar .filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 table.catalogue__table {
   width: 100%;
   border-collapse: collapse;

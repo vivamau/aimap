@@ -134,26 +134,38 @@ function renderFilters() {
   const types = ['all', 'proprietary', 'open-weight'];
   const mods  = ['all', 'text', 'image', 'audio', 'video'];
 
-  $('#filter-type').innerHTML = types.map(t =>
+  const typeHtml = types.map(t =>
     `<button class="chip ${state.filterType === t ? 'is-active' : ''}" data-type="${t}">${t}</button>`
   ).join('');
-
-  $('#filter-modality').innerHTML = mods.map(m =>
+  const modHtml = mods.map(m =>
     `<button class="chip ${state.filterModality === m ? 'is-active' : ''}" data-mod="${m}">${m}</button>`
   ).join('');
 
-  $('#filter-type').addEventListener('click', e => {
-    const btn = e.target.closest('.chip'); if (!btn) return;
-    state.filterType = btn.dataset.type;
-    renderFilters();
-    applyFilters();
+  ['#filter-type', '#cat-filter-type'].forEach(sel => {
+    const el = $(sel); if (el) el.innerHTML = typeHtml;
+  });
+  ['#filter-modality', '#cat-filter-modality'].forEach(sel => {
+    const el = $(sel); if (el) el.innerHTML = modHtml;
   });
 
-  $('#filter-modality').addEventListener('click', e => {
-    const btn = e.target.closest('.chip'); if (!btn) return;
-    state.filterModality = btn.dataset.mod;
-    renderFilters();
-    applyFilters();
+  ['#filter-type', '#cat-filter-type'].forEach(sel => {
+    const el = $(sel); if (!el) return;
+    el.addEventListener('click', e => {
+      const btn = e.target.closest('.chip'); if (!btn) return;
+      state.filterType = btn.dataset.type;
+      renderFilters();
+      applyFilters();
+    });
+  });
+
+  ['#filter-modality', '#cat-filter-modality'].forEach(sel => {
+    const el = $(sel); if (!el) return;
+    el.addEventListener('click', e => {
+      const btn = e.target.closest('.chip'); if (!btn) return;
+      state.filterModality = btn.dataset.mod;
+      renderFilters();
+      applyFilters();
+    });
   });
 }
 
@@ -654,22 +666,33 @@ function openToolDetail(t) {
 // ──────────────  search
 
 function bindSearch() {
-  const input = $('#atlas-search');
-  const clear = $('#atlas-search-clear');
-  if (!input) return;
+  const inputs = [
+    { input: $('#atlas-search'), clear: $('#atlas-search-clear') },
+    { input: $('#cat-search'),   clear: $('#cat-search-clear')   },
+  ].filter(p => p.input);
 
-  input.addEventListener('input', () => {
-    state.filterSearch = input.value.trim();
-    clear.hidden = !state.filterSearch;
-    applyFilters();
-  });
+  function syncAll(value) {
+    inputs.forEach(({ input, clear }) => {
+      input.value = value;
+      if (clear) clear.hidden = !value;
+    });
+  }
 
-  clear.addEventListener('click', () => {
-    input.value = '';
-    state.filterSearch = '';
-    clear.hidden = true;
-    input.focus();
-    applyFilters();
+  inputs.forEach(({ input, clear }) => {
+    input.addEventListener('input', () => {
+      state.filterSearch = input.value.trim();
+      syncAll(state.filterSearch);
+      applyFilters();
+    });
+
+    if (clear) {
+      clear.addEventListener('click', () => {
+        state.filterSearch = '';
+        syncAll('');
+        input.focus();
+        applyFilters();
+      });
+    }
   });
 }
 
