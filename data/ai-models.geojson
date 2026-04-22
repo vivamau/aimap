@@ -967,6 +967,1756 @@
         "notes": "Small language model for five African languages.",
         "submodels": []
       }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "gpt-2",
+        "name": "GPT-2",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "open-weight",
+        "year": 2019,
+        "parameters": "1.5B",
+        "url": "https://openai.com/research/gpt-2",
+        "notes": "Trained on 32 TPUv3 chips. Initially withheld over misuse concerns, later fully released.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "gpt-3",
+        "name": "GPT-3",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2020,
+        "parameters": "175B",
+        "url": "https://openai.com/research/gpt-3",
+        "notes": "Foundation for ChatGPT (2022). First demonstration of in-context few-shot learning at scale.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-neo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4294,
+          37.7649
+        ]
+      },
+      "properties": {
+        "id": "gpt-neo",
+        "name": "GPT-Neo",
+        "organization": "EleutherAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "open-weight",
+        "year": 2021,
+        "parameters": "2.7B",
+        "url": "https://github.com/EleutherAI/gpt-neo",
+        "notes": "Open-source GPT-3 alternative. Trained on The Pile dataset by a distributed volunteer research collective.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-j",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4294,
+          37.7649
+        ]
+      },
+      "properties": {
+        "id": "gpt-j",
+        "name": "GPT-J",
+        "organization": "EleutherAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "open-weight",
+        "year": 2021,
+        "parameters": "6B",
+        "url": "https://github.com/kingoflolz/mesh-transformer-jax",
+        "notes": "Trained on The Pile. For a time the most capable publicly available autoregressive language model.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "megatron-turing-nlg",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1215,
+          47.674
+        ]
+      },
+      "properties": {
+        "id": "megatron-turing-nlg",
+        "name": "Megatron-Turing NLG",
+        "organization": "Microsoft",
+        "country": "United States",
+        "city": "Redmond",
+        "type": "proprietary",
+        "year": 2021,
+        "parameters": "530B",
+        "url": "https://www.microsoft.com/en-us/research/blog/using-deepspeed-and-megatron-to-train-megatron-turing-nlg-530b",
+        "notes": "Joint Microsoft/Nvidia effort. Trained for ~3 months on 2,048 A100 GPUs.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ernie-3-titan",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4074,
+          39.9042
+        ]
+      },
+      "properties": {
+        "id": "ernie-3-titan",
+        "name": "ERNIE 3.0 Titan",
+        "organization": "Baidu",
+        "country": "China",
+        "city": "Beijing",
+        "type": "proprietary",
+        "year": 2021,
+        "parameters": "260B",
+        "url": "https://arxiv.org/abs/2112.12731",
+        "notes": "Chinese-language knowledge-enhanced model; precursor to the ERNIE 4.0 family.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "glam",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "glam",
+        "name": "GLaM",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "proprietary",
+        "year": 2021,
+        "parameters": "1200B",
+        "url": "https://arxiv.org/abs/2112.06905",
+        "notes": "Sparse mixture-of-experts model. Used ~⅓ the energy of GPT-3 during training.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gopher",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "gopher",
+        "name": "Gopher",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2021,
+        "parameters": "280B",
+        "url": "https://arxiv.org/abs/2112.11446",
+        "notes": "Later evolved into the compute-optimal Chinchilla. Demonstrated scaling law insights.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "lamda",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "lamda",
+        "name": "LaMDA",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "proprietary",
+        "year": 2022,
+        "parameters": "137B",
+        "url": "https://arxiv.org/abs/2201.08239",
+        "notes": "Dialog-specialised model. Basis for the Bard assistant before Gemini.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "chinchilla",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "chinchilla",
+        "name": "Chinchilla",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2022,
+        "parameters": "70B",
+        "url": "https://arxiv.org/abs/2203.15556",
+        "notes": "Demonstrated compute-optimal scaling: outperformed larger models trained on too few tokens.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "palm",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "palm",
+        "name": "PaLM",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "proprietary",
+        "year": 2022,
+        "parameters": "540B",
+        "url": "https://arxiv.org/abs/2204.02311",
+        "notes": "Trained ~60 days on 6,144 TPU v4 chips. Demonstrated breakthrough chain-of-thought reasoning.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "opt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "opt",
+        "name": "OPT",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "type": "open-weight",
+        "year": 2022,
+        "parameters": "175B",
+        "url": "https://arxiv.org/abs/2205.01068",
+        "notes": "Open Pre-trained Transformer. Released with full training logbook for reproducibility research.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "yalm",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6173,
+          55.7558
+        ]
+      },
+      "properties": {
+        "id": "yalm",
+        "name": "YaLM 100B",
+        "organization": "Yandex",
+        "country": "Russia",
+        "city": "Moscow",
+        "type": "open-weight",
+        "year": 2022,
+        "parameters": "100B",
+        "url": "https://github.com/yandex/YaLM-100B",
+        "notes": "English-Russian bilingual model released under Apache 2.0.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bloom",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3622,
+          48.8666
+        ]
+      },
+      "properties": {
+        "id": "bloom",
+        "name": "BLOOM",
+        "organization": "Hugging Face",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2022,
+        "parameters": "175B",
+        "url": "https://huggingface.co/bigscience/bloom",
+        "notes": "Collaborative BigScience effort involving 1,000+ researchers. 46 languages, 13 programming languages.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "galactica",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "galactica",
+        "name": "Galactica",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "type": "open-weight",
+        "year": 2022,
+        "parameters": "120B",
+        "url": "https://arxiv.org/abs/2211.09085",
+        "notes": "Trained on 106B tokens of scientific literature. Demo withdrawn after 72 hours due to factual errors.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "alexatm",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3321,
+          47.6062
+        ]
+      },
+      "properties": {
+        "id": "alexatm",
+        "name": "AlexaTM",
+        "organization": "Amazon",
+        "country": "United States",
+        "city": "Seattle",
+        "type": "proprietary",
+        "year": 2022,
+        "parameters": "20B",
+        "url": "https://arxiv.org/abs/2208.01448",
+        "notes": "Bidirectional seq2seq model powering Alexa features. Focused on few-shot learning.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-neox",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4294,
+          37.7649
+        ]
+      },
+      "properties": {
+        "id": "gpt-neox",
+        "name": "GPT-NeoX",
+        "organization": "EleutherAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "open-weight",
+        "year": 2022,
+        "parameters": "20B",
+        "url": "https://arxiv.org/abs/2204.06745",
+        "notes": "Based on Megatron architecture. Trained on The Pile; first open-source model to use rotary embeddings.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "llama-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "llama-1",
+        "name": "Llama 1",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "65B",
+        "url": "https://arxiv.org/abs/2302.13971",
+        "notes": "Trained on 1.4T tokens across 20 languages. Sparked the open fine-tuning ecosystem.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "gpt-4",
+        "name": "GPT-4",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "undisclosed",
+        "url": "https://openai.com/research/gpt-4",
+        "notes": "Architecture undisclosed. Multimodal with vision input. Surpassed bar exam top 10% performance.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cerebras-gpt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0363,
+          37.3688
+        ]
+      },
+      "properties": {
+        "id": "cerebras-gpt",
+        "name": "Cerebras-GPT",
+        "organization": "Cerebras",
+        "country": "United States",
+        "city": "Sunnyvale",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "13B",
+        "url": "https://arxiv.org/abs/2304.03208",
+        "notes": "Trained on CS-2 wafer-scale chips using Chinchilla-optimal token ratios.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bloomberggpt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.006,
+          40.7128
+        ]
+      },
+      "properties": {
+        "id": "bloomberggpt",
+        "name": "BloombergGPT",
+        "organization": "Bloomberg",
+        "country": "United States",
+        "city": "New York",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "50B",
+        "url": "https://arxiv.org/abs/2303.17564",
+        "notes": "Finance-domain model trained on 363B tokens from Bloomberg's proprietary data plus 345B public tokens.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "pangu-sigma",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0579,
+          22.5431
+        ]
+      },
+      "properties": {
+        "id": "pangu-sigma",
+        "name": "PanGu-Σ",
+        "organization": "Huawei",
+        "country": "China",
+        "city": "Shenzhen",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "1085B",
+        "url": "https://arxiv.org/abs/2303.10845",
+        "notes": "Sparse heterogeneous computing model. Trained on Ascend cluster hardware.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "palm-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "palm-2",
+        "name": "PaLM 2",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "340B",
+        "url": "https://arxiv.org/abs/2305.10403",
+        "notes": "Powers Bard and many Google Workspace features. Improved multilingual and reasoning capabilities.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "llama-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "llama-2",
+        "name": "Llama 2",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "70B",
+        "url": "https://arxiv.org/abs/2307.09288",
+        "notes": "Trained on 2T tokens using 3.3M GPU-hours. First widely licensed open LLM for commercial use.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4094,
+          37.7849
+        ]
+      },
+      "properties": {
+        "id": "claude-2",
+        "name": "Claude 2",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "undisclosed",
+        "url": "https://www.anthropic.com/index/claude-2",
+        "notes": "Extended context to 100K tokens. Constitutional AI training for improved safety.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mistral-7b",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3522,
+          48.8566
+        ]
+      },
+      "properties": {
+        "id": "mistral-7b",
+        "name": "Mistral 7B",
+        "organization": "Mistral AI",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "7.3B",
+        "url": "https://arxiv.org/abs/2310.06825",
+        "notes": "Outperformed Llama 2 13B on most benchmarks. Used sliding window attention and grouped-query attention.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "grok-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.143,
+          37.4419
+        ]
+      },
+      "properties": {
+        "id": "grok-1",
+        "name": "Grok-1",
+        "organization": "xAI",
+        "country": "United States",
+        "city": "Palo Alto",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "314B",
+        "url": "https://github.com/xai-org/grok-1",
+        "notes": "MoE architecture. Weights released under Apache 2.0 in March 2024.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "gemini-1",
+        "name": "Gemini 1.0",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google/technologies/gemini",
+        "notes": "First natively multimodal Google model. Available in Ultra, Pro, and Nano sizes.",
+        "modality": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mixtral-8x7b",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3522,
+          48.8566
+        ]
+      },
+      "properties": {
+        "id": "mixtral-8x7b",
+        "name": "Mixtral 8×7B",
+        "organization": "Mistral AI",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "46.7B",
+        "url": "https://arxiv.org/abs/2401.04088",
+        "notes": "Sparse MoE with 12.9B active parameters per forward pass. Outperformed Llama 2 70B on most benchmarks.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "deepseek-llm",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1651,
+          30.2841
+        ]
+      },
+      "properties": {
+        "id": "deepseek-llm",
+        "name": "DeepSeek-LLM",
+        "organization": "DeepSeek",
+        "country": "China",
+        "city": "Hangzhou",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "67B",
+        "url": "https://arxiv.org/abs/2401.02954",
+        "notes": "English and Chinese bilingual. First release in the DeepSeek family.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "phi-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1215,
+          47.674
+        ]
+      },
+      "properties": {
+        "id": "phi-2",
+        "name": "Phi-2",
+        "organization": "Microsoft Research",
+        "country": "United States",
+        "city": "Redmond",
+        "type": "open-weight",
+        "year": 2023,
+        "parameters": "2.7B",
+        "url": "https://www.microsoft.com/en-us/research/blog/phi-2",
+        "notes": "Trained on synthetic textbook-quality data. Outperformed models 25× its size on several benchmarks.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ibm-granite",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.7073,
+          41.1098
+        ]
+      },
+      "properties": {
+        "id": "ibm-granite",
+        "name": "Granite 13B",
+        "organization": "IBM",
+        "country": "United States",
+        "city": "Armonk",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "13B",
+        "url": "https://www.ibm.com/products/watsonx-ai",
+        "notes": "Enterprise code and language model family deployed via IBM Watsonx platform.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "yandexgpt",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          37.6173,
+          55.7558
+        ]
+      },
+      "properties": {
+        "id": "yandexgpt",
+        "name": "YandexGPT",
+        "organization": "Yandex",
+        "country": "Russia",
+        "city": "Moscow",
+        "type": "proprietary",
+        "year": 2023,
+        "parameters": "undisclosed",
+        "url": "https://yandex.com/dev/ya-gpt",
+        "notes": "Powers the Alice voice assistant. Russian-language flagship model from Yandex.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini-1-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "gemini-1-5",
+        "name": "Gemini 1.5",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google/technologies/gemini/pro",
+        "notes": "MoE architecture with 1M+ token context window. Enabled long-document and video understanding.",
+        "modality": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemma",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "gemma",
+        "name": "Gemma",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "7B",
+        "url": "https://ai.google.dev/gemma",
+        "notes": "Lightweight open-weight family derived from Gemini research. Trained on 6T tokens.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "olmo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3421,
+          47.6162
+        ]
+      },
+      "properties": {
+        "id": "olmo",
+        "name": "OLMo",
+        "organization": "Allen Institute for AI",
+        "country": "United States",
+        "city": "Seattle",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "7B",
+        "url": "https://allenai.org/olmo",
+        "notes": "Fully open model with released weights, training data, code, and evaluation suite.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4094,
+          37.7849
+        ]
+      },
+      "properties": {
+        "id": "claude-3",
+        "name": "Claude 3",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://www.anthropic.com/news/claude-3-family",
+        "notes": "Three-tier family: Haiku, Sonnet, Opus. Opus surpassed GPT-4 on multiple benchmarks at launch.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "dbrx",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3994,
+          37.7849
+        ]
+      },
+      "properties": {
+        "id": "dbrx",
+        "name": "DBRX",
+        "organization": "Databricks",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "136B",
+        "url": "https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm",
+        "notes": "Fine-grained MoE with 16 experts, 4 active per token. ~$10M training cost reported.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mixtral-8x22b",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3522,
+          48.8566
+        ]
+      },
+      "properties": {
+        "id": "mixtral-8x22b",
+        "name": "Mixtral 8×22B",
+        "organization": "Mistral AI",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "141B",
+        "url": "https://mistral.ai/news/mixtral-8x22b",
+        "notes": "Largest open MoE at release. 39B active parameters; strong on coding and math.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "phi-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1215,
+          47.674
+        ]
+      },
+      "properties": {
+        "id": "phi-3",
+        "name": "Phi-3",
+        "organization": "Microsoft Research",
+        "country": "United States",
+        "city": "Redmond",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "14B",
+        "url": "https://arxiv.org/abs/2404.14219",
+        "notes": "Small language model series (3.8B–14B) with performance rivalling much larger models.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "qwen-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1551,
+          30.2741
+        ]
+      },
+      "properties": {
+        "id": "qwen-2",
+        "name": "Qwen2",
+        "organization": "Alibaba Cloud",
+        "country": "China",
+        "city": "Hangzhou",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "72B",
+        "url": "https://qwenlm.github.io/blog/qwen2",
+        "notes": "Multiple sizes (0.5B–72B). Topped open-source leaderboards upon release.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "deepseek-v2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1651,
+          30.2841
+        ]
+      },
+      "properties": {
+        "id": "deepseek-v2",
+        "name": "DeepSeek-V2",
+        "organization": "DeepSeek",
+        "country": "China",
+        "city": "Hangzhou",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "236B",
+        "url": "https://arxiv.org/abs/2405.04434",
+        "notes": "MoE with 21B active parameters. Multi-head latent attention cut inference cost ~93% vs V1.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "nemotron-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9624,
+          37.3541
+        ]
+      },
+      "properties": {
+        "id": "nemotron-4",
+        "name": "Nemotron-4",
+        "organization": "Nvidia",
+        "country": "United States",
+        "city": "Santa Clara",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "340B",
+        "url": "https://research.nvidia.com/publication/2024-06_nemotron-4-340b",
+        "notes": "Trained on 9T tokens in a single epoch. Used as a synthetic data generator for other models.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-3-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4094,
+          37.7849
+        ]
+      },
+      "properties": {
+        "id": "claude-3-5",
+        "name": "Claude 3.5",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
+        "notes": "Sonnet variant surpassed Claude 3 Opus at lower cost. Introduced computer-use (agentic) capability.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "llama-3-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "llama-3-1",
+        "name": "Llama 3.1",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "405B",
+        "url": "https://ai.meta.com/blog/meta-llama-3-1",
+        "notes": "405B variant first open model to rival GPT-4. Trained on 15T tokens over 31M H100-80GB GPU-hours.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "grok-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.143,
+          37.4419
+        ]
+      },
+      "properties": {
+        "id": "grok-2",
+        "name": "Grok-2",
+        "organization": "xAI",
+        "country": "United States",
+        "city": "Palo Alto",
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://x.ai/blog/grok-2",
+        "notes": "Achieved frontier performance on MMLU and HumanEval. Integrated image generation via Aurora.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "openai-o1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "openai-o1",
+        "name": "OpenAI o1",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://openai.com/o1",
+        "notes": "First reasoning model to use chain-of-thought as a first-class training signal. PhD-level science benchmarks.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "deepseek-v3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1651,
+          30.2841
+        ]
+      },
+      "properties": {
+        "id": "deepseek-v3",
+        "name": "DeepSeek-V3",
+        "organization": "DeepSeek",
+        "country": "China",
+        "city": "Hangzhou",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "671B",
+        "url": "https://arxiv.org/abs/2412.19437",
+        "notes": "MoE trained in 2.788M H800 GPU-hours. Cost ~$5.5M — a fraction of comparable Western models.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "amazon-nova",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3321,
+          47.6062
+        ]
+      },
+      "properties": {
+        "id": "amazon-nova",
+        "name": "Amazon Nova",
+        "organization": "Amazon",
+        "country": "United States",
+        "city": "Seattle",
+        "type": "proprietary",
+        "year": 2024,
+        "parameters": "undisclosed",
+        "url": "https://aws.amazon.com/ai/nova",
+        "notes": "Multi-tier family (Micro, Lite, Pro, Premier) available via Amazon Bedrock.",
+        "modality": [
+          "text",
+          "image",
+          "video"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "pixtral",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3522,
+          48.8566
+        ]
+      },
+      "properties": {
+        "id": "pixtral",
+        "name": "Pixtral",
+        "organization": "Mistral AI",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "123B",
+        "url": "https://mistral.ai/news/pixtral-large",
+        "notes": "Multimodal model with native vision encoder. 12B variant also available.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "olmo-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3421,
+          47.6162
+        ]
+      },
+      "properties": {
+        "id": "olmo-2",
+        "name": "OLMo 2",
+        "organization": "Allen Institute for AI",
+        "country": "United States",
+        "city": "Seattle",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "32B",
+        "url": "https://allenai.org/blog/olmo2",
+        "notes": "Fully open successor trained on 6.6T tokens. 7B and 13B variants also released.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fugaku-llm",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6503,
+          35.6762
+        ]
+      },
+      "properties": {
+        "id": "fugaku-llm",
+        "name": "Fugaku-LLM",
+        "organization": "Fujitsu / Tokyo Tech",
+        "country": "Japan",
+        "city": "Tokyo",
+        "type": "open-weight",
+        "year": 2024,
+        "parameters": "13B",
+        "url": "https://arxiv.org/abs/2411.17501",
+        "notes": "Trained entirely on CPU-only Fugaku supercomputer. Designed for Japanese language tasks.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "qwen-2-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.1551,
+          30.2741
+        ]
+      },
+      "properties": {
+        "id": "qwen-2-5",
+        "name": "Qwen2.5",
+        "organization": "Alibaba Cloud",
+        "country": "China",
+        "city": "Hangzhou",
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "72B",
+        "url": "https://qwenlm.github.io/blog/qwen2.5",
+        "notes": "Dense and MoE variants from 0.5B to 72B. Strong on coding, math, and instruction-following.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "minimax-text-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.4737,
+          31.2304
+        ]
+      },
+      "properties": {
+        "id": "minimax-text-01",
+        "name": "MiniMax-Text-01",
+        "organization": "Minimax",
+        "country": "China",
+        "city": "Shanghai",
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "456B",
+        "url": "https://arxiv.org/abs/2501.08313",
+        "notes": "Hybrid linear-attention + softmax-attention architecture. Trained on 4.7T tokens.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini-2-0",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1278,
+          51.5074
+        ]
+      },
+      "properties": {
+        "id": "gemini-2-0",
+        "name": "Gemini 2.0",
+        "organization": "Google DeepMind",
+        "country": "United Kingdom",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google/technologies/gemini/flash",
+        "notes": "Agentic-first generation. Flash, Flash-Lite, and Pro variants with live audio/video streaming.",
+        "modality": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-3-7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4094,
+          37.7849
+        ]
+      },
+      "properties": {
+        "id": "claude-3-7",
+        "name": "Claude 3.7",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+        "notes": "Sonnet variant with hybrid thinking mode. First Claude with extended visible reasoning chains.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-4-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "gpt-4-5",
+        "name": "GPT-4.5",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://openai.com/index/gpt-4-5",
+        "notes": "Largest non-reasoning OpenAI model. Improved emotional intelligence and world knowledge.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "llama-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1817,
+          37.453
+        ]
+      },
+      "properties": {
+        "id": "llama-4",
+        "name": "Llama 4",
+        "organization": "Meta AI",
+        "country": "United States",
+        "city": "Menlo Park",
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "400B",
+        "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence",
+        "notes": "Natively multimodal MoE. Trained on 40T tokens including interleaved image-text data.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "openai-o3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "openai-o3",
+        "name": "OpenAI o3",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://openai.com/o3",
+        "notes": "Frontier reasoning model. First to exceed human performance on ARC-AGI benchmark.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "glm-4-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.4274,
+          39.9242
+        ]
+      },
+      "properties": {
+        "id": "glm-4-5",
+        "name": "GLM-4.5",
+        "organization": "Zhipu AI",
+        "country": "China",
+        "city": "Beijing",
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "355B",
+        "url": "https://github.com/THUDM/GLM-4",
+        "notes": "MoE model trained on 22T tokens. Released under MIT license.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4194,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "gpt-5",
+        "name": "GPT-5",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "parameters": "undisclosed",
+        "url": "https://openai.com/gpt-5",
+        "notes": "Unifies reasoning and general capability. Includes mini and nano variants.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sarvam-m",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.5946,
+          12.9716
+        ]
+      },
+      "properties": {
+        "id": "sarvam-m",
+        "name": "Sarvam-M",
+        "organization": "Sarvam AI",
+        "country": "India",
+        "city": "Bengaluru",
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "24B",
+        "url": "https://sarvam.ai/blog/sarvam-m",
+        "notes": "Hybrid reasoning model with strong Indic-language capabilities. Released Apache 2.0.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "param-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          77.209,
+          28.6139
+        ]
+      },
+      "properties": {
+        "id": "param-1",
+        "name": "Param-1",
+        "organization": "BharatGen",
+        "country": "India",
+        "city": "New Delhi",
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "2.9B",
+        "url": "https://bharatgen.ai",
+        "notes": "India-focused model trained on linguistically diverse Indian language data. Apache 2.0 license.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "apertus",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5417,
+          47.3769
+        ]
+      },
+      "properties": {
+        "id": "apertus",
+        "name": "Apertus",
+        "organization": "ETH Zurich / EPFL",
+        "country": "Switzerland",
+        "city": "Zurich",
+        "type": "open-weight",
+        "year": 2025,
+        "parameters": "70B",
+        "url": "https://arxiv.org/abs/2504.01234",
+        "notes": "Positioned as EU AI Act compliant European open model. Collaborative Swiss academic project.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
     }
   ]
 }

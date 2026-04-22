@@ -53,6 +53,3 @@ coverage/
 .cache/
 tmp/
 temp/
-
-# Backend Assets (Ignore contents, preserve folders)
-backend/data/*
