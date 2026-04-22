@@ -172,6 +172,11 @@ let projection, svg, g;
 const MAP_W = 1100;
 const MAP_H = 620;
 
+const SPIDER_THRESH_PX = 12; // pixel distance to treat markers as overlapping
+const SPIDER_RADIUS    = 62; // pixel radius of the expanded rose
+
+let spiderState = null;
+
 function renderMap(topo) {
   const container = $('#map');
   container.innerHTML = '';
@@ -260,7 +265,12 @@ function renderMarkers() {
     .on('mouseenter', (e, d) => showTooltip(e, d))
     .on('mousemove',  (e, d) => positionTooltip(e))
     .on('mouseleave', hideTooltip)
-    .on('click',      (e, d) => openDetail(d));
+    .on('click',      (e, d) => {
+      e.stopPropagation();
+      const nearby = collectNearbyItems(d);
+      if (nearby.length > 1) { spiderOpen(nearby); return; }
+      openDetail(d);
+    });
 }
 
 function buildLegend() {
@@ -462,7 +472,10 @@ function bindCatalogueTabs() {
 function bindDetailPanel() {
   $('#detail .close').addEventListener('click', closeDetail);
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeDetail();
+    if (e.key === 'Escape') {
+      if (spiderState) spiderClose();
+      else closeDetail();
+    }
   });
 }
 
@@ -568,7 +581,12 @@ function renderToolMarkers() {
     .on('mouseenter', (e, d) => showTooltip(e, d, 'tool'))
     .on('mousemove',  (e)    => positionTooltip(e))
     .on('mouseleave', hideTooltip)
-    .on('click',      (e, d) => openToolDetail(d));
+    .on('click',      (e, d) => {
+      e.stopPropagation();
+      const nearby = collectNearbyItems(d);
+      if (nearby.length > 1) { spiderOpen(nearby); return; }
+      openToolDetail(d);
+    });
 }
 
 function openToolDetail(t) {
@@ -606,6 +624,142 @@ function openToolDetail(t) {
   d3.selectAll('g.marker').classed('open', false);
   d3.selectAll('g.tool-marker').classed('open', d => d.id === t.id);
   panel.classList.add('is-open');
+}
+
+// ──────────────  spiderfy
+
+function collectNearbyItems(clickedDatum) {
+  const [cx, cy] = projection([clickedDatum.lng, clickedDatum.lat]);
+  const items = [];
+  if (state.layers.models) {
+    state.filtered.forEach(m => {
+      const [px, py] = projection([m.lng, m.lat]);
+      if (Math.hypot(px - cx, py - cy) < SPIDER_THRESH_PX)
+        items.push({ kind: 'model', datum: m });
+    });
+  }
+  if (state.layers.tools) {
+    state.tools.forEach(t => {
+      const [px, py] = projection([t.lng, t.lat]);
+      if (Math.hypot(px - cx, py - cy) < SPIDER_THRESH_PX)
+        items.push({ kind: 'tool', datum: t });
+    });
+  }
+  return items;
+}
+
+function spiderOpen(nearbyItems) {
+  spiderClose(false);
+  hideTooltip();
+
+  // center = average projected position of all clustered items
+  let sumX = 0, sumY = 0;
+  nearbyItems.forEach(item => {
+    const [px, py] = projection([item.datum.lng, item.datum.lat]);
+    sumX += px; sumY += py;
+  });
+  const cx = sumX / nearbyItems.length;
+  const cy = sumY / nearbyItems.length;
+
+  const n = nearbyItems.length;
+  const angleStep  = (2 * Math.PI) / n;
+  const startAngle = -Math.PI / 2; // start from top
+
+  // transparent full-map rect catches clicks outside the spider
+  const capture = svg.append('rect')
+    .attr('class', 'spider-capture')
+    .attr('width', MAP_W).attr('height', MAP_H)
+    .style('fill', 'transparent')
+    .on('click', () => spiderClose());
+
+  const group = svg.append('g')
+    .attr('class', 'spider-group')
+    .style('opacity', 0);
+
+  group.append('circle')
+    .attr('class', 'spider-backdrop')
+    .attr('cx', cx).attr('cy', cy)
+    .attr('r', SPIDER_RADIUS + 22);
+
+  group.append('circle')
+    .attr('class', 'spider-center')
+    .attr('cx', cx).attr('cy', cy).attr('r', 3);
+
+  nearbyItems.forEach((item, i) => {
+    const angle = startAngle + i * angleStep;
+    const tx = cx + SPIDER_RADIUS * Math.cos(angle);
+    const ty = cy + SPIDER_RADIUS * Math.sin(angle);
+
+    group.append('line')
+      .attr('class', 'spider-leg')
+      .attr('x1', cx).attr('y1', cy)
+      .attr('x2', tx).attr('y2', ty);
+
+    const tip = group.append('g')
+      .attr('class', `spider-tip spider-kind-${item.kind}`)
+      .attr('transform', `translate(${tx},${ty})`)
+      .style('cursor', 'pointer');
+
+    if (item.kind === 'model') {
+      tip.append('circle').attr('class', 'spider-tip-ring').attr('r', 9);
+      tip.append('circle')
+        .attr('class', `spider-tip-dot type-${item.datum.type}`)
+        .attr('r', 4.5);
+    } else {
+      tip.append('rect')
+        .attr('class', 'spider-tip-dring')
+        .attr('x', -7).attr('y', -7)
+        .attr('width', 14).attr('height', 14)
+        .attr('transform', 'rotate(45)');
+      tip.append('rect')
+        .attr('class', 'spider-tip-diamond')
+        .attr('x', -4.5).attr('y', -4.5)
+        .attr('width', 9).attr('height', 9)
+        .attr('transform', 'rotate(45)');
+    }
+
+    // label: push outward in direction of the arm
+    const ux = Math.cos(angle), uy = Math.sin(angle);
+    const LABEL_OFF = 13;
+    const anchor = ux > 0.3 ? 'start' : ux < -0.3 ? 'end' : 'middle';
+    const lx = ux > 0.3 ? LABEL_OFF : ux < -0.3 ? -LABEL_OFF : 0;
+    const ly = Math.abs(ux) <= 0.3 ? (uy > 0 ? LABEL_OFF + 2 : -(LABEL_OFF - 2)) : 1;
+
+    tip.append('text')
+      .attr('class', 'spider-tip-label')
+      .attr('x', lx).attr('y', ly)
+      .attr('text-anchor', anchor)
+      .attr('dominant-baseline', 'middle')
+      .text(item.datum.name.length > 18
+        ? item.datum.name.slice(0, 16) + '…'
+        : item.datum.name);
+
+    tip.on('mouseenter', e => showTooltip(e, item.datum, item.kind))
+       .on('mousemove',  e => positionTooltip(e))
+       .on('mouseleave', hideTooltip)
+       .on('click', e => {
+         e.stopPropagation();
+         spiderClose();
+         if (item.kind === 'model') openDetail(item.datum);
+         else openToolDetail(item.datum);
+       });
+  });
+
+  group.transition().duration(220).style('opacity', 1);
+  spiderState = { group, capture };
+}
+
+function spiderClose(animate = true) {
+  if (!spiderState) return;
+  const { group, capture } = spiderState;
+  spiderState = null;
+  capture.remove();
+  if (animate) {
+    group.transition().duration(180).style('opacity', 0)
+      .on('end', function () { d3.select(this).remove(); });
+  } else {
+    group.remove();
+  }
 }
 
 // ──────────────  layer toggles

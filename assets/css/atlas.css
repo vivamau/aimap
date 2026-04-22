@@ -1004,6 +1004,66 @@ table.catalogue__table {
 }
 .archive-banner .return-live:hover { background: var(--gold); color: var(--bg); }
 
+/* ─────────  Spiderfy ───────── */
+
+.spider-backdrop {
+  fill: rgba(13, 11, 8, 0.62);
+  stroke: rgba(201, 165, 68, 0.18);
+  stroke-width: 1;
+}
+.spider-center {
+  fill: var(--paper-3);
+  pointer-events: none;
+}
+.spider-leg {
+  stroke: var(--paper-3);
+  stroke-width: 1;
+  stroke-opacity: 0.4;
+  stroke-dasharray: 3 3;
+  pointer-events: none;
+}
+.spider-tip-ring {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+}
+.spider-tip-dot {
+  fill: var(--gold);
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  transition: fill 0.15s;
+}
+.spider-tip-dot.type-open-weight { fill: var(--verdigris); }
+.spider-kind-model:hover .spider-tip-ring  { opacity: 1; }
+.spider-kind-model:hover .spider-tip-dot   { fill: var(--paper); }
+
+.spider-tip-dring {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 1;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.spider-tip-diamond {
+  fill: var(--violet);
+  stroke: var(--bg);
+  stroke-width: 1.5;
+  transition: fill 0.15s;
+}
+.spider-kind-tool:hover .spider-tip-dring   { opacity: 1; }
+.spider-kind-tool:hover .spider-tip-diamond { fill: var(--paper); }
+
+.spider-tip-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  fill: var(--paper-2);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
 /* ─────────  Responsive ───────── */
 
 @media (max-width: 980px) {
