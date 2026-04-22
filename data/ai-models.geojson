@@ -2,10 +2,119 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. II — MMXXVI",
-    "updated": "2026-04-19",
+    "updated": "2026-04-22",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "xlnet",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "xlnet",
+        "name": "XLNet",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "open-weight",
+        "year": 2019,
+        "parameters": "0.340B",
+        "url": "https://github.com/zihangdai/xlnet/",
+        "notes": "An alternative to BERT; designed as encoder-only. Trained on 512 TPU v3 chips for 5.5 days",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "t5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "t5",
+        "name": "T5",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "open-weight",
+        "year": 2019,
+        "parameters": "11B",
+        "url": "https://github.com/google-research/text-to-text-transfer-transformer",
+        "notes": "Base model for many Google projects, such as Imagen",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bert",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.078827,
+          37.419857
+        ]
+      },
+      "properties": {
+        "id": "bert",
+        "name": "BERT",
+        "organization": "Google",
+        "country": "United States",
+        "city": "Mountain View",
+        "type": "open-weight",
+        "year": 2018,
+        "parameters": "0.340B",
+        "url": "https://github.com/google-research/bert",
+        "notes": "An early and influential language model. Encoder-only and thus not built to be prompted or generative. Training took 4 days on 64 TPUv2 chips.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.42,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "gpt-1",
+        "name": "GPT-1",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "",
+        "type": "open-weight",
+        "year": 2018,
+        "parameters": "0.117B",
+        "url": "https://arc.net/l/quote/ilvyqcdc",
+        "notes": "First GPT model, decoder-only transformer. Trained for 30 days on 8 P600 GPUs.",
+        "modality": [
+          "text"
+        ],
+        "submodels": []
+      }
+    },
     {
       "type": "Feature",
       "id": "gpt-4o",
