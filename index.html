@@ -20,9 +20,22 @@
     <a href="#atlas">The Map</a>
     <a href="#catalogue">Catalogue</a>
     <a href="#colophon">Colophon</a>
-    <a href="./admin.html">Editorial Desk</a>
+    <button class="nav-btn" id="btn-editions-modal">Previous Editions</button>
   </nav>
 </header>
+
+<!-- Editions modal -->
+<div class="editions-modal-backdrop" id="editions-modal" aria-hidden="true">
+  <div class="editions-modal" role="dialog" aria-labelledby="editions-modal-title">
+    <div class="editions-modal__head">
+      <span id="editions-modal-title">Editions Archive</span>
+      <button class="editions-modal__close" id="editions-modal-close">×</button>
+    </div>
+    <div class="editions-modal__body" id="editions-modal-body">
+      <!-- populated by atlas.js -->
+    </div>
+  </div>
+</div>
 
 <!-- ARCHIVE BANNER (shown when a past edition is active) -->
 <div class="archive-banner" id="archive-banner">
@@ -53,12 +66,9 @@
 <section class="atlas" id="atlas">
   <aside class="atlas__aside reveal reveal-3">
     <div class="glance-block" data-glance="models">
-      <div class="glance-head">
-        <div class="section-label">At a glance</div>
-        <div class="glance-tabs" id="glance-tabs">
-          <button class="glance-tab is-active" data-glance="models">Models</button>
-          <button class="glance-tab" data-glance="tools">Tools</button>
-        </div>
+      <div class="glance-tabs" id="glance-tabs">
+        <button class="glance-tab is-active" data-glance="models">Models</button>
+        <button class="glance-tab" data-glance="tools">Tools</button>
       </div>
       <div class="stats">
         <div class="stat"><div class="num"><em id="stat-primary">00</em></div><div class="label" id="stat-primary-label">Catalogued models</div></div>
@@ -80,6 +90,15 @@
           Tools
           <span class="layer-num" id="layer-tools-count">—</span>
         </button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="section-label">Search</div>
+      <div class="atlas-search-wrap">
+        <input class="atlas-search" id="atlas-search" type="text"
+               placeholder="Name, organisation, country…" autocomplete="off">
+        <button class="atlas-search-clear" id="atlas-search-clear" title="Clear search" hidden>×</button>
       </div>
     </div>
 
@@ -180,6 +199,7 @@
   <div class="org-line"></div>
   <dl class="specs"></dl>
   <p class="notes"></p>
+  <div class="links-section" style="display:none"></div>
   <div class="submodels-section" style="display:none"></div>
 </aside>
 

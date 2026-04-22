@@ -91,7 +91,7 @@ body.desk {
 /* ─── workspace ─── */
 .desk-grid {
   display: grid;
-  grid-template-columns: 380px 1fr 320px;
+  grid-template-columns: 380px 1fr 380px;
   min-height: calc(100vh - 220px);
 }
 

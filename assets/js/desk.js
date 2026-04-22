@@ -52,6 +52,7 @@ async function api(path, opts = {}) {
   bindSearch();
   bindEditionsToggle();
   bindEditionModal();
+  bindMetaModal();
   bindTabSwitcher();
   bindToolForm();
   bindToolSearch();
@@ -175,6 +176,47 @@ function bindForm() {
   $('#f-type').innerHTML = TYPES.map(t => `<option value="${t}">${t}</option>`).join('');
 
   $('#btn-add-submodel').addEventListener('click', addSubmodelRow);
+  $('#btn-add-link').addEventListener('click', () => addLinkRow());
+}
+
+// ──────────────  links editor
+
+function addLinkRow(data = {}) {
+  const row = document.createElement('div');
+  row.className = 'submodel-row';
+  row.style.gridTemplateColumns = '1fr 1.8fr 28px';
+  row.innerHTML = `
+    <input type="text" class="lk-label" placeholder="Paper / GitHub / HF…" value="${escapeHtml(data.label || '')}">
+    <input type="url"  class="lk-url"   placeholder="https://…"             value="${escapeHtml(data.url   || '')}">
+    <button type="button" class="del-row" title="Remove">×</button>`;
+  row.querySelector('.del-row').addEventListener('click', () => {
+    row.remove();
+    refreshLinksUI();
+  });
+  $('#link-rows').appendChild(row);
+  refreshLinksUI();
+  row.querySelector('.lk-label').focus();
+}
+
+function refreshLinksUI() {
+  const rows  = $$('#link-rows .submodel-row');
+  const empty = $('#links-empty');
+  const count = $('#links-count');
+  if (empty) empty.style.display = rows.length ? 'none' : 'block';
+  if (count) count.textContent = `${rows.length} link${rows.length !== 1 ? 's' : ''}`;
+}
+
+function populateLinks(links = []) {
+  $('#link-rows').innerHTML = '';
+  links.forEach(l => addLinkRow(l));
+  if (links.length === 0) refreshLinksUI();
+}
+
+function readLinks() {
+  return $$('#link-rows .submodel-row').map(row => ({
+    label: row.querySelector('.lk-label').value.trim(),
+    url:   row.querySelector('.lk-url').value.trim(),
+  })).filter(l => l.url);
 }
 
 // ──────────────  submodels editor
@@ -234,6 +276,7 @@ function newEntry() {
   $('#btn-delete').style.display = 'none';
   $$('#mod-grid .mod-toggle').forEach(t => t.classList.remove('is-on'));
   $('#f-type').value = 'proprietary';
+  populateLinks([]);
   populateSubmodels([]);
   renderList();
 }
@@ -253,11 +296,13 @@ function loadIntoForm(id) {
   $('#f-lng').value = m.lng;
   $('#f-type').value = m.type;
   $('#f-year').value = m.year;
+  $('#f-date').value = m.releaseDate || '';
   $('#f-params').value = m.parameters;
   $('#f-url').value = m.url;
   $('#f-notes').value = m.notes || '';
   $$('#mod-grid .mod-toggle').forEach(t =>
     t.classList.toggle('is-on', m.modality.includes(t.dataset.mod)));
+  populateLinks(m.links || []);
   populateSubmodels(m.submodels || []);
   renderList();
 }
@@ -274,10 +319,12 @@ function readForm() {
     lng: parseFloat($('#f-lng').value),
     type: $('#f-type').value,
     year: parseInt($('#f-year').value, 10),
+    releaseDate: $('#f-date').value || '',
     parameters: $('#f-params').value.trim() || 'undisclosed',
     url: $('#f-url').value.trim(),
     notes: $('#f-notes').value.trim(),
     modality: modality.length ? modality : ['text'],
+    links: readLinks(),
     submodels: readSubmodels(),
   };
 }
@@ -368,15 +415,42 @@ function downloadGeojson() {
   toast('Downloaded ai-models.geojson.');
 }
 
-async function editMeta() {
-  const edition = prompt('Edition label:', state.meta.edition || '');
-  if (edition === null) return;
-  const compiler = prompt('Compiler note:', state.meta.compiler || '');
-  if (compiler === null) return;
+function editMeta() {
+  $('#meta-edition').value  = state.meta.edition  || '';
+  $('#meta-compiler').value = state.meta.compiler || '';
+  $('#meta-updated').value  = state.meta.updated  || '—';
+  $('#meta-modal').style.display = 'grid';
+  setTimeout(() => $('#meta-edition').focus(), 50);
+}
+
+function bindMetaModal() {
+  $('#meta-modal-close').addEventListener('click',   closeMetaModal);
+  $('#meta-modal-cancel').addEventListener('click',  closeMetaModal);
+  $('#meta-modal-confirm').addEventListener('click', confirmMeta);
+  $('#meta-modal').addEventListener('click', e => {
+    if (e.target === $('#meta-modal')) closeMetaModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('#meta-modal').style.display !== 'none') closeMetaModal();
+  });
+}
+
+function closeMetaModal() {
+  $('#meta-modal').style.display = 'none';
+}
+
+async function confirmMeta() {
+  const edition  = $('#meta-edition').value.trim();
+  const compiler = $('#meta-compiler').value.trim();
+  if (!edition) {
+    $('#meta-edition').focus();
+    return toast('Edition label is required.', 'danger');
+  }
   try {
     await api('/meta', { method: 'PUT', body: JSON.stringify({ edition, compiler }) });
+    closeMetaModal();
     await refresh();
-    toast('Meta updated.');
+    toast('Metadata saved.');
   } catch (err) {
     toast(err.message, 'danger');
   }

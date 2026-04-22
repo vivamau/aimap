@@ -42,7 +42,7 @@
 
 <main class="desk-grid" id="models-grid">
 
-  <!-- LEFT: list + editions archive -->
+  <!-- LEFT: catalogue list -->
   <section class="panel">
     <div class="panel__head">
       <span>The Catalogue</span>
@@ -53,14 +53,6 @@
       <div class="entry-list" id="entry-list"></div>
     </div>
 
-    <!-- Editions archive drawer -->
-    <div class="panel__head editions-toggle" id="editions-toggle" style="cursor:pointer">
-      <span>Editions archive</span>
-      <span class="num" id="editions-count">—</span>
-    </div>
-    <div class="panel__body" id="editions-panel" style="display:none">
-      <div class="editions-list" id="editions-list"></div>
-    </div>
   </section>
 
   <!-- CENTER: form -->
@@ -115,6 +107,13 @@
             <input id="f-year" class="mono" type="number" min="1950" max="2100" required>
           </div>
           <div class="field">
+            <label>Release date</label>
+            <input id="f-date" class="mono" type="date">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
             <label>Parameters</label>
             <input id="f-params" class="mono" type="text" placeholder="70B / undisclosed">
           </div>
@@ -133,6 +132,23 @@
         <div class="field">
           <label>Notes</label>
           <textarea id="f-notes" placeholder="One or two sentences. Italicised in the dossier."></textarea>
+        </div>
+
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Links</span>
+            <span id="links-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 links</span>
+          </label>
+          <div class="submodels-editor" id="links-editor" style="margin-top:10px">
+            <div class="submodels-header" style="grid-template-columns:1fr 1.8fr 28px">
+              <span>Label</span>
+              <span>URL</span>
+              <span></span>
+            </div>
+            <div id="link-rows"></div>
+            <div class="submodels-empty" id="links-empty">No links yet</div>
+          </div>
+          <button type="button" class="btn btn-add-submodel" id="btn-add-link">+ Add link</button>
         </div>
 
         <div class="field">
@@ -170,8 +186,15 @@
     </div>
   </section>
 
-  <!-- RIGHT: live GeoJSON preview -->
+  <!-- RIGHT: editions archive + GeoJSON preview -->
   <section class="panel">
+    <div class="panel__head editions-toggle" id="editions-toggle" style="cursor:pointer">
+      <span>Editions archive</span>
+      <span class="num" id="editions-count">—</span>
+    </div>
+    <div class="panel__body" id="editions-panel" style="display:none;flex:0 0 auto;max-height:260px">
+      <div class="editions-list" id="editions-list"></div>
+    </div>
     <div class="panel__head">
       <span>GeoJSON preview</span>
       <span class="num">live</span>
@@ -297,6 +320,38 @@
   </section>
 
 </main>
+
+<!-- Meta modal -->
+<div class="modal-backdrop" id="meta-modal" style="display:none">
+  <div class="modal">
+    <div class="modal__head">
+      <span>Edit Edition Metadata</span>
+      <button class="close" id="meta-modal-close">×</button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__lede">
+        These fields are embedded in every exported GeoJSON and displayed in the atlas header.
+      </p>
+      <div class="field" style="margin-top:24px">
+        <label>Edition label <span style="color:var(--rust)">*</span></label>
+        <input id="meta-edition" type="text" placeholder="Vol. II — MMXXVI">
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label>Compiler note</label>
+        <textarea id="meta-compiler" placeholder="An ongoing cartographic survey…"></textarea>
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label style="color:var(--muted)">Last updated</label>
+        <input id="meta-updated" class="mono" type="text" readonly
+               style="opacity:.5;cursor:default">
+      </div>
+      <div class="form-actions" style="margin-top:24px">
+        <button type="button" class="btn" id="meta-modal-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="meta-modal-confirm">Save metadata</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Save Edition modal -->
 <div class="modal-backdrop" id="edition-modal" style="display:none">

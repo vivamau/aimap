@@ -156,12 +156,29 @@ function sanitiseModel(input) {
     lat, lng,
     type,
     year: input.year != null ? parseInt(input.year, 10) : new Date().getFullYear(),
+    releaseDate: sanitiseDate(input.releaseDate),
     parameters: String(input.parameters || 'undisclosed').trim(),
     url: String(input.url || '').trim(),
     notes: String(input.notes || '').trim(),
     modality,
+    links: Array.isArray(input.links)
+      ? input.links.map(sanitiseLink).filter(l => l.url)
+      : [],
     submodels,
   };
+}
+
+function sanitiseLink(l) {
+  return {
+    label: String(l.label ?? '').trim(),
+    url:   String(l.url   ?? '').trim(),
+  };
+}
+
+function sanitiseDate(v) {
+  if (!v) return '';
+  const s = String(v).trim();
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : '';
 }
 
 function sanitiseSubmodel(s) {

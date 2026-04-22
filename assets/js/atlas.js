@@ -35,6 +35,7 @@ const state = {
   filtered: [],
   filterType: 'all',     // all | proprietary | open-weight
   filterModality: 'all', // all | text | image | audio | video
+  filterSearch: '',
   sort:     { key: 'year', asc: false },
   toolSort: { key: 'year', asc: false },
   selected: null,
@@ -81,6 +82,8 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     bindArchiveBanner();
     bindLayerToggles();
     bindViewSwitch();
+    bindEditionsModal();
+    bindSearch();
   } catch (err) {
     console.error('Atlas failed to load:', err);
     document.body.insertAdjacentHTML('beforeend',
@@ -155,9 +158,12 @@ function renderFilters() {
 }
 
 function applyFilters() {
+  const q = state.filterSearch.toLowerCase();
   state.filtered = state.models.filter(m => {
     if (state.filterType !== 'all' && m.type !== state.filterType) return false;
     if (state.filterModality !== 'all' && !m.modality.includes(state.filterModality)) return false;
+    if (q && ![m.name, m.organization, m.country, m.city, String(m.year)]
+               .some(v => (v || '').toLowerCase().includes(q))) return false;
     return true;
   });
   renderMarkers();
@@ -488,11 +494,30 @@ function openDetail(m) {
   $('#detail .specs').innerHTML = `
     <dt>Type</dt><dd>${m.type}</dd>
     <dt>Year</dt><dd>${m.year}</dd>
+    ${m.releaseDate ? `<dt>Released</dt><dd>${m.releaseDate}</dd>` : ''}
     <dt>Modality</dt><dd>${m.modality.join(' · ')}</dd>
     <dt>Parameters</dt><dd>${m.parameters}</dd>
     <dt>Coordinates</dt><dd>${m.lat.toFixed(2)}°, ${m.lng.toFixed(2)}°</dd>
     <dt>Reference</dt><dd><a href="${m.url}" target="_blank" rel="noopener">${stripUrl(m.url)} ↗</a></dd>`;
   $('#detail .notes').textContent = m.notes || '';
+
+  // ── links ──
+  const linksEl = $('#detail .links-section');
+  if (linksEl) {
+    const links = Array.isArray(m.links) ? m.links.filter(l => l.url) : [];
+    if (links.length) {
+      linksEl.innerHTML = `
+        <div class="links-title">References</div>
+        <div class="links-list">${links.map(l => `
+          <a class="detail-link" href="${escapeAttr(l.url)}" target="_blank" rel="noopener">
+            ${escapeHtml(l.label || stripUrl(l.url))} ↗
+          </a>`).join('')}
+        </div>`;
+      linksEl.style.display = '';
+    } else {
+      linksEl.style.display = 'none';
+    }
+  }
 
   // ── submodels ──
   const subEl = $('#detail .submodels-section');
@@ -624,6 +649,97 @@ function openToolDetail(t) {
   d3.selectAll('g.marker').classed('open', false);
   d3.selectAll('g.tool-marker').classed('open', d => d.id === t.id);
   panel.classList.add('is-open');
+}
+
+// ──────────────  search
+
+function bindSearch() {
+  const input = $('#atlas-search');
+  const clear = $('#atlas-search-clear');
+  if (!input) return;
+
+  input.addEventListener('input', () => {
+    state.filterSearch = input.value.trim();
+    clear.hidden = !state.filterSearch;
+    applyFilters();
+  });
+
+  clear.addEventListener('click', () => {
+    input.value = '';
+    state.filterSearch = '';
+    clear.hidden = true;
+    input.focus();
+    applyFilters();
+  });
+}
+
+// ──────────────  editions modal
+
+function bindEditionsModal() {
+  const btn     = $('#btn-editions-modal');
+  const backdrop = $('#editions-modal');
+  const closeBtn = $('#editions-modal-close');
+  if (!btn || !backdrop) return;
+
+  btn.addEventListener('click', openEditionsModal);
+  closeBtn.addEventListener('click', closeEditionsModal);
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeEditionsModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('is-open')) closeEditionsModal();
+  });
+}
+
+function openEditionsModal() {
+  renderEditionsModal();
+  $('#editions-modal').classList.add('is-open');
+  $('#editions-modal').setAttribute('aria-hidden', 'false');
+}
+
+function closeEditionsModal() {
+  $('#editions-modal').classList.remove('is-open');
+  $('#editions-modal').setAttribute('aria-hidden', 'true');
+}
+
+function renderEditionsModal() {
+  const body = $('#editions-modal-body');
+  const liveActive = state.activeEditionId === 'live';
+
+  const liveItem = `
+    <div class="em-item em-live ${liveActive ? 'is-active' : ''}" data-edition="live">
+      <div class="em-item__label"><span class="em-dot"></span>Live edition</div>
+      <div class="em-item__meta">
+        <span>${state.models.length} model${state.models.length !== 1 ? 's' : ''}</span>
+        <span>Always current</span>
+      </div>
+    </div>`;
+
+  const archiveItems = state.editions.length
+    ? state.editions.map(ed => `
+        <div class="em-item ${state.activeEditionId === ed.id ? 'is-active' : ''}"
+             data-edition="${escapeAttr(ed.id)}">
+          <div class="em-item__label"><span class="em-dot"></span>${escapeHtml(ed.label)}</div>
+          <div class="em-item__meta">
+            <span>${ed.date}</span>
+            <span>${ed.features} model${ed.features !== 1 ? 's' : ''}</span>
+          </div>
+          ${ed.note ? `<div class="em-item__note">${escapeHtml(ed.note)}</div>` : ''}
+        </div>`).join('')
+    : `<div style="padding:32px 24px;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;color:var(--muted);text-transform:uppercase">
+         No archived editions yet.
+       </div>`;
+
+  body.innerHTML = liveItem + archiveItems;
+
+  body.querySelectorAll('.em-item').forEach(item => {
+    item.addEventListener('click', async () => {
+      const id = item.dataset.edition;
+      closeEditionsModal();
+      if (id === 'live') await loadLiveEdition();
+      else await loadEdition(id);
+    });
+  });
 }
 
 // ──────────────  spiderfy
@@ -919,9 +1035,13 @@ const TL_LANES = {
 };
 
 function parseItemDate(d) {
-  if (d && typeof d === 'object' && d.addedAt) {
-    const t = Date.parse(d.addedAt);
-    if (!isNaN(t)) return new Date(t);
+  if (d && typeof d === 'object') {
+    for (const key of ['releaseDate', 'addedAt']) {
+      if (d[key]) {
+        const t = Date.parse(d[key]);
+        if (!isNaN(t)) return new Date(t);
+      }
+    }
   }
   if (d && d.year != null) return new Date(d.year, 6, 1); // mid-year anchor
   return null;
