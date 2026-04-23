@@ -2,10 +2,57 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI",
-    "updated": "2026-04-22",
+    "updated": "2026-04-23",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "qwen-36",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.16,
+          30.27
+        ]
+      },
+      "properties": {
+        "id": "qwen-36",
+        "name": "Qwen 3.6",
+        "organization": "Alibaba Cloud",
+        "country": "China",
+        "city": "Bejing",
+        "type": "open-weight",
+        "year": 2026,
+        "releaseDate": "2026-04-15",
+        "parameters": "35B",
+        "url": "https://qwenlm.github.io/",
+        "notes": "Qwen3.6 delivers substantial upgrades in agentic coding and thinking preservation than previous Qwen models.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "qwen3.6:27b",
+            "version": "3.6",
+            "parameters": "27B",
+            "ollamaUrl": "https://ollama.com/library/qwen3.6",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-04-23"
+          },
+          {
+            "name": "qwen3.6:35b",
+            "version": "3.6",
+            "parameters": "35B",
+            "ollamaUrl": "https://ollama.com/library/qwen3.6",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-04-23"
+          }
+        ]
+      }
+    },
     {
       "type": "Feature",
       "id": "glm-47-flash",
