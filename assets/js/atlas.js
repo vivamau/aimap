@@ -33,20 +33,22 @@ function fromGeoJson(geo) {
 const state = {
   models: [],
   filtered: [],
-  filterType: 'all',     // all | proprietary | open-weight
-  filterModality: 'all', // all | text | image | audio | video
+  filterType: 'all',          // all | proprietary | open-weight
+  filterModality: 'all',      // all | text | image | audio | video
   filterSearch: '',
   sort:     { key: 'year', asc: false },
   toolSort: { key: 'year', asc: false },
   selected: null,
   selectedTool: null,
-  activeEditionId: 'live',   // 'live' or an edition id string
-  editions: [],              // list loaded from editions/index.json
-  tools: [],                 // AI tools layer
+  activeEditionId: 'live',    // 'live' or an edition id string
+  editions: [],               // list loaded from editions/index.json
+  tools: [],                  // AI tools layer
+  filteredTools: [],          // tools after category/search filter
+  filterToolCategory: 'all',  // all | assistant | codegen | devtool | ide | search
   layers: { models: true, tools: true },
-  catTab: 'models',          // active catalogue tab
-  glanceTab: 'models',       // active "at a glance" tab
-  view: 'map',               // 'map' | 'timeline'
+  catTab: 'models',           // active catalogue tab
+  glanceTab: 'models',        // active "at a glance" tab
+  view: 'map',                // 'map' | 'timeline'
   timelineRendered: false,
 };
 
@@ -56,6 +58,12 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 // ──────────────  bootstrap
 
 (async function init() {
+  const overlay = document.getElementById('loading-overlay');
+  const hideOverlay = () => {
+    if (!overlay) return;
+    overlay.classList.add('is-hidden');
+    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+  };
   try {
     const [geo, topo, editionsIndex, toolsGeo] = await Promise.all([
       fetch(DATA_URL).then(r => r.json()),
@@ -64,9 +72,10 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
       fetch(TOOLS_URL).then(r => r.json()).catch(() => ({ features: [] })),
     ]);
     const { meta, models } = fromGeoJson(geo);
-    state.models   = models;
-    state.editions = editionsIndex.editions || [];
-    state.tools    = fromToolsGeoJson(toolsGeo);
+    state.models        = models;
+    state.editions      = editionsIndex.editions || [];
+    state.tools         = fromToolsGeoJson(toolsGeo);
+    state.filteredTools = state.tools;
     renderMeta(meta);
     renderStats();
     renderFilters();
@@ -84,8 +93,10 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     bindViewSwitch();
     bindEditionsModal();
     bindSearch();
+    hideOverlay();
   } catch (err) {
     console.error('Atlas failed to load:', err);
+    hideOverlay();
     document.body.insertAdjacentHTML('beforeend',
       `<pre style="padding:48px;color:#b14a2c;font-family:monospace">Failed to load atlas data — ${err.message}</pre>`);
   }
@@ -397,7 +408,18 @@ function renderCatalogue() {
 function renderToolsCatalogue() {
   const tbody = $('#cat-tools tbody');
   if (!tbody) return;
-  const sorted = [...state.tools].sort((a, b) => {
+  const q = state.filterSearch.toLowerCase();
+  let tools = state.tools;
+  if (state.filterToolCategory !== 'all') {
+    tools = tools.filter(t => t.category === state.filterToolCategory);
+  }
+  if (q) {
+    tools = tools.filter(t =>
+      [t.name, t.organization, t.country, t.category]
+        .some(v => (v || '').toLowerCase().includes(q)));
+  }
+  state.filteredTools = tools;
+  const sorted = [...tools].sort((a, b) => {
     const k = state.toolSort.key;
     let av = a[k], bv = b[k];
     if (Array.isArray(av)) av = av.join(',');
@@ -435,7 +457,11 @@ function updateCatalogueCount() {
   const el = $('#catalogue-count');
   if (!el) return;
   if (state.catTab === 'tools') {
-    el.textContent = `${state.tools.length} tool${state.tools.length !== 1 ? 's' : ''}`;
+    const total  = state.tools.length;
+    const shown  = state.filteredTools.length;
+    el.textContent = shown === total
+      ? `${total} tool${total !== 1 ? 's' : ''}`
+      : `${shown} of ${total} tools`;
   } else {
     el.textContent = `${state.filtered.length} of ${state.models.length} entries`;
   }
@@ -469,6 +495,22 @@ function bindCatalogueSort() {
   });
 }
 
+function renderToolsFilters() {
+  const el = $('#cat-filter-category');
+  if (!el) return;
+  const categories = ['all', ...new Set(state.tools.map(t => t.category).filter(Boolean))].sort((a, b) =>
+    a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b));
+  el.innerHTML = categories.map(c =>
+    `<button class="chip ${state.filterToolCategory === c ? 'is-active' : ''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  el.addEventListener('click', e => {
+    const btn = e.target.closest('.chip'); if (!btn) return;
+    state.filterToolCategory = btn.dataset.cat;
+    renderToolsFilters();
+    renderToolsCatalogue();
+  });
+}
+
 function bindCatalogueTabs() {
   const tabs = $$('.cat-tab');
   tabs.forEach(tab => {
@@ -480,6 +522,24 @@ function bindCatalogueTabs() {
       const tt = $('#cat-tools');
       if (mt) mt.style.display = target === 'models' ? '' : 'none';
       if (tt) tt.style.display = target === 'tools'  ? '' : 'none';
+
+      const filterbar   = $('.cat-filterbar');
+      const typeFilter  = $('#cat-filter-type');
+      const modFilter   = $('#cat-filter-modality');
+      const catFilter   = $('#cat-filter-category');
+      const isTools     = target === 'tools';
+
+      if (typeFilter)  typeFilter.hidden  =  isTools;
+      if (modFilter)   modFilter.hidden   =  isTools;
+      if (catFilter)   catFilter.hidden   = !isTools;
+      if (filterbar)   filterbar.classList.toggle('tools-mode', isTools);
+
+      if (isTools) {
+        renderToolsFilters();
+        renderToolsCatalogue();
+      } else {
+        renderFilters();
+      }
       updateCatalogueCount();
     });
   });
@@ -683,6 +743,7 @@ function bindSearch() {
       state.filterSearch = input.value.trim();
       syncAll(state.filterSearch);
       applyFilters();
+      if (state.catTab === 'tools') renderToolsCatalogue();
     });
 
     if (clear) {
@@ -691,6 +752,7 @@ function bindSearch() {
         syncAll('');
         input.focus();
         applyFilters();
+        if (state.catTab === 'tools') renderToolsCatalogue();
       });
     }
   });

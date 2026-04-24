@@ -147,6 +147,7 @@
     </div>
     <div class="filter-row" id="cat-filter-type"></div>
     <div class="filter-row" id="cat-filter-modality"></div>
+    <div class="filter-row" id="cat-filter-category" hidden></div>
   </div>
 
   <table class="catalogue__table" id="cat-models" data-cat="models">
@@ -191,9 +192,17 @@
   </div>
   <div>
     <h4>Contribute</h4>
-    <p>The atlas is editable. Use the <a href="./admin.html">Editorial Desk</a> to propose additions, then commit the regenerated <code style="font-family:var(--mono);color:var(--gold)">ai-models.json</code> back to the repository.</p>
+    <p>Have you noticed errors or omissions? Please open an <a href="https://github.com/vivamau/aimap/issues">issue</a>, I'll try to revert to you ASAP!</p>
   </div>
 </section>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loading-overlay" aria-live="polite">
+  <div class="loading-inner">
+    <div class="loading-spinner"></div>
+    <p class="loading-label">Loading atlas data…</p>
+  </div>
+</div>
 
 <!-- DETAIL PANEL -->
 <aside class="detail-panel" id="detail">
