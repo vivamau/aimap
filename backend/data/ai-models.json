@@ -6,6 +6,36 @@
   },
   "models": [
     {
+      "id": "claude-4-haiku",
+      "name": "Claude 4 Haiku",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "type": "proprietary",
+      "year": 2025,
+      "releaseDate": "2025-10-15",
+      "parameters": "undisclosed",
+      "url": "",
+      "notes": "",
+      "modality": [
+        "text",
+        "code"
+      ],
+      "links": [],
+      "submodels": [
+        {
+          "name": "4.5",
+          "version": "4",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-11-24"
+        }
+      ]
+    },
+    {
       "id": "claude-4-sonnet",
       "name": "Claude 4 Sonnet",
       "organization": "OpenAI",
@@ -33,6 +63,14 @@
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-09-29"
+        },
+        {
+          "name": "4.6",
+          "version": "4",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-02-17"
         }
       ]
     },
