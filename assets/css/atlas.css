@@ -321,6 +321,10 @@ a:hover { color: var(--paper); border-color: var(--paper); }
   color: var(--bg); background: var(--gold);
   border-color: var(--gold);
 }
+.cat-filterbar.tools-mode .chip.is-active {
+  background: var(--violet);
+  border-color: var(--violet);
+}
 
 /* ─────────  Map ───────── */
 

@@ -8,6 +8,98 @@
   "features": [
     {
       "type": "Feature",
+      "id": "openai-o4-mini",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.42,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "openai-o4-mini",
+        "name": "OpenAI o4-mini",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-04-06",
+        "parameters": "undisclosed",
+        "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
+        "notes": "OpenAI o4-mini is a smaller model optimized for fast, cost-efficient reasoning—it achieves remarkable performance for its size and cost",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-35",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.42,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "gpt-35",
+        "name": "GPT-3.5",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2022,
+        "releaseDate": "2022-03-15",
+        "parameters": "undisclosed",
+        "url": "https://openai.com/index/gpt-3-5-turbo-fine-tuning-and-api-updates/",
+        "notes": "",
+        "modality": [
+          "text"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "turbo",
+            "version": "3.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2022-03-15"
+          },
+          {
+            "name": "text-davinci-003",
+            "version": "3.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2022-03-05"
+          },
+          {
+            "name": "text-davinci-002",
+            "version": "3.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2022-03-15"
+          },
+          {
+            "name": "instructGPT",
+            "version": "3.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2022-03-15"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
       "id": "gpt-54",
       "geometry": {
         "type": "Point",
@@ -497,6 +589,7 @@
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2024,
+        "releaseDate": "2024-05-13",
         "parameters": "undisclosed",
         "url": "https://openai.com",
         "notes": "Native multimodal foundation model with vision and voice capabilities.",
@@ -505,14 +598,15 @@
           "image",
           "audio"
         ],
+        "links": [],
         "submodels": [
           {
-            "name": "model:7b",
-            "version": "4.5",
-            "parameters": "7B",
-            "ollamaUrl": "http://ollama.com/model/gpt",
-            "huggingfaceUrl": "http://ollama.com/model/gpt",
-            "addedAt": "2026-04-19"
+            "name": "mini",
+            "version": "4",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2024-07-18"
           }
         ]
       }
@@ -1377,12 +1471,14 @@
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2020,
+        "releaseDate": "2020-05-29",
         "parameters": "175B",
         "url": "https://openai.com/research/gpt-3",
         "notes": "Foundation for ChatGPT (2022). First demonstration of in-context few-shot learning at scale.",
         "modality": [
           "text"
         ],
+        "links": [],
         "submodels": []
       }
     },
@@ -1836,6 +1932,7 @@
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2023,
+        "releaseDate": "2023-03-14",
         "parameters": "undisclosed",
         "url": "https://openai.com/research/gpt-4",
         "notes": "Architecture undisclosed. Multimodal with vision input. Surpassed bar exam top 10% performance.",
@@ -1843,6 +1940,7 @@
           "text",
           "image"
         ],
+        "links": [],
         "submodels": []
       }
     },
@@ -3076,14 +3174,33 @@
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2025,
+        "releaseDate": "2025-04-16",
         "parameters": "undisclosed",
         "url": "https://openai.com/o3",
-        "notes": "Frontier reasoning model. First to exceed human performance on ARC-AGI benchmark.",
+        "notes": "OpenAI o3 is a highly advanced \"reasoning\" designed to excel in complex, multi-step tasks across science, technology, engineering, and mathematics (STEM).",
         "modality": [
           "text",
           "image"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "mini",
+            "version": "o3",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-01-31"
+          },
+          {
+            "name": "pro",
+            "version": "o3",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-06-10"
+          }
+        ]
       }
     },
     {
