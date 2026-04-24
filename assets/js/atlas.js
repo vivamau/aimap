@@ -56,6 +56,12 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 // ──────────────  bootstrap
 
 (async function init() {
+  const overlay = document.getElementById('loading-overlay');
+  const hideOverlay = () => {
+    if (!overlay) return;
+    overlay.classList.add('is-hidden');
+    overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+  };
   try {
     const [geo, topo, editionsIndex, toolsGeo] = await Promise.all([
       fetch(DATA_URL).then(r => r.json()),
@@ -84,8 +90,10 @@ const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
     bindViewSwitch();
     bindEditionsModal();
     bindSearch();
+    hideOverlay();
   } catch (err) {
     console.error('Atlas failed to load:', err);
+    hideOverlay();
     document.body.insertAdjacentHTML('beforeend',
       `<pre style="padding:48px;color:#b14a2c;font-family:monospace">Failed to load atlas data — ${err.message}</pre>`);
   }
