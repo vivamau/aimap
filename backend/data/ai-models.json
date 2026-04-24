@@ -1,10 +1,201 @@
 {
   "meta": {
-    "edition": "Vol. III — MMXXVI",
-    "updated": "2026-04-23",
+    "edition": "Vol. I — MMXXVI",
+    "updated": "2026-04-24",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "models": [
+    {
+      "id": "gpt-54",
+      "name": "GPT-5.4",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.42,
+      "type": "proprietary",
+      "year": 2026,
+      "releaseDate": "2026-03-05",
+      "parameters": "undisclosed",
+      "url": "https://openai.com/index/introducing-gpt-5-4/",
+      "notes": "GPT‑5.4 is OpenAI first general-purpose model with native computer-use capabilities and marks a major step forward for developers and agents alike.",
+      "modality": [
+        "text",
+        "image",
+        "code"
+      ],
+      "links": [],
+      "submodels": [
+        {
+          "name": "Thinking",
+          "version": "5.4",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-03-05"
+        },
+        {
+          "name": "Pro",
+          "version": "5.4",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-03-05"
+        },
+        {
+          "name": "Mini",
+          "version": "5.4",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-03-17"
+        },
+        {
+          "name": "Nano",
+          "version": "5.4",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-03-17"
+        }
+      ]
+    },
+    {
+      "id": "gpt-53-codex",
+      "name": "GPT-5.3-Codex",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.42,
+      "type": "proprietary",
+      "year": 2026,
+      "releaseDate": "2026-02-05",
+      "parameters": "undisclosed",
+      "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
+      "notes": "LLM focusing on code generation, speed and the ability to search repositories, run terminal commands and at the same time, debug code.",
+      "modality": [
+        "code"
+      ],
+      "links": [],
+      "submodels": [
+        {
+          "name": "Spark",
+          "version": "5.3",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-02-12"
+        }
+      ]
+    },
+    {
+      "id": "gpt-52",
+      "name": "GPT-5.2",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.42,
+      "type": "proprietary",
+      "year": 2025,
+      "releaseDate": "2025-12-11",
+      "parameters": "undisclosed",
+      "url": "https://openai.com/index/introducing-gpt-5-2/",
+      "notes": "Succeeding GPT-5.1, it is a family of three large language models within the GPT series. It comes in three modes: GPT-5.2 instant, GPT-5.2 thinking (with standard and extended thinking), and GPT-5.2 Pro",
+      "modality": [
+        "text",
+        "image"
+      ],
+      "links": [],
+      "submodels": [
+        {
+          "name": "instant",
+          "version": "5.2",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-12-11"
+        },
+        {
+          "name": "thinking",
+          "version": "5.2",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-12-11"
+        },
+        {
+          "name": "pro",
+          "version": "5.2",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-12-11"
+        }
+      ]
+    },
+    {
+      "id": "gpt-51",
+      "name": "GPT-5.1",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.42,
+      "type": "proprietary",
+      "year": 2025,
+      "releaseDate": "2025-11-12",
+      "parameters": "undisclosed",
+      "url": "https://openai.com/index/gpt-5-1/",
+      "notes": "GPT-5.1 is a family of four large language models within OpenAI's GPT series.",
+      "modality": [
+        "text",
+        "image"
+      ],
+      "links": [],
+      "submodels": []
+    },
+    {
+      "id": "gpt-55",
+      "name": "GPT-5.5",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.42,
+      "type": "proprietary",
+      "year": 2026,
+      "releaseDate": "2026-04-23",
+      "parameters": "undisclosed",
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "notes": "GPT-5.5 is noticeably smarter and more persistent than GPT-5.4, with stronger coding performance and more reliable tool use.",
+      "modality": [
+        "text",
+        "image",
+        "code",
+        "3d"
+      ],
+      "links": [],
+      "submodels": [
+        {
+          "name": "Thinking",
+          "version": "5.5",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-04-23"
+        },
+        {
+          "name": "Pro",
+          "version": "5.5",
+          "parameters": "undisclosed",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-04-23"
+        }
+      ]
+    },
     {
       "id": "qwen-36",
       "name": "Qwen 3.6",
@@ -2090,8 +2281,11 @@
       "organization": "OpenAI",
       "country": "United States",
       "city": "San Francisco",
+      "lat": 37.7749,
+      "lng": -122.4194,
       "type": "proprietary",
       "year": 2025,
+      "releaseDate": "2025-08-07",
       "parameters": "undisclosed",
       "url": "https://openai.com/gpt-5",
       "notes": "Unifies reasoning and general capability. Includes mini and nano variants.",
@@ -2099,9 +2293,8 @@
         "text",
         "image"
       ],
-      "submodels": [],
-      "lat": 37.7749,
-      "lng": -122.4194
+      "links": [],
+      "submodels": []
     },
     {
       "id": "sarvam-m",
