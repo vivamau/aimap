@@ -6,6 +6,45 @@
   },
   "models": [
     {
+      "id": "deepseek-v4",
+      "name": "Deepseek-v4",
+      "organization": "Deepseek",
+      "country": "China",
+      "city": "Hangzhou",
+      "lat": 30.28,
+      "lng": 120.17,
+      "type": "proprietary",
+      "year": 2026,
+      "releaseDate": "2026-04-24",
+      "parameters": "1.6T",
+      "url": "",
+      "notes": "",
+      "modality": [
+        "text",
+        "image",
+        "code"
+      ],
+      "links": [],
+      "submodels": [
+        {
+          "name": "Flash",
+          "version": "4",
+          "parameters": "284B",
+          "ollamaUrl": "https://ollama.com/library/deepseek-v4-flash",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-04-24"
+        },
+        {
+          "name": "Pro",
+          "version": "4",
+          "parameters": "1.6T",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "https://huggingface.co/collections/deepseek-ai/deepseek-v4",
+          "addedAt": "2026-04-24"
+        }
+      ]
+    },
+    {
       "id": "claude-4-haiku",
       "name": "Claude 4 Haiku",
       "organization": "OpenAI",
