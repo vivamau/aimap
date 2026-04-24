@@ -8,6 +8,168 @@
   "features": [
     {
       "type": "Feature",
+      "id": "claude-4-sonnet",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.16,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "claude-4-sonnet",
+        "name": "Claude 4 Sonnet",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-05-22",
+        "parameters": "undisclosed",
+        "url": "",
+        "notes": "",
+        "modality": [
+          "text",
+          "image",
+          "code"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "4.5",
+            "version": "4",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-09-29"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-3-haiku",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.16,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "claude-3-haiku",
+        "name": "Claude 3 Haiku",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2024,
+        "releaseDate": "2024-03-13",
+        "parameters": "undisclosed",
+        "url": "",
+        "notes": "Claude is reportedly named after Claude Shannon, a 20th-century mathematician who laid the foundation for information theory.",
+        "modality": [
+          "text"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-instant",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.16,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "claude-instant",
+        "name": "Claude Instant",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2023,
+        "releaseDate": "2023-08-09",
+        "parameters": "undisclosed",
+        "url": "",
+        "notes": "Claude-Instant is a language model designed for rapid response generation while maintaining a high level of language understanding. It is optimized for speed.",
+        "modality": [
+          "text"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "1.1",
+            "version": "Instant",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-07-08"
+          },
+          {
+            "name": "1.2",
+            "version": "Instant",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-08-09"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gpt-oss",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.16,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "gpt-oss",
+        "name": "GPT-OSS",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "open-weight",
+        "year": 2025,
+        "releaseDate": "2025-08-05",
+        "parameters": "120B",
+        "url": "https://github.com/openai/gpt-oss",
+        "notes": "The gpt-oss series, OpenAI's open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases.",
+        "modality": [
+          "text",
+          "image"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "120b",
+            "version": "1",
+            "parameters": "120B",
+            "ollamaUrl": "https://ollama.com/library/gpt-oss",
+            "huggingfaceUrl": "https://huggingface.co/openai/gpt-oss-120b",
+            "addedAt": "2025-08-08"
+          },
+          {
+            "name": "20b",
+            "version": "1",
+            "parameters": "20B",
+            "ollamaUrl": "https://ollama.com/library/gpt-oss",
+            "huggingfaceUrl": "https://huggingface.co/openai/gpt-oss-20b",
+            "addedAt": "2026-04-24"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
       "id": "openai-o4-mini",
       "geometry": {
         "type": "Point",
@@ -623,20 +785,55 @@
       },
       "properties": {
         "id": "claude-opus-4",
-        "name": "Claude Opus 4",
+        "name": "Claude 4 Opus",
         "organization": "Anthropic",
         "country": "United States",
         "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-04-22",
+        "parameters": "undisclosed",
+        "url": "https://anthropic.com",
+        "notes": "Frontier reasoning model from the Constitutional AI lineage.",
         "modality": [
           "text",
           "image"
         ],
-        "type": "proprietary",
-        "year": 2025,
-        "parameters": "undisclosed",
-        "url": "https://anthropic.com",
-        "notes": "Frontier reasoning model from the Constitutional AI lineage.",
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "4.1",
+            "version": "4",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-08-05"
+          },
+          {
+            "name": "4.5",
+            "version": "4",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-11-24"
+          },
+          {
+            "name": "4.6",
+            "version": "4",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-02-05"
+          },
+          {
+            "name": "4.7",
+            "version": "4",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-04-16"
+          }
+        ]
       }
     },
     {
@@ -2122,13 +2319,24 @@
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2023,
+        "releaseDate": "2023-07-11",
         "parameters": "undisclosed",
         "url": "https://www.anthropic.com/index/claude-2",
         "notes": "Extended context to 100K tokens. Constitutional AI training for improved safety.",
         "modality": [
           "text"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "2.1",
+            "version": "2",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-11-21"
+          }
+        ]
       }
     },
     {
@@ -2480,12 +2688,13 @@
       },
       "properties": {
         "id": "claude-3",
-        "name": "Claude 3",
+        "name": "Claude 3 Sonnet",
         "organization": "Anthropic",
         "country": "United States",
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2024,
+        "releaseDate": "2024-03-04",
         "parameters": "undisclosed",
         "url": "https://www.anthropic.com/news/claude-3-family",
         "notes": "Three-tier family: Haiku, Sonnet, Opus. Opus surpassed GPT-4 on multiple benchmarks at launch.",
@@ -2493,7 +2702,25 @@
           "text",
           "image"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "3.5",
+            "version": "3",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2024-06-20"
+          },
+          {
+            "name": "3.7",
+            "version": "3",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-02-24"
+          }
+        ]
       }
     },
     {
@@ -2693,19 +2920,21 @@
       },
       "properties": {
         "id": "claude-3-5",
-        "name": "Claude 3.5",
+        "name": "Claude",
         "organization": "Anthropic",
         "country": "United States",
         "city": "San Francisco",
         "type": "proprietary",
         "year": 2024,
+        "releaseDate": "2023-03-14",
         "parameters": "undisclosed",
-        "url": "https://www.anthropic.com/news/claude-3-5-sonnet",
-        "notes": "Sonnet variant surpassed Claude 3 Opus at lower cost. Introduced computer-use (agentic) capability.",
+        "url": "https://www.anthropic.com/",
+        "notes": "First version of Claude. Claude is reportedly named after Claude Shannon, a 20th-century mathematician who laid the foundation for information theory.",
         "modality": [
           "text",
           "image"
         ],
+        "links": [],
         "submodels": []
       }
     },
@@ -3084,19 +3313,22 @@
       },
       "properties": {
         "id": "claude-3-7",
-        "name": "Claude 3.7",
+        "name": "Claude Mythos",
         "organization": "Anthropic",
         "country": "United States",
         "city": "San Francisco",
         "type": "proprietary",
-        "year": 2025,
+        "year": 2026,
+        "releaseDate": "2026-04-07",
         "parameters": "undisclosed",
-        "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
-        "notes": "Sonnet variant with hybrid thinking mode. First Claude with extended visible reasoning chains.",
+        "url": "https://www.anthropic.com/",
+        "notes": "Anthropic announced a preview of Claude Mythos (\"Project Glasswing/Claude Mythos Preview\") would be made available to 11 companies and organizations to find and fix cybersecurity vulnerabilities. Anthropic has stated that it does not plan to make Claude Mythos Preview generally available.",
         "modality": [
           "text",
-          "image"
+          "image",
+          "code"
         ],
+        "links": [],
         "submodels": []
       }
     },

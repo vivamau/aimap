@@ -21,7 +21,7 @@ const state = {
 
 const MODALITIES   = ['text', 'image', 'audio', 'video', 'code', '3d'];
 const TYPES        = ['proprietary', 'open-weight'];
-const CATEGORIES   = ['assistant', 'search', 'ide', 'codegen', 'devtool'];
+const CATEGORIES   = ['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music'];
 
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
@@ -658,6 +658,8 @@ function loadToolIntoForm(id) {
   $('#ft-lng').value          = t.lng;
   $('#ft-category').value     = t.category;
   $('#ft-year').value         = t.year;
+  $('#ft-date').value         = t.releaseDate || '';
+  $('#ft-retired').value      = t.retiredDate || '';
   $('#ft-url').value          = t.url;
   $('#ft-notes').value        = t.notes || '';
   $('#ft-builton').value      = Array.isArray(t.builtOn) ? t.builtOn.join(', ') : '';
@@ -679,6 +681,8 @@ function readToolForm() {
     lng:          parseFloat($('#ft-lng').value),
     category:     $('#ft-category').value,
     year:         parseInt($('#ft-year').value, 10),
+    releaseDate:  $('#ft-date').value || '',
+    retiredDate:  $('#ft-retired').value || '',
     url:          $('#ft-url').value.trim(),
     notes:        $('#ft-notes').value.trim(),
     builtOn,

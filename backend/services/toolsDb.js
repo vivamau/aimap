@@ -14,7 +14,8 @@ const { slugify } = require('../utilities/slugify');
 const { HttpError } = require('../middleware/errorHandler');
 
 const REQUIRED = ['name', 'organization', 'lat', 'lng'];
-const VALID_CATEGORIES = new Set(['assistant', 'search', 'ide', 'codegen', 'devtool']);
+const VALID_CATEGORIES = new Set(['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music']);
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 function createToolsDb({ dbPath }) {
   let cache = null;
@@ -115,6 +116,11 @@ function sanitiseTool(input) {
 
   const builtOn = Array.isArray(input.builtOn) ? input.builtOn.map(String) : [];
 
+  const releaseDate = input.releaseDate && ISO_DATE.test(input.releaseDate)
+    ? input.releaseDate : '';
+  const retiredDate = input.retiredDate && ISO_DATE.test(input.retiredDate)
+    ? input.retiredDate : '';
+
   return {
     id: input.id ? slugify(input.id) : slugify(input.name),
     name: String(input.name).trim(),
@@ -124,6 +130,8 @@ function sanitiseTool(input) {
     lat, lng,
     category,
     year: input.year != null ? parseInt(input.year, 10) : new Date().getFullYear(),
+    releaseDate,
+    retiredDate,
     url: String(input.url || '').trim(),
     notes: String(input.notes || '').trim(),
     builtOn,

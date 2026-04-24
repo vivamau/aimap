@@ -1,6 +1,106 @@
 {
   "tools": [
     {
+      "id": "sora",
+      "name": "Sora",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "text-to-video",
+      "year": 2024,
+      "releaseDate": "2024-02-01",
+      "retiredDate": "",
+      "url": "https://sora.chatgpt.com/",
+      "notes": "Sora is a text-to-video model and social media app developed by OpenAI. Using artificial intelligence, the model generates short video clips based on prompts, and can also extend existing short videos.",
+      "builtOn": []
+    },
+    {
+      "id": "dall-e-3",
+      "name": "DALL-E 3",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "text-to-image",
+      "year": 2023,
+      "releaseDate": "2023-09-01",
+      "retiredDate": "",
+      "url": "",
+      "notes": "A more powerful model better able to generate images from complex descriptions without manual prompt engineering and render complex details like hands and text.",
+      "builtOn": []
+    },
+    {
+      "id": "dall-e-2",
+      "name": "DALL-E 2",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "text-to-image",
+      "year": 2022,
+      "releaseDate": "2022-04-01",
+      "retiredDate": "",
+      "url": "https://openai.com/index/dall-e-2/",
+      "notes": "Improved version of DALL-E",
+      "builtOn": []
+    },
+    {
+      "id": "dall-e",
+      "name": "DALL-E",
+      "organization": "OpenAI",
+      "country": "",
+      "city": "",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "text-to-image",
+      "year": 2021,
+      "releaseDate": "2021-01-01",
+      "retiredDate": "2021-03-01",
+      "url": "",
+      "notes": "DALL-E is a Transformer model that creates images from textual descriptions. It uses a 12-billion-parameter version of GPT-3 to interpret natural language inputs",
+      "builtOn": [
+        "GPT-3"
+      ]
+    },
+    {
+      "id": "clip",
+      "name": "CLIP",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "devtool",
+      "year": 2021,
+      "releaseDate": "2021-01-05",
+      "retiredDate": "",
+      "url": "https://github.com/OpenAI/CLIP",
+      "notes": "Contrastive Language-Image Pre-training (CLIP) is a technique for training a pair of neural network models, one for image understanding and one for text understanding, using a contrastive objective.",
+      "builtOn": []
+    },
+    {
+      "id": "deep-research",
+      "name": "Deep research",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "assistant",
+      "year": 2025,
+      "releaseDate": "2025-02-02",
+      "retiredDate": "",
+      "url": "https://en.wikipedia.org/wiki/ChatGPT_Deep_Research",
+      "notes": "Deep research is an AI agent developed by OpenAI, unveiled on February 2, 2025. It leverages the capabilities of OpenAI's o3 model to perform extensive web browsing, data analysis, and synthesis, delivering comprehensive reports within a timeframe of 5 to 30 minutes.",
+      "builtOn": [
+        "GPT-o3"
+      ]
+    },
+    {
       "id": "claude",
       "name": "Claude",
       "organization": "Anthropic",
@@ -10,6 +110,8 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2023,
+      "releaseDate": "2023-03-14",
+      "retiredDate": "",
       "url": "https://claude.ai",
       "notes": "Constitutional AI assistant developed by Anthropic, known for safety and helpfulness.",
       "builtOn": []
@@ -24,9 +126,13 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2022,
+      "releaseDate": "2022-11-30",
+      "retiredDate": "",
       "url": "https://chat.openai.com",
       "notes": "Conversational AI assistant powered by GPT models, launched the modern AI chat era.",
-      "builtOn": ["gpt-4o"]
+      "builtOn": [
+        "gpt-4o"
+      ]
     },
     {
       "id": "gemini",
@@ -38,8 +144,10 @@
       "lat": 37.3861,
       "lng": -122.0839,
       "year": 2023,
+      "releaseDate": "2024-02-08",
+      "retiredDate": "",
       "url": "https://gemini.google.com",
-      "notes": "Google's multimodal AI assistant, deeply integrated with Google Workspace.",
+      "notes": "Google's multimodal AI assistant, deeply integrated with Google Workspace. Previously known as Bard (launched February 2023).",
       "builtOn": []
     },
     {
@@ -52,9 +160,13 @@
       "lat": 47.674,
       "lng": -122.1215,
       "year": 2023,
+      "releaseDate": "2023-11-01",
+      "retiredDate": "",
       "url": "https://copilot.microsoft.com",
       "notes": "AI assistant integrated into Microsoft 365 products and Windows.",
-      "builtOn": ["gpt-4o"]
+      "builtOn": [
+        "gpt-4o"
+      ]
     },
     {
       "id": "perplexity",
@@ -66,9 +178,14 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2022,
+      "releaseDate": "2022-12-07",
+      "retiredDate": "",
       "url": "https://perplexity.ai",
       "notes": "AI-powered search engine that provides cited answers to queries in real time.",
-      "builtOn": ["claude-3-5-sonnet", "gpt-4o"]
+      "builtOn": [
+        "claude-3-5-sonnet",
+        "gpt-4o"
+      ]
     },
     {
       "id": "cursor",
@@ -80,9 +197,14 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2023,
+      "releaseDate": "2023-03-14",
+      "retiredDate": "",
       "url": "https://cursor.sh",
       "notes": "AI-first code editor built on VS Code with deep chat and autocomplete integration.",
-      "builtOn": ["claude-3-5-sonnet", "gpt-4o"]
+      "builtOn": [
+        "claude-3-5-sonnet",
+        "gpt-4o"
+      ]
     },
     {
       "id": "kiro",
@@ -94,9 +216,13 @@
       "lat": 47.6062,
       "lng": -122.3321,
       "year": 2025,
+      "releaseDate": "2025-07-16",
+      "retiredDate": "",
       "url": "https://kiro.dev",
       "notes": "Amazon's AI IDE with spec-driven development and agentic coding workflows.",
-      "builtOn": ["claude-3-5-sonnet"]
+      "builtOn": [
+        "claude-3-5-sonnet"
+      ]
     },
     {
       "id": "windsurf",
@@ -108,6 +234,8 @@
       "lat": 37.3861,
       "lng": -122.0839,
       "year": 2024,
+      "releaseDate": "2024-11-13",
+      "retiredDate": "",
       "url": "https://codeium.com/windsurf",
       "notes": "Agentic IDE by Codeium with Cascade flow engine for multi-step coding tasks.",
       "builtOn": []
@@ -122,9 +250,13 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2021,
+      "releaseDate": "2022-06-21",
+      "retiredDate": "",
       "url": "https://github.com/features/copilot",
       "notes": "AI pair programmer integrated into VS Code, JetBrains, and GitHub.com.",
-      "builtOn": ["gpt-4o"]
+      "builtOn": [
+        "gpt-4o"
+      ]
     },
     {
       "id": "lovable",
@@ -136,9 +268,13 @@
       "lat": 59.3293,
       "lng": 18.0686,
       "year": 2023,
+      "releaseDate": "2024-01-16",
+      "retiredDate": "",
       "url": "https://lovable.dev",
       "notes": "AI full-stack engineer that builds React apps from natural language prompts.",
-      "builtOn": ["claude-3-5-sonnet"]
+      "builtOn": [
+        "claude-3-5-sonnet"
+      ]
     },
     {
       "id": "bolt",
@@ -150,9 +286,13 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2024,
+      "releaseDate": "2024-10-01",
+      "retiredDate": "",
       "url": "https://bolt.new",
       "notes": "Browser-based AI coding agent that creates and deploys full-stack apps instantly.",
-      "builtOn": ["claude-3-5-sonnet"]
+      "builtOn": [
+        "claude-3-5-sonnet"
+      ]
     },
     {
       "id": "v0",
@@ -164,9 +304,13 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2023,
+      "releaseDate": "2023-10-01",
+      "retiredDate": "",
       "url": "https://v0.dev",
       "notes": "Vercel's generative UI tool that produces React/shadcn components from prompts.",
-      "builtOn": ["gpt-4o"]
+      "builtOn": [
+        "gpt-4o"
+      ]
     },
     {
       "id": "replit",
@@ -178,9 +322,13 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2023,
+      "releaseDate": "2024-09-05",
+      "retiredDate": "",
       "url": "https://replit.com",
       "notes": "Cloud IDE with AI agent (Replit Agent) that can build and deploy apps end-to-end.",
-      "builtOn": ["claude-3-5-sonnet"]
+      "builtOn": [
+        "claude-3-5-sonnet"
+      ]
     },
     {
       "id": "devin",
@@ -192,6 +340,8 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2024,
+      "releaseDate": "2024-03-12",
+      "retiredDate": "",
       "url": "https://cognition.ai",
       "notes": "First autonomous AI software engineer capable of completing end-to-end engineering tasks.",
       "builtOn": []
@@ -206,9 +356,14 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2024,
+      "releaseDate": "2024-12-01",
+      "retiredDate": "",
       "url": "https://roocode.com",
       "notes": "Open-source VS Code extension for agentic coding with multi-model support.",
-      "builtOn": ["claude-3-5-sonnet", "gpt-4o"]
+      "builtOn": [
+        "claude-3-5-sonnet",
+        "gpt-4o"
+      ]
     },
     {
       "id": "kilo-code",
@@ -220,9 +375,13 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2024,
+      "releaseDate": "2024-10-01",
+      "retiredDate": "",
       "url": "https://kilocode.ai",
       "notes": "VS Code extension for AI-assisted coding with context-aware completions.",
-      "builtOn": ["claude-3-5-sonnet"]
+      "builtOn": [
+        "claude-3-5-sonnet"
+      ]
     },
     {
       "id": "opencode",
@@ -234,9 +393,14 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2025,
+      "releaseDate": "2025-05-01",
+      "retiredDate": "",
       "url": "https://opencode.ai",
       "notes": "Terminal-based AI coding agent with a clean TUI and multi-model support.",
-      "builtOn": ["claude-3-5-sonnet", "gpt-4o"]
+      "builtOn": [
+        "claude-3-5-sonnet",
+        "gpt-4o"
+      ]
     },
     {
       "id": "antigravity",
@@ -248,6 +412,8 @@
       "lat": 37.7749,
       "lng": -122.4194,
       "year": 2025,
+      "releaseDate": "2025-01-01",
+      "retiredDate": "",
       "url": "https://antigravity.dev",
       "notes": "AI-powered developer productivity tool for code review and refactoring.",
       "builtOn": []
