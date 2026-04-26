@@ -1443,6 +1443,23 @@ table.catalogue__table {
   margin: 0;
 }
 
+/* ─────────  Scrollbar ───────── */
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 99px;
+  transition: background 0.4s ease;
+}
+html.is-scrolling ::-webkit-scrollbar-thumb { background: var(--muted); }
+html.is-scrolling ::-webkit-scrollbar-thumb:hover { background: var(--paper-3); }
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+html.is-scrolling * { scrollbar-color: var(--muted) transparent; }
+
 /* ─────────  Pagination ───────── */
 
 .catalogue-pagination {

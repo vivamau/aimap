@@ -274,6 +274,18 @@
 
     syncButtons();
   })();
+
+  (function () {
+    var timer;
+    function show() {
+      document.documentElement.classList.add('is-scrolling');
+      clearTimeout(timer);
+      timer = setTimeout(function () {
+        document.documentElement.classList.remove('is-scrolling');
+      }, 900);
+    }
+    document.addEventListener('scroll', show, { passive: true, capture: true });
+  })();
 </script>
 </body>
 </html>
