@@ -115,6 +115,9 @@ function sanitiseTool(input) {
   if (errors.length) throw new HttpError(400, 'Validation failed', errors);
 
   const builtOn = Array.isArray(input.builtOn) ? input.builtOn.map(String) : [];
+  const links = Array.isArray(input.links)
+    ? input.links.filter(l => l && l.url).map(l => ({ label: String(l.label || '').trim(), url: String(l.url).trim() }))
+    : [];
 
   const releaseDate = input.releaseDate && ISO_DATE.test(input.releaseDate)
     ? input.releaseDate : '';
@@ -135,6 +138,7 @@ function sanitiseTool(input) {
     url: String(input.url || '').trim(),
     notes: String(input.notes || '').trim(),
     builtOn,
+    links,
   };
 }
 

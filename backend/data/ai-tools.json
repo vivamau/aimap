@@ -1,6 +1,150 @@
 {
   "tools": [
     {
+      "id": "hermes-agent",
+      "name": "Hermes Agent",
+      "organization": "Nous Research",
+      "country": "United States",
+      "city": "New York",
+      "lat": 40.73,
+      "lng": -73.9352,
+      "category": "assistant",
+      "year": 2026,
+      "releaseDate": "2026-02-01",
+      "retiredDate": "",
+      "url": "https://hermes-agent.nousresearch.com",
+      "notes": "Not a coding copilot tethered to an IDE or a chatbot wrapper around a single API. An autonomous agent that lives on your server, remembers what it learns, and gets more capable the longer it runs.",
+      "builtOn": [],
+      "links": [
+        {
+          "label": "Github",
+          "url": "https://github.com/NousResearch/hermes-agent"
+        }
+      ]
+    },
+    {
+      "id": "chatgpt-image-2",
+      "name": "ChatGPT Image 2",
+      "organization": "OpenAI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "category": "text-to-image",
+      "year": 2026,
+      "releaseDate": "2026-04-21",
+      "retiredDate": "",
+      "url": "https://openai.com/index/introducing-chatgpt-images-2-0/?utm_source=aim&utm_medium=telegram&utm_campaign=ai_baza",
+      "notes": "ChatGPT images 2.0 introduces a state of the art image generation model with improved text rendering, multilingual support, and advanced visual reasoning.",
+      "builtOn": [],
+      "links": []
+    },
+    {
+      "id": "cline",
+      "name": "Cline",
+      "organization": "Cline",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.194,
+      "category": "devtool",
+      "year": 2024,
+      "releaseDate": "2024-10-01",
+      "retiredDate": "",
+      "url": "https://cline.bot",
+      "notes": "Cline (formerly known as Claude Dev) is an open-source autonomous coding agent that operates as a VS Code extension, allowing it to read/write files, run terminal commands, and use browsers to interact with your codebase.",
+      "builtOn": [],
+      "links": []
+    },
+    {
+      "id": "openclaw",
+      "name": "OpenClaw",
+      "organization": "Peter Steinberger",
+      "country": "Austria",
+      "city": "Oberösterreich",
+      "lat": 14.2885,
+      "lng": 40.3069,
+      "category": "assistant",
+      "year": 2025,
+      "releaseDate": "2025-11-24",
+      "retiredDate": "",
+      "url": "https://openclaw.ai",
+      "notes": "OpenClaw (formerly Clawdbot, Moltbot, and Molty) is a free and open-source autonomous artificial intelligence agent that can execute tasks via large language models (LLMs), using messaging platforms as its main user interface.",
+      "builtOn": [],
+      "links": [
+        {
+          "label": "Github",
+          "url": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://github.com/openclaw/openclaw&ved=2ahUKEwiKzbqo9IuUAxURhv0HHRCGN_cQFnoECBoQAQ&usg=AOvVaw1AhpADznc4LJSyUPlWIOzO"
+        },
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/OpenClaw"
+        }
+      ]
+    },
+    {
+      "id": "continue",
+      "name": "Continue",
+      "organization": "Continue.dev",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.16,
+      "category": "devtool",
+      "year": 2023,
+      "releaseDate": "2023-06-01",
+      "retiredDate": "",
+      "url": "https://www.continue.dev",
+      "notes": "Continue.dev is an open-source, configurable AI coding assistant extension for VS Code and JetBrains, allowing developers to use LLMs (like GPT-4, Claude, or local models via Ollama) to autocomplete, chat, refactor, and generate code.",
+      "builtOn": [],
+      "links": [
+        {
+          "label": "Github",
+          "url": "https://github.com/continuedev/continue"
+        },
+        {
+          "label": "HackerNews",
+          "url": "https://news.ycombinator.com/item?id=43494427"
+        }
+      ]
+    },
+    {
+      "id": "qwen-studio",
+      "name": "Qwen Studio",
+      "organization": "Alibaba Studio",
+      "country": "China",
+      "city": "Bejin",
+      "lat": 20.27,
+      "lng": 120.16,
+      "category": "assistant",
+      "year": 2026,
+      "releaseDate": "2026-04-22",
+      "retiredDate": "",
+      "url": "https://qwen.ai/qwenchat",
+      "notes": "Qwen Studio is an AI assistant for everyone, powered by the Qwen series models. It’s free to use, open to all, and ready to help with creativity, collaboration, and endless possibilities. Just ask, and let Qwen Studio do the rest.",
+      "builtOn": [
+        "Qwen"
+      ],
+      "links": []
+    },
+    {
+      "id": "pi",
+      "name": "PI",
+      "organization": "Mario Zechner",
+      "country": "Austria",
+      "city": "n.a.",
+      "lat": 48.210033,
+      "lng": 16.363449,
+      "category": "assistant",
+      "year": 2025,
+      "releaseDate": "2025-12-02",
+      "retiredDate": "",
+      "url": "https://pi.dev",
+      "notes": "Pi is a minimal terminal coding harness. Adapt pi to your workflows, not the other way around. Extend it with TypeScript extensions, skills, prompt templates, and themes. Bundle them as pi packages and share via npm or git.",
+      "builtOn": [],
+      "links": []
+    },
+    {
       "id": "sora",
       "name": "Sora",
       "organization": "OpenAI",
@@ -14,7 +158,8 @@
       "retiredDate": "",
       "url": "https://sora.chatgpt.com/",
       "notes": "Sora is a text-to-video model and social media app developed by OpenAI. Using artificial intelligence, the model generates short video clips based on prompts, and can also extend existing short videos.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "dall-e-3",
@@ -30,7 +175,8 @@
       "retiredDate": "",
       "url": "",
       "notes": "A more powerful model better able to generate images from complex descriptions without manual prompt engineering and render complex details like hands and text.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "dall-e-2",
@@ -46,7 +192,8 @@
       "retiredDate": "",
       "url": "https://openai.com/index/dall-e-2/",
       "notes": "Improved version of DALL-E",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "dall-e",
@@ -64,7 +211,8 @@
       "notes": "DALL-E is a Transformer model that creates images from textual descriptions. It uses a 12-billion-parameter version of GPT-3 to interpret natural language inputs",
       "builtOn": [
         "GPT-3"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "clip",
@@ -80,7 +228,8 @@
       "retiredDate": "",
       "url": "https://github.com/OpenAI/CLIP",
       "notes": "Contrastive Language-Image Pre-training (CLIP) is a technique for training a pair of neural network models, one for image understanding and one for text understanding, using a contrastive objective.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "deep-research",
@@ -98,7 +247,8 @@
       "notes": "Deep research is an AI agent developed by OpenAI, unveiled on February 2, 2025. It leverages the capabilities of OpenAI's o3 model to perform extensive web browsing, data analysis, and synthesis, delivering comprehensive reports within a timeframe of 5 to 30 minutes.",
       "builtOn": [
         "GPT-o3"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "claude",
@@ -114,7 +264,8 @@
       "retiredDate": "",
       "url": "https://claude.ai",
       "notes": "Constitutional AI assistant developed by Anthropic, known for safety and helpfulness.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "chatgpt",
@@ -132,7 +283,8 @@
       "notes": "Conversational AI assistant powered by GPT models, launched the modern AI chat era.",
       "builtOn": [
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "gemini",
@@ -148,7 +300,8 @@
       "retiredDate": "",
       "url": "https://gemini.google.com",
       "notes": "Google's multimodal AI assistant, deeply integrated with Google Workspace. Previously known as Bard (launched February 2023).",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "microsoft-copilot",
@@ -166,7 +319,8 @@
       "notes": "AI assistant integrated into Microsoft 365 products and Windows.",
       "builtOn": [
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "perplexity",
@@ -185,7 +339,8 @@
       "builtOn": [
         "claude-3-5-sonnet",
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "cursor",
@@ -204,7 +359,8 @@
       "builtOn": [
         "claude-3-5-sonnet",
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "kiro",
@@ -222,7 +378,8 @@
       "notes": "Amazon's AI IDE with spec-driven development and agentic coding workflows.",
       "builtOn": [
         "claude-3-5-sonnet"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "windsurf",
@@ -238,7 +395,8 @@
       "retiredDate": "",
       "url": "https://codeium.com/windsurf",
       "notes": "Agentic IDE by Codeium with Cascade flow engine for multi-step coding tasks.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "github-copilot",
@@ -256,7 +414,8 @@
       "notes": "AI pair programmer integrated into VS Code, JetBrains, and GitHub.com.",
       "builtOn": [
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "lovable",
@@ -274,7 +433,8 @@
       "notes": "AI full-stack engineer that builds React apps from natural language prompts.",
       "builtOn": [
         "claude-3-5-sonnet"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "bolt",
@@ -292,7 +452,8 @@
       "notes": "Browser-based AI coding agent that creates and deploys full-stack apps instantly.",
       "builtOn": [
         "claude-3-5-sonnet"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "v0",
@@ -310,7 +471,8 @@
       "notes": "Vercel's generative UI tool that produces React/shadcn components from prompts.",
       "builtOn": [
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "replit",
@@ -328,7 +490,8 @@
       "notes": "Cloud IDE with AI agent (Replit Agent) that can build and deploy apps end-to-end.",
       "builtOn": [
         "claude-3-5-sonnet"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "devin",
@@ -344,26 +507,28 @@
       "retiredDate": "",
       "url": "https://cognition.ai",
       "notes": "First autonomous AI software engineer capable of completing end-to-end engineering tasks.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     },
     {
       "id": "roo-code",
       "name": "Roo Code",
       "organization": "Roo AI",
-      "category": "devtool",
-      "city": "San Francisco",
       "country": "United States",
+      "city": "San Francisco",
       "lat": 37.7749,
       "lng": -122.4194,
+      "category": "devtool",
       "year": 2024,
       "releaseDate": "2024-12-01",
-      "retiredDate": "",
+      "retiredDate": "2026-04-21",
       "url": "https://roocode.com",
-      "notes": "Open-source VS Code extension for agentic coding with multi-model support.",
+      "notes": "Open-source VS Code extension for agentic coding with multi-model support. In April 2026 it has been moved back to Cline.",
       "builtOn": [
         "claude-3-5-sonnet",
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "kilo-code",
@@ -381,7 +546,8 @@
       "notes": "VS Code extension for AI-assisted coding with context-aware completions.",
       "builtOn": [
         "claude-3-5-sonnet"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "opencode",
@@ -400,7 +566,8 @@
       "builtOn": [
         "claude-3-5-sonnet",
         "gpt-4o"
-      ]
+      ],
+      "links": []
     },
     {
       "id": "antigravity",
@@ -416,7 +583,8 @@
       "retiredDate": "",
       "url": "https://antigravity.dev",
       "notes": "AI-powered developer productivity tool for code review and refactoring.",
-      "builtOn": []
+      "builtOn": [],
+      "links": []
     }
   ]
 }

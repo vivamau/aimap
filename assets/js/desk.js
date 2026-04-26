@@ -224,6 +224,46 @@ function readLinks() {
   })).filter(l => l.url);
 }
 
+// ──────────────  tool links editor
+
+function addToolLinkRow(data = {}) {
+  const row = document.createElement('div');
+  row.className = 'submodel-row';
+  row.style.gridTemplateColumns = '1fr 1.8fr 28px';
+  row.innerHTML = `
+    <input type="text" class="lk-label" placeholder="Paper / GitHub / HF…" value="${escapeHtml(data.label || '')}">
+    <input type="url"  class="lk-url"   placeholder="https://…"             value="${escapeHtml(data.url   || '')}">
+    <button type="button" class="del-row" title="Remove">×</button>`;
+  row.querySelector('.del-row').addEventListener('click', () => {
+    row.remove();
+    refreshToolLinksUI();
+  });
+  $('#tool-link-rows').appendChild(row);
+  refreshToolLinksUI();
+  row.querySelector('.lk-label').focus();
+}
+
+function refreshToolLinksUI() {
+  const rows  = $$('#tool-link-rows .submodel-row');
+  const empty = $('#tool-links-empty');
+  const count = $('#tool-links-count');
+  if (empty) empty.style.display = rows.length ? 'none' : 'block';
+  if (count) count.textContent = `${rows.length} link${rows.length !== 1 ? 's' : ''}`;
+}
+
+function populateToolLinks(links = []) {
+  $('#tool-link-rows').innerHTML = '';
+  links.forEach(l => addToolLinkRow(l));
+  if (links.length === 0) refreshToolLinksUI();
+}
+
+function readToolLinks() {
+  return $$('#tool-link-rows .submodel-row').map(row => ({
+    label: row.querySelector('.lk-label').value.trim(),
+    url:   row.querySelector('.lk-url').value.trim(),
+  })).filter(l => l.url);
+}
+
 // ──────────────  submodels editor
 
 function addSubmodelRow(data = {}) {
@@ -730,6 +770,7 @@ function bindToolForm() {
   form.addEventListener('submit', e => { e.preventDefault(); saveToolEntry(); });
   $('#btn-tool-new').addEventListener('click', newToolEntry);
   $('#btn-tool-delete').addEventListener('click', deleteToolEntry);
+  $('#btn-add-tool-link').addEventListener('click', () => addToolLinkRow());
   const sel = $('#ft-category');
   if (sel) sel.innerHTML = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
 }
@@ -754,6 +795,7 @@ function newToolEntry() {
   state.activeToolId = null;
   const form = $('#tool-form');
   if (form) form.reset();
+  populateToolLinks([]);
   $('#tool-form-mode').textContent = 'New tool';
   $('#btn-tool-delete').style.display = 'none';
   renderToolsList();
@@ -779,6 +821,7 @@ function loadToolIntoForm(id) {
   $('#ft-url').value          = t.url;
   $('#ft-notes').value        = t.notes || '';
   $('#ft-builton').value      = Array.isArray(t.builtOn) ? t.builtOn.join(', ') : '';
+  populateToolLinks(t.links || []);
   renderToolsList();
 }
 
@@ -802,6 +845,7 @@ function readToolForm() {
     url:          $('#ft-url').value.trim(),
     notes:        $('#ft-notes').value.trim(),
     builtOn,
+    links:        readToolLinks(),
   };
 }
 

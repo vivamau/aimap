@@ -1,3 +1,13 @@
 {
-  "editions": []
+  "editions": [
+    {
+      "id": "2026-04-26_vol-i-mmxxvi-booting-up-mofx6i2l",
+      "label": "Vol. I — MMXXVI — booting up",
+      "note": "The first collection closes with 107 models",
+      "date": "2026-04-26",
+      "features": 107,
+      "tools": 25,
+      "file": "editions/2026-04-26_vol-i-mmxxvi-booting-up-mofx6i2l.geojson"
+    }
+  ]
 }

@@ -302,6 +302,23 @@
           <textarea id="ft-notes" placeholder="One or two sentences."></textarea>
         </div>
 
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Links</span>
+            <span id="tool-links-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 links</span>
+          </label>
+          <div class="submodels-editor" id="tool-links-editor" style="margin-top:10px">
+            <div class="submodels-header" style="grid-template-columns:1fr 1.8fr 28px">
+              <span>Label</span>
+              <span>URL</span>
+              <span></span>
+            </div>
+            <div id="tool-link-rows"></div>
+            <div class="submodels-empty" id="tool-links-empty">No links yet</div>
+          </div>
+          <button type="button" class="btn btn-add-submodel" id="btn-add-tool-link">+ Add link</button>
+        </div>
+
         <div class="field" style="display:none">
           <label>ID (auto)</label>
           <input id="ft-id" class="mono" type="text">

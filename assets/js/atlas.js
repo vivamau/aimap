@@ -748,6 +748,24 @@ function openToolDetail(t) {
 
   $('#detail .notes').textContent = t.notes || '';
 
+  // ── links ──
+  const linksEl = $('#detail .links-section');
+  if (linksEl) {
+    const links = Array.isArray(t.links) ? t.links.filter(l => l.url) : [];
+    if (links.length) {
+      linksEl.innerHTML = `
+        <div class="links-title">References</div>
+        <div class="links-list">${links.map(l => `
+          <a class="detail-link" href="${escapeAttr(l.url)}" target="_blank" rel="noopener">
+            ${escapeHtml(l.label || stripUrl(l.url))} ↗
+          </a>`).join('')}
+        </div>`;
+      linksEl.style.display = '';
+    } else {
+      linksEl.style.display = 'none';
+    }
+  }
+
   // tools have no submodels
   const subEl = $('#detail .submodels-section');
   if (subEl) subEl.style.display = 'none';
@@ -832,6 +850,7 @@ function renderEditionsModal() {
       <div class="em-item__label"><span class="em-dot"></span>Live edition</div>
       <div class="em-item__meta">
         <span>${state.models.length} model${state.models.length !== 1 ? 's' : ''}</span>
+        <span>${state.tools.length} tool${state.tools.length !== 1 ? 's' : ''}</span>
         <span>Always current</span>
       </div>
     </div>`;
@@ -844,6 +863,7 @@ function renderEditionsModal() {
           <div class="em-item__meta">
             <span>${ed.date}</span>
             <span>${ed.features} model${ed.features !== 1 ? 's' : ''}</span>
+            ${ed.tools != null ? `<span>${ed.tools} tool${ed.tools !== 1 ? 's' : ''}</span>` : ''}
           </div>
           ${ed.note ? `<div class="em-item__note">${escapeHtml(ed.note)}</div>` : ''}
         </div>`).join('')
@@ -1037,7 +1057,7 @@ function renderEditionSwitcher() {
     <button class="edition-opt live ${liveActive ? 'is-active' : ''}" data-edition="live">
       <span class="ed-dot"></span>
       <span class="ed-name">Live edition</span>
-      <span class="ed-count">${state.models.length} models</span>
+      <span class="ed-count">${state.models.length} models · ${state.tools.length} tools</span>
     </button>`;
 
   const archiveBtns = state.editions.map(ed => `
@@ -1046,7 +1066,7 @@ function renderEditionSwitcher() {
             title="${escapeAttr(ed.note || ed.label)}">
       <span class="ed-dot"></span>
       <span class="ed-name">${escapeHtml(ed.label)}</span>
-      <span class="ed-count">${ed.features}</span>
+      <span class="ed-count">${ed.features} models${ed.tools != null ? ` · ${ed.tools} tools` : ''}</span>
     </button>`).join('');
 
   container.innerHTML = liveBtn + (state.editions.length
@@ -1107,7 +1127,7 @@ function updateArchiveBanner(ed) {
   if (!ed) {
     banner.classList.remove('is-visible');
   } else {
-    $('#banner-label').textContent = `${ed.label} · ${ed.date} · ${ed.features} models`;
+    $('#banner-label').textContent = `${ed.label} · ${ed.date} · ${ed.features} models${ed.tools != null ? ` · ${ed.tools} tools` : ''}`;
     banner.classList.add('is-visible');
   }
 }
