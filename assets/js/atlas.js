@@ -8,6 +8,8 @@ const TOOLS_URL     = './data/ai-tools.geojson';
 const EDITIONS_URL  = './data/editions/index.json';
 const TOPO_URL      = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
+const PAGE_SIZE = 20;
+
 // Convert tools GeoJSON FeatureCollection → flat tool objects.
 function fromToolsGeoJson(geo) {
   return (geo.features || []).map(f => ({
@@ -50,6 +52,8 @@ const state = {
   glanceTab: 'models',        // active "at a glance" tab
   view: 'map',                // 'map' | 'timeline'
   timelineRendered: false,
+  modelPage: 1,
+  toolPage: 1,
 };
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -189,6 +193,7 @@ function applyFilters() {
                .some(v => (v || '').toLowerCase().includes(q))) return false;
     return true;
   });
+  state.modelPage = 1;
   renderMarkers();
   renderCatalogue();
   if (state.view === 'timeline') renderTimeline();
@@ -384,7 +389,12 @@ function renderCatalogue() {
     return 0;
   });
 
-  tbody.innerHTML = sorted.map((m, i) => `
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+  state.modelPage = Math.min(state.modelPage, totalPages);
+  const start = (state.modelPage - 1) * PAGE_SIZE;
+  const pageRows = sorted.slice(start, start + PAGE_SIZE);
+
+  tbody.innerHTML = pageRows.map(m => `
     <tr data-id="${m.id}">
       <td class="name-cell">${m.name}</td>
       <td>${m.organization}</td>
@@ -402,6 +412,12 @@ function renderCatalogue() {
       const m = state.models.find(x => x.id === tr.dataset.id);
       if (m) openDetail(m);
     });
+  });
+
+  renderPagination('#cat-models-pagination', state.modelPage, sorted.length, (p) => {
+    state.modelPage = p;
+    renderCatalogue();
+    scrollToCatalogueTop('#cat-models');
   });
 }
 
@@ -429,7 +445,12 @@ function renderToolsCatalogue() {
     return 0;
   });
 
-  tbody.innerHTML = sorted.map(t => {
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+  state.toolPage = Math.min(state.toolPage, totalPages);
+  const start = (state.toolPage - 1) * PAGE_SIZE;
+  const pageRows = sorted.slice(start, start + PAGE_SIZE);
+
+  tbody.innerHTML = pageRows.map(t => {
     const bo = Array.isArray(t.builtOn) && t.builtOn.length
       ? t.builtOn.slice(0, 2).join(', ') +
         (t.builtOn.length > 2 ? ` <span style="color:var(--muted)">+${t.builtOn.length - 2}</span>` : '')
@@ -450,6 +471,12 @@ function renderToolsCatalogue() {
       const t = state.tools.find(x => x.id === tr.dataset.id);
       if (t) openToolDetail(t);
     });
+  });
+
+  renderPagination('#cat-tools-pagination', state.toolPage, sorted.length, (p) => {
+    state.toolPage = p;
+    renderToolsCatalogue();
+    scrollToCatalogueTop('#cat-tools');
   });
 }
 
@@ -477,6 +504,7 @@ function bindCatalogueSort() {
       $$('#cat-models th').forEach(t => t.classList.remove('sorted', 'asc'));
       th.classList.add('sorted');
       if (state.sort.asc) th.classList.add('asc');
+      state.modelPage = 1;
       renderCatalogue();
     });
   });
@@ -490,6 +518,7 @@ function bindCatalogueSort() {
       $$('#cat-tools th').forEach(t => t.classList.remove('sorted', 'asc'));
       th.classList.add('sorted');
       if (state.toolSort.asc) th.classList.add('asc');
+      state.toolPage = 1;
       renderToolsCatalogue();
     });
   });
@@ -506,6 +535,7 @@ function renderToolsFilters() {
   el.addEventListener('click', e => {
     const btn = e.target.closest('.chip'); if (!btn) return;
     state.filterToolCategory = btn.dataset.cat;
+    state.toolPage = 1;
     renderToolsFilters();
     renderToolsCatalogue();
   });
@@ -520,8 +550,12 @@ function bindCatalogueTabs() {
       tabs.forEach(t => t.classList.toggle('is-active', t.dataset.cat === target));
       const mt = $('#cat-models');
       const tt = $('#cat-tools');
+      const mp = $('#cat-models-pagination');
+      const tp = $('#cat-tools-pagination');
       if (mt) mt.style.display = target === 'models' ? '' : 'none';
       if (tt) tt.style.display = target === 'tools'  ? '' : 'none';
+      if (mp) mp.style.display = target === 'models' ? '' : 'none';
+      if (tp) tp.style.display = target === 'tools'  ? '' : 'none';
 
       const filterbar   = $('.cat-filterbar');
       const typeFilter  = $('#cat-filter-type');
@@ -742,6 +776,7 @@ function bindSearch() {
     input.addEventListener('input', () => {
       state.filterSearch = input.value.trim();
       syncAll(state.filterSearch);
+      state.toolPage = 1;
       applyFilters();
       if (state.catTab === 'tools') renderToolsCatalogue();
     });
@@ -751,6 +786,7 @@ function bindSearch() {
         state.filterSearch = '';
         syncAll('');
         input.focus();
+        state.toolPage = 1;
         applyFilters();
         if (state.catTab === 'tools') renderToolsCatalogue();
       });
@@ -1036,6 +1072,7 @@ async function loadEdition(id) {
     const { meta, models } = fromGeoJson(geo);
     state.models = models;
     state.activeEditionId = id;
+    state.modelPage = 1;
     closeDetail();
     renderMeta({ ...meta, edition: ed.label, updated: ed.date });
     renderStats();
@@ -1335,6 +1372,51 @@ function renderTimeline() {
     .on('click',      (e, d) => openToolDetail(d.datum));
 
   state.timelineRendered = true;
+}
+
+// ──────────────  pagination
+
+function buildPageRange(current, total) {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+  const pages = [1];
+  if (current > 3) pages.push('…');
+  const lo = Math.max(2, current - 1);
+  const hi = Math.min(total - 1, current + 1);
+  for (let i = lo; i <= hi; i++) pages.push(i);
+  if (current < total - 2) pages.push('…');
+  pages.push(total);
+  return pages;
+}
+
+function renderPagination(selector, current, total, onPage) {
+  const container = $(selector);
+  if (!container) return;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+  const range = buildPageRange(current, totalPages);
+  const prevDis = current === 1 ? 'disabled' : '';
+  const nextDis = current === totalPages ? 'disabled' : '';
+
+  container.innerHTML = `
+    <div class="pagination">
+      <button class="page-btn page-arrow" data-page="${current - 1}" ${prevDis} aria-label="Previous page">←</button>
+      ${range.map(p => p === '…'
+        ? `<span class="page-ellipsis">…</span>`
+        : `<button class="page-btn ${p === current ? 'is-active' : ''}" data-page="${p}">${p}</button>`
+      ).join('')}
+      <button class="page-btn page-arrow" data-page="${current + 1}" ${nextDis} aria-label="Next page">→</button>
+      <span class="page-info">${current} / ${totalPages}</span>
+    </div>`;
+
+  container.querySelectorAll('.page-btn:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => onPage(+btn.dataset.page));
+  });
+}
+
+function scrollToCatalogueTop(tableSelector) {
+  const el = $(tableSelector);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ──────────────  utilities

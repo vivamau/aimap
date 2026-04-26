@@ -172,7 +172,7 @@
     <div class="filter-row" id="cat-filter-category" hidden></div>
   </div>
 
-  <table class="catalogue__table" id="cat-models" data-cat="models">
+  <table class="catalogue__table" id="cat-models" data-cat="models" style="scroll-margin-top: 80px">
     <thead>
       <tr>
         <th data-sort="name">Model</th>
@@ -186,8 +186,9 @@
     </thead>
     <tbody></tbody>
   </table>
+  <div class="catalogue-pagination" id="cat-models-pagination"></div>
 
-  <table class="catalogue__table" id="cat-tools" data-cat="tools" style="display:none">
+  <table class="catalogue__table" id="cat-tools" data-cat="tools" style="display:none; scroll-margin-top: 80px">
     <thead>
       <tr>
         <th data-sort="name">Tool</th>
@@ -200,6 +201,7 @@
     </thead>
     <tbody></tbody>
   </table>
+  <div class="catalogue-pagination tools-mode" id="cat-tools-pagination" style="display:none"></div>
 </section>
 
 <!-- COLOPHON -->
