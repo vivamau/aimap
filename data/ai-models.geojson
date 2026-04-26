@@ -2,10 +2,119 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. I — MMXXVI",
-    "updated": "2026-04-24",
+    "updated": "2026-04-26",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "minerva",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.496366,
+          41.902782
+        ]
+      },
+      "properties": {
+        "id": "minerva",
+        "name": "Minerva",
+        "organization": "Sapienza NLP",
+        "country": "Italy",
+        "city": "Rome",
+        "type": "open-weight",
+        "year": 2024,
+        "releaseDate": "2024-04-25",
+        "parameters": "7B",
+        "url": "https://minerva-ai.org",
+        "notes": "Minerva AI LLM is the first family of Large Language Models pretrained from scratch in Italian developed by Sapienza NLP in collaboration with Future Artificial Intelligence Research (FAIR) and CINECA. The Minerva models are truly-open (data and model) Italian-English LLMs, with approximately half of the pretraining data composed of Italian text.",
+        "modality": [
+          "text"
+        ],
+        "links": [
+          {
+            "label": "Minerva LLM, CEUR article",
+            "url": "https://aclanthology.org/2024.clicit-1.77.pdf"
+          }
+        ],
+        "submodels": [
+          {
+            "name": "7B-base",
+            "version": "1",
+            "parameters": "7B",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-7B-base-v1.0",
+            "addedAt": "2024-12-07"
+          },
+          {
+            "name": "7B-instruct",
+            "version": "1",
+            "parameters": "7B",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-7B-instruct-v1.0",
+            "addedAt": "2024-12-07"
+          },
+          {
+            "name": "3B-base",
+            "version": "1",
+            "parameters": "3B",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-3B-base-v1.0",
+            "addedAt": "2024-12-07"
+          },
+          {
+            "name": "1B-base",
+            "version": "1",
+            "parameters": "1B",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-1B-base-v1.0",
+            "addedAt": "2024-12-07"
+          },
+          {
+            "name": "350M-base",
+            "version": "1",
+            "parameters": "0.35",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-350M-base-v1.0",
+            "addedAt": "2024-12-07"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "amalia",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -9.133333,
+          38.716667
+        ]
+      },
+      "properties": {
+        "id": "amalia",
+        "name": "Amália",
+        "organization": "Instituto de Telecomunicações",
+        "country": "Portugal",
+        "city": "Lisbon",
+        "type": "open-weight",
+        "year": 2024,
+        "releaseDate": "2024-12-06",
+        "parameters": "undisclosed",
+        "url": "https://amaliallm.pt",
+        "notes": "Automatic Multimodal Language Assistant with Artificial Intelligence, the first Large-Scale Language Model (LLM) designed specifically for the Portuguese language.",
+        "modality": [
+          "text"
+        ],
+        "links": [
+          {
+            "label": "About Amália",
+            "url": "https://duarteocarmo.com/blog/amalia-and-the-future-of-european-portuguese-llms"
+          }
+        ],
+        "submodels": []
+      }
+    },
     {
       "type": "Feature",
       "id": "deepseek-v4",

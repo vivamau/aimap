@@ -25,6 +25,21 @@ function editionsRouter({ db, editionsStore }) {
     } catch (err) { next(err); }
   });
 
+  router.put('/:id', async (req, res, next) => {
+    try {
+      const { label, note } = req.body || {};
+      const updated = await editionsStore.update(req.params.id, { label, note });
+      res.json(updated);
+    } catch (err) { next(err); }
+  });
+
+  router.delete('/:id', async (req, res, next) => {
+    try {
+      const result = await editionsStore.remove(req.params.id);
+      res.json(result);
+    } catch (err) { next(err); }
+  });
+
   return router;
 }
 

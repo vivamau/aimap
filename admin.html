@@ -364,6 +364,51 @@
   </div>
 </div>
 
+<!-- Confirm Delete Edition modal -->
+<div class="modal-backdrop" id="confirm-delete-modal" style="display:none">
+  <div class="modal modal--danger">
+    <div class="modal__head">
+      <span>Delete Edition</span>
+      <button class="close" id="confirm-delete-close">×</button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__lede">
+        Permanently delete <strong id="confirm-delete-label"></strong>?
+        The snapshot file will be removed and this cannot be undone.
+      </p>
+      <div class="form-actions" style="margin-top:28px">
+        <button type="button" class="btn" id="confirm-delete-cancel">Cancel</button>
+        <button type="button" class="btn danger" id="confirm-delete-confirm">Delete edition</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Edition modal -->
+<div class="modal-backdrop" id="edit-edition-modal" style="display:none">
+  <div class="modal">
+    <div class="modal__head">
+      <span>Edit Edition</span>
+      <button class="close" id="edit-edition-close">×</button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__lede">Change the label or editorial note. The snapshot data is not affected.</p>
+      <div class="field" style="margin-top:24px">
+        <label>Edition label <span style="color:var(--rust)">*</span></label>
+        <input id="eed-label" type="text" placeholder="Vol. II — Summer 2026">
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label>Editorial note</label>
+        <textarea id="eed-note" placeholder="A sentence describing what changed in this edition…"></textarea>
+      </div>
+      <div class="form-actions" style="margin-top:24px">
+        <button type="button" class="btn" id="edit-edition-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="edit-edition-confirm">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Save Edition modal -->
 <div class="modal-backdrop" id="edition-modal" style="display:none">
   <div class="modal">

@@ -449,19 +449,35 @@ body.desk {
 
 .editions-list { display: flex; flex-direction: column; gap: 0; }
 .edition-item {
-  padding: 16px 18px;
+  padding: 14px 18px;
   border: 1px solid var(--line);
   border-bottom: none;
   background: transparent;
 }
 .edition-item:last-child { border-bottom: 1px solid var(--line); }
+.edition-item:hover { background: rgba(201, 165, 68, 0.025); }
+
+.ed-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.ed-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.edition-item:hover .ed-actions { opacity: 1; }
+
 .edition-item .ed-label {
   font-family: var(--serif);
   font-style: italic;
   font-size: 20px;
   color: var(--paper);
-  display: block;
-  margin-bottom: 4px;
 }
 .edition-item .ed-meta {
   font-family: var(--mono);
@@ -479,6 +495,12 @@ body.desk {
   color: var(--muted);
   margin-top: 6px;
   line-height: 1.4;
+}
+
+.btn-sm {
+  font-size: 9px;
+  padding: 4px 8px;
+  letter-spacing: 0.14em;
 }
 
 /* ─── save edition modal ─── */
@@ -506,6 +528,9 @@ body.desk {
   text-transform: uppercase;
   color: var(--gold);
 }
+.modal--danger { border-color: var(--rust); box-shadow: 12px 12px 0 rgba(177, 74, 44, 0.15); }
+.modal--danger .modal__head { color: var(--rust); }
+
 .modal__head .close {
   background: none; border: 1px solid var(--line-2);
   color: var(--paper-3);

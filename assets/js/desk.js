@@ -17,6 +17,9 @@ const state = {
   filteredToolIds: null,
   activeToolId: null,
   activeTab: 'models',
+  editingEditionId: null,
+  deletingEditionId: null,
+  deletingEditionLabel: null,
 };
 
 const MODALITIES   = ['text', 'image', 'audio', 'video', 'code', '3d'];
@@ -52,6 +55,8 @@ async function api(path, opts = {}) {
   bindSearch();
   bindEditionsToggle();
   bindEditionModal();
+  bindConfirmDeleteModal();
+  bindEditEditionModal();
   bindMetaModal();
   bindTabSwitcher();
   bindToolForm();
@@ -470,8 +475,14 @@ function renderEditions() {
     return;
   }
   list.innerHTML = state.editions.map(ed => `
-    <div class="edition-item">
-      <span class="ed-label">${escapeHtml(ed.label)}</span>
+    <div class="edition-item" data-ed-id="${escapeHtml(ed.id)}">
+      <div class="ed-header">
+        <span class="ed-label">${escapeHtml(ed.label)}</span>
+        <div class="ed-actions">
+          <button class="btn btn-sm btn-edit-ed" data-id="${escapeHtml(ed.id)}" title="Edit metadata">Edit</button>
+          <button class="btn btn-sm danger btn-del-ed" data-id="${escapeHtml(ed.id)}" data-label="${escapeHtml(ed.label)}" title="Delete edition">Delete</button>
+        </div>
+      </div>
       <div class="ed-meta">
         <span>${ed.date}</span>
         <span>${ed.features} model${ed.features !== 1 ? 's' : ''}</span>
@@ -482,6 +493,17 @@ function renderEditions() {
       </div>
       ${ed.note ? `<div class="ed-note">${escapeHtml(ed.note)}</div>` : ''}
     </div>`).join('');
+
+  list.querySelectorAll('.btn-edit-ed').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ed = state.editions.find(e => e.id === btn.dataset.id);
+      if (ed) openEditEditionModal(ed);
+    });
+  });
+
+  list.querySelectorAll('.btn-del-ed').forEach(btn => {
+    btn.addEventListener('click', () => deleteEdition(btn.dataset.id, btn.dataset.label));
+  });
 }
 
 function bindEditionsToggle() {
@@ -546,6 +568,100 @@ async function confirmSaveEdition() {
   } catch (err) {
     toast(err.message, 'danger');
   }
+}
+
+// ──────────────  edit / delete edition
+
+function bindConfirmDeleteModal() {
+  $('#confirm-delete-close').addEventListener('click',   closeConfirmDeleteModal);
+  $('#confirm-delete-cancel').addEventListener('click',  closeConfirmDeleteModal);
+  $('#confirm-delete-confirm').addEventListener('click', executeDeleteEdition);
+  $('#confirm-delete-modal').addEventListener('click', e => {
+    if (e.target === $('#confirm-delete-modal')) closeConfirmDeleteModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('#confirm-delete-modal').style.display !== 'none') {
+      closeConfirmDeleteModal();
+    }
+  });
+}
+
+function openConfirmDeleteModal(id, label) {
+  state.deletingEditionId    = id;
+  state.deletingEditionLabel = label;
+  $('#confirm-delete-label').textContent = `"${label}"`;
+  $('#confirm-delete-modal').style.display = 'grid';
+  $('#confirm-delete-cancel').focus();
+}
+
+function closeConfirmDeleteModal() {
+  $('#confirm-delete-modal').style.display = 'none';
+  state.deletingEditionId    = null;
+  state.deletingEditionLabel = null;
+}
+
+async function executeDeleteEdition() {
+  const { deletingEditionId: id, deletingEditionLabel: label } = state;
+  closeConfirmDeleteModal();
+  try {
+    await api(`/editions/${encodeURIComponent(id)}`, { method: 'DELETE' });
+    await refresh();
+    toast(`Edition "${label}" deleted.`, 'danger');
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+function bindEditEditionModal() {
+  $('#edit-edition-close').addEventListener('click',   closeEditEditionModal);
+  $('#edit-edition-cancel').addEventListener('click',  closeEditEditionModal);
+  $('#edit-edition-confirm').addEventListener('click', confirmEditEdition);
+  $('#edit-edition-modal').addEventListener('click', e => {
+    if (e.target === $('#edit-edition-modal')) closeEditEditionModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('#edit-edition-modal').style.display !== 'none') {
+      closeEditEditionModal();
+    }
+  });
+}
+
+function openEditEditionModal(ed) {
+  state.editingEditionId = ed.id;
+  $('#eed-label').value = ed.label;
+  $('#eed-note').value  = ed.note || '';
+  $('#edit-edition-modal').style.display = 'grid';
+  setTimeout(() => $('#eed-label').focus(), 50);
+}
+
+function closeEditEditionModal() {
+  $('#edit-edition-modal').style.display = 'none';
+  state.editingEditionId = null;
+}
+
+async function confirmEditEdition() {
+  const label = $('#eed-label').value.trim();
+  const note  = $('#eed-note').value.trim();
+  if (!label) {
+    $('#eed-label').focus();
+    return toast('Edition label is required.', 'danger');
+  }
+  try {
+    const updated = await api(`/editions/${encodeURIComponent(state.editingEditionId)}`, {
+      method: 'PUT',
+      body: JSON.stringify({ label, note }),
+    });
+    closeEditEditionModal();
+    await refresh();
+    $('#editions-panel').style.display = 'block';
+    toast(`Edition "${updated.label}" updated.`);
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+function deleteEdition(id, label) {
+  openConfirmDeleteModal(id, label);
 }
 
 // ──────────────  tab switcher

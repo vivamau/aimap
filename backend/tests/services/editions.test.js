@@ -105,6 +105,70 @@ describe('createEditionsStore.get()', () => {
   });
 });
 
+describe('createEditionsStore.update()', () => {
+  test('updates label and note in the index', async () => {
+    const ed = await store.create(DATASET, { label: 'Vol. I', note: 'old note' });
+    const updated = await store.update(ed.id, { label: 'Vol. I — Revised', note: 'new note' });
+    expect(updated.label).toBe('Vol. I — Revised');
+    expect(updated.note).toBe('new note');
+    const list = await store.list();
+    expect(list[0].label).toBe('Vol. I — Revised');
+  });
+
+  test('throws 400 when label is empty', async () => {
+    const ed = await store.create(DATASET, { label: 'Vol. I', note: '' });
+    await expect(store.update(ed.id, { label: '', note: '' }))
+      .rejects.toMatchObject({ status: 400 });
+  });
+
+  test('throws 404 for unknown id', async () => {
+    await expect(store.update('nope', { label: 'X', note: '' }))
+      .rejects.toMatchObject({ status: 404 });
+  });
+
+  test('does not change other editions', async () => {
+    const a = await store.create(DATASET, { label: 'Vol. I', note: '' });
+    await new Promise(r => setTimeout(r, 5));
+    const b = await store.create(DATASET, { label: 'Vol. II', note: '' });
+    await store.update(a.id, { label: 'Vol. I — Revised', note: '' });
+    const list = await store.list();
+    const bEntry = list.find(e => e.id === b.id);
+    expect(bEntry.label).toBe('Vol. II');
+  });
+});
+
+describe('createEditionsStore.remove()', () => {
+  test('removes edition from index and deletes the file', async () => {
+    const ed = await store.create(DATASET, { label: 'Vol. I', note: '' });
+    const filePath = path.join(editionsDir, `${ed.id}.geojson`);
+    expect(fs.existsSync(filePath)).toBe(true);
+    await store.remove(ed.id);
+    const list = await store.list();
+    expect(list).toHaveLength(0);
+    expect(fs.existsSync(filePath)).toBe(false);
+  });
+
+  test('returns the deleted id', async () => {
+    const ed = await store.create(DATASET, { label: 'Vol. I', note: '' });
+    const result = await store.remove(ed.id);
+    expect(result.deleted).toBe(ed.id);
+  });
+
+  test('throws 404 for unknown id', async () => {
+    await expect(store.remove('nope')).rejects.toMatchObject({ status: 404 });
+  });
+
+  test('does not remove other editions', async () => {
+    const a = await store.create(DATASET, { label: 'Vol. I', note: '' });
+    await new Promise(r => setTimeout(r, 5));
+    const b = await store.create(DATASET, { label: 'Vol. II', note: '' });
+    await store.remove(a.id);
+    const list = await store.list();
+    expect(list).toHaveLength(1);
+    expect(list[0].id).toBe(b.id);
+  });
+});
+
 describe('createEditionsStore.bootstrap()', () => {
   test('creates the editions dir and an empty index.json if absent', async () => {
     await store.bootstrap();

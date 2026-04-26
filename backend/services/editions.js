@@ -108,7 +108,29 @@ function createEditionsStore({ editionsDir }) {
     return JSON.parse(raw);
   }
 
-  return { bootstrap, list, create, get };
+  async function update(id, { label, note = '' }) {
+    if (!label || !label.trim()) throw new HttpError(400, 'Edition label is required');
+    const index = await readIndex();
+    const entry = index.editions.find(e => e.id === id);
+    if (!entry) throw new HttpError(404, `Edition "${id}" not found`);
+    entry.label = label.trim();
+    entry.note  = note.trim();
+    await writeIndex(index);
+    return { ...entry };
+  }
+
+  async function remove(id) {
+    const index = await readIndex();
+    const idx = index.editions.findIndex(e => e.id === id);
+    if (idx === -1) throw new HttpError(404, `Edition "${id}" not found`);
+    const [entry] = index.editions.splice(idx, 1);
+    await writeIndex(index);
+    const filePath = path.join(editionsDir, `${id}.geojson`);
+    try { await fsp.unlink(filePath); } catch {}
+    return { deleted: entry.id };
+  }
+
+  return { bootstrap, list, create, get, update, remove };
 }
 
 module.exports = { createEditionsStore };

@@ -76,3 +76,63 @@ describe('GET /api/editions/:id', () => {
     expect(r.status).toBe(404);
   });
 });
+
+describe('PUT /api/editions/:id', () => {
+  test('updates label and note, returns updated entry', async () => {
+    const created = await request(app).post('/api/editions')
+      .send({ label: 'Vol. I', note: 'old' });
+    const id = created.body.id;
+    const r = await request(app).put(`/api/editions/${id}`)
+      .send({ label: 'Vol. I — Revised', note: 'new note' });
+    expect(r.status).toBe(200);
+    expect(r.body.label).toBe('Vol. I — Revised');
+    expect(r.body.note).toBe('new note');
+  });
+
+  test('change is reflected in the list', async () => {
+    const created = await request(app).post('/api/editions')
+      .send({ label: 'Vol. I', note: '' });
+    await request(app).put(`/api/editions/${created.body.id}`)
+      .send({ label: 'Vol. I — Revised', note: '' });
+    const list = await request(app).get('/api/editions');
+    expect(list.body.editions[0].label).toBe('Vol. I — Revised');
+  });
+
+  test('400 when label is missing', async () => {
+    const created = await request(app).post('/api/editions')
+      .send({ label: 'Vol. I', note: '' });
+    const r = await request(app).put(`/api/editions/${created.body.id}`)
+      .send({ label: '', note: '' });
+    expect(r.status).toBe(400);
+  });
+
+  test('404 for unknown id', async () => {
+    const r = await request(app).put('/api/editions/nope')
+      .send({ label: 'X', note: '' });
+    expect(r.status).toBe(404);
+  });
+});
+
+describe('DELETE /api/editions/:id', () => {
+  test('removes the edition and returns deleted id', async () => {
+    const created = await request(app).post('/api/editions')
+      .send({ label: 'Vol. I', note: '' });
+    const id = created.body.id;
+    const r = await request(app).delete(`/api/editions/${id}`);
+    expect(r.status).toBe(200);
+    expect(r.body.deleted).toBe(id);
+  });
+
+  test('edition no longer appears in list after deletion', async () => {
+    const created = await request(app).post('/api/editions')
+      .send({ label: 'Vol. I', note: '' });
+    await request(app).delete(`/api/editions/${created.body.id}`);
+    const list = await request(app).get('/api/editions');
+    expect(list.body.editions).toHaveLength(0);
+  });
+
+  test('404 for unknown id', async () => {
+    const r = await request(app).delete('/api/editions/nope');
+    expect(r.status).toBe(404);
+  });
+});
