@@ -1060,7 +1060,7 @@ function renderEditionSwitcher() {
       <span class="ed-count">${state.models.length} models · ${state.tools.length} tools</span>
     </button>`;
 
-  const archiveBtns = state.editions.map(ed => `
+  const archiveBtns = state.editions.slice(0, 3).map(ed => `
     <button class="edition-opt ${state.activeEditionId === ed.id ? 'is-active' : ''}"
             data-edition="${escapeAttr(ed.id)}"
             title="${escapeAttr(ed.note || ed.label)}">
