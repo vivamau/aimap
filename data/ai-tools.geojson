@@ -777,9 +777,9 @@
         "id": "lovable",
         "name": "Lovable",
         "organization": "Lovable",
-        "category": "codegen",
-        "city": "Stockholm",
         "country": "Sweden",
+        "city": "Stockholm",
+        "category": "codegen",
         "year": 2023,
         "releaseDate": "2024-01-16",
         "retiredDate": "",
@@ -787,6 +787,10 @@
         "notes": "AI full-stack engineer that builds React apps from natural language prompts.",
         "builtOn": [
           "claude-3-5-sonnet"
+        ],
+        "connectedTools": [],
+        "connectedModels": [
+          "claude-opus-4"
         ],
         "links": []
       }

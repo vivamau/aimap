@@ -224,8 +224,11 @@ const MAP_H = 620;
 
 const SPIDER_THRESH_PX = 12; // pixel distance to treat markers as overlapping
 const SPIDER_RADIUS    = 62; // pixel radius of the expanded rose
+const MAX_SPIDER       = 20; // above this count, use the list panel instead
 
-let spiderState = null;
+let spiderState   = null;
+let clusterPanel  = null;
+let clusterOutsideHandler = null;
 
 function renderMap(topo) {
   const container = $('#map');
@@ -318,7 +321,10 @@ function renderMarkers() {
     .on('click',      (e, d) => {
       e.stopPropagation();
       const nearby = collectNearbyItems(d);
-      if (nearby.length > 1) { spiderOpen(nearby); return; }
+      if (nearby.length > 1) {
+        nearby.length > MAX_SPIDER ? openClusterPanel(nearby, e) : spiderOpen(nearby);
+        return;
+      }
       openDetail(d);
     });
 }
@@ -375,7 +381,7 @@ function showTooltip(e, d, entryType = 'model') {
     return;
   }
   const badge = entryType === 'tool'
-    ? `<span style="margin-top:4px;display:inline-block;background:rgba(128,96,168,0.2);color:#c0a0e0;font-size:9px;letter-spacing:0.12em;padding:1px 5px;border-radius:2px;text-transform:uppercase">${escapeHtml(d.category)}</span>`
+    ? `<span style="margin-top:4px;display:inline-block;background:rgba(128,96,168,0.15);color:var(--violet);font-size:9px;letter-spacing:0.12em;padding:1px 5px;border-radius:2px;text-transform:uppercase;border:1px solid rgba(128,96,168,0.35)">${escapeHtml(d.category)}</span>`
     : '';
   tooltip.innerHTML = `
     <span class="name">${escapeHtml(d.name)}</span>
@@ -592,7 +598,8 @@ function bindDetailPanel() {
   $('#detail .close').addEventListener('click', closeDetail);
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      if (spiderState) spiderClose();
+      if (clusterPanel) closeClusterPanel();
+      else if (spiderState) spiderClose();
       else closeDetail();
     }
   });
@@ -727,7 +734,10 @@ function renderToolMarkers() {
     .on('click',      (e, d) => {
       e.stopPropagation();
       const nearby = collectNearbyItems(d);
-      if (nearby.length > 1) { spiderOpen(nearby); return; }
+      if (nearby.length > 1) {
+        nearby.length > MAX_SPIDER ? openClusterPanel(nearby, e) : spiderOpen(nearby);
+        return;
+      }
       openToolDetail(d);
     });
 }
@@ -974,6 +984,7 @@ function collectNearbyItems(clickedDatum) {
 
 function spiderOpen(nearbyItems) {
   spiderClose(false);
+  closeClusterPanel();
   hideTooltip();
 
   // center = average projected position of all clustered items
@@ -1083,6 +1094,103 @@ function spiderClose(animate = true) {
       .on('end', function () { d3.select(this).remove(); });
   } else {
     group.remove();
+  }
+}
+
+// ──────────────  cluster panel (large overlapping sets)
+
+function openClusterPanel(items, event) {
+  closeClusterPanel();
+  spiderClose(false);
+  hideTooltip();
+
+  const mapEl = $('#map');
+  if (!mapEl) return;
+
+  // Sort: models A-Z first, then tools A-Z
+  const sorted = [
+    ...items.filter(i => i.kind === 'model').sort((a, b) => a.datum.name.localeCompare(b.datum.name)),
+    ...items.filter(i => i.kind === 'tool' ).sort((a, b) => a.datum.name.localeCompare(b.datum.name)),
+  ];
+
+  const modelCount = items.filter(i => i.kind === 'model').length;
+  const toolCount  = items.filter(i => i.kind === 'tool').length;
+  const headLabel  = [
+    modelCount ? `${modelCount} model${modelCount !== 1 ? 's' : ''}` : '',
+    toolCount  ? `${toolCount} tool${toolCount !== 1 ? 's' : ''}`    : '',
+  ].filter(Boolean).join(' · ');
+
+  const panel = document.createElement('div');
+  panel.className = 'cluster-panel';
+  panel.innerHTML = `
+    <div class="cluster-panel__head">
+      <span>${escapeHtml(headLabel)}</span>
+      <button class="cluster-panel__close" title="Close">×</button>
+    </div>
+    <div class="cluster-panel__list">
+      ${sorted.map(item => {
+        const d = item.datum;
+        const tagClass = item.kind === 'tool' ? 'tool' : d.type;
+        const tagLabel = item.kind === 'tool' ? d.category : d.type;
+        return `
+          <button class="cluster-item" data-id="${escapeAttr(d.id)}" data-kind="${item.kind}">
+            <span class="cluster-item__name">${escapeHtml(d.name)}</span>
+            <span class="cluster-item__org">${escapeHtml(d.organization)}</span>
+            <span class="cluster-item__tag ${tagClass}">${escapeHtml(tagLabel)}</span>
+          </button>`;
+      }).join('')}
+    </div>`;
+
+  mapEl.appendChild(panel);
+
+  // Position near the click, clamped to stay within the map
+  const rect = mapEl.getBoundingClientRect();
+  const cx   = event.clientX - rect.left;
+  const cy   = event.clientY - rect.top;
+  const pw   = panel.offsetWidth;
+  const ph   = panel.offsetHeight;
+  const mw   = mapEl.offsetWidth;
+  const mh   = mapEl.offsetHeight;
+
+  let left = cx + 14;
+  let top  = cy - 24;
+  if (left + pw > mw - 8) left = cx - pw - 14;
+  if (top  + ph > mh - 8) top  = mh - ph - 8;
+  if (top  < 8) top  = 8;
+  if (left < 8) left = 8;
+
+  panel.style.left = `${left}px`;
+  panel.style.top  = `${top}px`;
+
+  panel.querySelector('.cluster-panel__close').addEventListener('click', closeClusterPanel);
+
+  panel.querySelectorAll('.cluster-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeClusterPanel();
+      if (btn.dataset.kind === 'tool') {
+        const t = state.tools.find(x => x.id === btn.dataset.id);
+        if (t) openToolDetail(t);
+      } else {
+        const m = state.models.find(x => x.id === btn.dataset.id);
+        if (m) openDetail(m);
+      }
+    });
+  });
+
+  // Close when clicking outside the panel
+  clusterOutsideHandler = e => {
+    if (!panel.contains(e.target)) closeClusterPanel();
+  };
+  setTimeout(() => document.addEventListener('click', clusterOutsideHandler), 0);
+
+  clusterPanel = panel;
+}
+
+function closeClusterPanel() {
+  if (clusterPanel) { clusterPanel.remove(); clusterPanel = null; }
+  if (clusterOutsideHandler) {
+    document.removeEventListener('click', clusterOutsideHandler);
+    clusterOutsideHandler = null;
   }
 }
 
