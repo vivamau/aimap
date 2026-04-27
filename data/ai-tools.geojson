@@ -4,6 +4,72 @@
   "features": [
     {
       "type": "Feature",
+      "id": "claude-code",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.49,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "claude-code",
+        "name": "Claude Code",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "category": "codegen",
+        "year": 2025,
+        "releaseDate": "2025-05-22",
+        "retiredDate": "",
+        "url": "https://www.anthropic.com/product/claude-code",
+        "notes": "Claude Code is an agentic coding system that reads your codebase, makes changes across files, runs tests, and delivers committed code. For builders without an engineering background, it's an entry point to software development that didn't exist until recently.",
+        "builtOn": [],
+        "connectedTools": [
+          "claude"
+        ],
+        "connectedModels": [
+          "claude-4-haiku",
+          "claude-4-sonnet",
+          "claude-opus-4"
+        ],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-cowork",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "claude-cowork",
+        "name": "Claude Cowork",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "category": "assistant",
+        "year": 2026,
+        "releaseDate": "2026-01-12",
+        "retiredDate": "",
+        "url": "https://www.anthropic.com/product/claude-cowork",
+        "notes": "Claude Cowork handles tasks autonomously. Give it a goal and Claude works on your computer, local files, and applications to return a finished deliverable. If it’s repetitive, messy, or just taking too long, assign it to Claude.",
+        "builtOn": [],
+        "connectedTools": [
+          "claude"
+        ],
+        "connectedModels": [
+          "claude-opus-4"
+        ],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "llamacpp",
       "geometry": {
         "type": "Point",
@@ -244,6 +310,10 @@
         "builtOn": [
           "Qwen"
         ],
+        "connectedTools": [],
+        "connectedModels": [
+          "qwen-36"
+        ],
         "links": []
       }
     },
@@ -447,15 +517,21 @@
         "id": "claude",
         "name": "Claude",
         "organization": "Anthropic",
-        "category": "assistant",
-        "city": "San Francisco",
         "country": "United States",
+        "city": "San Francisco",
+        "category": "assistant",
         "year": 2023,
         "releaseDate": "2023-03-14",
         "retiredDate": "",
         "url": "https://claude.ai",
         "notes": "Constitutional AI assistant developed by Anthropic, known for safety and helpfulness.",
         "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [
+          "claude-4-sonnet",
+          "claude-4-haiku",
+          "claude-opus-4"
+        ],
         "links": []
       }
     },
