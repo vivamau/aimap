@@ -657,6 +657,11 @@ function openDetail(m) {
     }
   }
 
+  const connElM = $('#detail .connections-section');
+  if (connElM) connElM.style.display = 'none';
+  const modConnElM = $('#detail .model-connections-section');
+  if (modConnElM) modConnElM.style.display = 'none';
+
   panel.classList.add('is-open');
   d3.selectAll('g.marker').classed('open', d => d.id === m.id);
 }
@@ -747,6 +752,61 @@ function openToolDetail(t) {
     <dt>Reference</dt><dd>${refHtml}</dd>`;
 
   $('#detail .notes').textContent = t.notes || '';
+
+  // ── connected models ──
+  const modConnEl = $('#detail .model-connections-section');
+  if (modConnEl) {
+    const modIds = Array.isArray(t.connectedModels) ? t.connectedModels : [];
+    const connModels = modIds.map(id => state.models.find(m => m.id === id)).filter(Boolean);
+    if (connModels.length) {
+      modConnEl.innerHTML = `
+        <div class="model-connections-title">Connected Models</div>
+        ${connModels.map(m => `
+          <button class="conn-model-btn" data-id="${escapeAttr(m.id)}">
+            <span class="conn-name">${escapeHtml(m.name)}</span>
+            <span class="conn-model-sub">${escapeHtml(m.organization)} · ${escapeHtml(m.type)}</span>
+          </button>`).join('')}`;
+      modConnEl.querySelectorAll('.conn-model-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const m = state.models.find(x => x.id === btn.dataset.id);
+          if (m) openDetail(m);
+        });
+      });
+      modConnEl.style.display = '';
+    } else {
+      modConnEl.style.display = 'none';
+    }
+  }
+
+  // ── connected tools (forward + reverse) ──
+  const connEl = $('#detail .connections-section');
+  if (connEl) {
+    const connIds = new Set(Array.isArray(t.connectedTools) ? t.connectedTools : []);
+    state.tools.forEach(other => {
+      if (other.id !== t.id && Array.isArray(other.connectedTools) && other.connectedTools.includes(t.id)) {
+        connIds.add(other.id);
+      }
+    });
+    const connTools = [...connIds].map(id => state.tools.find(x => x.id === id)).filter(Boolean);
+    if (connTools.length) {
+      connEl.innerHTML = `
+        <div class="connections-title">Connected Tools</div>
+        ${connTools.map(ct => `
+          <button class="conn-tool-btn" data-id="${escapeAttr(ct.id)}">
+            <span class="conn-name">${escapeHtml(ct.name)}</span>
+            <span class="conn-sub">${escapeHtml(ct.organization)} · ${escapeHtml(ct.category)}</span>
+          </button>`).join('')}`;
+      connEl.querySelectorAll('.conn-tool-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const ct = state.tools.find(x => x.id === btn.dataset.id);
+          if (ct) openToolDetail(ct);
+        });
+      });
+      connEl.style.display = '';
+    } else {
+      connEl.style.display = 'none';
+    }
+  }
 
   // ── links ──
   const linksEl = $('#detail .links-section');
@@ -1321,6 +1381,32 @@ function renderTimeline() {
   // Submodels: place along the models lane, smaller radius; they may overlap parents slightly
   placeInLane(submodelItems, TL_LANES.models, 4);
 
+  // ── build deduplicated tool-to-tool connection pairs
+  const toolConnPairs = [];
+  const seenToolPairs = new Set();
+  toolItems.forEach(ti => {
+    const ids = Array.isArray(ti.datum.connectedTools) ? ti.datum.connectedTools : [];
+    ids.forEach(otherId => {
+      const pairKey = [ti.datum.id, otherId].sort().join('::');
+      if (seenToolPairs.has(pairKey)) return;
+      seenToolPairs.add(pairKey);
+      const other = toolItems.find(t => t.datum.id === otherId);
+      if (!other || ti._x == null || other._x == null) return;
+      toolConnPairs.push({ a: ti, b: other });
+    });
+  });
+
+  // ── build tool-model cross-lane connection pairs
+  const toolModelPairs = [];
+  toolItems.forEach(ti => {
+    const modIds = Array.isArray(ti.datum.connectedModels) ? ti.datum.connectedModels : [];
+    modIds.forEach(modId => {
+      const mi = modelItems.find(m => m.datum.id === modId);
+      if (!mi || ti._x == null || mi._x == null) return;
+      toolModelPairs.push({ tool: ti, model: mi });
+    });
+  });
+
   // ── submodel → parent connectors (drawn first, under markers)
   const connectors = svgSel.append('g').attr('class', 'tl-connectors');
   submodelItems.forEach(s => {
@@ -1365,6 +1451,25 @@ function renderTimeline() {
     .on('click',      (e, d) => {
       if (d.parent) openDetail(d.parent);
     });
+
+  // ── cross-lane tool-model arcs (drawn behind all markers)
+  const crossConnsG = svgSel.append('g').attr('class', 'tl-cross-connections');
+  toolModelPairs.forEach(({ tool, model }) => {
+    const gap = tool._y - model._y;
+    crossConnsG.append('path')
+      .attr('class', 'tl-model-tool-conn')
+      .attr('d', `M${tool._x},${tool._y} C${tool._x},${tool._y - gap * 0.4} ${model._x},${model._y + gap * 0.4} ${model._x},${model._y}`);
+  });
+
+  // ── tool-to-tool connection arcs (drawn behind diamonds)
+  const toolConnsG = svgSel.append('g').attr('class', 'tl-tool-connections');
+  toolConnPairs.forEach(({ a, b }) => {
+    const midX = (a._x + b._x) / 2;
+    const midY = Math.min(a._y, b._y) - 32;
+    toolConnsG.append('path')
+      .attr('class', 'tl-tool-conn')
+      .attr('d', `M${a._x},${a._y} Q${midX},${midY} ${b._x},${b._y}`);
+  });
 
   // ── tool markers (diamonds)
   const toolsG = svgSel.append('g').attr('class', 'tl-tools');

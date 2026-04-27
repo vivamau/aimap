@@ -32,11 +32,14 @@
       "lng": -122.143,
       "category": "local LLM tool",
       "year": 2023,
-      "releaseDate": "2023-02-01",
+      "releaseDate": "2023-07-01",
       "retiredDate": "",
       "url": "https://ollama.com",
       "notes": "Ollama is a wrapper of llama.cpp that is allowing newbie to run local LLM models easily",
       "builtOn": [],
+      "connectedTools": [
+        "llamacpp"
+      ],
       "links": []
     },
     {
@@ -76,6 +79,10 @@
       "url": "https://openai.com/index/introducing-chatgpt-images-2-0/?utm_source=aim&utm_medium=telegram&utm_campaign=ai_baza",
       "notes": "ChatGPT images 2.0 introduces a state of the art image generation model with improved text rendering, multilingual support, and advanced visual reasoning.",
       "builtOn": [],
+      "connectedTools": [],
+      "connectedModels": [
+        "gpt-54"
+      ],
       "links": []
     },
     {

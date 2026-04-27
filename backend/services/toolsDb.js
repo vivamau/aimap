@@ -115,6 +115,12 @@ function sanitiseTool(input) {
   if (errors.length) throw new HttpError(400, 'Validation failed', errors);
 
   const builtOn = Array.isArray(input.builtOn) ? input.builtOn.map(String) : [];
+  const connectedTools = Array.isArray(input.connectedTools)
+    ? input.connectedTools.map(String).filter(Boolean)
+    : [];
+  const connectedModels = Array.isArray(input.connectedModels)
+    ? input.connectedModels.map(String).filter(Boolean)
+    : [];
   const links = Array.isArray(input.links)
     ? input.links.filter(l => l && l.url).map(l => ({ label: String(l.label || '').trim(), url: String(l.url).trim() }))
     : [];
@@ -138,6 +144,8 @@ function sanitiseTool(input) {
     url: String(input.url || '').trim(),
     notes: String(input.notes || '').trim(),
     builtOn,
+    connectedTools,
+    connectedModels,
     links,
   };
 }

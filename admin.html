@@ -319,6 +319,30 @@
           <button type="button" class="btn btn-add-submodel" id="btn-add-tool-link">+ Add link</button>
         </div>
 
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Connected Tools</span>
+            <span id="connected-tools-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 connections</span>
+          </label>
+          <div id="connected-tools-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:28px"></div>
+          <div class="submodels-empty" id="connected-tools-empty">No connections yet</div>
+          <select id="connected-tools-select" class="mono" style="margin-top:10px">
+            <option value="">— connect a tool —</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Connected Models</span>
+            <span id="connected-models-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 connections</span>
+          </label>
+          <div id="connected-models-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:28px"></div>
+          <div class="submodels-empty" id="connected-models-empty">No model connections yet</div>
+          <select id="connected-models-select" class="mono" style="margin-top:10px">
+            <option value="">— connect a model —</option>
+          </select>
+        </div>
+
         <div class="field" style="display:none">
           <label>ID (auto)</label>
           <input id="ft-id" class="mono" type="text">

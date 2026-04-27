@@ -264,6 +264,104 @@ function readToolLinks() {
   })).filter(l => l.url);
 }
 
+// ──────────────  connected models editor
+
+function populateConnectedModels(ids = []) {
+  $('#connected-models-tags').innerHTML = '';
+  ids.forEach(id => addConnectedModelTag(id));
+  refreshConnectedModelsUI();
+}
+
+function addConnectedModelTag(id) {
+  const model = state.models.find(m => m.id === id);
+  if (!model) return;
+  const tag = document.createElement('span');
+  tag.className = 'conn-model-tag';
+  tag.dataset.id = id;
+  tag.innerHTML = `${escapeHtml(model.name)} <button type="button" class="rm-conn-model" title="Remove">×</button>`;
+  tag.querySelector('.rm-conn-model').addEventListener('click', () => {
+    tag.remove();
+    refreshConnectedModelsUI();
+  });
+  $('#connected-models-tags').appendChild(tag);
+  refreshConnectedModelsUI();
+}
+
+function refreshConnectedModelsUI() {
+  const tags = $$('#connected-models-tags .conn-model-tag');
+  const selectedIds = tags.map(t => t.dataset.id);
+  const empty = $('#connected-models-empty');
+  const count = $('#connected-models-count');
+  const sel   = $('#connected-models-select');
+
+  if (empty) empty.style.display = tags.length ? 'none' : 'block';
+  if (count) count.textContent = `${tags.length} connection${tags.length !== 1 ? 's' : ''}`;
+
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— connect a model —</option>';
+  state.models
+    .filter(m => !selectedIds.includes(m.id))
+    .forEach(m => {
+      const opt = document.createElement('option');
+      opt.value = m.id;
+      opt.textContent = m.name;
+      sel.appendChild(opt);
+    });
+}
+
+function readConnectedModels() {
+  return $$('#connected-models-tags .conn-model-tag').map(t => t.dataset.id);
+}
+
+// ──────────────  connected tools editor
+
+function populateConnectedTools(ids = []) {
+  $('#connected-tools-tags').innerHTML = '';
+  ids.forEach(id => addConnectedToolTag(id));
+  refreshConnectedToolsUI();
+}
+
+function addConnectedToolTag(id) {
+  const tool = state.tools.find(t => t.id === id);
+  if (!tool) return;
+  const tag = document.createElement('span');
+  tag.className = 'conn-tool-tag';
+  tag.dataset.id = id;
+  tag.innerHTML = `${escapeHtml(tool.name)} <button type="button" class="rm-conn" title="Remove">×</button>`;
+  tag.querySelector('.rm-conn').addEventListener('click', () => {
+    tag.remove();
+    refreshConnectedToolsUI();
+  });
+  $('#connected-tools-tags').appendChild(tag);
+  refreshConnectedToolsUI();
+}
+
+function refreshConnectedToolsUI() {
+  const tags = $$('#connected-tools-tags .conn-tool-tag');
+  const selectedIds = tags.map(t => t.dataset.id);
+  const empty = $('#connected-tools-empty');
+  const count = $('#connected-tools-count');
+  const sel   = $('#connected-tools-select');
+
+  if (empty) empty.style.display = tags.length ? 'none' : 'block';
+  if (count) count.textContent = `${tags.length} connection${tags.length !== 1 ? 's' : ''}`;
+
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— connect a tool —</option>';
+  state.tools
+    .filter(t => t.id !== state.activeToolId && !selectedIds.includes(t.id))
+    .forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.id;
+      opt.textContent = t.name;
+      sel.appendChild(opt);
+    });
+}
+
+function readConnectedTools() {
+  return $$('#connected-tools-tags .conn-tool-tag').map(t => t.dataset.id);
+}
+
 // ──────────────  submodels editor
 
 function addSubmodelRow(data = {}) {
@@ -771,6 +869,24 @@ function bindToolForm() {
   $('#btn-tool-new').addEventListener('click', newToolEntry);
   $('#btn-tool-delete').addEventListener('click', deleteToolEntry);
   $('#btn-add-tool-link').addEventListener('click', () => addToolLinkRow());
+  const connModelSel = $('#connected-models-select');
+  if (connModelSel) {
+    connModelSel.addEventListener('change', e => {
+      const id = e.target.value;
+      if (!id) return;
+      addConnectedModelTag(id);
+      e.target.value = '';
+    });
+  }
+  const connSel = $('#connected-tools-select');
+  if (connSel) {
+    connSel.addEventListener('change', e => {
+      const id = e.target.value;
+      if (!id) return;
+      addConnectedToolTag(id);
+      e.target.value = '';
+    });
+  }
   const sel = $('#ft-category');
   if (sel) sel.innerHTML = CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
 }
@@ -796,6 +912,8 @@ function newToolEntry() {
   const form = $('#tool-form');
   if (form) form.reset();
   populateToolLinks([]);
+  populateConnectedModels([]);
+  populateConnectedTools([]);
   $('#tool-form-mode').textContent = 'New tool';
   $('#btn-tool-delete').style.display = 'none';
   renderToolsList();
@@ -822,6 +940,8 @@ function loadToolIntoForm(id) {
   $('#ft-notes').value        = t.notes || '';
   $('#ft-builton').value      = Array.isArray(t.builtOn) ? t.builtOn.join(', ') : '';
   populateToolLinks(t.links || []);
+  populateConnectedModels(t.connectedModels || []);
+  populateConnectedTools(t.connectedTools || []);
   renderToolsList();
 }
 
@@ -845,6 +965,8 @@ function readToolForm() {
     url:          $('#ft-url').value.trim(),
     notes:        $('#ft-notes').value.trim(),
     builtOn,
+    connectedModels: readConnectedModels(),
+    connectedTools: readConnectedTools(),
     links:        readToolLinks(),
   };
 }
