@@ -32,6 +32,9 @@
     <a href="#catalogue">Catalogue</a>
     <a href="#colophon">Colophon</a>
     <button class="nav-btn" id="btn-editions-modal">Previous Editions</button>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="theme-switch" role="group" aria-label="Theme">
       <button class="theme-btn" data-theme-set="light" title="Light theme" aria-label="Light theme">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
@@ -45,6 +48,14 @@
     </div>
   </nav>
 </header>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#atlas" class="mobile-nav__link">The Map</a>
+  <a href="#catalogue" class="mobile-nav__link">Catalogue</a>
+  <a href="#colophon" class="mobile-nav__link">Colophon</a>
+  <button class="mobile-nav__link" id="mobile-btn-editions">Previous Editions</button>
+</div>
 
 <!-- Editions modal -->
 <div class="editions-modal-backdrop" id="editions-modal" aria-hidden="true">
@@ -287,6 +298,40 @@
       }, 900);
     }
     document.addEventListener('scroll', show, { passive: true, capture: true });
+  })();
+
+  (function () {
+    var hamburger = document.getElementById('nav-hamburger');
+    var mobileNav = document.getElementById('mobile-nav');
+    var mobileEdBtn = document.getElementById('mobile-btn-editions');
+    var edModal = document.getElementById('btn-editions-modal');
+    if (!hamburger || !mobileNav) return;
+
+    function close() {
+      mobileNav.classList.remove('is-open');
+      hamburger.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    hamburger.addEventListener('click', function () {
+      var open = mobileNav.classList.contains('is-open');
+      if (open) { close(); } else {
+        mobileNav.classList.add('is-open');
+        hamburger.classList.add('is-open');
+        hamburger.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    mobileNav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+
+    if (mobileEdBtn && edModal) {
+      mobileEdBtn.addEventListener('click', function () {
+        close();
+        edModal.click();
+      });
+    }
   })();
 </script>
 </body>

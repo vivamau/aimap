@@ -1534,6 +1534,115 @@ table.catalogue__table {
   .catalogue h2 { font-size: 38px; }
 }
 
+/* ─────────  Mobile navigation drawer ───────── */
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--line-2);
+  color: var(--paper-3);
+  width: 32px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-hamburger svg { width: 15px; height: 15px; display: block; }
+.nav-hamburger:hover { color: var(--paper); border-color: var(--paper-3); }
+.nav-hamburger.is-open { color: var(--gold); border-color: rgba(201, 165, 68, 0.5); }
+
+.mobile-nav {
+  display: none;
+  position: sticky;
+  top: 56px;
+  z-index: 38;
+  background: var(--surface-glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-2);
+  flex-direction: column;
+}
+.mobile-nav.is-open { display: flex; }
+
+.mobile-nav__link {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-3);
+  padding: 14px 20px;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  transition: color 0.15s, background 0.15s;
+}
+.mobile-nav__link:last-child { border-bottom: none; }
+.mobile-nav__link:hover { color: var(--gold); background: rgba(201, 165, 68, 0.04); }
+
+/* ─────────  Small screens (≤ 640px) ───────── */
+
+@media (max-width: 640px) {
+  /* Topbar: hide desktop nav, show hamburger */
+  .topbar { padding: 13px 20px; }
+  .topbar nav { gap: 12px; }
+  .topbar nav a,
+  .topbar .nav-btn { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* Mobile nav drawer position below topbar */
+  .mobile-nav { top: 52px; }
+
+  /* Archive banner */
+  .archive-banner { top: 52px; padding: 10px 20px; }
+
+  /* Hero */
+  .hero { padding: 36px 20px 24px; }
+  .hero h1 { font-size: clamp(46px, 13vw, 72px); }
+
+  /* Atlas aside */
+  .atlas__aside { padding: 24px 20px; gap: 24px; }
+
+  /* Stats */
+  .stat .num { font-size: 44px; }
+
+  /* Catalogue */
+  .catalogue { padding: 32px 20px 20px; }
+  .catalogue header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .cat-tabs { margin-left: 0; align-self: auto; }
+  .catalogue h2 { font-size: 30px; }
+  .catalogue header .count { order: 3; }
+
+  /* Filterbar */
+  .cat-filterbar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .cat-filterbar .atlas-search-wrap { width: 100%; flex: none; }
+
+  /* Colophon */
+  .colophon { padding: 32px 20px; }
+
+  /* Detail panel: full-width slide-up from right */
+  .detail-panel {
+    width: 100vw;
+    padding: 44px 22px 32px;
+    border-left: none;
+    border-top: 1px solid var(--gold);
+  }
+  .detail-panel h3 { font-size: 42px; }
+}
+
 ::selection { background: var(--gold); color: var(--on-accent); }
 
 /* ── Loading overlay ── */
