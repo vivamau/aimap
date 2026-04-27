@@ -194,10 +194,26 @@ function applyFilters() {
     return true;
   });
   state.modelPage = 1;
+  applyToolFilters();
   renderMarkers();
+  renderToolMarkers();
   renderCatalogue();
   if (state.view === 'timeline') renderTimeline();
   else state.timelineRendered = false;
+}
+
+function applyToolFilters() {
+  const q = state.filterSearch.toLowerCase();
+  let tools = state.tools;
+  if (state.filterToolCategory !== 'all') {
+    tools = tools.filter(t => t.category === state.filterToolCategory);
+  }
+  if (q) {
+    tools = tools.filter(t =>
+      [t.name, t.organization, t.country, t.category, String(t.year)]
+        .some(v => (v || '').toLowerCase().includes(q)));
+  }
+  state.filteredTools = tools;
 }
 
 // ──────────────  map
@@ -424,17 +440,8 @@ function renderCatalogue() {
 function renderToolsCatalogue() {
   const tbody = $('#cat-tools tbody');
   if (!tbody) return;
-  const q = state.filterSearch.toLowerCase();
-  let tools = state.tools;
-  if (state.filterToolCategory !== 'all') {
-    tools = tools.filter(t => t.category === state.filterToolCategory);
-  }
-  if (q) {
-    tools = tools.filter(t =>
-      [t.name, t.organization, t.country, t.category]
-        .some(v => (v || '').toLowerCase().includes(q)));
-  }
-  state.filteredTools = tools;
+  applyToolFilters();
+  const tools = state.filteredTools;
   const sorted = [...tools].sort((a, b) => {
     const k = state.toolSort.key;
     let av = a[k], bv = b[k];
@@ -681,7 +688,7 @@ function renderToolMarkers() {
   const layer = svg.select('g.tool-markers');
   if (layer.empty()) return;
 
-  const visible = state.layers.tools ? state.tools : [];
+  const visible = state.layers.tools ? state.filteredTools : [];
   const sel = layer.selectAll('g.tool-marker').data(visible, d => d.id);
 
   sel.exit().remove();
@@ -856,7 +863,7 @@ function bindSearch() {
       syncAll(state.filterSearch);
       state.toolPage = 1;
       applyFilters();
-      if (state.catTab === 'tools') renderToolsCatalogue();
+      renderToolsCatalogue();
     });
 
     if (clear) {
@@ -866,7 +873,7 @@ function bindSearch() {
         input.focus();
         state.toolPage = 1;
         applyFilters();
-        if (state.catTab === 'tools') renderToolsCatalogue();
+        renderToolsCatalogue();
       });
     }
   });

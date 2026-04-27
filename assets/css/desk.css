@@ -167,6 +167,7 @@ body.desk {
 }
 .entry .ent-type.proprietary { color: var(--gold); border-color: rgba(201, 165, 68, 0.45); }
 .entry .ent-type.open-weight { color: var(--verdigris); border-color: rgba(74, 132, 116, 0.55); }
+#tools-list .ent-type { color: #b090d8; border-color: rgba(176, 144, 216, 0.6); }
 
 .entry-search {
   width: 100%;

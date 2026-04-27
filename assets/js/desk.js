@@ -23,8 +23,8 @@ const state = {
 };
 
 const MODALITIES   = ['text', 'image', 'audio', 'video', 'code', '3d'];
-const TYPES        = ['proprietary', 'open-weight'];
-const CATEGORIES   = ['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music', 'local LLM tool'];
+const TYPES        = ['open-weight', 'proprietary'];
+const CATEGORIES   = ['assistant', 'codegen', 'devtool', 'ide', 'local LLM tool', 'music', 'search', 'text-to-image', 'text-to-speech', 'text-to-video'];
 
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
@@ -301,6 +301,7 @@ function refreshConnectedModelsUI() {
   sel.innerHTML = '<option value="">— connect a model —</option>';
   state.models
     .filter(m => !selectedIds.includes(m.id))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .forEach(m => {
       const opt = document.createElement('option');
       opt.value = m.id;
@@ -350,6 +351,7 @@ function refreshConnectedToolsUI() {
   sel.innerHTML = '<option value="">— connect a tool —</option>';
   state.tools
     .filter(t => t.id !== state.activeToolId && !selectedIds.includes(t.id))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .forEach(t => {
       const opt = document.createElement('option');
       opt.value = t.id;
