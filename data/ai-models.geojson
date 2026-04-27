@@ -8,6 +8,35 @@
   "features": [
     {
       "type": "Feature",
+      "id": "sonar-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "sonar-2",
+        "name": "Sonar 2",
+        "organization": "Perplexity AI",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-02-11",
+        "parameters": "70B",
+        "url": "https://www.perplexity.ai/hub/blog/introducing-perplexity-computer",
+        "notes": "Built on top of Llama 3.3 70B, Sonar has been further trained to enhance answer factuality and readability for Perplexity’s default search mode.",
+        "modality": [
+          "text"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "gemini-31",
       "geometry": {
         "type": "Point",

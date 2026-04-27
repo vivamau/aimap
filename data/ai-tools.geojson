@@ -4,6 +4,106 @@
   "features": [
     {
       "type": "Feature",
+      "id": "computer",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.41,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "computer",
+        "name": "Computer",
+        "organization": "Perplexity AI",
+        "country": "United States",
+        "city": "San Francisco",
+        "category": "assistant",
+        "year": 2025,
+        "releaseDate": "2026-02-25",
+        "retiredDate": "",
+        "url": "https://www.perplexity.ai/hub/blog/introducing-perplexity-computer",
+        "notes": "",
+        "builtOn": [],
+        "connectedTools": [
+          "perplexity"
+        ],
+        "connectedModels": [
+          "gpt-54",
+          "gemini-31",
+          "claude-4-sonnet",
+          "gpt-55",
+          "claude-opus-4",
+          "sonar-2"
+        ],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "claude-design",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.41,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "claude-design",
+        "name": "Claude Design",
+        "organization": "Anthropic",
+        "country": "United States",
+        "city": "San Francisco",
+        "category": "assistant",
+        "year": 2026,
+        "releaseDate": "2026-04-17",
+        "retiredDate": "",
+        "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+        "notes": "Claude Design, is an Anthropic Labs product that lets you collaborate with Claude to create polished visual work like designs, prototypes, slides, one-pagers, and more.",
+        "builtOn": [],
+        "connectedTools": [
+          "claude"
+        ],
+        "connectedModels": [
+          "claude-opus-4"
+        ],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "codex",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.41,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "codex",
+        "name": "Codex",
+        "organization": "OpenAI",
+        "country": "United States",
+        "city": "San Francisco",
+        "category": "devtool",
+        "year": 2025,
+        "releaseDate": "2025-04-16",
+        "retiredDate": "",
+        "url": "https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://openai.com/codex/&ved=2ahUKEwi54vfF4Y6UAxXuh_0HHfUmD8MQFnoECA0QAQ&usg=AOvVaw3V9H21PnY0a7qutTV18NyM",
+        "notes": "A coding agent that helps you build and ship with AI—powered by ChatGPT.",
+        "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [
+          "gpt-53-codex",
+          "gpt-54"
+        ],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "claude-code",
       "geometry": {
         "type": "Point",
@@ -631,9 +731,9 @@
         "id": "perplexity",
         "name": "Perplexity",
         "organization": "Perplexity AI",
-        "category": "search",
-        "city": "San Francisco",
         "country": "United States",
+        "city": "San Francisco",
+        "category": "search",
         "year": 2022,
         "releaseDate": "2022-12-07",
         "retiredDate": "",
@@ -642,6 +742,15 @@
         "builtOn": [
           "claude-3-5-sonnet",
           "gpt-4o"
+        ],
+        "connectedTools": [],
+        "connectedModels": [
+          "gemini-31",
+          "gpt-55",
+          "claude-4-sonnet",
+          "gpt-54",
+          "claude-opus-4",
+          "sonar-2"
         ],
         "links": []
       }

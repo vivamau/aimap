@@ -6,6 +6,26 @@
   },
   "models": [
     {
+      "id": "sonar-2",
+      "name": "Sonar 2",
+      "organization": "Perplexity AI",
+      "country": "United States",
+      "city": "San Francisco",
+      "lat": 37.77,
+      "lng": -122.41,
+      "type": "proprietary",
+      "year": 2025,
+      "releaseDate": "2025-02-11",
+      "parameters": "70B",
+      "url": "https://www.perplexity.ai/hub/blog/introducing-perplexity-computer",
+      "notes": "Built on top of Llama 3.3 70B, Sonar has been further trained to enhance answer factuality and readability for Perplexity’s default search mode.",
+      "modality": [
+        "text"
+      ],
+      "links": [],
+      "submodels": []
+    },
+    {
       "id": "gemini-31",
       "name": "Gemini 3.1",
       "organization": "Google Deepmind",
