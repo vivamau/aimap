@@ -1496,6 +1496,34 @@ function renderTimeline() {
     .on('mouseleave', hideTooltip)
     .on('click',      (e, d) => openToolDetail(d.datum));
 
+  // ── connection legend (bottom, centred)
+  const legendItems = [
+    { stroke: 'rgba(201,165,68,0.65)',  label: 'Model variant' },
+    { stroke: 'rgba(74,132,116,0.7)',   label: 'Tool–model link' },
+    { stroke: 'rgba(128,96,168,0.75)', label: 'Tool–tool link' },
+  ];
+  const legendY   = TL_H - 18;
+  const lineLen   = 24;
+  const itemW     = 180;
+  const legendW   = itemW * legendItems.length;
+  const legendX0  = (TL_W - legendW) / 2;
+
+  const legendG = svgSel.append('g').attr('class', 'tl-legend');
+  legendItems.forEach((item, i) => {
+    const lx = legendX0 + i * itemW;
+    legendG.append('line')
+      .attr('x1', lx).attr('y1', legendY)
+      .attr('x2', lx + lineLen).attr('y2', legendY)
+      .attr('stroke', item.stroke)
+      .attr('stroke-width', 1.5);
+    legendG.append('text')
+      .attr('class', 'tl-legend-label')
+      .attr('x', lx + lineLen + 8)
+      .attr('y', legendY)
+      .attr('dominant-baseline', 'middle')
+      .text(item.label);
+  });
+
   state.timelineRendered = true;
 }
 

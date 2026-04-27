@@ -544,10 +544,19 @@ a:hover { color: var(--paper); border-color: var(--paper); }
   opacity: 0.45;
 }
 
+.tl-legend-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  fill: var(--paper-3);
+}
+
 .tl-model-tool-conn {
   fill: none;
   stroke: var(--verdigris);
   stroke-width: 1;
+  stroke-dasharray: 3 4;
   opacity: 0.4;
 }
 
