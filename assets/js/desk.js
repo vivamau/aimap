@@ -824,7 +824,7 @@ function bindTabSwitcher() {
       tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === target));
       const mg = $('#models-grid');
       const tg = $('#tools-grid');
-      const vg = $("#glossary-grid');
+      const vg = $('#glossary-grid');
       if (mg) mg.style.display = target === 'models'     ? '' : 'none';
       if (tg) tg.style.display = target === 'tools'      ? '' : 'none';
       if (vg) vg.style.display = target === 'glossary' ? '' : 'none';
@@ -1125,9 +1125,9 @@ function bindGlossaryForm() {
   $('#btn-glossary-new').addEventListener('click', newGlossaryEntry);
   $('#btn-glossary-delete').addEventListener('click', deleteGlossaryEntry);
   $('#btn-add-glossary-link').addEventListener('click', () => addGlossaryLinkRow());
-  $("#fg-term').addEventListener('input', renderGlossaryPreview);
-  $("#fg-definition').addEventListener('input', renderGlossaryPreview);
-  $("#fg-notes').addEventListener('input', renderGlossaryPreview);
+  $('#fg-term').addEventListener('input', renderGlossaryPreview);
+  $('#fg-definition').addEventListener('input', renderGlossaryPreview);
+  $('#fg-notes').addEventListener('input', renderGlossaryPreview);
   const relSel = $('#related-terms-select');
   if (relSel) {
     relSel.addEventListener('change', e => {
@@ -1182,9 +1182,9 @@ function renderGlossaryList() {
 function renderGlossaryPreview() {
   const el = $('#glossary-preview');
   if (!el) return;
-  const term       = ($("#fg-term').value || '').trim();
-  const definition = ($("#fg-definition').value || '').trim();
-  const notes      = ($("#fg-notes').value || '').trim();
+  const term       = ($('#fg-term').value || '').trim();
+  const definition = ($('#fg-definition').value || '').trim();
+  const notes      = ($('#fg-notes').value || '').trim();
   const links        = readGlossaryLinks();
   const relatedIds   = readRelatedTerms();
   if (!term && !definition) {
@@ -1236,10 +1236,10 @@ function loadGlossaryIntoForm(id) {
   state.activeGlossaryId = id;
   $('#glossary-form-mode').textContent = `Editing "${t.term}"`;
   $('#btn-glossary-delete').style.display = '';
-  $("#fg-id').value         = t.id;
-  $("#fg-term').value       = t.term;
-  $("#fg-definition').value = t.definition;
-  $("#fg-notes').value      = t.notes || '';
+  $('#fg-id').value         = t.id;
+  $('#fg-term').value       = t.term;
+  $('#fg-definition').value = t.definition;
+  $('#fg-notes').value      = t.notes || '';
   populateGlossaryLinks(t.links || []);
   populateRelatedTerms(t.relatedTerms || []);
   renderGlossaryList();
@@ -1247,9 +1247,9 @@ function loadGlossaryIntoForm(id) {
 }
 
 async function saveGlossaryEntry() {
-  const term       = ($("#fg-term').value || '').trim();
-  const definition = ($("#fg-definition').value || '').trim();
-  const notes      = ($("#fg-notes').value || '').trim();
+  const term       = ($('#fg-term').value || '').trim();
+  const definition = ($('#fg-definition').value || '').trim();
+  const notes      = ($('#fg-notes').value || '').trim();
   const links        = readGlossaryLinks();
   const relatedTerms = readRelatedTerms();
   if (!term || !definition) {

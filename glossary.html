@@ -191,6 +191,9 @@
     color: var(--paper);
     line-height: 1.2;
     padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
   .vocab-definition {
     font-family: var(--sans);
@@ -318,6 +321,164 @@
     .vocab-index__search { width: 140px; }
     .vocab-letter { font-size: 56px; }
   }
+
+  /* ── Graph modal ── */
+  .graph-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .graph-modal[hidden] { display: none; }
+  .graph-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 7, 5, 0.84);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .graph-modal__panel {
+    position: relative;
+    z-index: 1;
+    width: min(1140px, 96vw);
+    height: min(800px, 92vh);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+  }
+  .graph-modal__header {
+    display: flex;
+    align-items: center;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--line);
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .graph-modal__icon { color: var(--verdigris); opacity: 0.7; flex-shrink: 0; }
+  .graph-modal__title {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper-3);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .graph-modal__close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 8px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+  .graph-modal__close:hover { color: var(--paper); }
+  .graph-modal__canvas-wrap {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    background: #0c0a07;
+    overflow: hidden;
+  }
+  #graph-canvas {
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+  .graph-modal__footer {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 20px;
+    border-top: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .graph-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .graph-legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .graph-legend-dot--focus     { background: #c9a544; }
+  .graph-legend-dot--connected { background: #4a8474; }
+  .graph-legend-dot--other     { background: rgba(180,170,150,0.38); }
+  .graph-node-hint {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Per-term graph button */
+  .vocab-graph-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 7px;
+    background: none;
+    border: 1px solid transparent;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px 3px 6px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .vocab-graph-btn:hover {
+    color: var(--verdigris);
+    border-color: rgba(74,132,116,0.4);
+  }
+
+  /* Global graph button in index bar */
+  .vocab-graph-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 6px;
+    background: transparent;
+    border: 1px solid var(--line-2);
+    color: var(--paper-3);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .vocab-graph-all-btn:hover {
+    color: var(--verdigris);
+    border-color: var(--verdigris);
+  }
+
+  @media (max-width: 640px) {
+    .graph-modal__panel { width: 99vw; height: 92vh; }
+    .graph-modal__footer { gap: 8px; padding: 8px 12px; }
+    .vocab-graph-all-btn .btn-label { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -381,6 +542,13 @@
   </div>
   <div id="alpha-index"></div>
   <span class="glossary-count" id="glossary-count"></span>
+  <button class="vocab-graph-all-btn" id="btn-graph-all" title="View all term connections">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="11" height="11" aria-hidden="true">
+      <circle cx="3" cy="3" r="1.5"/><circle cx="13" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/>
+      <line x1="4.2" y1="4" x2="11.5" y2="7"/><line x1="3" y1="4.5" x2="4.2" y2="11.8"/><line x1="6.2" y1="12.5" x2="11.5" y2="9"/>
+    </svg>
+    <span class="btn-label">Graph</span>
+  </button>
 </div>
 
 <!-- GLOSSARY BODY -->
@@ -403,6 +571,30 @@
     <p>Have you noticed errors or omissions? Please open an <a href="https://github.com/vivamau/aimap/issues">issue</a>, I'll try to revert to you ASAP!</p>
   </div>
 </section>
+
+<!-- GRAPH MODAL -->
+<div class="graph-modal" id="graph-modal" hidden>
+  <div class="graph-modal__backdrop" id="graph-backdrop"></div>
+  <div class="graph-modal__panel">
+    <header class="graph-modal__header">
+      <svg class="graph-modal__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true">
+        <circle cx="3" cy="3" r="1.5"/><circle cx="13" cy="8" r="1.5"/><circle cx="5" cy="13" r="1.5"/>
+        <line x1="4.2" y1="4" x2="11.5" y2="7"/><line x1="3" y1="4.5" x2="4.2" y2="11.8"/><line x1="6.2" y1="12.5" x2="11.5" y2="9"/>
+      </svg>
+      <span class="graph-modal__title" id="graph-modal-title">Glossary Graph</span>
+      <button class="graph-modal__close" id="graph-modal-close" aria-label="Close graph">×</button>
+    </header>
+    <div class="graph-modal__canvas-wrap" id="graph-canvas-wrap">
+      <canvas id="graph-canvas"></canvas>
+    </div>
+    <footer class="graph-modal__footer">
+      <span class="graph-legend-item"><span class="graph-legend-dot graph-legend-dot--focus"></span>Selected</span>
+      <span class="graph-legend-item"><span class="graph-legend-dot graph-legend-dot--connected"></span>Connected</span>
+      <span class="graph-legend-item"><span class="graph-legend-dot graph-legend-dot--other"></span>Other</span>
+      <span class="graph-node-hint" id="graph-node-hint">Click a node to navigate to the term</span>
+    </footer>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -530,8 +722,15 @@
                   ${linksHtml}
                 </div>`
               : '';
+            const graphBtnHtml = `<button class='vocab-graph-btn' data-graph='${esc(t.id)}' title='View in graph'>
+                <svg viewBox='0 0 16 16' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' width='10' height='10' aria-hidden='true'>
+                  <circle cx='3' cy='3' r='1.5'/><circle cx='13' cy='8' r='1.5'/><circle cx='5' cy='13' r='1.5'/>
+                  <line x1='4.2' y1='4' x2='11.5' y2='7'/><line x1='3' y1='4.5' x2='4.2' y2='11.8'/><line x1='6.2' y1='12.5' x2='11.5' y2='9'/>
+                </svg>
+                Graph
+              </button>`;
             return `<div class="vocab-entry${hasExtra ? '' : ' no-extra'}" id="term-${esc(t.id)}" data-id="${esc(t.id)}">
-              <div class="vocab-term">${esc(t.term)}</div>
+              <div class="vocab-term">${esc(t.term)}${graphBtnHtml}</div>
               <div class="vocab-def-col">
                 <div class="vocab-definition">${esc(t.definition)}</div>
                 ${relatedHtml}
@@ -573,12 +772,324 @@
         setTimeout(() => target.classList.remove('is-highlight'), 1800);
       });
     });
+
+    // per-term graph buttons
+    body.querySelectorAll('.vocab-graph-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        openGraph(btn.dataset.graph);
+      });
+    });
   }
 
   function esc(s) {
     return String(s ?? '').replace(/[&<>"']/g, c =>
       ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   }
+
+  // ── Graph modal ──────────────────────────────────────────────────────────────
+
+  let activeGraph = null;
+
+  function buildGraphData(terms) {
+    const nodes = terms.map(t => ({ id: t.id, term: t.term }));
+    const seen = new Set();
+    const links = [];
+    terms.forEach(t => {
+      (t.relatedTerms || []).forEach(rid => {
+        const key = [t.id, rid].sort().join('\0');
+        if (!seen.has(key)) { seen.add(key); links.push({ source: t.id, target: rid }); }
+      });
+    });
+    return { nodes, links };
+  }
+
+  function openGraph(focusId) {
+    if (!allTerms.length) return;
+    const modal  = document.getElementById('graph-modal');
+    const titleEl = document.getElementById('graph-modal-title');
+    const canvas  = document.getElementById('graph-canvas');
+    const wrap    = document.getElementById('graph-canvas-wrap');
+
+    if (focusId) {
+      const ft = allTerms.find(t => t.id === focusId);
+      titleEl.textContent = ft ? `Glossary — ${ft.term}` : 'Glossary';
+    } else {
+      titleEl.textContent = 'Glossary Graph — All Terms';
+    }
+
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    const dpr = window.devicePixelRatio || 1;
+    const w = wrap.clientWidth;
+    const h = wrap.clientHeight;
+    canvas.width  = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+
+    if (activeGraph) { activeGraph.destroy(); activeGraph = null; }
+    const { nodes, links } = buildGraphData(allTerms);
+    activeGraph = createForceGraph(canvas, w, h, dpr, nodes, links, focusId || null);
+    activeGraph.onNodeClick = id => {
+      closeGraph();
+      const el = document.getElementById('term-' + id);
+      if (!el) return;
+      el.classList.add('is-expanded', 'is-highlight');
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => el.classList.remove('is-highlight'), 1800);
+    };
+  }
+
+  function closeGraph() {
+    const modal = document.getElementById('graph-modal');
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+    if (activeGraph) { activeGraph.destroy(); activeGraph = null; }
+  }
+
+  function createForceGraph(canvas, W, H, dpr, nodesIn, linksIn, focusId) {
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    const nodeMap = {};
+    const nodes = nodesIn.map(n => {
+      const o = { id: n.id, term: n.term, x: W / 2, y: H / 2, vx: 0, vy: 0 };
+      nodeMap[n.id] = o;
+      return o;
+    });
+
+    const links = linksIn
+      .map(l => ({ s: nodeMap[l.source], t: nodeMap[l.target] }))
+      .filter(l => l.s && l.t);
+
+    const connIds = new Set();
+    if (focusId) {
+      links.forEach(l => {
+        if (l.s.id === focusId) connIds.add(l.t.id);
+        if (l.t.id === focusId) connIds.add(l.s.id);
+      });
+    }
+    const noFocus = !focusId;
+    const cx = W / 2, cy = H / 2;
+
+    // Initial placement
+    const focusNode = focusId ? nodeMap[focusId] : null;
+    if (focusNode) { focusNode.x = cx; focusNode.y = cy; }
+    const connList  = nodes.filter(n => connIds.has(n.id));
+    const otherList = nodes.filter(n => n.id !== focusId && !connIds.has(n.id));
+
+    if (focusId) {
+      connList.forEach((n, i) => {
+        const a = 2 * Math.PI * i / Math.max(connList.length, 1) - Math.PI / 2;
+        n.x = cx + Math.cos(a) * 145; n.y = cy + Math.sin(a) * 145;
+      });
+      otherList.forEach((n, i) => {
+        const a = 2 * Math.PI * i / Math.max(otherList.length, 1) + 0.7;
+        const r = 230 + (i % 3) * 45;
+        n.x = cx + Math.cos(a) * r; n.y = cy + Math.sin(a) * r;
+      });
+    } else {
+      nodes.forEach((n, i) => {
+        const a = 2 * Math.PI * i / nodes.length;
+        const r = Math.min(W, H) * 0.32;
+        n.x = cx + Math.cos(a) * r; n.y = cy + Math.sin(a) * r;
+      });
+    }
+
+    let alpha = 1;
+    const aDecay = 0.016;
+    const vDecay = 0.38;
+    let animFrame = null, animating = false;
+    let dragging = null, hovered = null;
+    let onNodeClick = null;
+
+    function applyForces() {
+      const rep    = 500;
+      const minD2  = 1600; // 40px hard floor — prevents repulsion explosion
+      const lLen   = 110, lK = 0.18, gK = 0.035, pad = 38;
+      const maxV   = 14;  // velocity cap — nodes can't teleport off-screen
+
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const d2 = Math.max(dx * dx + dy * dy, minD2);
+          const d  = Math.sqrt(d2);
+          const f  = rep * alpha / d2;
+          a.vx -= dx / d * f; a.vy -= dy / d * f;
+          b.vx += dx / d * f; b.vy += dy / d * f;
+        }
+      }
+      links.forEach(({ s, t }) => {
+        const dx = t.x - s.x, dy = t.y - s.y;
+        const d  = Math.sqrt(dx * dx + dy * dy) || 1;
+        const f  = (d - lLen) * lK * alpha;
+        s.vx += dx / d * f; s.vy += dy / d * f;
+        t.vx -= dx / d * f; t.vy -= dy / d * f;
+      });
+      nodes.forEach(n => {
+        n.vx += (cx - n.x) * gK * alpha;
+        n.vy += (cy - n.y) * gK * alpha;
+        if (n.x < pad)     n.vx += (pad - n.x) * 0.1;
+        if (n.x > W - pad) n.vx += (W - pad - n.x) * 0.1;
+        if (n.y < pad)     n.vy += (pad - n.y) * 0.1;
+        if (n.y > H - pad) n.vy += (H - pad - n.y) * 0.1;
+      });
+      nodes.forEach(n => {
+        if (n === dragging) return;
+        n.vx *= vDecay; n.vy *= vDecay;
+        n.vx = Math.max(-maxV, Math.min(maxV, n.vx));
+        n.vy = Math.max(-maxV, Math.min(maxV, n.vy));
+        n.x  += n.vx;  n.y  += n.vy;
+      });
+    }
+
+    const C = {
+      edgeFocus:  'rgba(74,132,116,0.65)',
+      edgeNormal: 'rgba(74,132,116,0.22)',
+      nodeFocus:  '#c9a544',
+      nodeConn:   '#4a8474',
+      nodeDim:    'rgba(180,170,150,0.3)',
+      lblFocus:   '#e8dcc4',
+      lblConn:    '#9ec3b8',
+      lblDim:     'rgba(180,170,150,0.28)',
+      ring:       'rgba(255,255,255,0.2)',
+      grid:       'rgba(255,255,255,0.028)',
+    };
+    const MONO = "'Geist Mono', ui-monospace, 'SF Mono', monospace";
+
+    function drawGrid() {
+      const sp = 30;
+      ctx.fillStyle = C.grid;
+      for (let x = sp; x < W; x += sp)
+        for (let y = sp; y < H; y += sp) {
+          ctx.beginPath(); ctx.arc(x, y, 0.75, 0, Math.PI * 2); ctx.fill();
+        }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      drawGrid();
+
+      links.forEach(({ s, t }) => {
+        const focusEdge = !noFocus && (s.id === focusId || t.id === focusId);
+        ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(t.x, t.y);
+        ctx.strokeStyle = focusEdge ? C.edgeFocus : C.edgeNormal;
+        ctx.lineWidth   = focusEdge ? 1.5 : 0.8;
+        ctx.stroke();
+      });
+
+      nodes.forEach(n => {
+        const isFoc  = focusId && n.id === focusId;
+        const isConn = connIds.has(n.id);
+        const isHov  = n === hovered;
+        const r = isFoc ? 9 : (isConn || noFocus ? 6 : 5);
+        const fill = noFocus ? C.nodeConn : (isFoc ? C.nodeFocus : (isConn ? C.nodeConn : C.nodeDim));
+
+        if (isFoc) { ctx.shadowColor = '#c9a544'; ctx.shadowBlur = 16; }
+        if (isHov) {
+          ctx.beginPath(); ctx.arc(n.x, n.y, r + 5, 0, Math.PI * 2);
+          ctx.strokeStyle = C.ring; ctx.lineWidth = 1.2; ctx.stroke();
+        }
+        ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = fill; ctx.fill();
+        ctx.shadowBlur = 0;
+
+        const showLbl = isFoc || isConn || isHov || (noFocus && nodes.length <= 22);
+        if (showLbl) {
+          const raw = n.term;
+          const lbl = raw.length > 22 ? raw.slice(0, 21) + '…' : raw;
+          ctx.font = `${isFoc ? 'bold ' : ''}10px ${MONO}`;
+          ctx.fillStyle = noFocus ? C.lblConn : (isFoc ? C.lblFocus : (isConn ? C.lblConn : C.lblDim));
+          ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+          ctx.fillText(lbl, n.x, n.y - r - 4);
+          ctx.textBaseline = 'alphabetic';
+        }
+      });
+    }
+
+    function startSim() {
+      if (animating) return;
+      animating = true;
+      function loop() {
+        // Alpha always decays — dragging just keeps the simulation alive, it doesn't freeze decay
+        alpha *= (1 - aDecay);
+        if (alpha > 0.004) applyForces();
+        draw();
+        if (alpha > 0.004 || dragging) { animFrame = requestAnimationFrame(loop); }
+        else { animating = false; animFrame = null; }
+      }
+      animFrame = requestAnimationFrame(loop);
+    }
+
+    function nodeAt(x, y) {
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const n = nodes[i];
+        const dx = x - n.x, dy = y - n.y;
+        if (dx * dx + dy * dy <= 16 * 16) return n;
+      }
+      return null;
+    }
+
+    function cpos(e) { const r = canvas.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    function tpos(e) { const r = canvas.getBoundingClientRect(); return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top }; }
+
+    let wasDragging = false; // blocks synthetic click generated after a drag release
+
+    const H_ = {
+      mousedown(e) {
+        const p = cpos(e), n = nodeAt(p.x, p.y);
+        if (n) { dragging = n; wasDragging = false; alpha = Math.max(alpha, 0.5); startSim(); }
+      },
+      mousemove(e) {
+        const p = cpos(e);
+        if (dragging) { dragging.x = p.x; dragging.y = p.y; dragging.vx = dragging.vy = 0; wasDragging = true; }
+        else { const prev = hovered; hovered = nodeAt(p.x, p.y); canvas.style.cursor = hovered ? 'pointer' : 'default'; if (prev !== hovered && !animating) draw(); }
+      },
+      mouseup()  { if (dragging) { dragging.vx = dragging.vy = 0; dragging = null; } },
+      click(e)   {
+        if (wasDragging) { wasDragging = false; return; }
+        const p = cpos(e), n = nodeAt(p.x, p.y);
+        if (n && onNodeClick) onNodeClick(n.id, n.term);
+      },
+      touchstart(e) {
+        e.preventDefault();
+        const p = tpos(e), n = nodeAt(p.x, p.y);
+        if (n) { dragging = n; wasDragging = false; alpha = Math.max(alpha, 0.5); startSim(); }
+      },
+      touchmove(e)  {
+        e.preventDefault();
+        if (dragging) { const p = tpos(e); dragging.x = p.x; dragging.y = p.y; dragging.vx = dragging.vy = 0; wasDragging = true; }
+      },
+      touchend()    { if (dragging) { dragging.vx = dragging.vy = 0; dragging = null; } },
+    };
+
+    Object.entries(H_).forEach(([ev, fn]) => {
+      const opts = (ev === 'touchstart' || ev === 'touchmove') ? { passive: false } : undefined;
+      canvas.addEventListener(ev, fn, opts);
+    });
+
+    function destroy() {
+      if (animFrame) { cancelAnimationFrame(animFrame); animFrame = null; }
+      Object.entries(H_).forEach(([ev, fn]) => {
+        const opts = (ev === 'touchstart' || ev === 'touchmove') ? { passive: false } : undefined;
+        canvas.removeEventListener(ev, fn, opts);
+      });
+    }
+
+    startSim();
+    return { destroy, set onNodeClick(fn) { onNodeClick = fn; } };
+  }
+
+  // Wire modal close events
+  document.getElementById('graph-modal-close').addEventListener('click', closeGraph);
+  document.getElementById('graph-backdrop').addEventListener('click', closeGraph);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGraph(); });
+  document.getElementById('btn-graph-all').addEventListener('click', () => openGraph(null));
+
 })();
 
 // ── theme switcher ──
