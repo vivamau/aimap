@@ -57,7 +57,7 @@
           "city":         { "type": "string" },
           "lat":          { "type": "number", "minimum": -90,  "maximum": 90 },
           "lng":          { "type": "number", "minimum": -180, "maximum": 180 },
-          "category":     { "type": "string", "enum": ["assistant", "search", "ide", "codegen", "devtool", "text-to-image", "text-to-speech", "text-to-video", "music"], "default": "devtool" },
+          "category":     { "type": "string", "enum": ["assistant", "search", "ide", "codegen", "devtool", "text-to-image", "text-to-speech", "text-to-video", "music","local LLM tool"], "default": "devtool" },
           "year":         { "type": "integer" },
           "url":          { "type": "string" },
           "notes":        { "type": "string" },

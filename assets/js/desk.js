@@ -24,7 +24,7 @@ const state = {
 
 const MODALITIES   = ['text', 'image', 'audio', 'video', 'code', '3d'];
 const TYPES        = ['proprietary', 'open-weight'];
-const CATEGORIES   = ['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music'];
+const CATEGORIES   = ['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music', 'local LLM tool'];
 
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));

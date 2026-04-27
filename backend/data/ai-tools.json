@@ -1,6 +1,45 @@
 {
   "tools": [
     {
+      "id": "llamacpp",
+      "name": "Llama.cpp",
+      "organization": "GGML AI",
+      "country": "Bulgaria",
+      "city": "",
+      "lat": 42.69,
+      "lng": 23.32,
+      "category": "local LLM tool",
+      "year": 2023,
+      "releaseDate": "2023-06-01",
+      "retiredDate": "",
+      "url": "https://ggml.ai",
+      "notes": "llama.cpp is an open source software library that performs inference on various large language models such as Llama. It is co-developed alongside the GGML project, a general-purpose tensor library created by Georgi Gerganov.",
+      "builtOn": [],
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Llama.cpp"
+        }
+      ]
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "organization": "Ollama",
+      "country": "United States",
+      "city": "Palo Alto",
+      "lat": 37.47,
+      "lng": -122.143,
+      "category": "local LLM tool",
+      "year": 2023,
+      "releaseDate": "2023-02-01",
+      "retiredDate": "",
+      "url": "https://ollama.com",
+      "notes": "Ollama is a wrapper of llama.cpp that is allowing newbie to run local LLM models easily",
+      "builtOn": [],
+      "links": []
+    },
+    {
       "id": "hermes-agent",
       "name": "Hermes Agent",
       "organization": "Nous Research",
@@ -62,8 +101,8 @@
       "organization": "Peter Steinberger",
       "country": "Austria",
       "city": "Oberösterreich",
-      "lat": 14.2885,
-      "lng": 40.3069,
+      "lat": 48.3069,
+      "lng": 16.2885,
       "category": "assistant",
       "year": 2025,
       "releaseDate": "2025-11-24",
@@ -135,7 +174,7 @@
       "city": "n.a.",
       "lat": 48.210033,
       "lng": 16.363449,
-      "category": "assistant",
+      "category": "local LLM tool",
       "year": 2025,
       "releaseDate": "2025-12-02",
       "retiredDate": "",

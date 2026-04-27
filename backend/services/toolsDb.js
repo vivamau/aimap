@@ -14,7 +14,7 @@ const { slugify } = require('../utilities/slugify');
 const { HttpError } = require('../middleware/errorHandler');
 
 const REQUIRED = ['name', 'organization', 'lat', 'lng'];
-const VALID_CATEGORIES = new Set(['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music']);
+const VALID_CATEGORIES = new Set(['assistant', 'search', 'ide', 'codegen', 'devtool', 'text-to-image', 'text-to-speech', 'text-to-video', 'music','local LLM tool']);
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 function createToolsDb({ dbPath }) {

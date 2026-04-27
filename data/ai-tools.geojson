@@ -4,6 +4,63 @@
   "features": [
     {
       "type": "Feature",
+      "id": "llamacpp",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.32,
+          42.69
+        ]
+      },
+      "properties": {
+        "id": "llamacpp",
+        "name": "Llama.cpp",
+        "organization": "GGML AI",
+        "country": "Bulgaria",
+        "city": "",
+        "category": "local LLM tool",
+        "year": 2023,
+        "releaseDate": "2023-06-01",
+        "retiredDate": "",
+        "url": "https://ggml.ai",
+        "notes": "llama.cpp is an open source software library that performs inference on various large language models such as Llama. It is co-developed alongside the GGML project, a general-purpose tensor library created by Georgi Gerganov.",
+        "builtOn": [],
+        "links": [
+          {
+            "label": "Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Llama.cpp"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ollama",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.143,
+          37.47
+        ]
+      },
+      "properties": {
+        "id": "ollama",
+        "name": "Ollama",
+        "organization": "Ollama",
+        "country": "United States",
+        "city": "Palo Alto",
+        "category": "local LLM tool",
+        "year": 2023,
+        "releaseDate": "2023-02-01",
+        "retiredDate": "",
+        "url": "https://ollama.com",
+        "notes": "Ollama is a wrapper of llama.cpp that is allowing newbie to run local LLM models easily",
+        "builtOn": [],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "hermes-agent",
       "geometry": {
         "type": "Point",
@@ -91,8 +148,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          40.3069,
-          14.2885
+          16.2885,
+          48.3069
         ]
       },
       "properties": {
@@ -199,7 +256,7 @@
         "organization": "Mario Zechner",
         "country": "Austria",
         "city": "n.a.",
-        "category": "assistant",
+        "category": "local LLM tool",
         "year": 2025,
         "releaseDate": "2025-12-02",
         "retiredDate": "",
