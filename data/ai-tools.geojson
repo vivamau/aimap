@@ -689,9 +689,9 @@
         "id": "kiro",
         "name": "Kiro",
         "organization": "Amazon",
-        "category": "ide",
-        "city": "Seattle",
         "country": "United States",
+        "city": "Seattle",
+        "category": "ide",
         "year": 2025,
         "releaseDate": "2025-07-16",
         "retiredDate": "",
@@ -699,6 +699,12 @@
         "notes": "Amazon's AI IDE with spec-driven development and agentic coding workflows.",
         "builtOn": [
           "claude-3-5-sonnet"
+        ],
+        "connectedTools": [],
+        "connectedModels": [
+          "gemini-31",
+          "claude-4-sonnet",
+          "claude-opus-4"
         ],
         "links": []
       }
@@ -994,16 +1000,23 @@
       "properties": {
         "id": "antigravity",
         "name": "Antigravity",
-        "organization": "Antigravity",
-        "category": "devtool",
-        "city": "San Francisco",
+        "organization": "Google",
         "country": "United States",
+        "city": "San Francisco",
+        "category": "devtool",
         "year": 2025,
         "releaseDate": "2025-01-01",
         "retiredDate": "",
         "url": "https://antigravity.dev",
         "notes": "AI-powered developer productivity tool for code review and refactoring.",
         "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [
+          "gemini-2",
+          "claude-opus-4",
+          "claude-4-sonnet",
+          "gemini-31"
+        ],
         "links": []
       }
     }

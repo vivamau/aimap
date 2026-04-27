@@ -2,10 +2,129 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. II — MMXXVI",
-    "updated": "2026-04-26",
+    "updated": "2026-04-27",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "gemini-31",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.13,
+          51.51
+        ]
+      },
+      "properties": {
+        "id": "gemini-31",
+        "name": "Gemini 3.1",
+        "organization": "Google Deepmind",
+        "country": "England",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2026,
+        "releaseDate": "2026-02-19",
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google/",
+        "notes": "Multimodal model trained jointly across text, image, audio and video.",
+        "modality": [
+          "text",
+          "image",
+          "code"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "Pro",
+            "version": "3.1",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-02-19"
+          },
+          {
+            "name": "Flash Image",
+            "version": "3.1",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-02-26"
+          },
+          {
+            "name": "Flash Lite",
+            "version": "3.1",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-03-02"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini-30",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.13,
+          51.51
+        ]
+      },
+      "properties": {
+        "id": "gemini-30",
+        "name": "Gemini 3.0",
+        "organization": "Google Deepmind",
+        "country": "England",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-11-18",
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google/",
+        "notes": "Multimodal model trained jointly across text, image, audio and video.",
+        "modality": [
+          "text",
+          "code"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "Pro",
+            "version": "3.0",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-11-18"
+          },
+          {
+            "name": "Deep Think",
+            "version": "3.0",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-12-03"
+          },
+          {
+            "name": "Pro Image",
+            "version": "3.0",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-11-20"
+          },
+          {
+            "name": "Flash",
+            "version": "3.0",
+            "parameters": "",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-12-17"
+          }
+        ]
+      }
+    },
     {
       "type": "Feature",
       "id": "kimi-k26",
@@ -1436,22 +1555,58 @@
       },
       "properties": {
         "id": "gemini-2",
-        "name": "Gemini 2.5 Pro",
+        "name": "Gemini 2.5",
         "organization": "Google DeepMind",
         "country": "United Kingdom",
         "city": "London",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-03-25",
+        "parameters": "undisclosed",
+        "url": "https://deepmind.google",
+        "notes": "Multimodal model trained jointly across text, image, audio and video.",
         "modality": [
           "text",
           "image",
           "audio",
-          "video"
+          "video",
+          "code"
         ],
-        "type": "proprietary",
-        "year": 2025,
-        "parameters": "undisclosed",
-        "url": "https://deepmind.google",
-        "notes": "Multimodal model trained jointly across text, image, audio and video.",
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "Pro",
+            "version": "2.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-03-25"
+          },
+          {
+            "name": "Flash",
+            "version": "2.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-04-17"
+          },
+          {
+            "name": "Flash-lite",
+            "version": "2.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-08-26"
+          },
+          {
+            "name": "Flash image",
+            "version": "2.5",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-08-26"
+          }
+        ]
       }
     },
     {
@@ -2999,6 +3154,7 @@
         "city": "London",
         "type": "proprietary",
         "year": 2023,
+        "releaseDate": "2023-12-06",
         "parameters": "undisclosed",
         "url": "https://deepmind.google/technologies/gemini",
         "notes": "First natively multimodal Google model. Available in Ultra, Pro, and Nano sizes.",
@@ -3008,7 +3164,33 @@
           "audio",
           "video"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "Nano",
+            "version": "1.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-12-06"
+          },
+          {
+            "name": "Pro",
+            "version": "1.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-12-13"
+          },
+          {
+            "name": "Ultra",
+            "version": "1.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2024-02-08"
+          }
+        ]
       }
     },
     {
@@ -3197,7 +3379,8 @@
         "country": "United Kingdom",
         "city": "London",
         "type": "proprietary",
-        "year": 2024,
+        "year": 2023,
+        "releaseDate": "2023-12-06",
         "parameters": "undisclosed",
         "url": "https://deepmind.google/technologies/gemini/pro",
         "notes": "MoE architecture with 1M+ token context window. Enabled long-document and video understanding.",
@@ -3207,7 +3390,33 @@
           "audio",
           "video"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "Nano",
+            "version": "1.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-12-06"
+          },
+          {
+            "name": "Pro",
+            "version": "1.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2023-12-13"
+          },
+          {
+            "name": "Ultra",
+            "version": "1.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2024-02-08"
+          }
+        ]
       }
     },
     {
@@ -3877,6 +4086,7 @@
         "city": "London",
         "type": "proprietary",
         "year": 2025,
+        "releaseDate": "2025-01-30",
         "parameters": "undisclosed",
         "url": "https://deepmind.google/technologies/gemini/flash",
         "notes": "Agentic-first generation. Flash, Flash-Lite, and Pro variants with live audio/video streaming.",
@@ -3886,7 +4096,33 @@
           "audio",
           "video"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "Pro",
+            "version": "2.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-02-05"
+          },
+          {
+            "name": "Flash",
+            "version": "2.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-01-30"
+          },
+          {
+            "name": "Flash-lite",
+            "version": "2.0",
+            "parameters": "undisclosed",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2025-02-01"
+          }
+        ]
       }
     },
     {
