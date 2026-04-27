@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AImap: Glossary of Artificial Intelligence</title>
+<meta name="description" content="A glossary of key terms and concepts in artificial intelligence.">
+<link rel="stylesheet" href="./assets/css/atlas.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%230d0b08' stroke='%23c9a544' stroke-width='2'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='serif' font-style='italic' font-size='14' fill='%23c9a544'%3EA%3C/text%3E%3C/svg%3E">
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('aimap-theme');
+      var theme = (stored === 'light' || stored === 'system') ? stored : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+<style>
+  /* ── Glossary-specific styles ── */
+  .vocab-hero {
+    padding: 96px 48px 64px;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+    align-items: end;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .vocab-hero::before {
+    content: ''; position: absolute;
+    top: 24px; right: 48px;
+    width: 1px; height: calc(100% - 48px);
+    background: linear-gradient(to bottom, transparent, var(--line-2) 30%, var(--line-2) 70%, transparent);
+  }
+  .vocab-hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(72px, 11vw, 168px);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: var(--paper);
+  }
+  .vocab-hero h1 .em {
+    font-style: italic;
+    color: var(--verdigris);
+    display: block;
+  }
+  .vocab-hero h1 .second {
+    display: block;
+    font-size: 0.78em;
+    color: var(--paper-2);
+  }
+  .vocab-hero .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--paper-3);
+    display: flex; flex-direction: column; gap: 14px;
+    padding-bottom: 12px;
+  }
+  .vocab-hero .meta dl {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+  }
+  .vocab-hero .meta dt { color: var(--muted); }
+  .vocab-hero .meta dd { color: var(--paper-2); }
+  .vocab-hero .lede {
+    margin-top: 18px;
+    font-family: var(--serif);
+    font-size: 15px;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.55;
+    color: var(--paper-2);
+  }
+
+  /* ── Alpha index bar ── */
+  .vocab-index {
+    position: sticky;
+    top: 60px;
+    z-index: 20;
+    background: var(--surface-glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 48px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .vocab-index__search-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+  .vocab-index__search {
+    background: transparent;
+    border: 1px solid var(--line-2);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 6px 28px 6px 10px;
+    outline: none;
+    width: 180px;
+    transition: border-color 0.2s;
+  }
+  .vocab-index__search::placeholder { color: var(--muted); }
+  .vocab-index__search:focus { border-color: var(--verdigris); }
+  .vocab-index__search-clear {
+    position: absolute; right: 6px;
+    background: none; border: none;
+    color: var(--muted); font-size: 14px;
+    cursor: pointer; padding: 2px 4px;
+    transition: color 0.15s;
+  }
+  .vocab-index__search-clear:hover { color: var(--paper); }
+  .alpha-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    min-width: 26px; height: 24px;
+    padding: 0 4px;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+    border-radius: 2px;
+  }
+  .alpha-btn:hover { color: var(--paper); border-color: var(--line-2); }
+  .alpha-btn.has-terms { color: var(--paper-3); }
+  .alpha-btn.is-active { color: var(--verdigris); border-color: var(--verdigris); }
+  .alpha-btn.is-disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+  /* ── Glossary body ── */
+  .vocab-body {
+    padding: 0 48px 80px;
+  }
+
+  .vocab-letter-group {
+    border-bottom: 1px solid var(--line);
+    padding: 48px 0 32px;
+  }
+  .vocab-letter-group:last-child { border-bottom: none; }
+
+  .vocab-letter {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 80px;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--verdigris);
+    opacity: 0.4;
+    margin-bottom: 28px;
+    user-select: none;
+  }
+
+  .vocab-terms {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .vocab-entry {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: baseline;
+    cursor: pointer;
+    transition: background 0.15s;
+    border-radius: 2px;
+  }
+  .vocab-entry:last-child { border-bottom: none; }
+  .vocab-entry:hover { background: rgba(74, 132, 116, 0.04); }
+  .vocab-entry.is-expanded { background: rgba(74, 132, 116, 0.04); }
+  .vocab-term {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+    line-height: 1.2;
+    padding-left: 16px;
+  }
+  .vocab-definition {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--paper-2);
+    line-height: 1.65;
+  }
+  .vocab-def-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+  }
+  .vocab-extra {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    display: none;
+  }
+  .vocab-entry.is-expanded .vocab-extra { display: block; }
+  .vocab-notes {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+  .vocab-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .vocab-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    border: 1px solid rgba(201, 165, 68, 0.3);
+    padding: 4px 10px;
+    text-decoration: none;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .vocab-link:hover {
+    background: rgba(201, 165, 68, 0.08);
+    border-color: var(--gold);
+    color: var(--paper);
+  }
+  .vocab-related {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+  .vocab-related__label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .vocab-related__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .vocab-related__chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--verdigris);
+    border: 1px solid rgba(74, 132, 116, 0.35);
+    padding: 4px 10px;
+    background: none;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .vocab-related__chip:hover {
+    background: rgba(74, 132, 116, 0.08);
+    border-color: var(--verdigris);
+    color: var(--paper);
+  }
+  .vocab-entry.is-highlight {
+    background: rgba(74, 132, 116, 0.07);
+    outline: 1px solid rgba(74, 132, 116, 0.4);
+    outline-offset: -1px;
+  }
+
+  /* ── Empty / loading states ── */
+  .vocab-empty {
+    padding: 80px 48px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
+  .glossary-count {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  @media (max-width: 980px) {
+    .vocab-hero { grid-template-columns: 1fr; padding: 64px 28px 40px; }
+    .vocab-hero::before { display: none; }
+    .vocab-body { padding: 0 28px 60px; }
+    .vocab-index { padding: 10px 28px; top: 56px; }
+    .vocab-entry { grid-template-columns: 1fr; gap: 8px; }
+    .vocab-term { padding-left: 0; font-size: 22px; }
+  }
+  @media (max-width: 640px) {
+    .vocab-hero { padding: 40px 20px 28px; }
+    .vocab-hero h1 { font-size: clamp(46px, 13vw, 72px); }
+    .vocab-body { padding: 0 20px 48px; }
+    .vocab-index { padding: 10px 20px; top: 52px; }
+    .vocab-index__search { width: 140px; }
+    .vocab-letter { font-size: 56px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="crest">
+    <span class="glyph"><em>A</em></span>
+    <span>Atlas of Artificial Intelligence</span>
+  </div>
+  <nav>
+    <a href="./index.html">The Map</a>
+    <a href="./index.html#catalogue">Catalogue</a>
+    <a href="#glossary" class="topbar-active">Glossary</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="theme-switch" role="group" aria-label="Theme">
+      <button class="theme-btn" data-theme-set="light" title="Light theme" aria-label="Light theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button class="theme-btn" data-theme-set="dark" title="Dark theme" aria-label="Dark theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="theme-btn" data-theme-set="system" title="System preference" aria-label="System theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="./index.html" class="mobile-nav__link">The Map</a>
+  <a href="./index.html#catalogue" class="mobile-nav__link">Catalogue</a>
+  <a href="#glossary" class="mobile-nav__link">Glossary</a>
+</div>
+
+<!-- HERO -->
+<section class="vocab-hero" id="glossary">
+  <h1 class="reveal reveal-1">
+    Glossary
+    <span class="em">of Artificial</span>
+    <span class="second">Intelligence</span>
+  </h1>
+  <aside class="meta reveal reveal-2">
+    <dl>
+      <dt>Section</dt>   <dd>Glossary</dd>
+      <dt>Order</dt>     <dd>Alphabetical</dd>
+      <dt>Entries</dt>   <dd id="vocab-total">—</dd>
+    </dl>
+    <p class="lede">Key concepts, methods, and terminology in the field of artificial intelligence, curated for the Atlas.</p>
+  </aside>
+</section>
+
+<!-- ALPHA INDEX + SEARCH -->
+<div class="vocab-index" id="vocab-index">
+  <div class="vocab-index__search-wrap">
+    <input class="vocab-index__search" id="glossary-search" type="text" placeholder="Search terms…" autocomplete="off">
+    <button class="vocab-index__search-clear" id="glossary-search-clear" hidden>×</button>
+  </div>
+  <div id="alpha-index"></div>
+  <span class="glossary-count" id="glossary-count"></span>
+</div>
+
+<!-- GLOSSARY BODY -->
+<section class="vocab-body" id="vocab-body">
+  <div class="vocab-empty" id="vocab-loading">Loading glossary…</div>
+</section>
+
+<!-- COLOPHON -->
+<section class="colophon">
+  <div>
+    <h4>Colophon</h4>
+    <p>Set in <span class="ornament">Instrument Serif</span> for display and Geist for body text and data.</p>
+  </div>
+  <div>
+    <h4>Method</h4>
+    <p>Definitions are editorial, written for clarity over technical precision. This is a survey glossary, not a standards document.</p>
+  </div>
+  <div>
+    <h4>Contribute</h4>
+    <p>Have you noticed errors or omissions? Please open an <a href="https://github.com/vivamau/aimap/issues">issue</a>, I'll try to revert to you ASAP!</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  const ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  let allTerms = [];
+  let filtered = [];
+  let activeFilter = null; // null = all
+
+  // ── fetch ──
+  fetch('/api/glossary')
+    .then(r => r.json())
+    .then(data => {
+      allTerms = data.terms || [];
+      filtered = allTerms;
+      render();
+    })
+    .catch(() => {
+      document.getElementById('vocab-loading').textContent = 'Could not load glossary.';
+    });
+
+  // ── search ──
+  const searchEl = document.getElementById('glossary-search');
+  const clearBtn = document.getElementById('glossary-search-clear');
+  searchEl.addEventListener('input', () => {
+    const q = searchEl.value.trim().toLowerCase();
+    clearBtn.hidden = !q;
+    activeFilter = null;
+    filtered = q
+      ? allTerms.filter(t =>
+          t.term.toLowerCase().includes(q) ||
+          t.definition.toLowerCase().includes(q) ||
+          (t.notes || '').toLowerCase().includes(q))
+      : allTerms;
+    render();
+  });
+  clearBtn.addEventListener('click', () => {
+    searchEl.value = '';
+    clearBtn.hidden = true;
+    filtered = allTerms;
+    render();
+    searchEl.focus();
+  });
+
+  // ── alpha filter ──
+  function buildAlphaIndex() {
+    const letters = new Set(allTerms.map(t => t.term[0].toUpperCase()));
+    const wrap = document.getElementById('alpha-index');
+    wrap.innerHTML = '';
+    ALPHA.forEach(letter => {
+      const btn = document.createElement('button');
+      btn.className = 'alpha-btn' + (letters.has(letter) ? ' has-terms' : ' is-disabled');
+      btn.textContent = letter;
+      btn.dataset.letter = letter;
+      btn.addEventListener('click', () => {
+        if (activeFilter === letter) {
+          activeFilter = null;
+          wrap.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('is-active'));
+        } else {
+          activeFilter = letter;
+          wrap.querySelectorAll('.alpha-btn').forEach(b =>
+            b.classList.toggle('is-active', b.dataset.letter === letter));
+        }
+        filtered = activeFilter
+          ? allTerms.filter(t => t.term[0].toUpperCase() === activeFilter)
+          : allTerms;
+        searchEl.value = '';
+        clearBtn.hidden = true;
+        render();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  // ── render ──
+  function render() {
+    const body = document.getElementById('vocab-body');
+    const total = document.getElementById('vocab-total');
+    const count = document.getElementById('glossary-count');
+
+    buildAlphaIndex();
+
+    total.textContent = allTerms.length;
+    count.textContent = filtered.length !== allTerms.length
+      ? `${filtered.length} of ${allTerms.length}`
+      : `${allTerms.length} entries`;
+
+    if (filtered.length === 0) {
+      body.innerHTML = '<div class="vocab-empty">No terms match.</div>';
+      return;
+    }
+
+    // group by first letter
+    const groups = {};
+    filtered.forEach(t => {
+      const letter = t.term[0].toUpperCase();
+      if (!groups[letter]) groups[letter] = [];
+      groups[letter].push(t);
+    });
+
+    body.innerHTML = Object.keys(groups).sort().map(letter => `
+      <div class="vocab-letter-group" id="group-${letter}">
+        <div class="vocab-letter">${letter}</div>
+        <div class="vocab-terms">
+          ${groups[letter].map(t => {
+            const hasNotes   = t.notes && t.notes.trim();
+            const hasLinks   = Array.isArray(t.links) && t.links.length > 0;
+            const hasRelated = Array.isArray(t.relatedTerms) && t.relatedTerms.length > 0;
+            const hasExtra   = hasNotes || hasLinks;
+            const linksHtml  = hasLinks
+              ? `<div class="vocab-links">${t.links.map(l =>
+                  `<a class="vocab-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label || l.url)}</a>`
+                ).join('')}</div>`
+              : '';
+            const relatedHtml = hasRelated
+              ? `<div class="vocab-related">
+                  <div class="vocab-related__label">See also</div>
+                  <div class="vocab-related__chips">${t.relatedTerms.map(rid =>
+                    `<button class="vocab-related__chip" data-target="${esc(rid)}">${esc(rid)}</button>`
+                  ).join('')}</div>
+                </div>`
+              : '';
+            const extraHtml = hasExtra
+              ? `<div class="vocab-extra">
+                  ${hasNotes ? `<div class="vocab-notes">${esc(t.notes)}</div>` : ''}
+                  ${linksHtml}
+                </div>`
+              : '';
+            return `<div class="vocab-entry${hasExtra ? '' : ' no-extra'}" id="term-${esc(t.id)}" data-id="${esc(t.id)}">
+              <div class="vocab-term">${esc(t.term)}</div>
+              <div class="vocab-def-col">
+                <div class="vocab-definition">${esc(t.definition)}</div>
+                ${relatedHtml}
+                ${extraHtml}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`).join('');
+
+    // resolve related-term chip labels to actual term names
+    const termMap = Object.fromEntries(allTerms.map(t => [t.id, t.term]));
+    body.querySelectorAll('.vocab-related__chip').forEach(btn => {
+      const tid = btn.dataset.target;
+      if (termMap[tid]) btn.textContent = termMap[tid];
+    });
+
+    // expand/collapse on click — only for entries that have extra content
+    body.querySelectorAll('.vocab-entry:not(.no-extra)').forEach(el => {
+      el.addEventListener('click', () => el.classList.toggle('is-expanded'));
+    });
+    body.querySelectorAll('.vocab-entry.no-extra').forEach(el => {
+      el.style.cursor = 'default';
+    });
+
+    // links open independently — don't bubble to expand toggle
+    body.querySelectorAll('.vocab-link').forEach(a => {
+      a.addEventListener('click', e => e.stopPropagation());
+    });
+
+    // related-term chip: expand + scroll to target entry
+    body.querySelectorAll('.vocab-related__chip').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const target = document.getElementById('term-' + btn.dataset.target);
+        if (!target) return;
+        target.classList.add('is-expanded', 'is-highlight');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => target.classList.remove('is-highlight'), 1800);
+      });
+    });
+  }
+
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+})();
+
+// ── theme switcher ──
+(function () {
+  var STORAGE_KEY = 'aimap-theme';
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.theme-btn[data-theme-set]');
+  function current() {
+    var t = root.getAttribute('data-theme');
+    return (t === 'light' || t === 'system') ? t : 'dark';
+  }
+  function syncButtons() {
+    var active = current();
+    buttons.forEach(function (b) {
+      b.classList.toggle('is-active', b.dataset.themeSet === active);
+      b.setAttribute('aria-pressed', String(b.dataset.themeSet === active));
+    });
+  }
+  function setTheme(next) {
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+    syncButtons();
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { setTheme(b.dataset.themeSet); });
+  });
+  syncButtons();
+})();
+
+// ── mobile nav ──
+(function () {
+  var hamburger = document.getElementById('nav-hamburger');
+  var mobileNav = document.getElementById('mobile-nav');
+  if (!hamburger || !mobileNav) return;
+  function close() {
+    mobileNav.classList.remove('is-open');
+    hamburger.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+  hamburger.addEventListener('click', function () {
+    var open = mobileNav.classList.contains('is-open');
+    if (open) { close(); } else {
+      mobileNav.classList.add('is-open');
+      hamburger.classList.add('is-open');
+      hamburger.setAttribute('aria-expanded', 'true');
+    }
+  });
+  mobileNav.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', close);
+  });
+})();
+
+// ── scrollbar visibility ──
+(function () {
+  var timer;
+  function show() {
+    document.documentElement.classList.add('is-scrolling');
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      document.documentElement.classList.remove('is-scrolling');
+    }, 900);
+  }
+  document.addEventListener('scroll', show, { passive: true, capture: true });
+})();
+</script>
+</body>
+</html>

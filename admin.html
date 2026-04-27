@@ -38,6 +38,7 @@
 <div class="desk-tabs">
   <button class="desk-tab is-active" data-tab="models">Models</button>
   <button class="desk-tab" data-tab="tools">Tools &amp; Applications</button>
+  <button class="desk-tab" data-tab="glossary">Glossary</button>
 </div>
 
 <main class="desk-grid" id="models-grid">
@@ -368,6 +369,104 @@
         This is the exact GeoJSON written to <span style="color:var(--gold)">data/ai-tools.geojson</span>.
       </p>
       <pre class="json-preview" id="tools-json-preview"></pre>
+    </div>
+  </section>
+
+</main>
+
+<!-- VOCABULARY GRID -->
+<main class="desk-grid vocab-desk-grid" id="glossary-grid" style="display:none">
+
+  <!-- LEFT: terms list -->
+  <section class="panel">
+    <div class="panel__head">
+      <span>Glossary</span>
+      <span class="num" id="glossary-count"></span>
+    </div>
+    <div class="panel__body">
+      <input class="entry-search" id="glossary-search" type="text" placeholder="Search terms…">
+      <div class="entry-list" id="glossary-list"></div>
+    </div>
+  </section>
+
+  <!-- CENTER: term form -->
+  <section class="panel">
+    <div class="panel__head">
+      <span id="glossary-form-mode">New term</span>
+      <span class="num">Composer</span>
+    </div>
+    <div class="panel__body">
+      <form class="form" id="glossary-form">
+        <div class="field">
+          <label>Term <span style="color:var(--rust)">*</span></label>
+          <input id="fg-term" type="text" required placeholder="e.g. Transformer">
+        </div>
+
+        <div class="field">
+          <label>Definition <span style="color:var(--rust)">*</span></label>
+          <textarea id="fg-definition" required placeholder="A clear, concise explanation of the term…" style="min-height:120px"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Notes <span style="font-size:9px;letter-spacing:0.12em;color:var(--muted)">(optional — shown on expand)</span></label>
+          <textarea id="fg-notes" placeholder="Extended context, etymology, examples, related concepts…" style="min-height:80px"></textarea>
+        </div>
+
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Links</span>
+            <span id="glossary-links-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 links</span>
+          </label>
+          <div class="submodels-editor" id="glossary-links-editor" style="margin-top:10px">
+            <div class="submodels-header" style="grid-template-columns:1fr 1.8fr 28px">
+              <span>Label</span>
+              <span>URL</span>
+              <span></span>
+            </div>
+            <div id="glossary-link-rows"></div>
+            <div class="submodels-empty" id="glossary-links-empty">No links yet</div>
+          </div>
+          <button type="button" class="btn btn-add-submodel" id="btn-add-glossary-link">+ Add link</button>
+        </div>
+
+        <div class="field">
+          <label style="display:flex;align-items:center;justify-content:space-between">
+            <span>Related Terms</span>
+            <span id="related-terms-count" style="font-size:9px;letter-spacing:0.2em;color:var(--muted)">0 related</span>
+          </label>
+          <div id="related-terms-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:28px"></div>
+          <div class="submodels-empty" id="related-terms-empty">No related terms yet</div>
+          <select id="related-terms-select" class="mono" style="margin-top:10px">
+            <option value="">— add a related term —</option>
+          </select>
+        </div>
+
+        <div class="field" style="display:none">
+          <label>ID (auto)</label>
+          <input id="fg-id" class="mono" type="text">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn danger" id="btn-glossary-delete" style="display:none">Delete</button>
+          <button type="button" class="btn" id="btn-glossary-new">New term</button>
+          <button type="submit" class="btn primary">Save term</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- RIGHT: preview / info -->
+  <section class="panel">
+    <div class="panel__head">
+      <span>Preview</span>
+      <span class="num">live</span>
+    </div>
+    <div class="panel__body">
+      <p style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;line-height:1.6">
+        How this term will appear on the
+        <a href="./glossary.html" target="_blank" style="color:var(--gold)">Glossary page ↗</a>.
+      </p>
+      <div id="glossary-preview" style="margin-top:8px"></div>
     </div>
   </section>
 

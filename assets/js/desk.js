@@ -16,6 +16,10 @@ const state = {
   tools: [],
   filteredToolIds: null,
   activeToolId: null,
+  // glossary
+  glossaryTerms: [],
+  filteredGlossaryIds: null,
+  activeGlossaryId: null,
   activeTab: 'models',
   editingEditionId: null,
   deletingEditionId: null,
@@ -61,6 +65,8 @@ async function api(path, opts = {}) {
   bindTabSwitcher();
   bindToolForm();
   bindToolSearch();
+  bindGlossaryForm();
+  bindGlossarySearch();
   try {
     await refresh();
     newEntry();
@@ -70,16 +76,18 @@ async function api(path, opts = {}) {
 })();
 
 async function refresh() {
-  const [meta, list, edList, toolList] = await Promise.all([
+  const [meta, list, edList, toolList, vocabList] = await Promise.all([
     api('/meta'),
     api('/models'),
     api('/editions'),
     api('/tools'),
+    api('/glossary'),
   ]);
-  state.meta     = meta;
-  state.models   = list.models;
-  state.editions = edList.editions;
-  state.tools    = toolList.tools;
+  state.meta       = meta;
+  state.models     = list.models;
+  state.editions   = edList.editions;
+  state.tools      = toolList.tools;
+  state.glossaryTerms = vocabList.terms;
   renderAll();
 }
 
@@ -92,6 +100,7 @@ function renderAll() {
   renderPreview();
   renderToolsList();
   renderToolsPreview();
+  renderGlossaryList();
 }
 
 function renderStatline() {
@@ -815,8 +824,10 @@ function bindTabSwitcher() {
       tabs.forEach(t => t.classList.toggle('is-active', t.dataset.tab === target));
       const mg = $('#models-grid');
       const tg = $('#tools-grid');
-      if (mg) mg.style.display = target === 'models' ? '' : 'none';
-      if (tg) tg.style.display = target === 'tools'  ? '' : 'none';
+      const vg = $("#glossary-grid');
+      if (mg) mg.style.display = target === 'models'     ? '' : 'none';
+      if (tg) tg.style.display = target === 'tools'      ? '' : 'none';
+      if (vg) vg.style.display = target === 'glossary' ? '' : 'none';
     });
   });
 }
@@ -1008,6 +1019,272 @@ async function deleteToolEntry() {
     toast(`Removed "${t.name}". GeoJSON regenerated.`, 'danger');
     await refresh();
     newToolEntry();
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+// ──────────────  glossary
+
+function addGlossaryLinkRow(data = {}) {
+  const row = document.createElement('div');
+  row.className = 'submodel-row';
+  row.style.gridTemplateColumns = '1fr 1.8fr 28px';
+  row.innerHTML = `
+    <input type="text" class="lk-label" placeholder="Wikipedia / Paper / GitHub…" value="${escapeHtml(data.label || '')}">
+    <input type="url"  class="lk-url"   placeholder="https://…"                   value="${escapeHtml(data.url   || '')}">
+    <button type="button" class="del-row" title="Remove">×</button>`;
+  row.querySelector('.del-row').addEventListener('click', () => {
+    row.remove();
+    refreshGlossaryLinksUI();
+    renderGlossaryPreview();
+  });
+  row.querySelector('.lk-label').addEventListener('input', renderGlossaryPreview);
+  row.querySelector('.lk-url').addEventListener('input', renderGlossaryPreview);
+  $('#glossary-link-rows').appendChild(row);
+  refreshGlossaryLinksUI();
+  row.querySelector('.lk-label').focus();
+}
+
+function refreshGlossaryLinksUI() {
+  const rows  = $$('#glossary-link-rows .submodel-row');
+  const empty = $('#glossary-links-empty');
+  const count = $('#glossary-links-count');
+  if (empty) empty.style.display = rows.length ? 'none' : 'block';
+  if (count) count.textContent = `${rows.length} link${rows.length !== 1 ? 's' : ''}`;
+}
+
+function populateGlossaryLinks(links = []) {
+  $('#glossary-link-rows').innerHTML = '';
+  links.forEach(l => addGlossaryLinkRow(l));
+  if (links.length === 0) refreshGlossaryLinksUI();
+}
+
+function readGlossaryLinks() {
+  return $$('#glossary-link-rows .submodel-row').map(row => ({
+    label: row.querySelector('.lk-label').value.trim(),
+    url:   row.querySelector('.lk-url').value.trim(),
+  })).filter(l => l.url);
+}
+
+// ── related terms ──
+
+function populateRelatedTerms(ids = []) {
+  $('#related-terms-tags').innerHTML = '';
+  ids.forEach(id => addRelatedTermTag(id));
+  refreshRelatedTermsUI();
+}
+
+function addRelatedTermTag(id) {
+  const term = state.glossaryTerms.find(t => t.id === id);
+  if (!term) return;
+  const tag = document.createElement('span');
+  tag.className = 'conn-model-tag';
+  tag.dataset.id = id;
+  tag.innerHTML = `${escapeHtml(term.term)} <button type="button" class="rm-conn-model" title="Remove">×</button>`;
+  tag.querySelector('.rm-conn-model').addEventListener('click', () => {
+    tag.remove();
+    refreshRelatedTermsUI();
+    renderGlossaryPreview();
+  });
+  $('#related-terms-tags').appendChild(tag);
+  refreshRelatedTermsUI();
+}
+
+function refreshRelatedTermsUI() {
+  const tags       = $$('#related-terms-tags .conn-model-tag');
+  const selectedIds = tags.map(t => t.dataset.id);
+  const empty      = $('#related-terms-empty');
+  const count      = $('#related-terms-count');
+  const sel        = $('#related-terms-select');
+
+  if (empty) empty.style.display = tags.length ? 'none' : 'block';
+  if (count) count.textContent = `${tags.length} related`;
+
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— add a related term —</option>';
+  state.glossaryTerms
+    .filter(t => t.id !== state.activeGlossaryId && !selectedIds.includes(t.id))
+    .sort((a, b) => a.term.localeCompare(b.term))
+    .forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.id;
+      opt.textContent = t.term;
+      sel.appendChild(opt);
+    });
+}
+
+function readRelatedTerms() {
+  return $$('#related-terms-tags .conn-model-tag').map(t => t.dataset.id);
+}
+
+function bindGlossaryForm() {
+  const form = $('#glossary-form');
+  if (!form) return;
+  form.addEventListener('submit', e => { e.preventDefault(); saveGlossaryEntry(); });
+  $('#btn-glossary-new').addEventListener('click', newGlossaryEntry);
+  $('#btn-glossary-delete').addEventListener('click', deleteGlossaryEntry);
+  $('#btn-add-glossary-link').addEventListener('click', () => addGlossaryLinkRow());
+  $("#fg-term').addEventListener('input', renderGlossaryPreview);
+  $("#fg-definition').addEventListener('input', renderGlossaryPreview);
+  $("#fg-notes').addEventListener('input', renderGlossaryPreview);
+  const relSel = $('#related-terms-select');
+  if (relSel) {
+    relSel.addEventListener('change', e => {
+      const id = e.target.value;
+      if (!id) return;
+      addRelatedTermTag(id);
+      renderGlossaryPreview();
+      e.target.value = '';
+    });
+  }
+}
+
+function bindGlossarySearch() {
+  const el = $('#glossary-search');
+  if (!el) return;
+  el.addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) { state.filteredGlossaryIds = null; return renderGlossaryList(); }
+    state.filteredGlossaryIds = state.glossaryTerms
+      .filter(t =>
+        t.term.toLowerCase().includes(q) ||
+        t.definition.toLowerCase().includes(q))
+      .map(t => t.id);
+    renderGlossaryList();
+  });
+}
+
+function renderGlossaryList() {
+  const list  = $('#glossary-list');
+  const count = $('#glossary-count');
+  if (!list) return;
+  const ids   = state.filteredGlossaryIds || state.glossaryTerms.map(t => t.id);
+  const items = state.glossaryTerms.filter(t => ids.includes(t.id));
+
+  if (count) count.textContent = `${items.length} / ${state.glossaryTerms.length}`;
+
+  if (items.length === 0) {
+    list.innerHTML = `<div class="empty-state">No terms match.</div>`;
+    return;
+  }
+  list.innerHTML = items.map(t => `
+    <button class="entry ${state.activeGlossaryId === t.id ? 'is-active' : ''}" data-id="${escapeHtml(t.id)}">
+      <span class="ent-name">${escapeHtml(t.term)}</span>
+      <span class="ent-org">${escapeHtml(t.definition.slice(0, 80))}${t.definition.length > 80 ? '…' : ''}</span>
+    </button>`).join('');
+
+  list.querySelectorAll('.entry').forEach(btn => {
+    btn.addEventListener('click', () => loadGlossaryIntoForm(btn.dataset.id));
+  });
+}
+
+function renderGlossaryPreview() {
+  const el = $('#glossary-preview');
+  if (!el) return;
+  const term       = ($("#fg-term').value || '').trim();
+  const definition = ($("#fg-definition').value || '').trim();
+  const notes      = ($("#fg-notes').value || '').trim();
+  const links        = readGlossaryLinks();
+  const relatedIds   = readRelatedTerms();
+  if (!term && !definition) {
+    el.innerHTML = '<p style="font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)">Fill in the form to see a preview.</p>';
+    return;
+  }
+  const linksHtml = links.length ? `
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)">
+      ${links.map(l => `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener"
+        style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--gold);border:1px solid rgba(201,165,68,.3);padding:4px 9px;text-decoration:none">
+        ${escapeHtml(l.label || l.url)}</a>`).join('')}
+    </div>` : '';
+  const relatedHtml = relatedIds.length ? (() => {
+    const names = relatedIds.map(id => {
+      const t = state.glossaryTerms.find(x => x.id === id);
+      return t ? escapeHtml(t.term) : escapeHtml(id);
+    });
+    return `<div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--line)">
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">See also</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">${names.map(n =>
+        `<span style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--verdigris);border:1px solid rgba(74,132,116,.35);padding:3px 9px">${n}</span>`
+      ).join('')}</div></div>`;
+  })() : '';
+  el.innerHTML = `
+    <div style="padding:16px 0;border-bottom:1px solid var(--line)">
+      <div style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--paper);margin-bottom:8px">${escapeHtml(term)}</div>
+      <div style="font-family:var(--sans);font-size:13px;font-weight:300;color:var(--paper-2);line-height:1.65">${escapeHtml(definition)}</div>
+      ${notes ? `<div style="font-family:var(--serif);font-style:italic;font-size:12px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);line-height:1.55">${escapeHtml(notes)}</div>` : ''}
+      ${linksHtml}
+      ${relatedHtml}
+    </div>`;
+}
+
+function newGlossaryEntry() {
+  state.activeGlossaryId = null;
+  const form = $('#glossary-form');
+  if (form) form.reset();
+  populateGlossaryLinks([]);
+  populateRelatedTerms([]);
+  $('#glossary-form-mode').textContent = 'New term';
+  $('#btn-glossary-delete').style.display = 'none';
+  renderGlossaryList();
+  renderGlossaryPreview();
+}
+
+function loadGlossaryIntoForm(id) {
+  const t = state.glossaryTerms.find(x => x.id === id);
+  if (!t) return;
+  state.activeGlossaryId = id;
+  $('#glossary-form-mode').textContent = `Editing "${t.term}"`;
+  $('#btn-glossary-delete').style.display = '';
+  $("#fg-id').value         = t.id;
+  $("#fg-term').value       = t.term;
+  $("#fg-definition').value = t.definition;
+  $("#fg-notes').value      = t.notes || '';
+  populateGlossaryLinks(t.links || []);
+  populateRelatedTerms(t.relatedTerms || []);
+  renderGlossaryList();
+  renderGlossaryPreview();
+}
+
+async function saveGlossaryEntry() {
+  const term       = ($("#fg-term').value || '').trim();
+  const definition = ($("#fg-definition').value || '').trim();
+  const notes      = ($("#fg-notes').value || '').trim();
+  const links        = readGlossaryLinks();
+  const relatedTerms = readRelatedTerms();
+  if (!term || !definition) {
+    return toast('Term and definition are required.', 'danger');
+  }
+  try {
+    let saved;
+    if (state.activeGlossaryId) {
+      saved = await api('/glossary/' + encodeURIComponent(state.activeGlossaryId), {
+        method: 'PUT', body: JSON.stringify({ term, definition, notes, links, relatedTerms }),
+      });
+      toast(`Updated "${saved.term}".`);
+    } else {
+      saved = await api('/glossary', {
+        method: 'POST', body: JSON.stringify({ term, definition, notes, links, relatedTerms }),
+      });
+      toast(`Added "${saved.term}".`);
+    }
+    state.activeGlossaryId = saved.id;
+    await refresh();
+    loadGlossaryIntoForm(saved.id);
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+async function deleteGlossaryEntry() {
+  if (!state.activeGlossaryId) return;
+  const t = state.glossaryTerms.find(x => x.id === state.activeGlossaryId);
+  if (!confirm(`Remove "${t.term}" from the glossary?`)) return;
+  try {
+    await api('/glossary/' + encodeURIComponent(state.activeGlossaryId), { method: 'DELETE' });
+    toast(`Removed "${t.term}".`, 'danger');
+    await refresh();
+    newGlossaryEntry();
   } catch (err) {
     toast(err.message, 'danger');
   }

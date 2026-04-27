@@ -17,5 +17,6 @@ module.exports = {
   EDITIONS_DIR: path.join(REPO_ROOT, 'data', 'editions'),
   TOOLS_DB_PATH: path.join(BACKEND_ROOT, 'data', 'ai-tools.json'),
   TOOLS_GEOJSON_PATH: path.join(REPO_ROOT, 'data', 'ai-tools.geojson'),
+  GLOSSARY_DB_PATH: path.join(BACKEND_ROOT, 'data', 'ai-glossary.json'),
   resolvePublicGeojsonPath,
 };

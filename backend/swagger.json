@@ -64,6 +64,19 @@
           "builtOn":      { "type": "array", "items": { "type": "string" }, "description": "Model ids this tool is built on" }
         }
       },
+      "GlossaryTerm": {
+        "type": "object",
+        "required": ["term", "definition"],
+        "properties": {
+          "id":         { "type": "string", "description": "Auto-derived from term if omitted" },
+          "term":       { "type": "string" },
+          "definition": { "type": "string" },
+          "notes":      { "type": "string" },
+          "links":        { "type": "array", "items": { "type": "object", "properties": { "label": { "type": "string" }, "url": { "type": "string" } } } },
+          "relatedTerms": { "type": "array", "items": { "type": "string" }, "description": "IDs of related glossary terms" },
+          "updatedAt":    { "type": "string", "format": "date" }
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
@@ -195,6 +208,36 @@
         "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } }
       },
       "delete": { "summary": "Delete a tool", "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
+    },
+    "/glossary": {
+      "get": {
+        "summary": "List all glossary terms (alphabetical)",
+        "responses": {
+          "200": {
+            "description": "Array of terms",
+            "content": { "application/json": { "schema": { "type": "object", "properties": { "terms": { "type": "array", "items": { "$ref": "#/components/schemas/GlossaryTerm" } } } } } }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a glossary term",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GlossaryTerm" } } } },
+        "responses": {
+          "201": { "description": "Created term" },
+          "400": { "description": "Validation error" },
+          "409": { "description": "ID conflict" }
+        }
+      }
+    },
+    "/glossary/{id}": {
+      "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+      "get":    { "summary": "Get one glossary term", "responses": { "200": { "description": "Term" }, "404": { "description": "Not found" } } },
+      "put":    {
+        "summary": "Update a glossary term",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GlossaryTerm" } } } },
+        "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } }
+      },
+      "delete": { "summary": "Delete a glossary term", "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
     }
   }
 }
