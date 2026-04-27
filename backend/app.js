@@ -50,7 +50,7 @@ function createApp(opts = {}) {
   app.use('/api/meta',     metaRouter     ({ db, geojsonPath }));
   app.use('/api/models',   modelsRouter   ({ db, geojsonPath }));
   app.use('/api/export',   exportRouter   ({ db, geojsonPath }));
-  app.use('/api/editions', editionsRouter ({ db, editionsStore }));
+  app.use('/api/editions', editionsRouter ({ db, toolsDb, editionsStore }));
   app.use('/api/tools',    toolsRouter    ({ toolsDb, toolsGeojsonPath }));
 
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc, {

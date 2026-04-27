@@ -6,12 +6,24 @@
 const fsp = require('fs/promises');
 const path = require('path');
 
-function toFeatureCollection({ meta, models }) {
-  return {
+function toFeatureCollection({ meta, models, tools = [] }) {
+  const fc = {
     type: 'FeatureCollection',
     meta: { ...meta },
     features: models.map(toFeature),
   };
+  if (tools.length > 0) {
+    fc.toolFeatures = tools.map(t => {
+      const { lat, lng, ...properties } = t;
+      return {
+        type: 'Feature',
+        id: t.id,
+        geometry: { type: 'Point', coordinates: [lng, lat] },
+        properties,
+      };
+    });
+  }
+  return fc;
 }
 
 function toFeature(model) {

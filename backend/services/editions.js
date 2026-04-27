@@ -85,6 +85,7 @@ function createEditionsStore({ editionsDir }) {
       note: note.trim(),
       date: new Date().toISOString().slice(0, 10),
       features: fc.features.length,
+      tools: (dataset.tools || []).length,
       file: `editions/${filename}`,
     };
 

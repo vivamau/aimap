@@ -1,6 +1,6 @@
 const express = require('express');
 
-function editionsRouter({ db, editionsStore }) {
+function editionsRouter({ db, toolsDb, editionsStore }) {
   const router = express.Router();
 
   router.get('/', async (_req, res, next) => {
@@ -13,7 +13,8 @@ function editionsRouter({ db, editionsStore }) {
   router.post('/', async (req, res, next) => {
     try {
       const { label, note = '' } = req.body || {};
-      const entry = await editionsStore.create(db.snapshot(), { label, note });
+      const dataset = { ...db.snapshot(), tools: toolsDb.listTools() };
+      const entry = await editionsStore.create(dataset, { label, note });
       res.status(201).json(entry);
     } catch (err) { next(err); }
   });

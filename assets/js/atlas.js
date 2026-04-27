@@ -1158,13 +1158,24 @@ async function loadEdition(id) {
     const geo = await fetch(`./data/${ed.file}`).then(r => r.json());
     const { meta, models } = fromGeoJson(geo);
     state.models = models;
+    // Restore the tools snapshot saved with this edition.
+    // For older editions that pre-date tool snapshotting, strip inter-layer
+    // connections from live tools so the timeline stays historically accurate.
+    if (Array.isArray(geo.toolFeatures) && geo.toolFeatures.length > 0) {
+      state.tools = fromToolsGeoJson({ features: geo.toolFeatures });
+    } else {
+      state.tools = state.tools.map(t => ({ ...t, connectedModels: [], connectedTools: [] }));
+    }
     state.activeEditionId = id;
     state.modelPage = 1;
+    state.toolPage = 1;
     closeDetail();
     renderMeta({ ...meta, edition: ed.label, updated: ed.date });
     renderStats();
+    renderLayerToggles();
     renderEditionSwitcher();
     applyFilters();
+    renderToolsCatalogue();
     updateArchiveBanner(ed);
   } catch (err) {
     console.error('Failed to load edition', id, err);
@@ -1173,15 +1184,23 @@ async function loadEdition(id) {
 
 async function loadLiveEdition() {
   try {
-    const geo = await fetch(DATA_URL).then(r => r.json());
+    const [geo, toolsGeo] = await Promise.all([
+      fetch(DATA_URL).then(r => r.json()),
+      fetch(TOOLS_URL).then(r => r.json()),
+    ]);
     const { meta, models } = fromGeoJson(geo);
     state.models = models;
+    state.tools  = fromToolsGeoJson(toolsGeo);
     state.activeEditionId = 'live';
+    state.modelPage = 1;
+    state.toolPage  = 1;
     closeDetail();
     renderMeta(meta);
     renderStats();
+    renderLayerToggles();
     renderEditionSwitcher();
     applyFilters();
+    renderToolsCatalogue();
     updateArchiveBanner(null);
   } catch (err) {
     console.error('Failed to reload live edition', err);
