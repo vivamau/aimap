@@ -1,6 +1,16 @@
 const express = require('express');
+const fsp = require('fs/promises');
+const path = require('path');
 
-function glossaryRouter({ vocabDb }) {
+async function writePublicGlossary(terms, publicPath) {
+  if (!publicPath) return;
+  await fsp.mkdir(path.dirname(publicPath), { recursive: true });
+  const tmp = publicPath + '.tmp';
+  await fsp.writeFile(tmp, JSON.stringify({ terms }, null, 2));
+  await fsp.rename(tmp, publicPath);
+}
+
+function glossaryRouter({ vocabDb, glossaryPublicPath }) {
   const router = express.Router();
 
   router.get('/', (req, res) => {
@@ -15,6 +25,7 @@ function glossaryRouter({ vocabDb }) {
   router.post('/', async (req, res, next) => {
     try {
       const created = await vocabDb.createTerm(req.body || {});
+      await writePublicGlossary(vocabDb.listTerms(), glossaryPublicPath);
       res.status(201).json(created);
     } catch (err) { next(err); }
   });
@@ -22,6 +33,7 @@ function glossaryRouter({ vocabDb }) {
   router.put('/:id', async (req, res, next) => {
     try {
       const updated = await vocabDb.updateTerm(req.params.id, req.body || {});
+      await writePublicGlossary(vocabDb.listTerms(), glossaryPublicPath);
       res.json(updated);
     } catch (err) { next(err); }
   });
@@ -29,6 +41,7 @@ function glossaryRouter({ vocabDb }) {
   router.delete('/:id', async (req, res, next) => {
     try {
       const result = await vocabDb.deleteTerm(req.params.id);
+      await writePublicGlossary(vocabDb.listTerms(), glossaryPublicPath);
       res.json(result);
     } catch (err) { next(err); }
   });
@@ -36,4 +49,4 @@ function glossaryRouter({ vocabDb }) {
   return router;
 }
 
-module.exports = { glossaryRouter };
+module.exports = { glossaryRouter, writePublicGlossary };

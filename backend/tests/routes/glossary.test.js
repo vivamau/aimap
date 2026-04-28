@@ -4,12 +4,13 @@ const os = require('os');
 const request = require('supertest');
 const { createApp } = require('../../app');
 
-let tmpDir, vocabDbPath, app;
+let tmpDir, vocabDbPath, glossaryPublicPath, app;
 
 beforeEach(async () => {
   tmpDir = await fsp.mkdtemp(path.join(os.tmpdir(), 'atlas-glossary-api-'));
   vocabDbPath = path.join(tmpDir, 'ai-glossary.json');
-  app = createApp({ vocabDbPath, staticRoot: tmpDir });
+  glossaryPublicPath = path.join(tmpDir, 'public-ai-glossary.json');
+  app = createApp({ vocabDbPath, staticRoot: tmpDir, glossaryPublicPath });
 });
 
 afterEach(async () => {
@@ -120,5 +121,31 @@ describe('DELETE /api/glossary/:id', () => {
   test('404 when missing', async () => {
     const r = await request(app).delete('/api/glossary/nope');
     expect(r.status).toBe(404);
+  });
+});
+
+describe('public glossary export', () => {
+  test('POST writes data/ai-glossary.json', async () => {
+    await request(app).post('/api/glossary').send(sample());
+    const raw = await fsp.readFile(glossaryPublicPath, 'utf8');
+    const data = JSON.parse(raw);
+    expect(data.terms).toHaveLength(1);
+    expect(data.terms[0].term).toBe('Machine Learning');
+  });
+
+  test('PUT updates data/ai-glossary.json', async () => {
+    await request(app).post('/api/glossary').send(sample());
+    await request(app).put('/api/glossary/machine-learning').send(sample({ notes: 'updated' }));
+    const raw = await fsp.readFile(glossaryPublicPath, 'utf8');
+    const data = JSON.parse(raw);
+    expect(data.terms[0].notes).toBe('updated');
+  });
+
+  test('DELETE updates data/ai-glossary.json', async () => {
+    await request(app).post('/api/glossary').send(sample());
+    await request(app).delete('/api/glossary/machine-learning');
+    const raw = await fsp.readFile(glossaryPublicPath, 'utf8');
+    const data = JSON.parse(raw);
+    expect(data.terms).toHaveLength(0);
   });
 });

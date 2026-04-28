@@ -8,7 +8,7 @@ const cors = require('cors');
 const path = require('path');
 const swaggerUi = require('swagger-ui-express');
 
-const { STATIC_ROOT, DB_PATH, GEOJSON_PATH, EDITIONS_DIR, TOOLS_DB_PATH, TOOLS_GEOJSON_PATH, GLOSSARY_DB_PATH } = require('./config/paths');
+const { STATIC_ROOT, DB_PATH, GEOJSON_PATH, EDITIONS_DIR, TOOLS_DB_PATH, TOOLS_GEOJSON_PATH, GLOSSARY_DB_PATH, GLOSSARY_EDITIONS_DIR, GLOSSARY_PUBLIC_PATH } = require('./config/paths');
 const { createDb } = require('./services/db');
 const { createToolsDb } = require('./services/toolsDb');
 const { exportTo } = require('./services/geojsonExporter');
@@ -19,7 +19,9 @@ const { exportRouter } = require('./routes/exportRoute');
 const { editionsRouter } = require('./routes/editions');
 const { toolsRouter } = require('./routes/tools');
 const { glossaryRouter } = require('./routes/glossary');
+const { glossaryEditionsRouter } = require('./routes/glossaryEditions');
 const { createGlossaryDb } = require('./services/glossaryDb');
+const { createGlossaryEditionsStore } = require('./services/glossaryEditions');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 const swaggerDoc = require('./swagger.json');
 
@@ -31,11 +33,14 @@ function createApp(opts = {}) {
   const toolsDbPath     = opts.toolsDbPath     || TOOLS_DB_PATH;
   const toolsGeojsonPath = opts.toolsGeojsonPath || TOOLS_GEOJSON_PATH;
 
-  const vocabDbPath   = opts.vocabDbPath || GLOSSARY_DB_PATH;
+  const vocabDbPath          = opts.vocabDbPath          || GLOSSARY_DB_PATH;
+  const glossaryEditionsDir  = opts.glossaryEditionsDir  || GLOSSARY_EDITIONS_DIR;
+  const glossaryPublicPath   = opts.glossaryPublicPath   || GLOSSARY_PUBLIC_PATH;
   const db            = createDb({ dbPath });
   const editionsStore = createEditionsStore({ editionsDir });
   const toolsDb       = createToolsDb({ dbPath: toolsDbPath });
-  const vocabDb       = createGlossaryDb({ dbPath: vocabDbPath });
+  const vocabDb                = createGlossaryDb({ dbPath: vocabDbPath });
+  const glossaryEditionsStore  = createGlossaryEditionsStore({ editionsDir: glossaryEditionsDir });
   db.load();
   toolsDb.load();
   vocabDb.load();
@@ -57,7 +62,8 @@ function createApp(opts = {}) {
   app.use('/api/export',   exportRouter   ({ db, geojsonPath }));
   app.use('/api/editions', editionsRouter ({ db, toolsDb, editionsStore }));
   app.use('/api/tools',      toolsRouter      ({ toolsDb, toolsGeojsonPath }));
-  app.use('/api/glossary', glossaryRouter ({ vocabDb }));
+  app.use('/api/glossary',          glossaryRouter         ({ vocabDb, glossaryPublicPath }));
+  app.use('/api/glossary-editions', glossaryEditionsRouter ({ vocabDb, glossaryEditionsStore }));
 
   app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc, {
     customSiteTitle: 'Atlas of AI — API',

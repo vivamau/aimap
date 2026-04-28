@@ -77,6 +77,17 @@
           "updatedAt":    { "type": "string", "format": "date" }
         }
       },
+      "GlossaryEdition": {
+        "type": "object",
+        "properties": {
+          "id":     { "type": "string" },
+          "label":  { "type": "string" },
+          "note":   { "type": "string" },
+          "date":   { "type": "string", "format": "date" },
+          "terms":  { "type": "integer", "description": "Number of terms snapshotted" },
+          "file":   { "type": "string", "description": "Path relative to the data root, e.g. glossary-editions/2026-04-28_….json" }
+        }
+      },
       "Error": {
         "type": "object",
         "properties": {
@@ -208,6 +219,26 @@
         "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } }
       },
       "delete": { "summary": "Delete a tool", "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
+    },
+    "/glossary-editions": {
+      "get": {
+        "summary": "List all glossary editions",
+        "responses": { "200": { "description": "Array of edition metadata", "content": { "application/json": { "schema": { "type": "object", "properties": { "editions": { "type": "array", "items": { "$ref": "#/components/schemas/GlossaryEdition" } } } } } } } }
+      },
+      "post": {
+        "summary": "Save current glossary as a named edition",
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["label"], "properties": { "label": { "type": "string" }, "note": { "type": "string" } } } } } },
+        "responses": {
+          "201": { "description": "Created edition metadata", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GlossaryEdition" } } } },
+          "400": { "description": "Label missing" }
+        }
+      }
+    },
+    "/glossary-editions/{id}": {
+      "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+      "get":    { "summary": "Get snapshot for a glossary edition", "responses": { "200": { "description": "Glossary snapshot" }, "404": { "description": "Not found" } } },
+      "put":    { "summary": "Update glossary edition label/note", "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/GlossaryEdition" } } } }, "responses": { "200": { "description": "Updated" }, "404": { "description": "Not found" } } },
+      "delete": { "summary": "Delete a glossary edition", "responses": { "200": { "description": "Deleted" }, "404": { "description": "Not found" } } }
     },
     "/glossary": {
       "get": {

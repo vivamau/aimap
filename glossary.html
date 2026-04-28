@@ -604,8 +604,15 @@
   let activeFilter = null; // null = all
 
   // ── fetch ──
-  fetch('/api/glossary')
-    .then(r => r.json())
+  function loadTerms(url) {
+    return fetch(url).then(r => {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    });
+  }
+
+  loadTerms('/api/glossary')
+    .catch(() => loadTerms('./data/ai-glossary.json'))
     .then(data => {
       allTerms = data.terms || [];
       filtered = allTerms;

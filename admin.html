@@ -18,6 +18,7 @@
     <button class="btn" id="btn-refresh">Refresh</button>
     <button class="btn" id="btn-meta">Meta</button>
     <button class="btn edition-btn" id="btn-save-edition">Save Edition ✦</button>
+    <button class="btn edition-btn" id="btn-save-glossary-edition" style="display:none">Save Glossary Edition ✦</button>
     <button class="btn" id="btn-download">Download GeoJSON</button>
     <button class="btn primary" id="btn-export">Regenerate file</button>
     <a class="btn" href="/api/docs" target="_blank">API docs ↗</a>
@@ -455,8 +456,15 @@
     </div>
   </section>
 
-  <!-- RIGHT: preview / info -->
+  <!-- RIGHT: editions archive + preview -->
   <section class="panel">
+    <div class="panel__head editions-toggle" id="glossary-editions-toggle" style="cursor:pointer">
+      <span>Glossary editions</span>
+      <span class="num" id="glossary-editions-count">—</span>
+    </div>
+    <div class="panel__body" id="glossary-editions-panel" style="display:none;flex:0 0 auto;max-height:260px">
+      <div class="editions-list" id="glossary-editions-list"></div>
+    </div>
     <div class="panel__head">
       <span>Preview</span>
       <span class="num">live</span>
@@ -571,6 +579,58 @@
       <div class="form-actions" style="margin-top:24px">
         <button type="button" class="btn" id="modal-cancel">Cancel</button>
         <button type="button" class="btn primary" id="modal-confirm">Save Edition ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Save Glossary Edition modal -->
+<div class="modal-backdrop" id="glossary-edition-modal" style="display:none">
+  <div class="modal">
+    <div class="modal__head">
+      <span>Save Glossary Edition</span>
+      <button class="close" id="glossary-modal-close">×</button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__lede">
+        A named snapshot of the current <strong id="glossary-modal-count"></strong> will be saved and added to the glossary editions archive. The live glossary is unaffected.
+      </p>
+      <div class="field" style="margin-top:24px">
+        <label>Edition label <span style="color:var(--rust)">*</span></label>
+        <input id="ged-label" type="text" placeholder="Glossary Vol. II — Summer 2026">
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label>Editorial note</label>
+        <textarea id="ged-note" placeholder="A sentence describing what changed in this edition…"></textarea>
+      </div>
+      <div class="form-actions" style="margin-top:24px">
+        <button type="button" class="btn" id="glossary-modal-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="glossary-modal-confirm">Save Glossary Edition ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Glossary Edition modal -->
+<div class="modal-backdrop" id="edit-glossary-edition-modal" style="display:none">
+  <div class="modal">
+    <div class="modal__head">
+      <span>Edit Glossary Edition</span>
+      <button class="close" id="edit-glossary-edition-close">×</button>
+    </div>
+    <div class="modal__body">
+      <p class="modal__lede">Change the label or editorial note. The snapshot data is not affected.</p>
+      <div class="field" style="margin-top:24px">
+        <label>Edition label <span style="color:var(--rust)">*</span></label>
+        <input id="eged-label" type="text" placeholder="Glossary Vol. II — Summer 2026">
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label>Editorial note</label>
+        <textarea id="eged-note" placeholder="A sentence describing what changed in this edition…"></textarea>
+      </div>
+      <div class="form-actions" style="margin-top:24px">
+        <button type="button" class="btn" id="edit-glossary-edition-cancel">Cancel</button>
+        <button type="button" class="btn primary" id="edit-glossary-edition-confirm">Save changes</button>
       </div>
     </div>
   </div>

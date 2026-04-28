@@ -20,6 +20,9 @@ const state = {
   glossaryTerms: [],
   filteredGlossaryIds: null,
   activeGlossaryId: null,
+  // glossary editions
+  glossaryEditions: [],
+  editingGlossaryEditionId: null,
   activeTab: 'models',
   editingEditionId: null,
   deletingEditionId: null,
@@ -67,6 +70,9 @@ async function api(path, opts = {}) {
   bindToolSearch();
   bindGlossaryForm();
   bindGlossarySearch();
+  bindGlossaryEditionsToggle();
+  bindGlossaryEditionModal();
+  bindEditGlossaryEditionModal();
   try {
     await refresh();
     newEntry();
@@ -76,18 +82,20 @@ async function api(path, opts = {}) {
 })();
 
 async function refresh() {
-  const [meta, list, edList, toolList, vocabList] = await Promise.all([
+  const [meta, list, edList, toolList, vocabList, glossaryEdList] = await Promise.all([
     api('/meta'),
     api('/models'),
     api('/editions'),
     api('/tools'),
     api('/glossary'),
+    api('/glossary-editions'),
   ]);
-  state.meta       = meta;
-  state.models     = list.models;
-  state.editions   = edList.editions;
-  state.tools      = toolList.tools;
-  state.glossaryTerms = vocabList.terms;
+  state.meta             = meta;
+  state.models           = list.models;
+  state.editions         = edList.editions;
+  state.tools            = toolList.tools;
+  state.glossaryTerms    = vocabList.terms;
+  state.glossaryEditions = glossaryEdList.editions;
   renderAll();
 }
 
@@ -101,6 +109,7 @@ function renderAll() {
   renderToolsList();
   renderToolsPreview();
   renderGlossaryList();
+  renderGlossaryEditions();
 }
 
 function renderStatline() {
@@ -813,6 +822,159 @@ function deleteEdition(id, label) {
   openConfirmDeleteModal(id, label);
 }
 
+// ──────────────  glossary editions panel
+
+function renderGlossaryEditions() {
+  const count = state.glossaryEditions.length;
+  const countEl = $('#glossary-editions-count');
+  if (countEl) countEl.textContent = count ? `${count} saved` : '0 saved';
+
+  const list = $('#glossary-editions-list');
+  if (!list) return;
+
+  if (!count) {
+    list.innerHTML = `<div class="editions-empty">
+      No glossary editions saved yet.<br>Use <em>Save Glossary Edition ✦</em> to archive the current glossary.
+    </div>`;
+    return;
+  }
+
+  list.innerHTML = state.glossaryEditions.map(ed => `
+    <div class="edition-item" data-ged-id="${escapeHtml(ed.id)}">
+      <div class="edition-item__meta">
+        <strong>${escapeHtml(ed.label)}</strong>
+        <span>${ed.terms} term${ed.terms !== 1 ? 's' : ''} · ${ed.date}</span>
+        ${ed.note ? `<em>${escapeHtml(ed.note)}</em>` : ''}
+      </div>
+      <div class="edition-item__actions">
+        <button class="btn btn-sm btn-edit-ged" data-id="${escapeHtml(ed.id)}" title="Edit">Edit</button>
+        <button class="btn btn-sm danger btn-del-ged" data-id="${escapeHtml(ed.id)}" data-label="${escapeHtml(ed.label)}" title="Delete">Delete</button>
+      </div>
+    </div>`).join('');
+
+  list.querySelectorAll('.btn-edit-ged').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ed = state.glossaryEditions.find(e => e.id === btn.dataset.id);
+      if (ed) openEditGlossaryEditionModal(ed);
+    });
+  });
+  list.querySelectorAll('.btn-del-ged').forEach(btn => {
+    btn.addEventListener('click', () => deleteGlossaryEdition(btn.dataset.id, btn.dataset.label));
+  });
+}
+
+function bindGlossaryEditionsToggle() {
+  const toggle = $('#glossary-editions-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', () => {
+    const panel = $('#glossary-editions-panel');
+    if (!panel) return;
+    const open = panel.style.display !== 'none';
+    panel.style.display = open ? 'none' : 'block';
+    toggle.style.borderBottom = open ? '' : '1px solid var(--verdigris)';
+  });
+}
+
+// ── Save Glossary Edition modal ──
+
+function bindGlossaryEditionModal() {
+  $('#btn-save-glossary-edition').addEventListener('click', openGlossaryEditionModal);
+  $('#glossary-modal-close').addEventListener('click',   closeGlossaryEditionModal);
+  $('#glossary-modal-cancel').addEventListener('click',  closeGlossaryEditionModal);
+  $('#glossary-modal-confirm').addEventListener('click', confirmSaveGlossaryEdition);
+  $('#glossary-edition-modal').addEventListener('click', e => {
+    if (e.target === $('#glossary-edition-modal')) closeGlossaryEditionModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('#glossary-edition-modal').style.display !== 'none') closeGlossaryEditionModal();
+  });
+}
+
+function openGlossaryEditionModal() {
+  const count = state.glossaryTerms.length;
+  $('#glossary-modal-count').textContent = `${count} term${count !== 1 ? 's' : ''}`;
+  $('#ged-label').value = '';
+  $('#ged-note').value  = '';
+  $('#glossary-edition-modal').style.display = 'grid';
+  setTimeout(() => $('#ged-label').focus(), 50);
+}
+
+function closeGlossaryEditionModal() {
+  $('#glossary-edition-modal').style.display = 'none';
+}
+
+async function confirmSaveGlossaryEdition() {
+  const label = ($('#ged-label').value || '').trim();
+  const note  = ($('#ged-note').value  || '').trim();
+  if (!label) { toast('A glossary edition label is required.', 'danger'); return; }
+  try {
+    const ed = await api('/glossary-editions', {
+      method: 'POST', body: JSON.stringify({ label, note }),
+    });
+    closeGlossaryEditionModal();
+    await refresh();
+    $('#glossary-editions-panel').style.display = 'block';
+    toast(`Glossary edition "${ed.label}" saved — ${ed.terms} terms archived.`);
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+// ── Edit Glossary Edition modal ──
+
+function bindEditGlossaryEditionModal() {
+  $('#edit-glossary-edition-close').addEventListener('click',   closeEditGlossaryEditionModal);
+  $('#edit-glossary-edition-cancel').addEventListener('click',  closeEditGlossaryEditionModal);
+  $('#edit-glossary-edition-confirm').addEventListener('click', confirmEditGlossaryEdition);
+  $('#edit-glossary-edition-modal').addEventListener('click', e => {
+    if (e.target === $('#edit-glossary-edition-modal')) closeEditGlossaryEditionModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && $('#edit-glossary-edition-modal').style.display !== 'none') closeEditGlossaryEditionModal();
+  });
+}
+
+function openEditGlossaryEditionModal(ed) {
+  state.editingGlossaryEditionId = ed.id;
+  $('#eged-label').value = ed.label;
+  $('#eged-note').value  = ed.note || '';
+  $('#edit-glossary-edition-modal').style.display = 'grid';
+  setTimeout(() => $('#eged-label').focus(), 50);
+}
+
+function closeEditGlossaryEditionModal() {
+  $('#edit-glossary-edition-modal').style.display = 'none';
+  state.editingGlossaryEditionId = null;
+}
+
+async function confirmEditGlossaryEdition() {
+  const label = ($('#eged-label').value || '').trim();
+  const note  = ($('#eged-note').value  || '').trim();
+  if (!label) { toast('Edition label is required.', 'danger'); return; }
+  try {
+    const updated = await api(`/glossary-editions/${encodeURIComponent(state.editingGlossaryEditionId)}`, {
+      method: 'PUT', body: JSON.stringify({ label, note }),
+    });
+    closeEditGlossaryEditionModal();
+    await refresh();
+    $('#glossary-editions-panel').style.display = 'block';
+    toast(`Glossary edition "${updated.label}" updated.`);
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
+async function deleteGlossaryEdition(id, label) {
+  if (!confirm(`Remove glossary edition "${label}"? This cannot be undone.`)) return;
+  try {
+    await api(`/glossary-editions/${encodeURIComponent(id)}`, { method: 'DELETE' });
+    toast(`Glossary edition "${label}" deleted.`, 'danger');
+    await refresh();
+  } catch (err) {
+    toast(err.message, 'danger');
+  }
+}
+
 // ──────────────  tab switcher
 
 function bindTabSwitcher() {
@@ -825,9 +987,13 @@ function bindTabSwitcher() {
       const mg = $('#models-grid');
       const tg = $('#tools-grid');
       const vg = $('#glossary-grid');
-      if (mg) mg.style.display = target === 'models'     ? '' : 'none';
-      if (tg) tg.style.display = target === 'tools'      ? '' : 'none';
+      if (mg) mg.style.display = target === 'models'   ? '' : 'none';
+      if (tg) tg.style.display = target === 'tools'    ? '' : 'none';
       if (vg) vg.style.display = target === 'glossary' ? '' : 'none';
+      const btnEd  = $('#btn-save-edition');
+      const btnGed = $('#btn-save-glossary-edition');
+      if (btnEd)  btnEd.style.display  = target === 'models'   ? '' : 'none';
+      if (btnGed) btnGed.style.display = target === 'glossary' ? '' : 'none';
     });
   });
 }
