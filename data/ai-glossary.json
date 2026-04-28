@@ -1,13 +1,59 @@
 {
   "terms": [
     {
-      "id": "machine-learning",
-      "term": "Machine Learning",
-      "definition": "A field of AI.",
-      "notes": "",
-      "links": [],
-      "relatedTerms": [],
+      "id": "ai-artificial-intelligence",
+      "term": "AI (Artificial Intelligence)",
+      "definition": "Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making. It is a field of research in engineering, mathematics and computer science that develops and studies methods and software that enable machines to perceive their environment and use learning and intelligence to take actions that maximize their chances of achieving defined goals.",
+      "notes": "This needs to be improved",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+        }
+      ],
+      "relatedTerms": [
+        "ml-machine-learning"
+      ],
       "updatedAt": "2026-04-28"
+    },
+    {
+      "id": "dl-deep-learning",
+      "term": "DL (Deep learning)",
+      "definition": "In machine learning, deep learning (DL) focuses on utilizing multilayered neural networks to perform tasks such as classification, regression, and representation learning. The field takes inspiration from biological neuroscience and revolves around stacking artificial neurons into layers and \"training\" them to process data.",
+      "notes": "Most modern deep learning models are based on multi-layered neural networks such as convolutional neural networks and transformers, although they can also include propositional formulas or latent variables organized layer-wise in deep generative models such as the nodes in deep belief networks and deep Boltzmann machines.[7]\n\nFundamentally, deep learning refers to a class of machine learning algorithms in which a hierarchy of layers is used to transform input data into a progressively more abstract and composite representation. For example, in an image recognition model, the raw input may be an image (represented as a tensor of pixels). The first representational layer may attempt to identify basic shapes such as lines and circles, the second layer may compose and encode arrangements of edges, the third layer may encode a nose and eyes, and the fourth layer may recognize that the image contains a face.",
+      "links": [],
+      "relatedTerms": [
+        "ml-machine-learning"
+      ],
+      "updatedAt": "2026-04-27"
+    },
+    {
+      "id": "ml-machine-learning",
+      "term": "ML (Machine learning)",
+      "definition": "Machine learning (ML) is a field of study in artificial intelligence concerned with the development and study of statistical algorithms that can learn from data and generalize to unseen data, and thus perform tasks without explicit programming language instructions. Within a subdiscipline of machine learning, advances in the field of deep learning have allowed neural networks, a class of statistical algorithms, to surpass many previous machine learning approaches in performance.",
+      "notes": "The term machine learning was coined in 1959 by Arthur Samuel, an IBM employee and pioneer in the field of computer gaming and artificial intelligence. The synonym self-teaching computers was also used during this time period.\n\nThe earliest machine learning program was introduced in the 1950s when Arthur Samuel invented a computer program that calculated the winning chance in checkers for each side, but the history of machine learning roots back to decades of human desire and effort to study human cognitive processes. In 1949, Canadian psychologist Donald Hebb published the book The Organization of Behavior, in which he introduced a theoretical neural structure formed by certain interactions among nerve cells. Hebb's model of neurons interacting with one another set a groundwork for how AIs and machine learning algorithms work under nodes, or artificial neurons used by computers to communicate data. Other researchers who have studied human cognitive systems contributed to the modern machine learning technologies as well, including logician Walter Pitts and Warren McCulloch, who proposed the early mathematical models of neural networks to come up with algorithms that mirror human thought processes.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Machine_learning"
+        }
+      ],
+      "relatedTerms": [
+        "ai-artificial-intelligence"
+      ],
+      "updatedAt": "2026-04-27"
+    },
+    {
+      "id": "moe-mixture-of-expert",
+      "term": "MoE (Mixture of Expert)",
+      "definition": "Mixture of experts (MoE) is a machine learning technique where multiple expert networks (learners) are used to divide a problem space into homogeneous regions. MoE represents a form of ensemble learning. They were also called committee machines.",
+      "notes": "After deep learning, MoE found applications in running the largest models, as a simple way to perform conditional computation: only parts of the model are used, the parts chosen according to what the input is.\n\nThe earliest paper that applies MoE to deep learning dates back to 2013, which proposed to use a different gating network at each layer in a deep neural network.\n\nThe key goal when using MoE in deep learning is to reduce computing cost. Consequently, for each query, only a small subset of the experts should be queried. This makes MoE in deep learning different from classical MoE. In classical MoE, the output for each query is a weighted sum of all experts' outputs. In deep learning MoE, the output for each query can only involve a few experts' outputs. Consequently, the key design choice in MoE becomes routing: given a batch of queries, how to route the queries to the best experts.",
+      "links": [],
+      "relatedTerms": [
+        "ml-machine-learning",
+        "dl-deep-learning"
+      ],
+      "updatedAt": "2026-04-27"
     }
   ]
 }
