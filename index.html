@@ -4,7 +4,59 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AImap: Atlas of Artificial Intelligence</title>
-<meta name="description" content="A cartographic survey of the global distribution of artificial intelligence systems.">
+<meta name="description" content="An interactive atlas mapping the global distribution of AI models, tools, and organisations — explore 120+ systems plotted on a world map with filtering by type, modality, and country.">
+<meta name="author" content="vivamau">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vivamau.github.io/aimap/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AImap">
+<meta property="og:title" content="AImap: Atlas of Artificial Intelligence">
+<meta property="og:description" content="An interactive atlas mapping the global distribution of AI models, tools, and organisations — explore 120+ systems plotted on a world map with filtering by type, modality, and country.">
+<meta property="og:url" content="https://vivamau.github.io/aimap/">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AImap: Atlas of Artificial Intelligence">
+<meta name="twitter:description" content="An interactive atlas mapping the global distribution of AI models, tools, and organisations — explore 120+ systems plotted on a world map.">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "AImap: Atlas of Artificial Intelligence",
+  "url": "https://vivamau.github.io/aimap/",
+  "description": "An interactive atlas mapping the global distribution of artificial intelligence models, tools, and organisations.",
+  "author": { "@type": "Person", "name": "vivamau", "url": "https://github.com/vivamau" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://vivamau.github.io/aimap/#catalogue",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Atlas of Artificial Intelligence — Models & Tools",
+  "description": "A curated, geolocated catalogue of artificial intelligence models and tools, with metadata on organisation, country of origin, modality, type, year, and parameters.",
+  "url": "https://vivamau.github.io/aimap/",
+  "keywords": ["artificial intelligence", "AI models", "machine learning", "large language models", "AI tools", "AI geography", "AI atlas", "deep learning"],
+  "license": "https://github.com/vivamau/aimap/blob/main/LICENSE",
+  "creator": { "@type": "Person", "name": "vivamau", "url": "https://github.com/vivamau" },
+  "distribution": {
+    "@type": "DataDownload",
+    "encodingFormat": "application/geo+json",
+    "contentUrl": "https://vivamau.github.io/aimap/data/ai-models.geojson"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="stylesheet" href="./assets/css/atlas.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='10' fill='%230d0b08' stroke='%23c9a544' stroke-width='2'/%3E%3Ctext x='12' y='17' text-anchor='middle' font-family='serif' font-style='italic' font-size='14' fill='%23c9a544'%3EA%3C/text%3E%3C/svg%3E">
 <script>
