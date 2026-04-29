@@ -46,7 +46,7 @@ const state = {
   editions: [],               // list loaded from editions/index.json
   tools: [],                  // AI tools layer
   filteredTools: [],          // tools after category/search filter
-  filterToolCategory: 'all',  // all | assistant | codegen | devtool | ide | search
+  filterToolCategory: 'all',  // all | assistant | codegen | devtool | fun | ide | search
   layers: { models: true, tools: true },
   catTab: 'models',           // active catalogue tab
   glanceTab: 'models',        // active "at a glance" tab

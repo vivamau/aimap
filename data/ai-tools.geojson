@@ -4,6 +4,34 @@
   "features": [
     {
       "type": "Feature",
+      "id": "translator-mind",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0,
+          0
+        ]
+      },
+      "properties": {
+        "id": "translator-mind",
+        "name": "Translator Mind",
+        "organization": "Translator Mind",
+        "country": "n.a.",
+        "city": "n.a.",
+        "category": "fun",
+        "year": 2026,
+        "releaseDate": "2026-02-02",
+        "retiredDate": "",
+        "url": "https://translatormind.com/",
+        "notes": "In a world of robotic, literal translations, we saw an opportunity for something more human, more creative, and frankly, more fun. We wanted to build tools that didn’t just change the language, but changed the feeling.",
+        "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "computer",
       "geometry": {
         "type": "Point",
