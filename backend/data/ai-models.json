@@ -1,10 +1,61 @@
 {
   "meta": {
     "edition": "Vol. II — MMXXVI",
-    "updated": "2026-04-27",
+    "updated": "2026-05-03",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "models": [
+    {
+      "id": "granite-41",
+      "name": "Granite 4.1",
+      "organization": "IBM",
+      "country": "United States",
+      "city": "Armonk",
+      "lat": 41.1098,
+      "lng": -73.7073,
+      "type": "open-weight",
+      "year": 2026,
+      "releaseDate": "2026-04-28",
+      "parameters": "30B",
+      "url": "https://www.ibm.com/granite/docs",
+      "notes": "Granite 4.1 language models are a family of state-of-the-art open foundation models featuring dense decoder-only architectures in three sizes — 3B, 8B, and 30B. They natively support multilingual capabilities, a wide range of coding tasks, retrieval-augmented generation (RAG), tool usage, and structured JSON output. License: Apache 2.0",
+      "modality": [
+        "text",
+        "code"
+      ],
+      "links": [
+        {
+          "label": "Github",
+          "url": "https://github.com/ibm-granite/granite-4.1-language-models"
+        }
+      ],
+      "submodels": [
+        {
+          "name": "granite4.1:3b",
+          "version": "4.1",
+          "parameters": "3B",
+          "ollamaUrl": "https://ollama.com/library/granite4.1",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-05-03"
+        },
+        {
+          "name": "granite4.1:8b",
+          "version": "4.1",
+          "parameters": "8B",
+          "ollamaUrl": "https://ollama.com/library/granite4.1",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-05-03"
+        },
+        {
+          "name": "granite4.1:30b",
+          "version": "4.1",
+          "parameters": "30B",
+          "ollamaUrl": "https://ollama.com/library/granite4.1",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-05-03"
+        }
+      ]
+    },
     {
       "id": "sonar-2",
       "name": "Sonar 2",
