@@ -53,3 +53,6 @@ coverage/
 .cache/
 tmp/
 temp/
+
+# Claude Code worktrees
+.claude/worktrees/

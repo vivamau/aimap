@@ -595,6 +595,8 @@ function bindCatalogueTabs() {
 
 // ──────────────  detail panel
 
+let _detailJustOpened = false;
+
 function bindDetailPanel() {
   $('#detail .close').addEventListener('click', closeDetail);
   document.addEventListener('keydown', e => {
@@ -604,9 +606,17 @@ function bindDetailPanel() {
       else closeDetail();
     }
   });
+  document.addEventListener('click', e => {
+    if (_detailJustOpened) { _detailJustOpened = false; return; }
+    const panel = $('#detail');
+    if (panel.classList.contains('is-open') && !panel.contains(e.target)) {
+      closeDetail();
+    }
+  });
 }
 
 function openDetail(m) {
+  _detailJustOpened = true;
   state.selected = m;
   const panel = $('#detail');
   $('#detail .eyebrow').textContent = `№ ${zeroPad(state.models.indexOf(m) + 1, 3)} · ${m.year}`;
@@ -746,6 +756,7 @@ function renderToolMarkers() {
 }
 
 function openToolDetail(t) {
+  _detailJustOpened = true;
   state.selectedTool = t;
   state.selected = null;
   const panel = $('#detail');
