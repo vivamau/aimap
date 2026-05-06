@@ -1,10 +1,31 @@
 {
   "meta": {
     "edition": "Vol. II — MMXXVI",
-    "updated": "2026-05-03",
+    "updated": "2026-05-06",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
   },
   "models": [
+    {
+      "id": "subq1m-preview",
+      "name": "SubQ1M-Preview",
+      "organization": "Subquadritic",
+      "country": "United States",
+      "city": "Miami",
+      "lat": 25.7751,
+      "lng": -80.2806,
+      "type": "proprietary",
+      "year": 2026,
+      "releaseDate": "2026-05-05",
+      "parameters": "undisclosed",
+      "url": "https://subq.ai/introducing-subq",
+      "notes": "SubQ 1M-Preview, is the first LLM built on a fully subquadratic architecture, one where compute grows linearly with context length.\n\nThis allows significantly increased context windows, state-of-the-art accuracy on needle-in-a-haystack and exact copy tests, faster inference, and significantly lower cost to improve together. Historically, making models subquadratic meant sacrificing on accuracy, and reducing cost meant sacrificing performance. SubQ improves all of that at once. Not incrementally, but at an order of magnitude that makes millions of tokens of context a practical reality.\n\nWith a research result at 12 million tokens, SubQ's architecture reduces attention compute by almost 1,000x compared to other frontier models.",
+      "modality": [
+        "text",
+        "code"
+      ],
+      "links": [],
+      "submodels": []
+    },
     {
       "id": "granite-41",
       "name": "Granite 4.1",
