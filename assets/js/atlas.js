@@ -425,6 +425,7 @@ function renderCatalogue() {
       <td class="hide-sm">${m.modality.join(' · ')}</td>
       <td>${m.year}</td>
       <td class="hide-sm">${m.parameters}</td>
+      <td class="hide-sm">${m.contextSize || '—'}</td>
     </tr>`).join('');
 
   updateCatalogueCount();
@@ -617,6 +618,7 @@ function openDetail(m) {
     ${m.releaseDate ? `<dt>Released</dt><dd>${m.releaseDate}</dd>` : ''}
     <dt>Modality</dt><dd>${m.modality.join(' · ')}</dd>
     <dt>Parameters</dt><dd>${m.parameters}</dd>
+    ${m.contextSize ? `<dt>Context size</dt><dd>${escapeHtml(m.contextSize)}</dd>` : ''}
     <dt>Coordinates</dt><dd>${m.lat.toFixed(2)}°, ${m.lng.toFixed(2)}°</dd>
     <dt>Reference</dt><dd><a href="${m.url}" target="_blank" rel="noopener">${stripUrl(m.url)} ↗</a></dd>`;
   $('#detail .notes').textContent = m.notes || '';
@@ -653,6 +655,7 @@ function openDetail(m) {
           <td>${escapeHtml(s.name)}</td>
           <td>${escapeHtml(s.version)}</td>
           <td>${escapeHtml(s.parameters)}</td>
+          <td>${escapeHtml(s.contextSize || '')}</td>
           <td class="sub-links">${links}</td>
           <td>${escapeHtml(s.addedAt)}</td>
         </tr>`;
@@ -661,7 +664,7 @@ function openDetail(m) {
         <div class="submodels-title">Variants &amp; submodels<span>(${subs.length})</span></div>
         <table class="submodels-table">
           <thead><tr>
-            <th>Name</th><th>Version</th><th>Params</th><th>Links</th><th>Added</th>
+            <th>Name</th><th>Version</th><th>Params</th><th>Context</th><th>Links</th><th>Added</th>
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>`;
