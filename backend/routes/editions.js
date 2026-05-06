@@ -28,8 +28,8 @@ function editionsRouter({ db, toolsDb, editionsStore }) {
 
   router.put('/:id', async (req, res, next) => {
     try {
-      const { label, note } = req.body || {};
-      const updated = await editionsStore.update(req.params.id, { label, note });
+      const { label, note, date } = req.body || {};
+      const updated = await editionsStore.update(req.params.id, { label, note, date });
       res.json(updated);
     } catch (err) { next(err); }
   });

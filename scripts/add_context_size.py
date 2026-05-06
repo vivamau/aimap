@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from collections import OrderedDict
 
-DATA = Path(__file__).resolve().parent.parent / "data" / "ai-models.geojson"
+DATA = Path(__file__).resolve().parent.parent / "backend" / "data" / "ai-models.json"
 
 # Top-level model context sizes (by id). Submodel-specific overrides below.
 MODEL_CTX = {
@@ -191,24 +191,25 @@ def main() -> None:
     raw = DATA.read_text()
     data = json.loads(raw, object_pairs_hook=OrderedDict)
 
-    for feat in data["features"]:
-        props = feat["properties"]
-        mid = props["id"]
+    models = data["models"]
+    updated = 0
+    for model in models:
+        mid = model["id"]
         parent_ctx = ctx_for_model(mid)
-        # Insert contextSize right after "parameters"
-        new_props = insert_after(props, "parameters", "contextSize", parent_ctx)
-        # Update submodels
-        if "submodels" in new_props and isinstance(new_props["submodels"], list):
+        new_model = insert_after(model, "parameters", "contextSize", parent_ctx)
+        if "submodels" in new_model and isinstance(new_model["submodels"], list):
             new_subs = []
-            for sub in new_props["submodels"]:
+            for sub in new_model["submodels"]:
                 sub_ctx = ctx_for_submodel(mid, sub.get("name", ""), parent_ctx)
                 new_sub = insert_after(sub, "parameters", "contextSize", sub_ctx)
                 new_subs.append(new_sub)
-            new_props["submodels"] = new_subs
-        feat["properties"] = new_props
+            new_model["submodels"] = new_subs
+        models[updated] = new_model
+        updated += 1
 
+    data["models"] = models
     DATA.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
-    print(f"Updated {len(data['features'])} models.")
+    print(f"Updated {updated} models.")
 
 
 if __name__ == "__main__":

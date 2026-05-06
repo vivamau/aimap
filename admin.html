@@ -119,6 +119,10 @@
             <label>Parameters</label>
             <input id="f-params" class="mono" type="text" placeholder="70B / undisclosed">
           </div>
+          <div class="field">
+            <label>Context size</label>
+            <input id="f-ctx" class="mono" type="text" placeholder="128K / 1M">
+          </div>
         </div>
 
         <div class="field">
@@ -163,6 +167,7 @@
               <span>Name</span>
               <span>Version</span>
               <span>Params</span>
+              <span>Context</span>
               <span>Ollama</span>
               <span>HuggingFace</span>
               <span>Added</span>
@@ -540,10 +545,14 @@
       <button class="close" id="edit-edition-close">×</button>
     </div>
     <div class="modal__body">
-      <p class="modal__lede">Change the label or editorial note. The snapshot data is not affected.</p>
+      <p class="modal__lede">Change the label, date, or editorial note. The snapshot data is not affected.</p>
       <div class="field" style="margin-top:24px">
         <label>Edition label <span style="color:var(--rust)">*</span></label>
         <input id="eed-label" type="text" placeholder="Vol. II — Summer 2026">
+      </div>
+      <div class="field" style="margin-top:18px">
+        <label>Date</label>
+        <input id="eed-date" class="mono" type="date">
       </div>
       <div class="field" style="margin-top:18px">
         <label>Editorial note</label>

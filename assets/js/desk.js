@@ -392,6 +392,7 @@ function addSubmodelRow(data = {}) {
     <input type="text"  class="sm-name"   placeholder="model:7b"         value="${escapeHtml(data.name           || '')}">
     <input type="text"  class="sm-ver"    placeholder="2.5"               value="${escapeHtml(data.version        || '')}">
     <input type="text"  class="sm-params" placeholder="7B"                value="${escapeHtml(data.parameters     || '')}">
+    <input type="text"  class="sm-ctx"    placeholder="128K"              value="${escapeHtml(data.contextSize    || '')}">
     <input type="url"   class="sm-ollama" placeholder="https://ollama.com/…" value="${escapeHtml(data.ollamaUrl   || '')}">
     <input type="url"   class="sm-hf"     placeholder="https://huggingface.co/…" value="${escapeHtml(data.huggingfaceUrl || '')}">
     <input type="date"  class="sm-date"   value="${escapeHtml(data.addedAt || today)}">
@@ -426,6 +427,7 @@ function readSubmodels() {
     name:           row.querySelector('.sm-name').value.trim(),
     version:        row.querySelector('.sm-ver').value.trim(),
     parameters:     row.querySelector('.sm-params').value.trim(),
+    contextSize:    row.querySelector('.sm-ctx').value.trim(),
     ollamaUrl:      row.querySelector('.sm-ollama').value.trim(),
     huggingfaceUrl: row.querySelector('.sm-hf').value.trim(),
     addedAt:        row.querySelector('.sm-date').value.trim(),
@@ -461,6 +463,7 @@ function loadIntoForm(id) {
   $('#f-year').value = m.year;
   $('#f-date').value = m.releaseDate || '';
   $('#f-params').value = m.parameters;
+  $('#f-ctx').value = m.contextSize || '';
   $('#f-url').value = m.url;
   $('#f-notes').value = m.notes || '';
   $$('#mod-grid .mod-toggle').forEach(t =>
@@ -484,6 +487,7 @@ function readForm() {
     year: parseInt($('#f-year').value, 10),
     releaseDate: $('#f-date').value || '',
     parameters: $('#f-params').value.trim() || 'undisclosed',
+    contextSize: $('#f-ctx').value.trim() || '',
     url: $('#f-url').value.trim(),
     notes: $('#f-notes').value.trim(),
     modality: modality.length ? modality : ['text'],
@@ -787,6 +791,7 @@ function bindEditEditionModal() {
 function openEditEditionModal(ed) {
   state.editingEditionId = ed.id;
   $('#eed-label').value = ed.label;
+  $('#eed-date').value  = ed.date || '';
   $('#eed-note').value  = ed.note || '';
   $('#edit-edition-modal').style.display = 'grid';
   setTimeout(() => $('#eed-label').focus(), 50);
@@ -799,6 +804,7 @@ function closeEditEditionModal() {
 
 async function confirmEditEdition() {
   const label = $('#eed-label').value.trim();
+  const date  = $('#eed-date').value.trim();
   const note  = $('#eed-note').value.trim();
   if (!label) {
     $('#eed-label').focus();
@@ -807,7 +813,7 @@ async function confirmEditEdition() {
   try {
     const updated = await api(`/editions/${encodeURIComponent(state.editingEditionId)}`, {
       method: 'PUT',
-      body: JSON.stringify({ label, note }),
+      body: JSON.stringify({ label, date, note }),
     });
     closeEditEditionModal();
     await refresh();

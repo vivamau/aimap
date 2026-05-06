@@ -109,13 +109,14 @@ function createEditionsStore({ editionsDir }) {
     return JSON.parse(raw);
   }
 
-  async function update(id, { label, note = '' }) {
+  async function update(id, { label, note = '', date }) {
     if (!label || !label.trim()) throw new HttpError(400, 'Edition label is required');
     const index = await readIndex();
     const entry = index.editions.find(e => e.id === id);
     if (!entry) throw new HttpError(404, `Edition "${id}" not found`);
     entry.label = label.trim();
     entry.note  = note.trim();
+    if (date && /^\d{4}-\d{2}-\d{2}$/.test(date.trim())) entry.date = date.trim();
     await writeIndex(index);
     return { ...entry };
   }

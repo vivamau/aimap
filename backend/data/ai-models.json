@@ -1,8 +1,8 @@
 {
   "meta": {
-    "edition": "Vol. II — MMXXVI",
+    "edition": "Vol. III — MMXXVI, now with Context",
     "updated": "2026-05-06",
-    "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems."
+    "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "models": [
     {
@@ -17,6 +17,7 @@
       "year": 2026,
       "releaseDate": "2026-05-05",
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://subq.ai/introducing-subq",
       "notes": "SubQ 1M-Preview, is the first LLM built on a fully subquadratic architecture, one where compute grows linearly with context length.\n\nThis allows significantly increased context windows, state-of-the-art accuracy on needle-in-a-haystack and exact copy tests, faster inference, and significantly lower cost to improve together. Historically, making models subquadratic meant sacrificing on accuracy, and reducing cost meant sacrificing performance. SubQ improves all of that at once. Not incrementally, but at an order of magnitude that makes millions of tokens of context a practical reality.\n\nWith a research result at 12 million tokens, SubQ's architecture reduces attention compute by almost 1,000x compared to other frontier models.",
       "modality": [
@@ -38,6 +39,7 @@
       "year": 2026,
       "releaseDate": "2026-04-28",
       "parameters": "30B",
+      "contextSize": "128K",
       "url": "https://www.ibm.com/granite/docs",
       "notes": "Granite 4.1 language models are a family of state-of-the-art open foundation models featuring dense decoder-only architectures in three sizes — 3B, 8B, and 30B. They natively support multilingual capabilities, a wide range of coding tasks, retrieval-augmented generation (RAG), tool usage, and structured JSON output. License: Apache 2.0",
       "modality": [
@@ -55,6 +57,7 @@
           "name": "granite4.1:3b",
           "version": "4.1",
           "parameters": "3B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/granite4.1",
           "huggingfaceUrl": "",
           "addedAt": "2026-05-03"
@@ -63,6 +66,7 @@
           "name": "granite4.1:8b",
           "version": "4.1",
           "parameters": "8B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/granite4.1",
           "huggingfaceUrl": "",
           "addedAt": "2026-05-03"
@@ -71,6 +75,7 @@
           "name": "granite4.1:30b",
           "version": "4.1",
           "parameters": "30B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/granite4.1",
           "huggingfaceUrl": "",
           "addedAt": "2026-05-03"
@@ -89,6 +94,7 @@
       "year": 2025,
       "releaseDate": "2025-02-11",
       "parameters": "70B",
+      "contextSize": "200K",
       "url": "https://www.perplexity.ai/hub/blog/introducing-perplexity-computer",
       "notes": "Built on top of Llama 3.3 70B, Sonar has been further trained to enhance answer factuality and readability for Perplexity’s default search mode.",
       "modality": [
@@ -109,6 +115,7 @@
       "year": 2026,
       "releaseDate": "2026-02-19",
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://deepmind.google/",
       "notes": "Multimodal model trained jointly across text, image, audio and video.",
       "modality": [
@@ -122,6 +129,7 @@
           "name": "Pro",
           "version": "3.1",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-19"
@@ -130,6 +138,7 @@
           "name": "Flash Image",
           "version": "3.1",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-26"
@@ -138,6 +147,7 @@
           "name": "Flash Lite",
           "version": "3.1",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-02"
@@ -156,6 +166,7 @@
       "year": 2025,
       "releaseDate": "2025-11-18",
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://deepmind.google/",
       "notes": "Multimodal model trained jointly across text, image, audio and video.",
       "modality": [
@@ -168,6 +179,7 @@
           "name": "Pro",
           "version": "3.0",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-11-18"
@@ -176,6 +188,7 @@
           "name": "Deep Think",
           "version": "3.0",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-12-03"
@@ -184,6 +197,7 @@
           "name": "Pro Image",
           "version": "3.0",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-11-20"
@@ -192,6 +206,7 @@
           "name": "Flash",
           "version": "3.0",
           "parameters": "",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-12-17"
@@ -210,6 +225,7 @@
       "year": 2026,
       "releaseDate": "2026-04-22",
       "parameters": "1T",
+      "contextSize": "256K",
       "url": "",
       "notes": "Kimi K2.6 is an open-source, native multimodal agentic model that advances practical capabilities in long-horizon coding, coding-driven design, proactive autonomous execution, and swarm-based task orchestration.",
       "modality": [
@@ -235,6 +251,7 @@
       "year": 2026,
       "releaseDate": "2026-01-01",
       "parameters": "32B",
+      "contextSize": "256K",
       "url": "https://moonshot.ai",
       "notes": "In January 2026, Moonshot AI released Kimi K2.5, a 1 trillion parameter MoE model with 32 billion active parameters. The model is multimodal in vision and language understanding with advanced agentic capabilities, instant and thinking modes, as well as conversational and agentic paradigms.",
       "modality": [
@@ -255,6 +272,7 @@
       "year": 2025,
       "releaseDate": "2025-10-01",
       "parameters": "48B",
+      "contextSize": "1M",
       "url": "https://moonshot.ai",
       "notes": "In October 2025, Moonshot AI released Kimi Linear, a 48 billion parameter MoE model with 3 billion active parameters. It uses a more efficient attention method known as Kimi Delta Attention (KDA), which reduces memory usage and improves generation speed at longer context window sizes.",
       "modality": [
@@ -275,6 +293,7 @@
       "year": 2025,
       "releaseDate": "2025-07-01",
       "parameters": "32B",
+      "contextSize": "128K",
       "url": "https://moonshot.ai",
       "notes": "In July 2025, Moonshot AI released Kimi K2, a 1 trillion parameter mixture of experts large language model with 32 billion active parameters which was open sourced under a modified MIT license.",
       "modality": [
@@ -287,6 +306,7 @@
           "name": "Instruct-0905",
           "version": "2",
           "parameters": "32B",
+          "contextSize": "128K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-09-09"
@@ -305,6 +325,7 @@
       "year": 2025,
       "releaseDate": "2025-06-01",
       "parameters": "72B",
+      "contextSize": "128K",
       "url": "https://moonshot.ai",
       "notes": "In June 2025, Kimi-Dev, a 72B parameter coding-focused model based on Qwen2.5-72B, was released. It achieved state of the art performance among open source models on the SWE-bench Verified benchmark",
       "modality": [
@@ -325,6 +346,7 @@
       "year": 2025,
       "releaseDate": "2025-04-01",
       "parameters": "16B",
+      "contextSize": "128K",
       "url": "",
       "notes": "In April 2025, Kimi-VL, an open source 16 billion parameter mixture of experts (MoE) large language model with 3 billion active parameters, was released.",
       "modality": [
@@ -337,6 +359,7 @@
           "name": "Thinking",
           "version": "VL",
           "parameters": "16B",
+          "contextSize": "128K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-06-01"
@@ -355,6 +378,7 @@
       "year": 2025,
       "releaseDate": "2025-01-01",
       "parameters": "16B",
+      "contextSize": "128K",
       "url": "https://moonshot.ai",
       "notes": "First public version of Kimi. Moonshot AI claimed it matched the performance of OpenAI o1 in mathematics, coding, and multimodal reasoning capabilities.",
       "modality": [
@@ -376,6 +400,7 @@
       "year": 2025,
       "releaseDate": "2025-12-08",
       "parameters": "undisclosed",
+      "contextSize": "undisclosed",
       "url": "https://mimo.xiaomi.com/",
       "notes": "Xiaomi MiMo is a family of large language models (LLMs) developed by Xiaomi. It was initially released in April 2025 with the MiMo-7B model. Currently, MiMo is available for developers through API service. It is used as the key AI model in Xiaomi's \"Human x Car x Home\" ecosystem.",
       "modality": [
@@ -388,6 +413,7 @@
           "name": "Flash",
           "version": "2",
           "parameters": "undisclosed",
+          "contextSize": "undisclosed",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/xiaomimimo/MiMo-V2-Flash",
           "addedAt": "2025-12-16"
@@ -396,6 +422,7 @@
           "name": "TTS",
           "version": "2",
           "parameters": "undisclosed",
+          "contextSize": "undisclosed",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-18"
@@ -404,6 +431,7 @@
           "name": "Omni",
           "version": "2",
           "parameters": "undisclosed",
+          "contextSize": "undisclosed",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-18"
@@ -412,6 +440,7 @@
           "name": "Pro",
           "version": "2",
           "parameters": "undisclosed",
+          "contextSize": "undisclosed",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-18"
@@ -430,6 +459,7 @@
       "year": 2025,
       "releaseDate": "2025-04-01",
       "parameters": "7B",
+      "contextSize": "32K",
       "url": "https://mimo.xiaomi.com",
       "notes": "Xiaomi MiMo is a family of large language models (LLMs) developed by Xiaomi. It was initially released in April 2025 with the MiMo-7B model. Currently, MiMo is available for developers through API service. It is used as the key AI model in Xiaomi's \"Human x Car x Home\" ecosystem.",
       "modality": [
@@ -442,6 +472,7 @@
           "name": "7B",
           "version": "1",
           "parameters": "7B",
+          "contextSize": "32K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-01"
@@ -460,6 +491,7 @@
       "year": 2026,
       "releaseDate": "2026-04-22",
       "parameters": "undisclosed",
+      "contextSize": "undisclosed",
       "url": "https://mimo.xiaomi.com/mimo-v2-5",
       "notes": "Xiaomi MiMo is a family of large language models (LLMs) developed by Xiaomi. It was initially released in April 2025 with the MiMo-7B model. Currently, MiMo is available for developers through API service. It is used as the key AI model in Xiaomi's \"Human x Car x Home\" ecosystem.",
       "modality": [
@@ -478,6 +510,7 @@
           "name": "Standard",
           "version": "2.5",
           "parameters": "undisclosed",
+          "contextSize": "undisclosed",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-22"
@@ -486,6 +519,7 @@
           "name": "Pro",
           "version": "2.5",
           "parameters": "undisclosed",
+          "contextSize": "undisclosed",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-22"
@@ -504,6 +538,7 @@
       "year": 2024,
       "releaseDate": "2024-04-25",
       "parameters": "7B",
+      "contextSize": "16K",
       "url": "https://minerva-ai.org",
       "notes": "Minerva AI LLM is the first family of Large Language Models pretrained from scratch in Italian developed by Sapienza NLP in collaboration with Future Artificial Intelligence Research (FAIR) and CINECA. The Minerva models are truly-open (data and model) Italian-English LLMs, with approximately half of the pretraining data composed of Italian text.",
       "modality": [
@@ -520,6 +555,7 @@
           "name": "7B-base",
           "version": "1",
           "parameters": "7B",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-7B-base-v1.0",
           "addedAt": "2024-12-07"
@@ -528,6 +564,7 @@
           "name": "7B-instruct",
           "version": "1",
           "parameters": "7B",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-7B-instruct-v1.0",
           "addedAt": "2024-12-07"
@@ -536,6 +573,7 @@
           "name": "3B-base",
           "version": "1",
           "parameters": "3B",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-3B-base-v1.0",
           "addedAt": "2024-12-07"
@@ -544,6 +582,7 @@
           "name": "1B-base",
           "version": "1",
           "parameters": "1B",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-1B-base-v1.0",
           "addedAt": "2024-12-07"
@@ -552,6 +591,7 @@
           "name": "350M-base",
           "version": "1",
           "parameters": "0.35",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/sapienzanlp/Minerva-350M-base-v1.0",
           "addedAt": "2024-12-07"
@@ -570,6 +610,7 @@
       "year": 2024,
       "releaseDate": "2024-12-06",
       "parameters": "undisclosed",
+      "contextSize": "undisclosed",
       "url": "https://amaliallm.pt",
       "notes": "Automatic Multimodal Language Assistant with Artificial Intelligence, the first Large-Scale Language Model (LLM) designed specifically for the Portuguese language.",
       "modality": [
@@ -595,6 +636,7 @@
       "year": 2026,
       "releaseDate": "2026-04-24",
       "parameters": "1.6T",
+      "contextSize": "128K",
       "url": "",
       "notes": "",
       "modality": [
@@ -608,6 +650,7 @@
           "name": "Flash",
           "version": "4",
           "parameters": "284B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-v4-flash",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-24"
@@ -616,6 +659,7 @@
           "name": "Pro",
           "version": "4",
           "parameters": "1.6T",
+          "contextSize": "128K",
           "ollamaUrl": "",
           "huggingfaceUrl": "https://huggingface.co/collections/deepseek-ai/deepseek-v4",
           "addedAt": "2026-04-24"
@@ -634,6 +678,7 @@
       "year": 2025,
       "releaseDate": "2025-10-15",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "",
       "notes": "",
       "modality": [
@@ -646,6 +691,7 @@
           "name": "4.5",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-11-24"
@@ -664,6 +710,7 @@
       "year": 2025,
       "releaseDate": "2025-05-22",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "",
       "notes": "",
       "modality": [
@@ -677,6 +724,7 @@
           "name": "4.5",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-09-29"
@@ -685,6 +733,7 @@
           "name": "4.6",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-17"
@@ -703,6 +752,7 @@
       "year": 2024,
       "releaseDate": "2024-03-13",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "",
       "notes": "Claude is reportedly named after Claude Shannon, a 20th-century mathematician who laid the foundation for information theory.",
       "modality": [
@@ -723,6 +773,7 @@
       "year": 2023,
       "releaseDate": "2023-08-09",
       "parameters": "undisclosed",
+      "contextSize": "100K",
       "url": "",
       "notes": "Claude-Instant is a language model designed for rapid response generation while maintaining a high level of language understanding. It is optimized for speed.",
       "modality": [
@@ -734,6 +785,7 @@
           "name": "1.1",
           "version": "Instant",
           "parameters": "undisclosed",
+          "contextSize": "100K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-07-08"
@@ -742,6 +794,7 @@
           "name": "1.2",
           "version": "Instant",
           "parameters": "undisclosed",
+          "contextSize": "100K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-08-09"
@@ -760,6 +813,7 @@
       "year": 2025,
       "releaseDate": "2025-08-05",
       "parameters": "120B",
+      "contextSize": "128K",
       "url": "https://github.com/openai/gpt-oss",
       "notes": "The gpt-oss series, OpenAI's open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases.",
       "modality": [
@@ -772,6 +826,7 @@
           "name": "120b",
           "version": "1",
           "parameters": "120B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/gpt-oss",
           "huggingfaceUrl": "https://huggingface.co/openai/gpt-oss-120b",
           "addedAt": "2025-08-08"
@@ -780,6 +835,7 @@
           "name": "20b",
           "version": "1",
           "parameters": "20B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/gpt-oss",
           "huggingfaceUrl": "https://huggingface.co/openai/gpt-oss-20b",
           "addedAt": "2026-04-24"
@@ -798,6 +854,7 @@
       "year": 2025,
       "releaseDate": "2025-04-06",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://openai.com/index/introducing-o3-and-o4-mini/",
       "notes": "OpenAI o4-mini is a smaller model optimized for fast, cost-efficient reasoning—it achieves remarkable performance for its size and cost",
       "modality": [
@@ -819,6 +876,7 @@
       "year": 2022,
       "releaseDate": "2022-03-15",
       "parameters": "undisclosed",
+      "contextSize": "16K",
       "url": "https://openai.com/index/gpt-3-5-turbo-fine-tuning-and-api-updates/",
       "notes": "",
       "modality": [
@@ -830,6 +888,7 @@
           "name": "turbo",
           "version": "3.5",
           "parameters": "undisclosed",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2022-03-15"
@@ -838,6 +897,7 @@
           "name": "text-davinci-003",
           "version": "3.5",
           "parameters": "undisclosed",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2022-03-05"
@@ -846,6 +906,7 @@
           "name": "text-davinci-002",
           "version": "3.5",
           "parameters": "undisclosed",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2022-03-15"
@@ -854,6 +915,7 @@
           "name": "instructGPT",
           "version": "3.5",
           "parameters": "undisclosed",
+          "contextSize": "16K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2022-03-15"
@@ -872,6 +934,7 @@
       "year": 2026,
       "releaseDate": "2026-03-05",
       "parameters": "undisclosed",
+      "contextSize": "400K",
       "url": "https://openai.com/index/introducing-gpt-5-4/",
       "notes": "GPT‑5.4 is OpenAI first general-purpose model with native computer-use capabilities and marks a major step forward for developers and agents alike.",
       "modality": [
@@ -885,6 +948,7 @@
           "name": "Thinking",
           "version": "5.4",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-05"
@@ -893,6 +957,7 @@
           "name": "Pro",
           "version": "5.4",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-05"
@@ -901,6 +966,7 @@
           "name": "Mini",
           "version": "5.4",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-17"
@@ -909,6 +975,7 @@
           "name": "Nano",
           "version": "5.4",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-03-17"
@@ -927,6 +994,7 @@
       "year": 2026,
       "releaseDate": "2026-02-05",
       "parameters": "undisclosed",
+      "contextSize": "400K",
       "url": "https://openai.com/index/introducing-gpt-5-3-codex/",
       "notes": "LLM focusing on code generation, speed and the ability to search repositories, run terminal commands and at the same time, debug code.",
       "modality": [
@@ -938,6 +1006,7 @@
           "name": "Spark",
           "version": "5.3",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-12"
@@ -956,6 +1025,7 @@
       "year": 2025,
       "releaseDate": "2025-12-11",
       "parameters": "undisclosed",
+      "contextSize": "400K",
       "url": "https://openai.com/index/introducing-gpt-5-2/",
       "notes": "Succeeding GPT-5.1, it is a family of three large language models within the GPT series. It comes in three modes: GPT-5.2 instant, GPT-5.2 thinking (with standard and extended thinking), and GPT-5.2 Pro",
       "modality": [
@@ -968,6 +1038,7 @@
           "name": "instant",
           "version": "5.2",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-12-11"
@@ -976,6 +1047,7 @@
           "name": "thinking",
           "version": "5.2",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-12-11"
@@ -984,6 +1056,7 @@
           "name": "pro",
           "version": "5.2",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-12-11"
@@ -1002,6 +1075,7 @@
       "year": 2025,
       "releaseDate": "2025-11-12",
       "parameters": "undisclosed",
+      "contextSize": "400K",
       "url": "https://openai.com/index/gpt-5-1/",
       "notes": "GPT-5.1 is a family of four large language models within OpenAI's GPT series.",
       "modality": [
@@ -1023,6 +1097,7 @@
       "year": 2026,
       "releaseDate": "2026-04-23",
       "parameters": "undisclosed",
+      "contextSize": "400K",
       "url": "https://openai.com/index/introducing-gpt-5-5/",
       "notes": "GPT-5.5 is noticeably smarter and more persistent than GPT-5.4, with stronger coding performance and more reliable tool use.",
       "modality": [
@@ -1037,6 +1112,7 @@
           "name": "Thinking",
           "version": "5.5",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-23"
@@ -1045,6 +1121,7 @@
           "name": "Pro",
           "version": "5.5",
           "parameters": "undisclosed",
+          "contextSize": "400K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-23"
@@ -1063,6 +1140,7 @@
       "year": 2026,
       "releaseDate": "2026-04-15",
       "parameters": "35B",
+      "contextSize": "256K",
       "url": "https://qwenlm.github.io/",
       "notes": "Qwen3.6 delivers substantial upgrades in agentic coding and thinking preservation than previous Qwen models.",
       "modality": [
@@ -1075,6 +1153,7 @@
           "name": "qwen3.6:27b",
           "version": "3.6",
           "parameters": "27B",
+          "contextSize": "256K",
           "ollamaUrl": "https://ollama.com/library/qwen3.6",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-23"
@@ -1083,6 +1162,7 @@
           "name": "qwen3.6:35b",
           "version": "3.6",
           "parameters": "35B",
+          "contextSize": "256K",
           "ollamaUrl": "https://ollama.com/library/qwen3.6",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-23"
@@ -1101,6 +1181,7 @@
       "year": 2025,
       "releaseDate": "2025-12-22",
       "parameters": "undisclosed",
+      "contextSize": "128K",
       "url": "https://github.com/zai-org/GLM-4.5",
       "notes": "GLM-4.7-Flash is a 30B-A3B MoE model. As the strongest model in the 30B class, GLM-4.7-Flash offers a new option for lightweight deployment that balances performance and efficiency.",
       "modality": [
@@ -1111,6 +1192,7 @@
           "name": "glm-4.7-flash:q4_K_M",
           "version": "4.7",
           "parameters": "4B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/glm-4.7-flash",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-22"
@@ -1119,6 +1201,7 @@
           "name": "glm-4.7-flash:q8_0",
           "version": "4.7",
           "parameters": "8B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/glm-4.7-flash",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-22"
@@ -1127,6 +1210,7 @@
           "name": "glm-4.7-flash:bf16",
           "version": "4.7",
           "parameters": "32B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/glm-4.7-flash",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-22"
@@ -1144,6 +1228,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "",
       "notes": "GLM-4.7, your new coding partner, is coming with the following features:\n\nCore Coding: GLM-4.7 brings clear gains, compared to its predecessor GLM-4.6, in multilingual agentic coding and terminal-based tasks, including (73.8%, +5.8%) on SWE-bench, (66.7%, +12.9%) on SWE-bench Multilingual, and (41%, +16.5%) on Terminal Bench 2.0. GLM-4.7 also supports thinking before acting, with significant improvements on complex tasks in mainstream agent frameworks such as Claude Code, Kilo Code, Cline, and Roo Code.\nVibe Coding: GLM-4.7 takes a major step forward in UI quality. It produces cleaner, more modern webpages and generates better-looking slides with more accurate layout and sizing.\nTool Using: GLM-4.7 achieves significantly improvements in Tool using. Significant better performances can be seen on benchmarks such as τ^2-Bench and on web browsing via BrowseComp.\nComplex Reasoning: GLM-4.7 delivers a substantial boost in mathematical and reasoning capabilities, achieving (42.8%, +12.4%) on the HLE (Humanity’s Last Exam) benchmark compared to GLM-4.6.",
       "modality": [
@@ -1161,6 +1246,7 @@
       "type": "open-weight",
       "year": 2019,
       "parameters": "0.340B",
+      "contextSize": "512",
       "url": "https://github.com/zihangdai/xlnet/",
       "notes": "An alternative to BERT; designed as encoder-only. Trained on 512 TPU v3 chips for 5.5 days",
       "modality": [
@@ -1179,6 +1265,7 @@
       "type": "open-weight",
       "year": 2019,
       "parameters": "11B",
+      "contextSize": "512",
       "url": "https://github.com/google-research/text-to-text-transfer-transformer",
       "notes": "Base model for many Google projects, such as Imagen",
       "modality": [
@@ -1198,6 +1285,7 @@
       "type": "open-weight",
       "year": 2018,
       "parameters": "0.340B",
+      "contextSize": "512",
       "url": "https://github.com/google-research/bert",
       "notes": "An early and influential language model. Encoder-only and thus not built to be prompted or generative. Training took 4 days on 64 TPUv2 chips.",
       "modality": [
@@ -1216,6 +1304,7 @@
       "type": "open-weight",
       "year": 2018,
       "parameters": "0.117B",
+      "contextSize": "512",
       "url": "https://arc.net/l/quote/ilvyqcdc",
       "notes": "First GPT model, decoder-only transformer. Trained for 30 days on 8 P600 GPUs.",
       "modality": [
@@ -1237,6 +1326,7 @@
       "year": 2024,
       "releaseDate": "2024-05-13",
       "parameters": "undisclosed",
+      "contextSize": "128K",
       "url": "https://openai.com",
       "notes": "Native multimodal foundation model with vision and voice capabilities.",
       "modality": [
@@ -1250,6 +1340,7 @@
           "name": "mini",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "128K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2024-07-18"
@@ -1268,6 +1359,7 @@
       "year": 2025,
       "releaseDate": "2025-04-22",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://anthropic.com",
       "notes": "Frontier reasoning model from the Constitutional AI lineage.",
       "modality": [
@@ -1280,6 +1372,7 @@
           "name": "4.1",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-08-05"
@@ -1288,6 +1381,7 @@
           "name": "4.5",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-11-24"
@@ -1296,6 +1390,7 @@
           "name": "4.6",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-02-05"
@@ -1304,6 +1399,7 @@
           "name": "4.7",
           "version": "4",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2026-04-16"
@@ -1322,6 +1418,7 @@
       "year": 2025,
       "releaseDate": "2025-03-25",
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://deepmind.google",
       "notes": "Multimodal model trained jointly across text, image, audio and video.",
       "modality": [
@@ -1337,6 +1434,7 @@
           "name": "Pro",
           "version": "2.5",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-03-25"
@@ -1345,6 +1443,7 @@
           "name": "Flash",
           "version": "2.5",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-17"
@@ -1353,6 +1452,7 @@
           "name": "Flash-lite",
           "version": "2.5",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-08-26"
@@ -1361,6 +1461,7 @@
           "name": "Flash image",
           "version": "2.5",
           "parameters": "undisclosed",
+          "contextSize": "32K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-08-26"
@@ -1379,6 +1480,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "70B",
+      "contextSize": "128K",
       "url": "https://ai.meta.com",
       "notes": "Open-weight family widely fine-tuned by the research community.",
       "submodels": [
@@ -1386,6 +1488,7 @@
           "name": "llama3.3:70b",
           "version": "3.3",
           "parameters": "70B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/llama3.3:70b",
           "huggingfaceUrl": "https://huggingface.co/meta-llama/Llama-3.3-70B-Instruct",
           "addedAt": "2024-12-06"
@@ -1394,6 +1497,7 @@
           "name": "llama3.2:1b",
           "version": "3.2",
           "parameters": "1B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/llama3.2:1b",
           "huggingfaceUrl": "https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct",
           "addedAt": "2024-09-25"
@@ -1402,6 +1506,7 @@
           "name": "llama3.2:3b",
           "version": "3.2",
           "parameters": "3B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/llama3.2:3b",
           "huggingfaceUrl": "https://huggingface.co/meta-llama/Llama-3.2-3B-Instruct",
           "addedAt": "2024-09-25"
@@ -1410,6 +1515,7 @@
           "name": "llama3.1:8b",
           "version": "3.1",
           "parameters": "8B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/llama3.1:8b",
           "huggingfaceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct",
           "addedAt": "2024-07-23"
@@ -1418,6 +1524,7 @@
           "name": "llama3.1:70b",
           "version": "3.1",
           "parameters": "70B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/llama3.1:70b",
           "huggingfaceUrl": "https://huggingface.co/meta-llama/Meta-Llama-3.1-70B-Instruct",
           "addedAt": "2024-07-23"
@@ -1438,6 +1545,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "123B",
+      "contextSize": "128K",
       "url": "https://mistral.ai",
       "notes": "European foundation model with multilingual emphasis.",
       "submodels": [
@@ -1445,6 +1553,7 @@
           "name": "mistral:7b",
           "version": "0.3",
           "parameters": "7B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/mistral:7b",
           "huggingfaceUrl": "https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3",
           "addedAt": "2023-09-27"
@@ -1453,6 +1562,7 @@
           "name": "mistral-nemo:12b",
           "version": "Nemo",
           "parameters": "12B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/mistral-nemo:12b",
           "huggingfaceUrl": "https://huggingface.co/mistralai/Mistral-Nemo-Instruct-2407",
           "addedAt": "2024-07-18"
@@ -1461,6 +1571,7 @@
           "name": "mistral-small:22b",
           "version": "Small 3.1",
           "parameters": "22B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/mistral-small:22b",
           "huggingfaceUrl": "https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503",
           "addedAt": "2025-03-13"
@@ -1482,6 +1593,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "235B (MoE)",
+      "contextSize": "128K",
       "url": "https://qwenlm.github.io",
       "notes": "Leading Chinese open-weight family across multiple sizes, including dense and MoE variants.",
       "submodels": [
@@ -1489,6 +1601,7 @@
           "name": "qwen3:0.6b",
           "version": "3",
           "parameters": "0.6B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:0.6b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-0.6B",
           "addedAt": "2025-04-28"
@@ -1497,6 +1610,7 @@
           "name": "qwen3:1.7b",
           "version": "3",
           "parameters": "1.7B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:1.7b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-1.7B",
           "addedAt": "2025-04-28"
@@ -1505,6 +1619,7 @@
           "name": "qwen3:4b",
           "version": "3",
           "parameters": "4B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:4b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-4B",
           "addedAt": "2025-04-28"
@@ -1513,6 +1628,7 @@
           "name": "qwen3:8b",
           "version": "3",
           "parameters": "8B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:8b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-8B",
           "addedAt": "2025-04-28"
@@ -1521,6 +1637,7 @@
           "name": "qwen3:14b",
           "version": "3",
           "parameters": "14B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:14b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-14B",
           "addedAt": "2025-04-28"
@@ -1529,6 +1646,7 @@
           "name": "qwen3:32b",
           "version": "3",
           "parameters": "32B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:32b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-32B",
           "addedAt": "2025-04-28"
@@ -1537,6 +1655,7 @@
           "name": "qwen3:30b-a3b",
           "version": "3 MoE",
           "parameters": "30B (A3B)",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:30b-a3b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-30B-A3B",
           "addedAt": "2025-04-28"
@@ -1545,6 +1664,7 @@
           "name": "qwen3:235b-a22b",
           "version": "3 MoE",
           "parameters": "235B (A22B)",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen3:235b-a22b",
           "huggingfaceUrl": "https://huggingface.co/Qwen/Qwen3-235B-A22B",
           "addedAt": "2025-04-28"
@@ -1565,6 +1685,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "671B (MoE)",
+      "contextSize": "128K",
       "url": "https://deepseek.com",
       "notes": "Reasoning-focused mixture-of-experts model released with open weights.",
       "submodels": [
@@ -1572,6 +1693,7 @@
           "name": "deepseek-r1:1.5b",
           "version": "R1",
           "parameters": "1.5B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:1.5b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
           "addedAt": "2025-01-20"
@@ -1580,6 +1702,7 @@
           "name": "deepseek-r1:7b",
           "version": "R1",
           "parameters": "7B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:7b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
           "addedAt": "2025-01-20"
@@ -1588,6 +1711,7 @@
           "name": "deepseek-r1:8b",
           "version": "R1",
           "parameters": "8B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:8b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
           "addedAt": "2025-01-20"
@@ -1596,6 +1720,7 @@
           "name": "deepseek-r1:14b",
           "version": "R1",
           "parameters": "14B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:14b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
           "addedAt": "2025-01-20"
@@ -1604,6 +1729,7 @@
           "name": "deepseek-r1:32b",
           "version": "R1",
           "parameters": "32B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:32b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
           "addedAt": "2025-01-20"
@@ -1612,6 +1738,7 @@
           "name": "deepseek-r1:70b",
           "version": "R1",
           "parameters": "70B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:70b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Llama-70B",
           "addedAt": "2025-01-20"
@@ -1620,6 +1747,7 @@
           "name": "deepseek-r1:671b",
           "version": "R1",
           "parameters": "671B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-r1:671b",
           "huggingfaceUrl": "https://huggingface.co/deepseek-ai/DeepSeek-R1",
           "addedAt": "2025-01-20"
@@ -1641,6 +1769,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "128K",
       "url": "https://yiyan.baidu.com",
       "notes": "Baidu's flagship knowledge-enhanced foundation model.",
       "submodels": [],
@@ -1659,6 +1788,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "32K",
       "url": "https://01.ai",
       "notes": "Founded by Kai-Fu Lee; bilingual English/Chinese capabilities.",
       "submodels": [],
@@ -1678,6 +1808,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "11B",
+      "contextSize": "8K",
       "url": "https://falconllm.tii.ae",
       "notes": "Open-weight family from the Gulf region's flagship AI institute.",
       "submodels": [
@@ -1685,6 +1816,7 @@
           "name": "falcon2:11b",
           "version": "2",
           "parameters": "11B",
+          "contextSize": "8K",
           "ollamaUrl": "https://ollama.com/library/falcon2:11b",
           "huggingfaceUrl": "https://huggingface.co/tiiuae/falcon-11B",
           "addedAt": "2024-05-14"
@@ -1705,6 +1837,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "104B",
+      "contextSize": "128K",
       "url": "https://cohere.com",
       "notes": "Enterprise-focused model with strong retrieval-augmented generation.",
       "submodels": [
@@ -1712,6 +1845,7 @@
           "name": "command-r:35b",
           "version": "R",
           "parameters": "35B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/command-r:35b",
           "huggingfaceUrl": "https://huggingface.co/CohereForAI/c4ai-command-r-v01",
           "addedAt": "2024-03-11"
@@ -1720,6 +1854,7 @@
           "name": "command-r-plus:104b",
           "version": "R+",
           "parameters": "104B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/command-r-plus:104b",
           "huggingfaceUrl": "https://huggingface.co/CohereForAI/c4ai-command-r-plus",
           "addedAt": "2024-04-04"
@@ -1740,6 +1875,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "398B (MoE)",
+      "contextSize": "256K",
       "url": "https://ai21.com",
       "notes": "Hybrid Transformer–Mamba architecture with very long context.",
       "submodels": [],
@@ -1758,6 +1894,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "8B",
+      "contextSize": "N/A",
       "url": "https://stability.ai",
       "notes": "Open-weight diffusion model for high-fidelity image synthesis.",
       "submodels": [],
@@ -1777,6 +1914,7 @@
       "type": "proprietary",
       "year": 2025,
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://x.ai",
       "notes": "Trained on the Colossus supercluster; integrated with X.",
       "submodels": [],
@@ -1795,6 +1933,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "14B",
+      "contextSize": "16K",
       "url": "https://microsoft.com/research",
       "notes": "Small-but-strong model trained on heavily curated synthetic data.",
       "submodels": [
@@ -1802,6 +1941,7 @@
           "name": "phi4:14b",
           "version": "4",
           "parameters": "14B",
+          "contextSize": "16K",
           "ollamaUrl": "https://ollama.com/library/phi4:14b",
           "huggingfaceUrl": "https://huggingface.co/microsoft/phi-4",
           "addedAt": "2024-12-12"
@@ -1810,6 +1950,7 @@
           "name": "phi4-mini:3.8b",
           "version": "4-mini",
           "parameters": "3.8B",
+          "contextSize": "16K",
           "ollamaUrl": "https://ollama.com/library/phi4-mini:3.8b",
           "huggingfaceUrl": "https://huggingface.co/microsoft/Phi-4-mini-instruct",
           "addedAt": "2025-03-01"
@@ -1818,6 +1959,7 @@
           "name": "phi4-reasoning:14b",
           "version": "4-reasoning",
           "parameters": "14B",
+          "contextSize": "16K",
           "ollamaUrl": "https://ollama.com/library/phi4-reasoning:14b",
           "huggingfaceUrl": "https://huggingface.co/microsoft/Phi-4-reasoning",
           "addedAt": "2025-04-01"
@@ -1838,6 +1980,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "7B",
+      "contextSize": "8K",
       "url": "https://aleph-alpha.com",
       "notes": "Sovereign European foundation model with multilingual training.",
       "submodels": [],
@@ -1856,6 +1999,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "2B",
+      "contextSize": "8K",
       "url": "https://sarvam.ai",
       "notes": "Indic-language model trained on 10 Indian languages plus English.",
       "submodels": [],
@@ -1874,6 +2018,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "undisclosed",
       "url": "https://olakrutrim.com",
       "notes": "First Indian unicorn-built foundation model; Indic multilingual.",
       "submodels": [],
@@ -1893,6 +2038,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "128K",
       "url": "https://clova.ai",
       "notes": "Korean-language flagship model from Naver's AI division.",
       "submodels": [],
@@ -1911,6 +2057,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "10B",
+      "contextSize": "4K",
       "url": "https://sakana.ai",
       "notes": "Evolutionary model-merging research; Japanese-language capable.",
       "submodels": [],
@@ -1929,6 +2076,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "undisclosed",
       "url": "https://maritaca.ai",
       "notes": "Brazilian-Portuguese specialised foundation model.",
       "submodels": [],
@@ -1947,6 +2095,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "0.4B",
+      "contextSize": "2K",
       "url": "https://lelapa.ai",
       "notes": "Small language model for five African languages.",
       "submodels": [],
@@ -1962,6 +2111,7 @@
       "type": "open-weight",
       "year": 2019,
       "parameters": "1.5B",
+      "contextSize": "1K",
       "url": "https://openai.com/research/gpt-2",
       "notes": "Trained on 32 TPUv3 chips. Initially withheld over misuse concerns, later fully released.",
       "modality": [
@@ -1983,6 +2133,7 @@
       "year": 2020,
       "releaseDate": "2020-05-29",
       "parameters": "175B",
+      "contextSize": "2K",
       "url": "https://openai.com/research/gpt-3",
       "notes": "Foundation for ChatGPT (2022). First demonstration of in-context few-shot learning at scale.",
       "modality": [
@@ -2000,6 +2151,7 @@
       "type": "open-weight",
       "year": 2021,
       "parameters": "2.7B",
+      "contextSize": "2K",
       "url": "https://github.com/EleutherAI/gpt-neo",
       "notes": "Open-source GPT-3 alternative. Trained on The Pile dataset by a distributed volunteer research collective.",
       "modality": [
@@ -2018,6 +2170,7 @@
       "type": "open-weight",
       "year": 2021,
       "parameters": "6B",
+      "contextSize": "2K",
       "url": "https://github.com/kingoflolz/mesh-transformer-jax",
       "notes": "Trained on The Pile. For a time the most capable publicly available autoregressive language model.",
       "modality": [
@@ -2036,6 +2189,7 @@
       "type": "proprietary",
       "year": 2021,
       "parameters": "530B",
+      "contextSize": "2K",
       "url": "https://www.microsoft.com/en-us/research/blog/using-deepspeed-and-megatron-to-train-megatron-turing-nlg-530b",
       "notes": "Joint Microsoft/Nvidia effort. Trained for ~3 months on 2,048 A100 GPUs.",
       "modality": [
@@ -2054,6 +2208,7 @@
       "type": "proprietary",
       "year": 2021,
       "parameters": "260B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2112.12731",
       "notes": "Chinese-language knowledge-enhanced model; precursor to the ERNIE 4.0 family.",
       "modality": [
@@ -2072,6 +2227,7 @@
       "type": "proprietary",
       "year": 2021,
       "parameters": "1200B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2112.06905",
       "notes": "Sparse mixture-of-experts model. Used ~⅓ the energy of GPT-3 during training.",
       "modality": [
@@ -2090,6 +2246,7 @@
       "type": "proprietary",
       "year": 2021,
       "parameters": "280B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2112.11446",
       "notes": "Later evolved into the compute-optimal Chinchilla. Demonstrated scaling law insights.",
       "modality": [
@@ -2108,6 +2265,7 @@
       "type": "proprietary",
       "year": 2022,
       "parameters": "137B",
+      "contextSize": "undisclosed",
       "url": "https://arxiv.org/abs/2201.08239",
       "notes": "Dialog-specialised model. Basis for the Bard assistant before Gemini.",
       "modality": [
@@ -2126,6 +2284,7 @@
       "type": "proprietary",
       "year": 2022,
       "parameters": "70B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2203.15556",
       "notes": "Demonstrated compute-optimal scaling: outperformed larger models trained on too few tokens.",
       "modality": [
@@ -2144,6 +2303,7 @@
       "type": "proprietary",
       "year": 2022,
       "parameters": "540B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2204.02311",
       "notes": "Trained ~60 days on 6,144 TPU v4 chips. Demonstrated breakthrough chain-of-thought reasoning.",
       "modality": [
@@ -2162,6 +2322,7 @@
       "type": "open-weight",
       "year": 2022,
       "parameters": "175B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2205.01068",
       "notes": "Open Pre-trained Transformer. Released with full training logbook for reproducibility research.",
       "modality": [
@@ -2180,6 +2341,7 @@
       "type": "open-weight",
       "year": 2022,
       "parameters": "100B",
+      "contextSize": "2K",
       "url": "https://github.com/yandex/YaLM-100B",
       "notes": "English-Russian bilingual model released under Apache 2.0.",
       "modality": [
@@ -2198,6 +2360,7 @@
       "type": "open-weight",
       "year": 2022,
       "parameters": "175B",
+      "contextSize": "2K",
       "url": "https://huggingface.co/bigscience/bloom",
       "notes": "Collaborative BigScience effort involving 1,000+ researchers. 46 languages, 13 programming languages.",
       "modality": [
@@ -2216,6 +2379,7 @@
       "type": "open-weight",
       "year": 2022,
       "parameters": "120B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2211.09085",
       "notes": "Trained on 106B tokens of scientific literature. Demo withdrawn after 72 hours due to factual errors.",
       "modality": [
@@ -2234,6 +2398,7 @@
       "type": "proprietary",
       "year": 2022,
       "parameters": "20B",
+      "contextSize": "1K",
       "url": "https://arxiv.org/abs/2208.01448",
       "notes": "Bidirectional seq2seq model powering Alexa features. Focused on few-shot learning.",
       "modality": [
@@ -2252,6 +2417,7 @@
       "type": "open-weight",
       "year": 2022,
       "parameters": "20B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2204.06745",
       "notes": "Based on Megatron architecture. Trained on The Pile; first open-source model to use rotary embeddings.",
       "modality": [
@@ -2270,6 +2436,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "65B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2302.13971",
       "notes": "Trained on 1.4T tokens across 20 languages. Sparked the open fine-tuning ecosystem.",
       "modality": [
@@ -2291,6 +2458,7 @@
       "year": 2023,
       "releaseDate": "2023-03-14",
       "parameters": "undisclosed",
+      "contextSize": "32K",
       "url": "https://openai.com/research/gpt-4",
       "notes": "Architecture undisclosed. Multimodal with vision input. Surpassed bar exam top 10% performance.",
       "modality": [
@@ -2309,6 +2477,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "13B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2304.03208",
       "notes": "Trained on CS-2 wafer-scale chips using Chinchilla-optimal token ratios.",
       "modality": [
@@ -2327,6 +2496,7 @@
       "type": "proprietary",
       "year": 2023,
       "parameters": "50B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2303.17564",
       "notes": "Finance-domain model trained on 363B tokens from Bloomberg's proprietary data plus 345B public tokens.",
       "modality": [
@@ -2345,6 +2515,7 @@
       "type": "proprietary",
       "year": 2023,
       "parameters": "1085B",
+      "contextSize": "undisclosed",
       "url": "https://arxiv.org/abs/2303.10845",
       "notes": "Sparse heterogeneous computing model. Trained on Ascend cluster hardware.",
       "modality": [
@@ -2363,6 +2534,7 @@
       "type": "proprietary",
       "year": 2023,
       "parameters": "340B",
+      "contextSize": "8K",
       "url": "https://arxiv.org/abs/2305.10403",
       "notes": "Powers Bard and many Google Workspace features. Improved multilingual and reasoning capabilities.",
       "modality": [
@@ -2383,6 +2555,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "70B",
+      "contextSize": "4K",
       "url": "https://arxiv.org/abs/2307.09288",
       "notes": "Trained on 2T tokens using 3.3M GPU-hours. First widely licensed open LLM for commercial use.",
       "modality": [
@@ -2393,6 +2566,7 @@
           "name": "llama2:7b",
           "version": "2",
           "parameters": "7B",
+          "contextSize": "4K",
           "ollamaUrl": "https://ollama.com/library/llama2",
           "huggingfaceUrl": "",
           "addedAt": "2024-04-22"
@@ -2401,6 +2575,7 @@
           "name": "llama2:13b",
           "version": "2",
           "parameters": "13B",
+          "contextSize": "4K",
           "ollamaUrl": "https://ollama.com/library/llama2",
           "huggingfaceUrl": "",
           "addedAt": "2024-04-22"
@@ -2409,6 +2584,7 @@
           "name": "llama2:70b",
           "version": "2",
           "parameters": "70B",
+          "contextSize": "4K",
           "ollamaUrl": "https://ollama.com/library/llama2",
           "huggingfaceUrl": "",
           "addedAt": "2024-04-22"
@@ -2427,6 +2603,7 @@
       "year": 2023,
       "releaseDate": "2023-07-11",
       "parameters": "undisclosed",
+      "contextSize": "100K",
       "url": "https://www.anthropic.com/index/claude-2",
       "notes": "Extended context to 100K tokens. Constitutional AI training for improved safety.",
       "modality": [
@@ -2438,6 +2615,7 @@
           "name": "2.1",
           "version": "2",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-11-21"
@@ -2453,6 +2631,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "7.3B",
+      "contextSize": "32K",
       "url": "https://arxiv.org/abs/2310.06825",
       "notes": "Outperformed Llama 2 13B on most benchmarks. Used sliding window attention and grouped-query attention.",
       "modality": [
@@ -2471,6 +2650,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "314B",
+      "contextSize": "8K",
       "url": "https://github.com/xai-org/grok-1",
       "notes": "MoE architecture. Weights released under Apache 2.0 in March 2024.",
       "modality": [
@@ -2492,6 +2672,7 @@
       "year": 2023,
       "releaseDate": "2023-12-06",
       "parameters": "undisclosed",
+      "contextSize": "32K",
       "url": "https://deepmind.google/technologies/gemini",
       "notes": "First natively multimodal Google model. Available in Ultra, Pro, and Nano sizes.",
       "modality": [
@@ -2506,6 +2687,7 @@
           "name": "Nano",
           "version": "1.0",
           "parameters": "undisclosed",
+          "contextSize": "32K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-12-06"
@@ -2514,6 +2696,7 @@
           "name": "Pro",
           "version": "1.0",
           "parameters": "undisclosed",
+          "contextSize": "32K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-12-13"
@@ -2522,6 +2705,7 @@
           "name": "Ultra",
           "version": "1.0",
           "parameters": "undisclosed",
+          "contextSize": "32K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2024-02-08"
@@ -2539,6 +2723,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "46.7B",
+      "contextSize": "32K",
       "url": "https://arxiv.org/abs/2401.04088",
       "notes": "Sparse MoE with 12.9B active parameters per forward pass. Outperformed Llama 2 70B on most benchmarks.",
       "modality": [
@@ -2549,6 +2734,7 @@
           "name": "mixtral:8x7b",
           "version": "1",
           "parameters": "7B",
+          "contextSize": "32K",
           "ollamaUrl": "https://ollama.com/library/mixtral",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2557,6 +2743,7 @@
           "name": "mixtral:8x22b",
           "version": "1",
           "parameters": "22B",
+          "contextSize": "32K",
           "ollamaUrl": "https://ollama.com/library/mixtral",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2574,6 +2761,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "67B",
+      "contextSize": "4K",
       "url": "https://arxiv.org/abs/2401.02954",
       "notes": "English and Chinese bilingual. First release in the DeepSeek family.",
       "modality": [
@@ -2584,6 +2772,7 @@
           "name": "deepseek-llm:7b",
           "version": "1",
           "parameters": "7B",
+          "contextSize": "4K",
           "ollamaUrl": "https://ollama.com/library/deepseek-llm",
           "huggingfaceUrl": "",
           "addedAt": "2024-04-22"
@@ -2592,6 +2781,7 @@
           "name": "deepseek-llm:67b",
           "version": "1",
           "parameters": "67B",
+          "contextSize": "4K",
           "ollamaUrl": "https://ollama.com/library/deepseek-llm",
           "huggingfaceUrl": "",
           "addedAt": "2024-04-22"
@@ -2607,6 +2797,7 @@
       "type": "open-weight",
       "year": 2023,
       "parameters": "2.7B",
+      "contextSize": "2K",
       "url": "https://www.microsoft.com/en-us/research/blog/phi-2",
       "notes": "Trained on synthetic textbook-quality data. Outperformed models 25× its size on several benchmarks.",
       "modality": [
@@ -2625,6 +2816,7 @@
       "type": "proprietary",
       "year": 2023,
       "parameters": "13B",
+      "contextSize": "8K",
       "url": "https://www.ibm.com/products/watsonx-ai",
       "notes": "Enterprise code and language model family deployed via IBM Watsonx platform.",
       "modality": [
@@ -2643,6 +2835,7 @@
       "type": "proprietary",
       "year": 2023,
       "parameters": "undisclosed",
+      "contextSize": "8K",
       "url": "https://yandex.com/dev/ya-gpt",
       "notes": "Powers the Alice voice assistant. Russian-language flagship model from Yandex.",
       "modality": [
@@ -2664,6 +2857,7 @@
       "year": 2023,
       "releaseDate": "2023-12-06",
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://deepmind.google/technologies/gemini/pro",
       "notes": "MoE architecture with 1M+ token context window. Enabled long-document and video understanding.",
       "modality": [
@@ -2678,6 +2872,7 @@
           "name": "Nano",
           "version": "1.0",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-12-06"
@@ -2686,6 +2881,7 @@
           "name": "Pro",
           "version": "1.0",
           "parameters": "undisclosed",
+          "contextSize": "2M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2023-12-13"
@@ -2694,6 +2890,7 @@
           "name": "Ultra",
           "version": "1.0",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2024-02-08"
@@ -2709,6 +2906,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "7B",
+      "contextSize": "8K",
       "url": "https://ai.google.dev/gemma",
       "notes": "Lightweight open-weight family derived from Gemini research. Trained on 6T tokens.",
       "modality": [
@@ -2727,6 +2925,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "7B",
+      "contextSize": "4K",
       "url": "https://allenai.org/olmo",
       "notes": "Fully open model with released weights, training data, code, and evaluation suite.",
       "modality": [
@@ -2748,6 +2947,7 @@
       "year": 2024,
       "releaseDate": "2024-03-04",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://www.anthropic.com/news/claude-3-family",
       "notes": "Three-tier family: Haiku, Sonnet, Opus. Opus surpassed GPT-4 on multiple benchmarks at launch.",
       "modality": [
@@ -2760,6 +2960,7 @@
           "name": "3.5",
           "version": "3",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2024-06-20"
@@ -2768,6 +2969,7 @@
           "name": "3.7",
           "version": "3",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-02-24"
@@ -2783,6 +2985,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "136B",
+      "contextSize": "32K",
       "url": "https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm",
       "notes": "Fine-grained MoE with 16 experts, 4 active per token. ~$10M training cost reported.",
       "modality": [
@@ -2801,6 +3004,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "14B",
+      "contextSize": "128K",
       "url": "https://arxiv.org/abs/2404.14219",
       "notes": "Small language model series (3.8B–14B) with performance rivalling much larger models.",
       "modality": [
@@ -2821,6 +3025,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "72B",
+      "contextSize": "128K",
       "url": "https://qwenlm.github.io/blog/qwen2",
       "notes": "Multiple sizes (0.5B–72B). Topped open-source leaderboards upon release.",
       "modality": [
@@ -2831,6 +3036,7 @@
           "name": "qwen2:0.5b",
           "version": "2",
           "parameters": "0.5B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2839,6 +3045,7 @@
           "name": "qwen2:1.5b",
           "version": "2",
           "parameters": "1.5B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2847,6 +3054,7 @@
           "name": "qwen2:7b",
           "version": "2",
           "parameters": "7B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2855,6 +3063,7 @@
           "name": "qwen2:72b",
           "version": "2",
           "parameters": "72B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2872,6 +3081,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "236B",
+      "contextSize": "128K",
       "url": "https://arxiv.org/abs/2405.04434",
       "notes": "MoE with 21B active parameters. Multi-head latent attention cut inference cost ~93% vs V1.",
       "modality": [
@@ -2882,6 +3092,7 @@
           "name": "deepseek-v2:16b",
           "version": "2",
           "parameters": "16B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-v2",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2890,6 +3101,7 @@
           "name": "deepseek-v2:236b",
           "version": "2",
           "parameters": "236B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-v2",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -2905,6 +3117,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "340B",
+      "contextSize": "4K",
       "url": "https://research.nvidia.com/publication/2024-06_nemotron-4-340b",
       "notes": "Trained on 9T tokens in a single epoch. Used as a synthetic data generator for other models.",
       "modality": [
@@ -2926,6 +3139,7 @@
       "year": 2024,
       "releaseDate": "2023-03-14",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://www.anthropic.com/",
       "notes": "First version of Claude. Claude is reportedly named after Claude Shannon, a 20th-century mathematician who laid the foundation for information theory.",
       "modality": [
@@ -2944,6 +3158,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "405B",
+      "contextSize": "128K",
       "url": "https://ai.meta.com/blog/meta-llama-3-1",
       "notes": "405B variant first open model to rival GPT-4. Trained on 15T tokens over 31M H100-80GB GPU-hours.",
       "modality": [
@@ -2962,6 +3177,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "128K",
       "url": "https://x.ai/blog/grok-2",
       "notes": "Achieved frontier performance on MMLU and HumanEval. Integrated image generation via Aurora.",
       "modality": [
@@ -2981,6 +3197,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://openai.com/o1",
       "notes": "First reasoning model to use chain-of-thought as a first-class training signal. PhD-level science benchmarks.",
       "modality": [
@@ -3002,6 +3219,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "671B",
+      "contextSize": "128K",
       "url": "https://arxiv.org/abs/2412.19437",
       "notes": "MoE trained in 2.788M H800 GPU-hours. Cost ~$5.5M — a fraction of comparable Western models.",
       "modality": [
@@ -3012,6 +3230,7 @@
           "name": "deepseek-v3:671b",
           "version": "3",
           "parameters": "671B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/deepseek-v3",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3027,6 +3246,7 @@
       "type": "proprietary",
       "year": 2024,
       "parameters": "undisclosed",
+      "contextSize": "300K",
       "url": "https://aws.amazon.com/ai/nova",
       "notes": "Multi-tier family (Micro, Lite, Pro, Premier) available via Amazon Bedrock.",
       "modality": [
@@ -3047,6 +3267,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "123B",
+      "contextSize": "128K",
       "url": "https://mistral.ai/news/pixtral-large",
       "notes": "Multimodal model with native vision encoder. 12B variant also available.",
       "modality": [
@@ -3066,6 +3287,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "32B",
+      "contextSize": "4K",
       "url": "https://allenai.org/blog/olmo2",
       "notes": "Fully open successor trained on 6.6T tokens. 7B and 13B variants also released.",
       "modality": [
@@ -3084,6 +3306,7 @@
       "type": "open-weight",
       "year": 2024,
       "parameters": "13B",
+      "contextSize": "2K",
       "url": "https://arxiv.org/abs/2411.17501",
       "notes": "Trained entirely on CPU-only Fugaku supercomputer. Designed for Japanese language tasks.",
       "modality": [
@@ -3104,6 +3327,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "72B",
+      "contextSize": "128K",
       "url": "https://qwenlm.github.io/blog/qwen2.5",
       "notes": "Dense and MoE variants from 0.5B to 72B. Strong on coding, math, and instruction-following.",
       "modality": [
@@ -3114,6 +3338,7 @@
           "name": "qwen2.5:0.5b",
           "version": "2.5",
           "parameters": "0.5B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2.5",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3122,6 +3347,7 @@
           "name": "qwen2.5:1.5b",
           "version": "2.5",
           "parameters": "1.5B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2.5",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3130,6 +3356,7 @@
           "name": "qwen2.5:3b",
           "version": "2.5",
           "parameters": "3B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2.5",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3138,6 +3365,7 @@
           "name": "qwen2.5:7b",
           "version": "2.5",
           "parameters": "7B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2.5",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3146,6 +3374,7 @@
           "name": "qwen2.5:14b",
           "version": "2.5",
           "parameters": "14B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2.5",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3154,6 +3383,7 @@
           "name": "qwen2.5:72b",
           "version": "2.5",
           "parameters": "72B",
+          "contextSize": "128K",
           "ollamaUrl": "https://ollama.com/library/qwen2.5",
           "huggingfaceUrl": "",
           "addedAt": "2025-04-22"
@@ -3169,6 +3399,7 @@
       "type": "proprietary",
       "year": 2025,
       "parameters": "456B",
+      "contextSize": "4M",
       "url": "https://arxiv.org/abs/2501.08313",
       "notes": "Hybrid linear-attention + softmax-attention architecture. Trained on 4.7T tokens.",
       "modality": [
@@ -3190,6 +3421,7 @@
       "year": 2025,
       "releaseDate": "2025-01-30",
       "parameters": "undisclosed",
+      "contextSize": "1M",
       "url": "https://deepmind.google/technologies/gemini/flash",
       "notes": "Agentic-first generation. Flash, Flash-Lite, and Pro variants with live audio/video streaming.",
       "modality": [
@@ -3204,6 +3436,7 @@
           "name": "Pro",
           "version": "2.0",
           "parameters": "undisclosed",
+          "contextSize": "2M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-02-05"
@@ -3212,6 +3445,7 @@
           "name": "Flash",
           "version": "2.0",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-01-30"
@@ -3220,6 +3454,7 @@
           "name": "Flash-lite",
           "version": "2.0",
           "parameters": "undisclosed",
+          "contextSize": "1M",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-02-01"
@@ -3238,6 +3473,7 @@
       "year": 2026,
       "releaseDate": "2026-04-07",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://www.anthropic.com/",
       "notes": "Anthropic announced a preview of Claude Mythos (\"Project Glasswing/Claude Mythos Preview\") would be made available to 11 companies and organizations to find and fix cybersecurity vulnerabilities. Anthropic has stated that it does not plan to make Claude Mythos Preview generally available.",
       "modality": [
@@ -3257,6 +3493,7 @@
       "type": "proprietary",
       "year": 2025,
       "parameters": "undisclosed",
+      "contextSize": "128K",
       "url": "https://openai.com/index/gpt-4-5",
       "notes": "Largest non-reasoning OpenAI model. Improved emotional intelligence and world knowledge.",
       "modality": [
@@ -3276,6 +3513,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "400B",
+      "contextSize": "10M",
       "url": "https://ai.meta.com/blog/llama-4-multimodal-intelligence",
       "notes": "Natively multimodal MoE. Trained on 40T tokens including interleaved image-text data.",
       "modality": [
@@ -3298,6 +3536,7 @@
       "year": 2025,
       "releaseDate": "2025-04-16",
       "parameters": "undisclosed",
+      "contextSize": "200K",
       "url": "https://openai.com/o3",
       "notes": "OpenAI o3 is a highly advanced \"reasoning\" designed to excel in complex, multi-step tasks across science, technology, engineering, and mathematics (STEM).",
       "modality": [
@@ -3310,6 +3549,7 @@
           "name": "mini",
           "version": "o3",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-01-31"
@@ -3318,6 +3558,7 @@
           "name": "pro",
           "version": "o3",
           "parameters": "undisclosed",
+          "contextSize": "200K",
           "ollamaUrl": "",
           "huggingfaceUrl": "",
           "addedAt": "2025-06-10"
@@ -3333,6 +3574,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "355B",
+      "contextSize": "128K",
       "url": "https://github.com/THUDM/GLM-4",
       "notes": "MoE model trained on 22T tokens. Released under MIT license.",
       "modality": [
@@ -3354,6 +3596,7 @@
       "year": 2025,
       "releaseDate": "2025-08-07",
       "parameters": "undisclosed",
+      "contextSize": "400K",
       "url": "https://openai.com/gpt-5",
       "notes": "Unifies reasoning and general capability. Includes mini and nano variants.",
       "modality": [
@@ -3372,6 +3615,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "24B",
+      "contextSize": "32K",
       "url": "https://sarvam.ai/blog/sarvam-m",
       "notes": "Hybrid reasoning model with strong Indic-language capabilities. Released Apache 2.0.",
       "modality": [
@@ -3390,6 +3634,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "2.9B",
+      "contextSize": "8K",
       "url": "https://bharatgen.ai",
       "notes": "India-focused model trained on linguistically diverse Indian language data. Apache 2.0 license.",
       "modality": [
@@ -3408,6 +3653,7 @@
       "type": "open-weight",
       "year": 2025,
       "parameters": "70B",
+      "contextSize": "65K",
       "url": "https://arxiv.org/abs/2504.01234",
       "notes": "Positioned as EU AI Act compliant European open model. Collaborative Swiss academic project.",
       "modality": [

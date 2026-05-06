@@ -1,6 +1,15 @@
 {
   "editions": [
     {
+      "id": "2026-05-06_vol-ii-mmxxvi-snapshot-moujlruz",
+      "label": "Vol. II — MMXXVI — snapshot",
+      "note": "The last version without context information",
+      "date": "2026-05-01",
+      "features": 122,
+      "tools": 39,
+      "file": "editions/2026-05-06_vol-ii-mmxxvi-snapshot-moujlruz.geojson"
+    },
+    {
       "id": "2026-04-26_vol-i-mmxxvi-booting-up-mofx6i2l",
       "label": "Vol. I — MMXXVI — booting up",
       "note": "The first collection closes with 107 models",
