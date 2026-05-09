@@ -120,6 +120,164 @@
         "vector-database"
       ],
       "updatedAt": "2026-05-03"
+    },
+    {
+      "id": "agi-artificial-general-intelligence",
+      "term": "AGI (Artificial General Intelligence)",
+      "definition": "Artificial general intelligence (AGI) is a hypothetical type of artificial intelligence that matches or surpasses human capabilities across virtually all cognitive tasks.",
+      "notes": "AGI is also known as strong AI, full AI, human-level AI, human-level intelligent AI, or general intelligent action.\n\nThe term \"artificial general intelligence\" was used in 1997 by Mark Gubrud in a discussion of the implications of fully automated military production and operations. A mathematical formalism of AGI named AIXI was proposed in 2000 by Marcus Hutter, who defines intelligence as \"an agent’s ability to achieve goals or succeed in a wide range of environments\". This type of AGI has also been called \"universal artificial intelligence\". The term AGI was re-introduced and popularized by Shane Legg and Ben Goertzel around 2002.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Artificial_general_intelligence"
+        }
+      ],
+      "relatedTerms": [
+        "ai-artificial-intelligence",
+        "turing-test"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "turing-test",
+      "term": "Turing Test",
+      "definition": "The Turing test, originally called the imitation game by Alan Turing in 1949, is a test of a machine's ability to exhibit intelligent behaviour equivalent to that of a human.",
+      "notes": "In the test, a human evaluator judges a text transcript of a natural-language conversation between a human and a machine. The evaluator tries to identify the machine, and the machine passes if the evaluator cannot reliably tell them apart. The results would not depend on the machine's ability to answer questions correctly, only on how closely its answers resembled those of a human. Since the Turing test is a test of indistinguishability in performance capacity, the verbal version generalizes naturally to all of human performance capacity, verbal as well as nonverbal (robotic).",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Turing_test"
+        }
+      ],
+      "relatedTerms": [
+        "agi-artificial-general-intelligence",
+        "ai-artificial-intelligence"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "neural-network",
+      "term": "Neural Network",
+      "definition": "In machine learning, a neural network (NN) or neural net, also known as an artificial neural network (ANN), is a computational model inspired by the structure and functions of biological neural networks.",
+      "notes": "A neural network consists of connected units or nodes called artificial neurons, which loosely model the neurons in the brain. Artificial neuron models that mimic biological neurons more closely have also been recently investigated and shown to significantly improve performance. These are connected by edges, which model the synapses in the brain. Each artificial neuron receives signals from connected neurons, then processes them and sends a signal to other connected neurons. The \"signal\" is a real number, and the output of each neuron is computed by some non-linear function of the totality of its inputs, called the activation function. The strength of the signal at each connection is determined by a weight, which adjusts during the learning process.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Neural_network_(machine_learning)"
+        }
+      ],
+      "relatedTerms": [
+        "ml-machine-learning"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "transformer",
+      "term": "Transformer",
+      "definition": "In deep learning, the transformer is a family of artificial neural network architectures based on the multi-head attention mechanism, in which text is converted to numerical representations called tokens, and each token is converted into a vector via lookup from a word embedding table.",
+      "notes": "At each layer, each token is then contextualized within the scope of the context window with other (unmasked) tokens via a parallel multi-head attention mechanism, allowing the signal for key tokens to be amplified and less important tokens to be diminished. Because self-attention alone is permutation-invariant, transformers inject positional information, typically through positional encodings or learned positional embeddings, so token order can affect the output.\n\nTransformers have the advantage of having no recurrent units, therefore requiring less training time than earlier recurrent neural architectures (RNNs) such as long short-term memory (LSTM). Later variations have been widely adopted for training large language models (LLMs) on large (language) datasets. Modern transformer designs are commonly grouped into encoder-only, decoder-only, and encoder-decoder variants, depending on whether they are optimized for representation learning, autoregressive generation, or conditional sequence-to-sequence tasks.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)#History"
+        }
+      ],
+      "relatedTerms": [
+        "llm-large-language-model",
+        "dl-deep-learning"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "mcp-model-context-protocol",
+      "term": "MCP (Model Context Protocol)",
+      "definition": "The Model Context Protocol (MCP) is an open standard and open-source framework introduced by Anthropic in November 2024 to standardize the way artificial intelligence (AI) systems like large language models (LLMs) integrate and share data with external tools, systems, and data sources.",
+      "notes": "MCP was announced by Anthropic in November 2024 as an open standard for connecting AI assistants to data systems such as content repositories, business management tools, and development environments. The protocol was created at Anthropic by engineers David Soria Parra and Justin Spahr-Summers. It aims to address the challenge of information silos and legacy systems. Before MCP, developers often had to build custom connectors for each data source or tool, resulting in what Anthropic described as an \"N×M\" data integration problem.\n\nEarlier stop-gap approaches—such as OpenAI's 2023 \"function-calling\" API and the ChatGPT plug-in framework—solved similar problems but required vendor-specific connectors. MCP re-uses the message-flow ideas of the Language Server Protocol (LSP) and is transported over JSON-RPC 2.0.\n\nIn December 2025, Anthropic donated the MCP to the Agentic AI Foundation (AAIF), a directed fund under the Linux Foundation, co-founded by Anthropic, Block and OpenAI, with support from other companies.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Model_Context_Protocol"
+        }
+      ],
+      "relatedTerms": [
+        "ai-artificial-intelligence",
+        "llm-large-language-model"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "context-window-or-length",
+      "term": "Context (window or length)",
+      "definition": "The context window (or “context length”) of a large language model (LLM) is the amount of text, in tokens, that the model can consider or “remember” at any one time. A larger context window enables an AI model to process longer inputs and incorporate a greater amount of information into each output.",
+      "notes": "An LLM’s context window can be thought of as the equivalent of its working memory. It determines how long of a conversation it can carry out without forgetting details from earlier in the exchange. It also determines the maximum size of documents or code samples that it can process at once. When a prompt, conversation, document or code base exceeds an artificial intelligence model’s context window, it must be truncated or summarized for the model to proceed. \n\nGenerally speaking, increasing an LLM’s context window size translates to increased accuracy, fewer hallucinations, more coherent model responses, longer conversations and an improved ability to analyze longer sequences of data. However, increasing context length is not without tradeoffs: it often entails increased computational power requirements—and therefore increased costs—and a potential increase in vulnerability to adversarial attacks.",
+      "links": [
+        {
+          "label": "IBM",
+          "url": "https://www.ibm.com/think/topics/context-window"
+        },
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Context_window"
+        }
+      ],
+      "relatedTerms": [
+        "llm-large-language-model"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "tokenization",
+      "term": "Tokenization",
+      "definition": "As machine learning algorithms process numbers rather than text, the text must be converted to numbers. In the first step, a vocabulary is decided upon, then integer indices are arbitrarily but uniquely assigned to each vocabulary entry, and finally, an embedding is associated with the integer index.",
+      "notes": "Algorithms include byte-pair encoding (BPE) and WordPiece. There are also special tokens serving as control characters, such as [MASK] for masked-out token (as used in BERT), and [UNK] (\"unknown\") for characters not appearing in the vocabulary. Also, some special symbols are used to denote special text formatting. For example, \"Ġ\" denotes a preceding whitespace in RoBERTa and GPT and \"##\" denotes continuation of a preceding word in BERT.\n\nFor example, the BPE tokenizer used by the legacy version of GPT-3 would split tokenizer: texts -> series of numerical \"tokens\" as\ntoken\tizer\t:\t texts\t ->\tseries\t of\t numerical\t \"\tt\tok\tens\t\"\nTokenization also compresses the datasets. Because LLMs generally require input to be an array that is not jagged, the shorter texts must be \"padded\" until they match the length of the longest one. According to Yenni Jun, the average number of words per token depends on the language.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Large_language_model#Tokenization"
+        }
+      ],
+      "relatedTerms": [
+        "embedding",
+        "mcp-model-context-protocol"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "moe-mixture-of-experts",
+      "term": "MoE (Mixture of experts)",
+      "definition": "Mixture of experts (MoE) is a machine learning technique where multiple expert networks (learners) are used to divide a problem space into homogeneous regions. MoE represents a form of ensemble learning. They were also called committee machines.",
+      "notes": "The scale of a model is one of the most important axes for better model quality. Given a fixed computing budget, training a larger model for fewer steps is better than training a smaller model for more steps.\n\nMixture of Experts enable models to be pretrained with far less compute, which means you can dramatically scale up the model or dataset size with the same compute budget as a dense model. In particular, a MoE model should achieve the same quality as its dense counterpart much faster during pretraining.\n\nSo, what exactly is a MoE? In the context of transformer models, a MoE consists of two main elements:\n\nSparse MoE layers are used instead of dense feed-forward network (FFN) layers. MoE layers have a certain number of “experts” (e.g. 8), where each expert is a neural network. In practice, the experts are FFNs, but they can also be more complex networks or even a MoE itself, leading to hierarchical MoEs!\nA gate network or router, that determines which tokens are sent to which expert. For example, in the image below, the token “More” is sent to the second expert, and the token \"Parameters” is sent to the first network. As we’ll explore later, we can send a token to more than one expert. How to route a token to an expert is one of the big decisions when working with MoEs - the router is composed of learned parameters and is pretrained at the same time as the rest of the network.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Mixture_of_experts#cite_note-3"
+        },
+        {
+          "label": "Huggingface",
+          "url": "https://huggingface.co/blog/moe#what-is-a-mixture-of-experts-moe"
+        }
+      ],
+      "relatedTerms": [
+        "llm-large-language-model"
+      ],
+      "updatedAt": "2026-05-09"
+    },
+    {
+      "id": "diffusion-model",
+      "term": "Diffusion Model",
+      "definition": "In machine learning, diffusion models, also known as diffusion-based generative models or score-based generative models, are a class of latent variable generative models.",
+      "notes": "A diffusion model consists of two major components: the forward diffusion process, and the reverse sampling process. The goal of diffusion models is to learn a diffusion process for a given dataset, such that the process can generate new elements that are distributed similarly as the original dataset. A diffusion model models data as generated by a diffusion process, whereby a new datum performs a random walk with drift through the space of all possible data. A trained diffusion model can be sampled in many ways, with different efficiency and quality.",
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Diffusion_model"
+        }
+      ],
+      "relatedTerms": [
+        "llm-large-language-model",
+        "moe-mixture-of-experts"
+      ],
+      "updatedAt": "2026-05-09"
     }
   ]
 }
