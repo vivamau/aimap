@@ -4,6 +4,73 @@
   "features": [
     {
       "type": "Feature",
+      "id": "commandcode",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41,
+          37.7749
+        ]
+      },
+      "properties": {
+        "id": "commandcode",
+        "name": "CommandCode",
+        "organization": "CommandCode",
+        "country": "United States",
+        "city": "San Francisco",
+        "category": "devtool",
+        "year": 2026,
+        "releaseDate": "2026-01-01",
+        "retiredDate": "",
+        "url": "https://commandcode.ai/",
+        "notes": "CommanCode is a frontier coding agent. Writes. Debugs. Fixes. Refactors. All from your terminal — and gets sharper with every session. Just prompt. It handles the rest.",
+        "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ds4c",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.07041,
+          37.49223
+        ]
+      },
+      "properties": {
+        "id": "ds4c",
+        "name": "DS4.c",
+        "organization": "antirez",
+        "country": "Italy",
+        "city": "Catania",
+        "category": "local LLM tool",
+        "year": 2026,
+        "releaseDate": "2026-05-07",
+        "retiredDate": "",
+        "url": "https://github.com/antirez/ds4",
+        "notes": "ds4.c is a small native inference engine for DeepSeek V4 Flash. It is intentionally narrow: not a generic GGUF runner, not a wrapper around another runtime, and not a framework. The main path is a DeepSeek V4 Flash-specific Metal graph executor with DS4-specific loading, prompt rendering, KV state, and server API glue.",
+        "builtOn": [
+          "Deepseek 4"
+        ],
+        "connectedTools": [
+          "llamacpp"
+        ],
+        "connectedModels": [
+          "deepseek-v4"
+        ],
+        "links": [
+          {
+            "label": "Github",
+            "url": "https://github.com/antirez/ds4"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
       "id": "translator-mind",
       "geometry": {
         "type": "Point",
