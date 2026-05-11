@@ -2,10 +2,70 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-05-06",
+    "updated": "2026-05-11",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "composer-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "composer-2",
+        "name": "Composer 2",
+        "organization": "Cursor",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2026,
+        "releaseDate": "2026-03-19",
+        "parameters": "undisclosed",
+        "contextSize": "200K",
+        "url": "https://cursor.com/blog/composer-2",
+        "notes": "Composer 2 is Cursor's own agentic model. It reaches frontier-level coding performance",
+        "modality": [
+          "code"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "composer",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.41,
+          37.77
+        ]
+      },
+      "properties": {
+        "id": "composer",
+        "name": "Composer",
+        "organization": "Cursor",
+        "country": "United States",
+        "city": "San Francisco",
+        "type": "proprietary",
+        "year": 2025,
+        "releaseDate": "2025-10-29",
+        "parameters": "undisclosed",
+        "contextSize": "200K",
+        "url": "https://cursor.com/blog/composer",
+        "notes": "Composer is an agent model designed for software engineering intelligence and speed.",
+        "modality": [
+          "code"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
     {
       "type": "Feature",
       "id": "subq1m-preview",
