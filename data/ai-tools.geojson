@@ -4,6 +4,42 @@
   "features": [
     {
       "type": "Feature",
+      "id": "bob",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.71,
+          41.11
+        ]
+      },
+      "properties": {
+        "id": "bob",
+        "name": "Bob",
+        "organization": "IBM",
+        "country": "United States",
+        "city": "Armonk",
+        "category": "ide",
+        "year": 2026,
+        "releaseDate": "2026-04-29",
+        "retiredDate": "",
+        "url": "https://bob.ibm.com/",
+        "notes": "Hi, I'm Bob! I'm here to work right alongside you in your codebase, and help you build quality software faster.",
+        "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [
+          "claude-3",
+          "granite-41"
+        ],
+        "links": [
+          {
+            "label": "Github",
+            "url": "https://github.com/IBM/bob-demo"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
       "id": "commandcode",
       "geometry": {
         "type": "Point",

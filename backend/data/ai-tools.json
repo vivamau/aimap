@@ -1,6 +1,33 @@
 {
   "tools": [
     {
+      "id": "bob",
+      "name": "Bob",
+      "organization": "IBM",
+      "country": "United States",
+      "city": "Armonk",
+      "lat": 41.11,
+      "lng": -73.71,
+      "category": "ide",
+      "year": 2026,
+      "releaseDate": "2026-04-29",
+      "retiredDate": "",
+      "url": "https://bob.ibm.com/",
+      "notes": "Hi, I'm Bob! I'm here to work right alongside you in your codebase, and help you build quality software faster.",
+      "builtOn": [],
+      "connectedTools": [],
+      "connectedModels": [
+        "claude-3",
+        "granite-41"
+      ],
+      "links": [
+        {
+          "label": "Github",
+          "url": "https://github.com/IBM/bob-demo"
+        }
+      ]
+    },
+    {
       "id": "commandcode",
       "name": "CommandCode",
       "organization": "CommandCode",

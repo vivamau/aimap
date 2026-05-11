@@ -8,6 +8,76 @@
   "features": [
     {
       "type": "Feature",
+      "id": "devstral-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.3522,
+          48.8566
+        ]
+      },
+      "properties": {
+        "id": "devstral-2",
+        "name": "Devstral 2",
+        "organization": "Mistral AI",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2025,
+        "releaseDate": "2025-12-09",
+        "parameters": "123B",
+        "contextSize": "256K",
+        "url": "https://mistral.ai/news/devstral-2-vibe-cli",
+        "notes": "Devstral 2 is a next-generation coding model family available in two sizes: Devstral 2 (123B) and Devstral Small 2 (24B). Devstral 2 ships under a modified MIT license, while Devstral Small 2 uses Apache 2.0. Both are open-source and permissively licensed to accelerate distributed intelligence.",
+        "modality": [
+          "code"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "devstral-2-small",
+            "version": "2",
+            "parameters": "24B",
+            "contextSize": "384K",
+            "ollamaUrl": "https://ollama.com/library/devstral-small-2",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-05-11"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "devstral",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.35,
+          48.85
+        ]
+      },
+      "properties": {
+        "id": "devstral",
+        "name": "Devstral",
+        "organization": "Mistral AI",
+        "country": "France",
+        "city": "Paris",
+        "type": "open-weight",
+        "year": 2025,
+        "releaseDate": "2025-05-21",
+        "parameters": "24B",
+        "contextSize": "128K",
+        "url": "https://mistral.ai/news/devstral",
+        "notes": "Devstral is an agentic LLM for software engineering tasks. Devstral is built under a collaboration between Mistral AI and All Hands AI  and outperforms all open-source models on SWE-Bench Verified by a large margin. Devstral is released under the Apache 2.0 license.",
+        "modality": [
+          "code"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "composer-2",
       "geometry": {
         "type": "Point",
