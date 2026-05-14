@@ -2,10 +2,49 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-05-11",
+    "updated": "2026-05-14",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "domyn-small",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.1885,
+          45.4647
+        ]
+      },
+      "properties": {
+        "id": "domyn-small",
+        "name": "Domyn Small",
+        "organization": "Domyn",
+        "country": "Italy",
+        "city": "Milan",
+        "type": "open-weight",
+        "year": 2026,
+        "releaseDate": "2026-05-13",
+        "parameters": "10B",
+        "contextSize": "32K/131K",
+        "url": "https://www.domyn.com",
+        "notes": "Domyn Small is a 10B-parameter open-weight reasoning model designed for resource-constrained, agentic, and fine-tunable deployments. It pairs a dual-mode (thinking on/off) inference design with grouped-query attention, a native 32k context window (extensible to 131k via YaRN), and tool calling. On reasoning benchmarks it reaches accuracy comparable to leading 7–10B reasoning peers while spending roughly 2–4× fewer reasoning tokens — placing it on a favourable accuracy/cost Pareto frontier for production inference and downstream fine-tuning.",
+        "modality": [
+          "text"
+        ],
+        "links": [
+          {
+            "label": "Huggingface",
+            "url": "https://huggingface.co/domyn/Domyn-Small-v1.0"
+          },
+          {
+            "label": "Security Paper",
+            "url": "https://secure.domyn.com/Website/Research/Papers/domyn_small_arxiv_submission.pdf"
+          }
+        ],
+        "submodels": []
+      }
+    },
     {
       "type": "Feature",
       "id": "devstral-2",
