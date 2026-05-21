@@ -2,10 +2,97 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-05-14",
+    "updated": "2026-05-21",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "gemini-omni",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.13,
+          51.51
+        ]
+      },
+      "properties": {
+        "id": "gemini-omni",
+        "name": "Gemini Omni",
+        "organization": "Google Deepmind",
+        "country": "Englad",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2026,
+        "releaseDate": "2026-05-20",
+        "parameters": "undisclosed",
+        "contextSize": "n.a.",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni/",
+        "notes": "With Omni, you can combine images, audio, video and text as input and generate high-quality videos grounded in Gemini's real-world knowledge. You can also easily edit your videos through conversation.",
+        "modality": [
+          "text",
+          "image",
+          "audio",
+          "video"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "Flash",
+            "version": "n.a.",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-05-20"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gemini-35",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.23,
+          51.51
+        ]
+      },
+      "properties": {
+        "id": "gemini-35",
+        "name": "Gemini 3.5",
+        "organization": "Google Deepmind",
+        "country": "England",
+        "city": "London",
+        "type": "proprietary",
+        "year": 2026,
+        "releaseDate": "2026-05-18",
+        "parameters": "undisclosed",
+        "contextSize": "n.a.",
+        "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash",
+        "notes": "Gemini 3.5 Flash provides sustained frontier-level intelligence optimized for real-world tasks at a higher speed and lower cost. Designed for the agentic era, it excels at sub-agent deployment, multi-step workflows, and long-horizon tasks at scale. This model is particularly effective for rapid agentic loops involving complex coding cycles and iterations.",
+        "modality": [
+          "text",
+          "image",
+          "audio",
+          "video",
+          "code"
+        ],
+        "links": [],
+        "submodels": [
+          {
+            "name": "Flash",
+            "version": "3.5",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-05-20"
+          }
+        ]
+      }
+    },
     {
       "type": "Feature",
       "id": "domyn-small",

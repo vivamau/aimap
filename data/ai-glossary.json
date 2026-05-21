@@ -196,6 +196,22 @@
       "updatedAt": "2026-05-09"
     },
     {
+      "id": "open-weight",
+      "term": "Open weight",
+      "definition": "An open-weight model (or open-weights AI) is an artificial intelligence model whose trained parameters—its \"weights\"—are publicly available for anyone to download, modify, and run on their own hardware.While the final learned values of the neural network are shared, the original training code, the training datasets, and full architectural blueprints are usually kept proprietary.",
+      "notes": "",
+      "links": [
+        {
+          "label": "Opensource.org",
+          "url": "https://opensource.org/ai/open-weights"
+        }
+      ],
+      "relatedTerms": [
+        "llm-large-language-model"
+      ],
+      "updatedAt": "2026-05-21"
+    },
+    {
       "id": "rag-retrieval-augmented-generation",
       "term": "RAG (Retrieval-augmented generation)",
       "definition": "Retrieval-augmented generation (RAG) is a technique that enables large language models (LLMs) to retrieve and incorporate new information from external data sources.",
