@@ -2,10 +2,40 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-05-21",
+    "updated": "2026-05-22",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "features": [
+    {
+      "type": "Feature",
+      "id": "qwen-37",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.16,
+          30.27
+        ]
+      },
+      "properties": {
+        "id": "qwen-37",
+        "name": "Qwen 3.7",
+        "organization": "Alibaba Cloud",
+        "country": "China",
+        "city": "Bejin",
+        "type": "proprietary",
+        "year": 2026,
+        "releaseDate": "2026-05-19",
+        "parameters": "undisclosed",
+        "contextSize": "n.a.",
+        "url": "https://qwen.ai/blog?id=qwen3.7",
+        "notes": "",
+        "modality": [
+          "code"
+        ],
+        "links": [],
+        "submodels": []
+      }
+    },
     {
       "type": "Feature",
       "id": "gemini-omni",
