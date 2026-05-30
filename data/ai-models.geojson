@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-05-22",
+    "updated": "2026-05-30",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "features": [
@@ -2040,6 +2040,15 @@
             "ollamaUrl": "",
             "huggingfaceUrl": "",
             "addedAt": "2026-04-16"
+          },
+          {
+            "name": "4.8",
+            "version": "4",
+            "parameters": "undisclosed",
+            "contextSize": "200K",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-05-28"
           }
         ]
       }

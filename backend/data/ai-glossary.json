@@ -294,6 +294,28 @@
         "llm-large-language-model"
       ],
       "updatedAt": "2026-05-21"
+    },
+    {
+      "id": "inference",
+      "term": "Inference",
+      "definition": "In machine learning, AI inference is the act of using a trained AI model to make predictions on new data.",
+      "notes": "Essentially, any instance of an artificial intelligence model actually generating outputs or making decisions in a real-world AI application constitutes AI inference. In simple terms, AI inference entails a trained model applying the patterns it learned from its training data to infer the correct output for a given input.\n\nInferences in a wider sense, are steps in logical reasoning, moving from premises to logical consequences. Inference is traditionally divided into deduction and induction, a distinction that dates at least to Aristotle (300s BC). A third type of inference, abduction, has been proposed, notably by Charles Sanders Peirce. Deduction is inference deriving logical conclusions from premises known or assumed to be true, with the laws of valid inference being studied in logic. Induction is inference from particular evidence to a universal conclusion.[Abduction seeks neither logical certainty nor a universal conclusion but a \"best explanation\" based on likelihood given the evidence.",
+      "links": [
+        {
+          "label": "IBM",
+          "url": "https://www.ibm.com/think/topics/ai-inference"
+        },
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Inference"
+        }
+      ],
+      "relatedTerms": [
+        "ai-artificial-intelligence",
+        "ml-machine-learning",
+        "context-window-or-length"
+      ],
+      "updatedAt": "2026-05-30"
     }
   ]
 }
