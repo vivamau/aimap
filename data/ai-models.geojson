@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-05-30",
+    "updated": "2026-06-02",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "features": [
@@ -4697,20 +4697,79 @@
       },
       "properties": {
         "id": "minimax-text-01",
-        "name": "MiniMax-Text-01",
+        "name": "MiniMax",
         "organization": "Minimax",
         "country": "China",
         "city": "Shanghai",
-        "type": "proprietary",
+        "type": "open-weight",
         "year": 2025,
+        "releaseDate": "",
         "parameters": "456B",
         "contextSize": "4M",
         "url": "https://arxiv.org/abs/2501.08313",
         "notes": "Hybrid linear-attention + softmax-attention architecture. Trained on 4.7T tokens.",
         "modality": [
-          "text"
+          "text",
+          "image",
+          "code"
         ],
-        "submodels": []
+        "links": [],
+        "submodels": [
+          {
+            "name": "Text 01",
+            "version": "n.a.",
+            "parameters": "4B",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-06-02"
+          },
+          {
+            "name": "m2",
+            "version": "2.0",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-06-02"
+          },
+          {
+            "name": "m2.1",
+            "version": "2.1",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-06-02"
+          },
+          {
+            "name": "m2.5",
+            "version": "2.5",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-06-02"
+          },
+          {
+            "name": "m2.7",
+            "version": "2.7",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-06-02"
+          },
+          {
+            "name": "m3",
+            "version": "3.0",
+            "parameters": "n.a.",
+            "contextSize": "n.a.",
+            "ollamaUrl": "",
+            "huggingfaceUrl": "",
+            "addedAt": "2026-06-02"
+          }
+        ]
       }
     },
     {
