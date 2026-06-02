@@ -3648,8 +3648,8 @@
           "name": "m2",
           "version": "2.0",
           "parameters": "n.a.",
-          "contextSize": "n.a.",
-          "ollamaUrl": "",
+          "contextSize": "200K",
+          "ollamaUrl": "https://ollama.com/library/minimax-m2",
           "huggingfaceUrl": "",
           "addedAt": "2026-06-02"
         },
@@ -3657,8 +3657,8 @@
           "name": "m2.1",
           "version": "2.1",
           "parameters": "n.a.",
-          "contextSize": "n.a.",
-          "ollamaUrl": "",
+          "contextSize": "198K",
+          "ollamaUrl": "https://ollama.com/library/minimax-m2.1",
           "huggingfaceUrl": "",
           "addedAt": "2026-06-02"
         },
@@ -3666,8 +3666,8 @@
           "name": "m2.5",
           "version": "2.5",
           "parameters": "n.a.",
-          "contextSize": "n.a.",
-          "ollamaUrl": "",
+          "contextSize": "198K",
+          "ollamaUrl": "https://ollama.com/library/minimax-m2.5",
           "huggingfaceUrl": "",
           "addedAt": "2026-06-02"
         },
@@ -3675,8 +3675,8 @@
           "name": "m2.7",
           "version": "2.7",
           "parameters": "n.a.",
-          "contextSize": "n.a.",
-          "ollamaUrl": "",
+          "contextSize": "200K",
+          "ollamaUrl": "https://ollama.com/library/minimax-m2.7",
           "huggingfaceUrl": "",
           "addedAt": "2026-06-02"
         },
@@ -3684,8 +3684,8 @@
           "name": "m3",
           "version": "3.0",
           "parameters": "n.a.",
-          "contextSize": "n.a.",
-          "ollamaUrl": "",
+          "contextSize": "512K",
+          "ollamaUrl": "https://ollama.com/library/minimax-m3",
           "huggingfaceUrl": "",
           "addedAt": "2026-06-02"
         }
