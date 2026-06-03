@@ -1,10 +1,140 @@
 {
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-06-02",
+    "updated": "2026-06-03",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "models": [
+    {
+      "id": "mai",
+      "name": "MAI",
+      "organization": "Microsoft",
+      "country": "United States",
+      "city": "Redmond",
+      "lat": 47.67,
+      "lng": -122.12,
+      "type": "proprietary",
+      "year": 2025,
+      "releaseDate": "2025-05-28",
+      "parameters": "undisclosed",
+      "contextSize": "n.a.",
+      "url": "https://microsoft.ai/",
+      "notes": "MAI was founded on March 19, 2024, the company would oversee Microsoft Copilot and several other services previously developed by other teams such as Edge and Bing, it would also help provide resources and co-develop for the Microsoft 365 app. The company appointed DeepMind and Inflection AI co-founder Mustafa Suleyman as Executive Vice President (EVP) and CEO and hired fellow Inflection AI co-founder Karén Simonyan as Chief Scientist. Microsoft's previous artificial intelligence team was absorbed into the company, with its employees joining it.",
+      "modality": [
+        "text",
+        "image",
+        "audio",
+        "code"
+      ],
+      "links": [
+        {
+          "label": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Microsoft_AI"
+        },
+        {
+          "label": "About Microsoft AI",
+          "url": "https://microsoft.ai/about/"
+        },
+        {
+          "label": "MAI-Thinking-1",
+          "url": "https://microsoft.ai/news/introducing-mai-thinking-1/"
+        },
+        {
+          "label": "MAI-Voice-2",
+          "url": "https://microsoft.ai/news/mai-voice-2expressive-speech-in-10-languages/"
+        },
+        {
+          "label": "MAI-Transcribe-1.5",
+          "url": "https://microsoft.ai/news/mai-transcribe-1-5more-accurate-context-aware-and-built-for-production/"
+        },
+        {
+          "label": "MAI-Image-2.5",
+          "url": "https://microsoft.ai/news/introducing-mai-image-2-5/"
+        },
+        {
+          "label": "MAI-Code-1-Flash",
+          "url": "https://microsoft.ai/news/introducingmai-code-1-flash/"
+        },
+        {
+          "label": "MAI-Image-1",
+          "url": "https://microsoft.ai/news/introducing-mai-image-1-debuting-in-the-top-10-on-lmarena/"
+        }
+      ],
+      "submodels": [
+        {
+          "name": "MAI-Voice-1",
+          "version": "1",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-08-28"
+        },
+        {
+          "name": "MAI-Preview-1",
+          "version": "1",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-08-28"
+        },
+        {
+          "name": "MAI-Thinking",
+          "version": "1",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-06-02"
+        },
+        {
+          "name": "MAI-Code-1-Flash",
+          "version": "1",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-06-02"
+        },
+        {
+          "name": "MAI-Image-2.5",
+          "version": "2.5",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-06-02"
+        },
+        {
+          "name": "MAI-Transcribe-1.5",
+          "version": "1.5",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-06-02"
+        },
+        {
+          "name": "MAI-Voice-2",
+          "version": "2",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-06-02"
+        },
+        {
+          "name": "MAI-Image-1",
+          "version": "1",
+          "parameters": "n.a.",
+          "contextSize": "n.a.",
+          "ollamaUrl": "",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-10-13"
+        }
+      ]
+    },
     {
       "id": "qwen-37",
       "name": "Qwen 3.7",
