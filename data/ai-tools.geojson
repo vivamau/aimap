@@ -4,6 +4,34 @@
   "features": [
     {
       "type": "Feature",
+      "id": "scout",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.12,
+          47.67
+        ]
+      },
+      "properties": {
+        "id": "scout",
+        "name": "Scout",
+        "organization": "Microsoft",
+        "country": "United States",
+        "city": "Redmond",
+        "category": "assistant",
+        "year": 2026,
+        "releaseDate": "2026-06-02",
+        "retiredDate": "",
+        "url": "https://www.microsoft.com/en-us/microsoft-365/blog/2026/06/02/introducing-microsoft-scout-your-always-on-personal-agent/",
+        "notes": "Today we are introducing a new category of agents called Autopilots. Autopilots are always-on agents that work autonomously, with their own identity, and act on your behalf. \n\nAutopilots stay active in the background, understand how work gets done across your apps and systems, and take action without needing to be prompted each time. Because they operate with their own identity, they can carry out tasks within the permissions and policies you and your organization set. This creates a more durable way to keep work in motion so it continues even when your attention is elsewhere.",
+        "builtOn": [],
+        "connectedTools": [],
+        "connectedModels": [],
+        "links": []
+      }
+    },
+    {
+      "type": "Feature",
       "id": "bob",
       "geometry": {
         "type": "Point",

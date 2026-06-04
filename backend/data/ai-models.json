@@ -1,7 +1,7 @@
 {
   "meta": {
     "edition": "Vol. III — MMXXVI, now with Context",
-    "updated": "2026-06-03",
+    "updated": "2026-06-04",
     "compiler": "An ongoing cartographic survey of the global distribution of artificial intelligence systems. Now with context information."
   },
   "models": [
@@ -3256,8 +3256,11 @@
       "organization": "Google DeepMind",
       "country": "United Kingdom",
       "city": "London",
+      "lat": 51.5074,
+      "lng": -0.1278,
       "type": "open-weight",
       "year": 2024,
+      "releaseDate": "2024-06-04",
       "parameters": "7B",
       "contextSize": "8K",
       "url": "https://ai.google.dev/gemma",
@@ -3265,9 +3268,45 @@
       "modality": [
         "text"
       ],
-      "submodels": [],
-      "lat": 51.5074,
-      "lng": -0.1278
+      "links": [],
+      "submodels": [
+        {
+          "name": "gemma2",
+          "version": "2",
+          "parameters": "27b",
+          "contextSize": "8K",
+          "ollamaUrl": "https://ollama.com/library/gemma2",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-06-04"
+        },
+        {
+          "name": "gemma3",
+          "version": "3",
+          "parameters": "27b",
+          "contextSize": "128K",
+          "ollamaUrl": "https://ollama.com/library/gemma3",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-01-01"
+        },
+        {
+          "name": "gemma3n",
+          "version": "3n",
+          "parameters": "e4b",
+          "contextSize": "32K",
+          "ollamaUrl": "https://ollama.com/library/gemma3n",
+          "huggingfaceUrl": "",
+          "addedAt": "2025-05-04"
+        },
+        {
+          "name": "gemma4",
+          "version": "4",
+          "parameters": "31b",
+          "contextSize": "128K",
+          "ollamaUrl": "https://ollama.com/library/gemma4",
+          "huggingfaceUrl": "",
+          "addedAt": "2026-06-04"
+        }
+      ]
     },
     {
       "id": "olmo",
